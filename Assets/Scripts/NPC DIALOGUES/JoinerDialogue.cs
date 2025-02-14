@@ -30,11 +30,11 @@ public class JoinerDialogue : MonoBehaviour
     void AfterDialogue() {
         Debug.Log("got hook");
         PartyManager partyManager = GameObject.FindGameObjectWithTag("Player").GetComponent<PartyManager>();
-        partyManager.AddToParty("MemberA");
-        Inventory inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
+        partyManager.AddToParty(survivor);
+        
 
         
-        inventory.AddMember(survivor);
+        
         Destroy(gameObject);
     }
 }

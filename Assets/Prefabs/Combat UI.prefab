@@ -126,9 +126,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 
   profile: {fileID: 7901107717046848250}
+  healthbarCasing: {fileID: 0}
   healthBarBar: {fileID: 7901107717469626367}
   healthBarTail: {fileID: 7901107716574611733}
   maxHealth: 0
+  defaultImagePosition: {x: 0, y: 0, z: 0}
+  initialBarPosition: {x: 0, y: 0, z: 0}
+  _isHighlighted: 0
+  battleUiHandler: {fileID: 0}
+  playerHealthIndicator: {fileID: 0}
 --- !u!1 &7901107715772585317
 GameObject:
   m_ObjectHideFlags: 0
@@ -403,9 +409,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 
   profile: {fileID: 7901107716962715299}
+  healthbarCasing: {fileID: 0}
   healthBarBar: {fileID: 7901107716452140285}
   healthBarTail: {fileID: 7901107715621193604}
   maxHealth: 0
+  defaultImagePosition: {x: 0, y: 0, z: 0}
+  initialBarPosition: {x: 0, y: 0, z: 0}
+  _isHighlighted: 0
+  battleUiHandler: {fileID: 0}
+  playerHealthIndicator: {fileID: 0}
 --- !u!1 &7901107715915067309
 GameObject:
   m_ObjectHideFlags: 0
@@ -553,9 +565,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 
   profile: {fileID: 7901107716345755352}
+  healthbarCasing: {fileID: 0}
   healthBarBar: {fileID: 7901107716297402745}
   healthBarTail: {fileID: 7901107716449787865}
   maxHealth: 0
+  defaultImagePosition: {x: 0, y: 0, z: 0}
+  initialBarPosition: {x: 0, y: 0, z: 0}
+  _isHighlighted: 0
+  battleUiHandler: {fileID: 0}
+  playerHealthIndicator: {fileID: 0}
 --- !u!1 &7901107716096265686
 GameObject:
   m_ObjectHideFlags: 0
@@ -1562,8 +1580,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   partyUIAnimator: {fileID: 7901107717640802340}
   enemyUIAnimator: {fileID: 7901107715915067297}
+  enemyStatsAnimator: {fileID: 0}
   actOption: 0
   itemOption: 0
+  canSelect: 0
   overworldUI: {fileID: 0}
   combatUI: {fileID: 7901107716330422353}
   actOptionBList: {fileID: 7901107717618699623}
@@ -1574,7 +1594,8 @@ MonoBehaviour:
   - {fileID: 7901107715771790225}
   - {fileID: 7901107715881914211}
   - {fileID: 7901107716459336698}
-  partyManager: {fileID: 0}
+  partyManager: {fileID: 8920071011522045586, guid: ccfc5b2903162cea5bf8daca0154eb07,
+    type: 3}
   currentTurnIndex: 0
   profileImages:
   - {fileID: 6976219667641568234, guid: d068f37a9b8556241a344075120966b1, type: 3}
@@ -1587,6 +1608,7 @@ MonoBehaviour:
   turnIndicator: {fileID: 7901107716316476604}
   floatingTextPrefab: {fileID: 8117628085070202528}
   enemyName: {fileID: 7901107716246076664}
+  damageButtonText: {fileID: 0}
 --- !u!114 &7901107716330422356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2043,9 +2065,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 
   profile: {fileID: 7901107716477381951}
+  healthbarCasing: {fileID: 0}
   healthBarBar: {fileID: 7901107715772585243}
   healthBarTail: {fileID: 7901107717270512545}
   maxHealth: 0
+  defaultImagePosition: {x: 0, y: 0, z: 0}
+  initialBarPosition: {x: 0, y: 0, z: 0}
+  _isHighlighted: 0
+  battleUiHandler: {fileID: 0}
+  playerHealthIndicator: {fileID: 0}
 --- !u!1 &7901107716477381945
 GameObject:
   m_ObjectHideFlags: 0

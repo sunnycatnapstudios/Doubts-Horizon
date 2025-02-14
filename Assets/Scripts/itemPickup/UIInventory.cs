@@ -30,8 +30,14 @@ public class UIInventory : MonoBehaviour
 
     List<UIItem> listOfItems= new List<UIItem>();
     List<UIPartyMember> listOfMembers = new List<UIPartyMember>();
+    private PartyManager partyManager;
     
+    void Start()
+    {
 
+        partyManager = GameObject.FindWithTag("Player").GetComponent<PartyManager>();
+        Debug.Log(partyManager);
+    }
     public void InitializeInventory(int inventorySlotsAmount) {
         for (int i = 0; i < inventorySlotsAmount; i++)
         {
@@ -39,6 +45,7 @@ public class UIInventory : MonoBehaviour
             item.transform.SetParent(contentPanel, false);
             listOfItems.Add(item);
             item.OnItemClick += HandleItemSelection;
+            
         }
     
     }
@@ -49,16 +56,19 @@ public class UIInventory : MonoBehaviour
 
     }
     
-    public void InitializeParty(Dictionary<string, Survivor> survivors)
+    public void InitializeParty()
     {
-        foreach (Survivor member in survivors.Values)
-        {
+        
+
+        partyManager = GameObject.FindWithTag("Player").GetComponent<PartyManager>();
+       
             UIPartyMember person = Instantiate(memberPrefab, Vector3.zero, Quaternion.identity);
             person.transform.SetParent(partyPanel, false);
             listOfMembers.Add(person);
             person.OnItemClicked += HandlePartySelection;
+            Debug.Log("dsfa");
 
-        }
+        
     }
 
     public void AddPartyMember()
@@ -69,6 +79,24 @@ public class UIInventory : MonoBehaviour
         listOfMembers.Add(person);
         person.OnItemClicked += HandlePartySelection;
 
+
+    }
+
+    public void fixPartyUIMembers(int len)
+      
+    {
+        len += 1;
+        if (len > listOfMembers.Count)
+        {
+            for (int i = listOfMembers.Count; i < len; i++)
+            {
+                UIPartyMember person = Instantiate(memberPrefab, Vector3.zero, Quaternion.identity);
+                person.transform.SetParent(partyPanel, false);
+                // person.transform.localScale = Vector3.one;
+                listOfMembers.Add(person);
+                person.OnItemClicked += HandlePartySelection;
+            }
+        }
 
     }
 
@@ -105,7 +133,7 @@ public class UIInventory : MonoBehaviour
 
     public void DisplayItem() { }
 
-    public void Show(Dictionary<string, Slot> inventory, Dictionary<string, Survivor> survivors)
+    public void Show(Dictionary<string, Slot> inventory)
     {
         gameObject.SetActive(true);
         descriptionUI.ResetDescription();
@@ -116,9 +144,14 @@ public class UIInventory : MonoBehaviour
             
         }
         counter = 0;
-        foreach (Survivor member in survivors.Values)
+        partyManager = GameObject.FindWithTag("Player").GetComponent<PartyManager>();
+        fixPartyUIMembers(partyManager.currentPartyMembers.Count);
+        listOfMembers[0].SetdisplayItem(partyManager.getPlayer());
+        counter = 1;
+        foreach (Survivor member in partyManager.currentPartyMembers)
         {
             Debug.Log(counter);
+            Debug.Log(listOfMembers.Count);
             listOfMembers[counter].SetdisplayItem(member);
             counter++;
        
@@ -141,5 +174,6 @@ public class UIInventory : MonoBehaviour
     public void Hide()
     {
         gameObject.SetActive(false);
+        ClearSelected();
     }
 }

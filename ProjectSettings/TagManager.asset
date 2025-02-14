@@ -23,6 +23,7 @@ TagManager:
   - Main Level
   - Map Bounds
   - Combat UI
+  - Inventory
   layers:
   - Default
   - TransparentFX

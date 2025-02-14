@@ -31,11 +31,11 @@ public class DamselDialogue : MonoBehaviour
     void AfterDialogue() {
         Debug.Log("got hook");
         PartyManager partyManager = GameObject.FindGameObjectWithTag("Player").GetComponent<PartyManager>();
-        partyManager.AddToParty("MemberB");
+        partyManager.AddToParty(Survivor);
         Inventory inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
 
 
-        inventory.AddMember(Survivor);
+       
 
 
         Destroy(gameObject);
