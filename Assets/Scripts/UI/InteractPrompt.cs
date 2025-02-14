@@ -128,6 +128,7 @@ public class InteractPrompt : MonoBehaviour
             if (currentPopUp == null)
             {
                 currentPopUp = Instantiate(popUpPrefab, Camera.main.WorldToScreenPoint(transform.position + Vector3.up * 1.5f), Quaternion.identity, GameObject.FindGameObjectWithTag("Overworld UI").transform);
+                currentPopUp.transform.SetSiblingIndex(0);
                 popUpText = currentPopUp.GetComponentInChildren<TMP_Text>();
                 popUpAnimator = currentPopUp.GetComponent<Animator>();
             } else {

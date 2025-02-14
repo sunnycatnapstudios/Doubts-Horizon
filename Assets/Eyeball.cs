@@ -18,7 +18,7 @@ public class Eyeball : MonoBehaviour
     public float distance;
 
     public float scaleFactor;
-    public float movementRange, movementDuration, pupilAnimationSpeed;
+    public float movementRange, movementDuration, pupilAnimationSpeed, randomDilation;
     public Vector2 randomMovement, randomIdleMovement;
 
     void OnEnable()
@@ -29,6 +29,7 @@ public class Eyeball : MonoBehaviour
 
         StartCoroutine(RandomPupilMovement());
         StartCoroutine(RandomEyeState());
+        StartCoroutine(RandomPupilDialation());
     }
     public void StartDilatePupil()
     {
@@ -91,6 +92,14 @@ public class Eyeball : MonoBehaviour
             yield return new WaitForSecondsRealtime(Random.Range(3f, 6f));
         }
     }
+    private IEnumerator RandomPupilDialation()
+    {
+        while (true)
+        {
+            randomDilation = Random.Range(.8f, 1.3f);
+            yield return new WaitForSecondsRealtime(Random.Range(.7f, 3f));
+        }
+    }
 
     void Update()
     {
@@ -142,6 +151,6 @@ public class Eyeball : MonoBehaviour
         scaleFactor = Mathf.Lerp(1f, .4f, offset.magnitude / currentPupilRadius);
 
         eyePupil.rotation = Quaternion.Euler(0, 0, (pupilLookAngle+(randomMovement.x)/2));
-        eyePupil.sizeDelta = new Vector2(scaleFactor * currentPupilRadius, currentPupilRadius);
+        eyePupil.sizeDelta = new Vector2(scaleFactor * currentPupilRadius * randomDilation, currentPupilRadius * randomDilation);
     }
 }
