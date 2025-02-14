@@ -26,9 +26,6 @@ public class PartyManager : MonoBehaviour
 {
     public int partyCount;
     public GameObject partyMemberTemplate;
-    public List<GameObject> partyMembers = new List<GameObject>();
-    GameObject partySpawn;
-    // public GameObject floatingTextPrefab;
 
     public Dictionary<string, PartyMember> playerStats = new Dictionary<string, PartyMember>
     {
