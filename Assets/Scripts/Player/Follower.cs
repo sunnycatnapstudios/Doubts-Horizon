@@ -15,10 +15,13 @@ public class Follower : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         if (order!=0) {transform.position = Player.transform.position;}
 
         spriteState = GetComponent<SpriteRenderer>();
         partyAnim = GetComponent<Animator>();
+        partyManager = GameObject.FindGameObjectWithTag("Player").GetComponent<PartyManager>();
+        
     }
 
     // Update is called once per frame

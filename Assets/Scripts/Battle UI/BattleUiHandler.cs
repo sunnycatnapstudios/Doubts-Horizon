@@ -34,7 +34,7 @@ public class BattleUiHandler : MonoBehaviour
     public int currentTurnIndex = 0;
     private bool battleInProgress = false;
 
-    public Dictionary<string, CharStats> L1Enemies = new Dictionary<string, CharStats>
+    public Dictionary<string, CharStats> L1Enemies = new Dictionary<string, CharStats>//i think these should also be prefabs
     {
         { "Handy", new CharStats("Handy", 38, 100, true)},
         { "Gregor", new CharStats("Gregor", 21, 120, true)},
@@ -63,21 +63,22 @@ public class BattleUiHandler : MonoBehaviour
     public IEnumerator StartBattle()
     {
         battleOrder.Clear();
-
-        foreach (var member in partyManager.currentPlayer)
-        {
-            CharStats playerStats = new CharStats(member.Name, member.Damage, member.Health, false);
-            battleOrder.Add(playerStats);
-            partySlots[0].GetComponent<PartySlot>().Name = member.Name;
-            partySlots[0].GetComponent<PartySlot>().SetHealth(member.Health);
-        }
+        partyManager = GameObject.FindGameObjectWithTag("Player").GetComponent<PartyManager>();
+        Survivor player = GameObject.FindGameObjectWithTag("Player").GetComponent<PartyManager>().getPlayer();
+            Debug.Log(player);
+        CharStats playerStats = new CharStats(player.Name, player.Damage, player.Health, false);
+        //CharStats playerStats = new CharStats("player.Name", 21, 321, false);
+        battleOrder.Add(playerStats);
+        partySlots[0].GetComponent<PartySlot>().Name = player.Name;
+        partySlots[0].GetComponent<PartySlot>().SetHealth(player.CurHealth);
+        partySlots[0].GetComponent<PartySlot>().profile.sprite = player.GetSprite();
 
         int slotIndex = 1;
         foreach (var member in partyManager.currentPartyMembers)
         {
-            if (member.isCombatant)
+            if (member.IsCombatant)
             {
-                CharStats newChar = new CharStats(member.Name, member.Damage, member.Health, false);
+                CharStats newChar = new CharStats(member.Name, member.Damage, member.Health, false);//probably need to change abit to be able to use current health as well as max health
                 battleOrder.Add(newChar);
 
                 if (slotIndex < partySlots.Count)
@@ -86,6 +87,7 @@ public class BattleUiHandler : MonoBehaviour
                     // partySlots[slotIndex].profile.sprite = member.profileSprite; // Ensure PartyMember has profileSprite
                     partySlots[slotIndex].GetComponent<PartySlot>().Name = member.Name;
                     partySlots[slotIndex].GetComponent<PartySlot>().SetHealth(member.Health);
+                    partySlots[slotIndex].GetComponent<PartySlot>().profile.sprite=member.GetSprite(); //can create add/create other sprites and getters if want to use different sprite
                 }
                 slotIndex++;
             }
@@ -98,15 +100,7 @@ public class BattleUiHandler : MonoBehaviour
 
         battleOrder = ShuffleList(battleOrder);
         
-        foreach (var profilePic in profileImages)
-        {
-            foreach (var slot in partySlots)
-            {
-                if (profilePic.name == slot.GetComponent<PartySlot>().Name) {
-                    slot.GetComponent<PartySlot>().profile.sprite = profilePic;
-                }
-            }
-        }
+       
 
         foreach (var Char in battleOrder)
         {
@@ -313,12 +307,19 @@ public class BattleUiHandler : MonoBehaviour
         if (playerParty.Count > 0)
         {
             CharStats target = playerParty[Random.Range(0, playerParty.Count)];
+            Survivor guyGettingHit;
+            if (target.Name == partyManager.getPlayer().Name) {
+
+                 guyGettingHit = partyManager.getPlayer();
+            } else {
+                 guyGettingHit = partyManager.currentPartyMembers.Find(c=>c.Name ==target.Name);
+            }
 
             // Simulate attack
             int enemyDamage = (int)Random.Range(enemy.Attack*.6f, enemy.Attack*1.2f);
             Debug.Log($"{enemy.Name} attacks {target.Name} for {enemyDamage} damage!");
-            partyManager.TakeDamage(target.Name, enemyDamage);
-            target.Health -= enemyDamage;
+            partyManager.TakeDamage(guyGettingHit, enemyDamage);
+            //target.Health -= enemyDamage;
             foreach (GameObject mem in partySlots)
             {
                 if (mem.GetComponent<PartySlot>().Name == target.Name)
@@ -330,7 +331,8 @@ public class BattleUiHandler : MonoBehaviour
                 }
             }
             // Check if target is defeated
-            if (target.Health <= 0)
+            Debug.Log(guyGettingHit.ToString());
+            if (guyGettingHit.Health <= 0)
             {
                 Debug.Log($"{target.Name} has been defeated!");
                 battleOrder.Remove(target);

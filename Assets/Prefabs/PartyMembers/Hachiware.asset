@@ -12,8 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37bebb4f9bbe1904896366df90c723ce, type: 3}
   m_Name: Hachiware
   m_EditorClassIdentifier: 
-  Name: hachi
-  Damage: 2
-  Health: 231
+  name: HACHIWAREE
+  damage: 12
+  health: 32
   isCombatant: 1
+  Animcontroller: {fileID: 9100000, guid: ffcf3fd7ed2c1024ab6b6aad59d0e314, type: 2}
   Sprite: {fileID: 7598356176507770372, guid: d068f37a9b8556241a344075120966b1, type: 3}
+  walkingSprite: {fileID: 0}
+  GetWalkingSprite: {fileID: 0}

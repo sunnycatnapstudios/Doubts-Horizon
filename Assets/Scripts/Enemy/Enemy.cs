@@ -23,6 +23,17 @@ public class Enemy : MonoBehaviour
 
     public GameObject overworldUI, combatUI;
 
+   
+
+    void Start()
+    {
+        startPos = transform.position;
+        enemyAnim = GetComponent<Animator>();
+        spriteState = GetComponent<SpriteRenderer>();
+        detectRange = baseRange;
+        target = GameObject.FindGameObjectWithTag("Player").transform;
+
+    }
 
     void OnDrawGizmos() { // Draws a Debug for NPC interact radius
         Gizmos.color = Color.white;
@@ -156,14 +167,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void Start()
-    {
-        startPos = transform.position;
-        enemyAnim = GetComponent<Animator>();
-        spriteState = GetComponent<SpriteRenderer>();
-        detectRange = baseRange;
-
-    }
+    
 
     void Update()
     {
