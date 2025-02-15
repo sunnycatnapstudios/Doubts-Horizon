@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,7 +17,7 @@ public class InteractPrompt : MonoBehaviour
     private TMP_Text popUpText;
     private Animator popUpAnimator;
 
-    
+
     public GameObject interactBoxPrefab;
     private GameObject currentInteractBox;
     private TMP_Text interactBoxText;
@@ -35,6 +36,11 @@ public class InteractPrompt : MonoBehaviour
 
     public NPCDialogueHandler NPCDialogueHandler;
 
+    [Serializable]
+    private struct AudioClips {
+        public AudioClip sfxOnInteract;
+    }
+    [SerializeField] private AudioClips audioClips;
 
     void OnDrawGizmos() { // Draws a Debug for NPC interact radius
         Gizmos.color = Color.white;
@@ -151,8 +157,7 @@ public class InteractPrompt : MonoBehaviour
                 interactCount++;
                 if (CompareTag("Interactable"))
                 {
-                    // TODO replace with smarter method later
-                    AudioManager.Instance.PlayUiSound("Ui_SelectButton");
+                    AudioManager.Instance.PlayUiSound(audioClips.sfxOnInteract);
                     Debug.Log($"YEP, YOU'VE TAPPED {this.name} {interactCount} TIMES!!!");
                 }
                 else if (CompareTag("NPC"))

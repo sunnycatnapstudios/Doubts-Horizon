@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -46,7 +47,7 @@ using UnityEngine.UI;
 //             {
 //                 // bulletRef[i].sprite = fullSprite;
 //                 bulletRef[i].enabled = true;
-//             } else 
+//             } else
 //             {
 //                 // bulletRef[i].sprite = emptySprite;
 //                 bulletRef[i].enabled = false;
@@ -121,6 +122,13 @@ public class Bullet : MonoBehaviour
     private bool isReloading = false;
     public float reloadSpeed = .1f;
 
+    [Serializable]
+    private struct AudioClips {
+        public AudioClip sfxDrawSlingshot;
+        public AudioClip sfxBulletShot;
+    }
+    [SerializeField] private AudioClips audioClips;
+
     void ResetProjectile() {
         shoot = false;
         sprender.enabled = false;
@@ -174,7 +182,7 @@ public class Bullet : MonoBehaviour
         ResetProjectile();
         UpdateUI();
 
-        transform.position = Vector3.down * .8f + target.position; 
+        transform.position = Vector3.down * .8f + target.position;
         DIR = Vector3.down;
     }
 
@@ -185,12 +193,11 @@ public class Bullet : MonoBehaviour
         if (Input.GetMouseButtonUp(1) && !shoot && bulletCount > 0 && !isReloading)
         {
             ChangeBulletCount(bulletCount - 1);
-            shoot = true; 
-            sprender.enabled = true; 
+            shoot = true;
+            sprender.enabled = true;
             circollider2D.enabled = true;
             refCheck = transform.position;
-            // TODO replace with better method later
-            AudioManager.Instance.PlaySound("Sfx_EnterLevel");
+            AudioManager.Instance.PlaySound(audioClips.sfxBulletShot);
         }
         if (bulletCount <= 0 && !isReloading)
         {

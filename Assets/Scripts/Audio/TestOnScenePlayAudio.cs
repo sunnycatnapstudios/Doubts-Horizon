@@ -1,19 +1,25 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TestOnScenePlayAudio : MonoBehaviour
-{
+public class TestOnScenePlayAudio : MonoBehaviour {
+    [Serializable]
+    private struct AudioClips {
+        public AudioClip startClip;
+    }
+
+    [SerializeField] private AudioClips audioClips;
+
     // Start is called before the first frame update
-    IEnumerator Start()
-    {
+    IEnumerator Start() {
         // For now just play the forest ambient
-        AudioManager.Instance.CrossFadeAmbienceSound("Ambient_Forest", 3f);
+        AudioManager.Instance.CrossFadeAmbienceSound(audioClips.startClip, 3f);
         //AudioManager.Instance.CrossFadeAmbienceToZero(3f, 5f);
         //yield return DualAudioTest();
         yield break;
     }
-    
+
     // IEnumerator DualAudioTest()
     // {
     //     //yield return new WaitForSeconds(5);

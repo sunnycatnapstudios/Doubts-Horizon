@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -18,6 +19,13 @@ public class LevelTransition : MonoBehaviour
     public Vector3 refPosition;
     public bool changedLevel, inTransition;
 
+    [Serializable]
+    private struct AudioClips {
+        public AudioClip sfxEnterTransition;
+        public AudioClip sfxExitTransition;
+    }
+    [SerializeField] private AudioClips audioClips;
+
     private void OnTriggerEnter2D(Collider2D other) {
 
         // if (other.CompareTag(tagTarget)&& !inTransition)
@@ -31,10 +39,10 @@ public class LevelTransition : MonoBehaviour
                 Player.GetComponent<Player>().movePoint.transform.position += entranceDirection;
                 Player.GetComponent<Player>().isPlayerInControl = true;
                 Player.GetComponent<Player>().moveSpeed = 3f;
-                
+
                 // inTransition = true;
                 sceneAnimation.SetTrigger("Leave Scene");
-                AudioManager.Instance.PlaySound("Sfx_EnterLevel");
+                AudioManager.Instance.PlaySound(audioClips.sfxEnterTransition);
             }
         }
     }
@@ -46,8 +54,8 @@ public class LevelTransition : MonoBehaviour
             {
                 Debug.Log(tagTarget + " has left "+ name);
                 Player.GetComponent<Player>().isPlayerInControl = false;
-                
-                AudioManager.Instance.PlaySound("Sfx_ExitLevel");
+
+                AudioManager.Instance.PlaySound(audioClips.sfxExitTransition);
                 changedLevel = true;
             }
         }
@@ -59,10 +67,10 @@ public class LevelTransition : MonoBehaviour
         // if (CompareTag("Same Level")||CompareTag("Battle UI Level"))
         {
             sceneAnimation.SetTrigger("Enter Scene");
-            
+
             Player.GetComponent<Player>().movePoint.transform.position = exitLocation+exitDirection;
             Player.transform.position = exitLocation;
-            
+
             int i = 0;
             foreach (GameObject partyMember in Player.GetComponent<PartyManager>().spawnedPartyMembers)
             {
@@ -71,7 +79,7 @@ public class LevelTransition : MonoBehaviour
             }
 
             Player.GetComponent<Player>().isPlayerInControl = false;
-            
+
             changedLevel = false;
 
             // inTransition = true;

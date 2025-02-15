@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,8 +17,12 @@ public class Inventory : MonoBehaviour
     Dictionary<string, Survivor> survivors = new Dictionary<string, Survivor>();
     public Survivor test1;
     public Survivor test2;
-    
 
+    [Serializable]
+    private struct AudioClips {
+        public AudioClip sfxPickup;
+    }
+    [SerializeField] private AudioClips audioClips;
 
 
     void Start()
@@ -35,7 +40,7 @@ public class Inventory : MonoBehaviour
         }
         inventoryWindow.InitializeParty(survivors);
 
-        
+
 
     }
     private void addItem(Item item)
@@ -82,8 +87,8 @@ public class Inventory : MonoBehaviour
         {
             itemsInRange.Add(col.gameObject);
 
-           
-            
+
+
         }
     }
 
@@ -98,13 +103,12 @@ public class Inventory : MonoBehaviour
                 Item item = curObj.GetComponent<Pickupable>().GetItem();
                 addItem(item);
                 Debug.Log("did");
-                
-                // TODO replace with better method later
-                AudioManager.Instance.PlayUiSound("Ui_SelectDrawer");
+
+                AudioManager.Instance.PlayUiSound(audioClips.sfxPickup);
                 foreach (string slot in inventory.Keys) {
                     Debug.Log(slot + inventory[slot].getCount().ToString());
-                    
-                
+
+
                 }
                 curObj.GetComponent<Pickupable>().DestroyInWorld();
 
@@ -143,12 +147,12 @@ public class Inventory : MonoBehaviour
             itemsInRange.Remove(col.gameObject);
 
             // Print the entire list to the console.
-           
+
 
         }
     }
 
-    
+
 }
 
 
