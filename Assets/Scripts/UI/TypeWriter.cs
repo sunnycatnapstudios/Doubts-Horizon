@@ -11,7 +11,7 @@ public class TypeWriter : MonoBehaviour
     
     [SerializeField] float delayBeforeStart = 0f;
 	[SerializeField] float timeBtwChars = 0.1f;
-	[SerializeField] string leadingChar = "";
+	[SerializeField] string leadingChar = ""; // TODO: do we ever plan to use this? can it be removed?
 	[SerializeField] bool leadingCharBeforeDelay = false;
 
 	public bool hasStartedTyping = false, isTyping = false, skipTyping = false;
@@ -31,13 +31,28 @@ public class TypeWriter : MonoBehaviour
         yield return new WaitForSeconds(delayBeforeStart);
 		textChirp = 0f;
 
-        foreach (char c in writer)
-		{
+        for (int i = 0; i < writer.Length; ++i) {
 			if (skipTyping) {
 				_tmpProText.text = writer;
 				break;
 			}
 
+            // If there is a style tag attach the whole thing
+            if (writer[i] == '<') {
+                int start = i;
+                while (i < writer.Length) {
+                    ++i;
+                    if (writer[i] == '>') {
+                        break;
+                    }
+                }
+                _tmpProText.text += writer.Substring(start, i-start);
+                if (i >= writer.Length) {
+                    break;
+                }
+            }
+
+            char c = writer[i];
 			if (_tmpProText.text.Length > 0)
 			{
 				_tmpProText.text = _tmpProText.text.Substring(0, _tmpProText.text.Length - leadingChar.Length);

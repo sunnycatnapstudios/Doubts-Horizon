@@ -13,7 +13,7 @@ public class JoinerDialogue : MonoBehaviour {
 
         npcDialogueHandler.dialogueLines = new List<string> {
             "It's dangerous to go alone!",
-            "Take me."
+            "<link=\"FirstJoin\"><b><#d4af37>Take me</color></b></link>."
         };
         npcDialogueHandler.afterDialogue = new NPCDialogueHandler.AfterDialogueCall(AfterDialogue);
     }
