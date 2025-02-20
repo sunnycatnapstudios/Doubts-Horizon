@@ -2,39 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JoinerDialogue : MonoBehaviour
-{
-    private NPCDialogueHandler NPCDialogueHandler;
+public class JoinerDialogue : MonoBehaviour {
+    private NPCDialogueHandler npcDialogueHandler;
     private InteractPrompt InteractPrompt;
-    public List<string> dialogueLines;
-    private List<string> introLines, funnyRetort;
     public Survivor survivor;
 
-    void Start ()
-    {
-        NPCDialogueHandler = GetComponent<NPCDialogueHandler>();
+    void Start() {
+        npcDialogueHandler = GetComponent<NPCDialogueHandler>();
         InteractPrompt = GetComponent<InteractPrompt>();
-        
-        introLines = new List<string>
-        {
+
+        npcDialogueHandler.dialogueLines = new List<string> {
             "It's dangerous to go alone!",
             "Take me."
         };
-        dialogueLines = introLines;
-        NPCDialogueHandler.dialogueLines = dialogueLines;
-        NPCDialogueHandler.afterDialogue = new NPCDialogueHandler.AfterDialogueCall(AfterDialogue);
+        npcDialogueHandler.afterDialogue = new NPCDialogueHandler.AfterDialogueCall(AfterDialogue);
     }
-    void Update ()
-    {
+    void Update() {
     }
     void AfterDialogue() {
-        Debug.Log("got hook");
+        Debug.Log("Completed dialogue");
         PartyManager partyManager = GameObject.FindGameObjectWithTag("Player").GetComponent<PartyManager>();
         partyManager.AddToParty(survivor);
-        
-
-        
-        
         Destroy(gameObject);
     }
 }

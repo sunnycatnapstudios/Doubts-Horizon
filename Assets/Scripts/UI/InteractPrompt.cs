@@ -31,9 +31,8 @@ public class InteractPrompt : MonoBehaviour {
     private Image charProfile;
 
     public bool isDialogueOpen = false, dialogueFinished = false;
-    bool afterDialogueCalled = false;
 
-    public NPCDialogueHandler NPCDialogueHandler;
+    public NPCDialogueHandler npcDialogueHandler;
 
     [Serializable]
     private struct AudioClips {
@@ -120,7 +119,7 @@ public class InteractPrompt : MonoBehaviour {
             dialogueAnimator = dialogueBox.GetComponent<Animator>();
             dialogueAnimator.Play("Dialogue Hidden");
             // dialogueBox.SetActive(false);
-            NPCDialogueHandler = GetComponent<NPCDialogueHandler>();
+            npcDialogueHandler = GetComponent<NPCDialogueHandler>();
         }
         // if (CompareTag("Interactable")) {
         //     Debug.Log("YEEEEEEEEEEEAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHH");
@@ -168,15 +167,15 @@ public class InteractPrompt : MonoBehaviour {
                         nameText.text = this.name;
                         // isDialogueOpen = true;
                         charProfile.sprite = characterProfile;
-                        NPCDialogueHandler.ResetDialogue();
-                        string nextLine = NPCDialogueHandler.GetNextLine();
+                        npcDialogueHandler.ResetDialogue();
+                        string nextLine = npcDialogueHandler.GetNextLine();
 
                         if (nextLine != null) {
                             OpenDialogue(nextLine);
                             dialogueFinished = false;
                         }
                     } else if (!bodyTypeWriter.isTyping && !bodyTypeWriter.hasStartedTyping) {
-                        string nextLine = NPCDialogueHandler.GetNextLine();
+                        string nextLine = npcDialogueHandler.GetNextLine();
 
                         if (nextLine != null) {
                             UpdateDialogue(nextLine);
@@ -205,9 +204,8 @@ public class InteractPrompt : MonoBehaviour {
             }
         }
 
-        if (dialogueFinished && !afterDialogueCalled && NPCDialogueHandler.afterDialogue != null) {
-            NPCDialogueHandler.afterDialogue();
-            afterDialogueCalled = true;
+        if (dialogueFinished && npcDialogueHandler.afterDialogue != null) {
+            npcDialogueHandler.afterDialogue();
         }
     }
 
