@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,8 +7,7 @@ public class NPCDialogueHandler : MonoBehaviour
 {
     public List<string> dialogueLines;
     private int currentLineIndex = 0; 
-    [HideInInspector] public delegate void AfterDialogueCall();
-    [HideInInspector] public AfterDialogueCall afterDialogue;
+    [HideInInspector] public Action afterDialogue;
 
     public string GetNextLine()
     {

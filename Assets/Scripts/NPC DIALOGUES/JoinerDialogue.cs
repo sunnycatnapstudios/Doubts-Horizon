@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,7 +16,7 @@ public class JoinerDialogue : MonoBehaviour {
             "It's dangerous to go alone!",
             "<link=\"FirstJoin\"><b><#d4af37>Take me</color></b></link>."
         };
-        npcDialogueHandler.afterDialogue = new NPCDialogueHandler.AfterDialogueCall(AfterDialogue);
+        npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
     }
     void Update() {
     }

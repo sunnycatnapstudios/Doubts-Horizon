@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -23,7 +24,7 @@ public class DamselDialogue : MonoBehaviour
         };
         dialogueLines = introLines;
         NPCDialogueHandler.dialogueLines = dialogueLines;
-        NPCDialogueHandler.afterDialogue = new NPCDialogueHandler.AfterDialogueCall(AfterDialogue);
+        NPCDialogueHandler.afterDialogue = new Action(AfterDialogue);
     }
     void Update ()
     {
