@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 [System.Serializable]
 public class CharacterStats
@@ -19,27 +20,13 @@ public class CharacterStats
         isEnemy = isenemy;
     }
 }
-[System.Serializable]
-public class _Inventory
-{
-    public List<Item> items = new List<Item>();
-}
-
-[System.Serializable]
-public class _Item
-{
-    public string itemName;
-    public int quantity;
-}
 
 public class GameStatsManager : MonoBehaviour
 {
     public static GameStatsManager Instance { get; private set;}
+    public _PartyManager _partyManager;
 
-    // public PlayerStats playerStats;
-    // public List<CharacterStats> partyStats = new List<CharacterStats>();
-    // public Dictionary<int, EnemyStats> enemyStats = new Dictionary<int, EnemyStats>();
-    // public Inventory inventory;
+    // Combat-Related Stats
     public Dictionary<string, CharacterStats> playerStats = new Dictionary<string, CharacterStats>
     {
         { "Player", new CharacterStats("Player", 50, 150, 150, true, false)}
@@ -58,6 +45,97 @@ public class GameStatsManager : MonoBehaviour
         { "Gregor", new CharacterStats("Gregor", 21, 120, 120, true, true)},
         { "Turf", new CharacterStats("Turf", 31, 150, 150, true, true)}
     };
+    public Dictionary<string, CharacterStats> L2AEnemies = new Dictionary<string, CharacterStats>
+    {
+
+    };
+    public Dictionary<string, CharacterStats> L2BEnemies = new Dictionary<string, CharacterStats>
+    {
+
+    };
+    public List<CharacterStats> currentPartyMembers = new List<CharacterStats>();
+    public List<GameObject> spawnedPartyMembers = new List<GameObject>();
+
+    // Sprint-Related Stats
+    public bool infSprint, staminaRecharging, sprintLocked, isCurrentlySprinting;
+    public float currStamina, maxStamina = 100, sprintCost = 35;
+    Image staminaBar;
+    private Coroutine recharge;
+
+
+    public bool CanSprint() { return currStamina > 0 && !sprintLocked;}
+    public void Sprint()
+    {
+        if (infSprint) return;
+
+        if (currStamina > 0)
+        {
+            if (isCurrentlySprinting) {
+                currStamina -= sprintCost * Time.deltaTime;
+                if (staminaRecharging)
+                {
+                    staminaRecharging = false;
+                    StopCoroutine(RechargeStamina());
+                    recharge = null;
+                }
+            }
+            // isCurrentlySprinting = true;
+
+            if (!isCurrentlySprinting && currStamina < maxStamina) {StartRecharge();}
+            if (currStamina <= 0)
+            {
+                currStamina = 0;
+                sprintLocked = true;
+                StartRecharge();
+            }
+        }
+    }
+    public void StartRecharge()
+    {
+        if (staminaRecharging) {return;}
+
+        if (currStamina>=maxStamina)
+        {
+            currStamina = maxStamina;
+            staminaRecharging = sprintLocked = false;
+            return;
+        }
+        staminaRecharging = true;
+        if (recharge != null) {StopCoroutine(recharge);}
+        recharge = StartCoroutine(RechargeStamina());
+    }
+    private IEnumerator RechargeStamina()
+    {
+        yield return new WaitForSeconds(1f);
+        while (currStamina < maxStamina)
+        {
+            if (isCurrentlySprinting) // Stop recharging if sprinting resumes
+            {
+                staminaRecharging = false;
+                recharge = null;
+                yield break;
+            }
+
+            currStamina += (150) * Time.deltaTime;
+            if (currStamina >= maxStamina) {
+                currStamina = maxStamina;
+                staminaRecharging = sprintLocked = false;
+                recharge = null;
+                yield break;
+            }
+            yield return new WaitForSeconds(0.01f);
+        }
+    }
+
+    public void PrintCharacterStats(Dictionary<string, CharacterStats> characterDict, string groupName)
+    {
+        Debug.Log($"--- {groupName} Stats ---");
+        foreach (var entry in characterDict)
+        {
+            CharacterStats stats = entry.Value;
+            Debug.Log($"Name: {stats.Name}, Attack: {stats.attack}, HP: {stats.currentHealth}/{stats.maxHealth}, Combatant: {stats.isCombatant}, Enemy: {stats.isEnemy}");
+        }
+    }
 
 
     private void Awake()
@@ -67,9 +145,22 @@ public class GameStatsManager : MonoBehaviour
             Instance = this;
             DontDestroyOnLoad(gameObject);
         }
-        else
-        {
-            Destroy(gameObject);
-        }
+        else {Destroy(gameObject);}
+
+        currStamina = maxStamina;
+        sprintLocked = false;
+
+        _partyManager = GetComponentInChildren<_PartyManager>();
+        staminaBar = GameObject.FindGameObjectWithTag("Stamina Bar").GetComponent<Image>();
+    }
+    public void Start()
+    {
+        // PrintCharacterStats(playerStats, "Player");
+        // PrintCharacterStats(allPartyMembers, "Party Members");
+        // PrintCharacterStats(L1Enemies, "Enemies");
+    }
+    public void Update()
+    {
+        staminaBar.fillAmount = currStamina/maxStamina;
     }
 }

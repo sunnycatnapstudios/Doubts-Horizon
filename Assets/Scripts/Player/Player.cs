@@ -9,7 +9,6 @@ using Cinemachine;
 public class Player : MonoBehaviour
 {
 
-    public bool infSprint;
     [HideInInspector] public Animator anim;
     [HideInInspector] public SpriteRenderer spritestate;
     [HideInInspector] public Inventory inventory;
@@ -31,36 +30,21 @@ public class Player : MonoBehaviour
     public float camMax, camMin;
     public bool isZooming;
 
-    public float currStamina, maxStamina = 100, sprintCost = 35;
-    public Image staminaBar;
-    private Coroutine recharge;
-    public bool recharging, isMoving;
+    public bool isMoving;
     public bool faceLeft, faceRight, faceUp, faceDown = true;
     int animCount;
 
-    // New Input controls
-    private PlayerInputActions playerInputActions;
-    private InputAction movement, move;
-    public Vector2 moveInput;
     public Vector2 lastInput;
     public Vector2 playerInput;
 
     private PartyManager partyManager;
+    private _PartyManager _partyManager;
 
     public bool isPlayerInControl;
+    public bool isSneaking, isSprinting;
 
-    
-    private IEnumerator RechargeStamina() {
-        yield return new WaitForSeconds(1f);
-        while (currStamina < maxStamina) {
-            currStamina += (sprintCost*3f)*Time.deltaTime;
-            if (currStamina > maxStamina) {recharging = false; currStamina = maxStamina;}
-            staminaBar.fillAmount = currStamina/maxStamina;
-            yield return new WaitForSeconds(.01f);
-        }
-    }
 
-    void viewMap()
+    void ViewMap()
     {
         isZooming = Input.GetKey(KeyCode.Q);
         float targetSize = isZooming ? camMax : camMin;
@@ -70,17 +54,21 @@ public class Player : MonoBehaviour
 
     void UpdateMoveHist()
     {
-        if (moveHist.Count < partyManager.partyCount&&
+        if (moveHist.Count < _partyManager.partyCount&&
             movePoint.position == pointRef)
         {
             // for (int i = 0; i<partyManager.partyCount; i++) 
             {moveHist.Add(movePoint.position);}
         }
         if (movePoint.position != pointRef) {moveHist.Add(pointRef);}
-        if (moveHist.Count > partyManager.partyCount) {moveHist.RemoveAt(0);}
+        if (moveHist.Count > _partyManager.partyCount) {moveHist.RemoveAt(0);}
     }
 
 
+    void Awake()
+    {
+        _partyManager = GameStatsManager.Instance._partyManager;
+    }
     void Start()
     {
         anim = GetComponent<Animator>();
@@ -99,7 +87,6 @@ public class Player : MonoBehaviour
         movePoint.parent = null;
         moveConstant = moveSpeed; moveSprint = moveSpeed*sprintConstant; moveSneak = moveSpeed*sneakConstant;
 
-        currStamina = maxStamina;
 
         // moveHist = new List<Vector3>();
         // for (int i = 0; i<partyManager.partyCount; i++) {moveHist.Add(movePoint.position); Debug.Log("AAAAAAAAA");}
@@ -108,64 +95,29 @@ public class Player : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // // Movement controls V1
-        // if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow)){
-        //     transform.position+= Vector3.up*Time.deltaTime*Speed;
-        //     anim.Play("Walk Up");
-        // }
-        // if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)){
-        //     transform.position+= Vector3.left*Time.deltaTime*Speed;
-        //     anim.Play("Walk Left");
-        //     spritestate.flipX = true;
-        // }
-        // if(Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow)){
-        //     transform.position+= Vector3.down*Time.deltaTime*Speed;
-        //     anim.Play("Walk Down");
-        // }
-        // if(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow)){
-        //     transform.position+= Vector3.right*Time.deltaTime*Speed;
-        //     anim.Play("Walk Left");
-        //     spritestate.flipX = false;
-        // }
-        // if(Input.GetMouseButtonDown(1)){
-        //     Speed = 4;
-        // }
-        // else if(Input.GetMouseButtonUp(1)){
-        //     Speed = 8;
-        // }
-
-
-        // Movement Controls V2
         Vector3 startRef = transform.position;
         transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed*Time.deltaTime);
         Vector3 endRef = transform.position;
-
         isMoving = startRef!=endRef;
+        
+        isSneaking = Input.GetMouseButton(1);
+        isSprinting = Input.GetKey(KeyCode.LeftShift) && GameStatsManager.Instance.CanSprint() && !isSneaking;
+        GameStatsManager.Instance.isCurrentlySprinting = isSprinting && isMoving;
 
-        // Controls Movement Speed
-        if (!isPlayerInControl)
+        GameStatsManager.Instance.Sprint();
+
+        if (!isPlayerInControl) {
+            moveSpeed = isSneaking ? moveSneak : ((isSprinting&&isMoving) ? moveSprint : moveConstant);
+        }
+        if (isSprinting && isMoving) {if (animCount<=0){partiSystem.Play(); animCount+=1;}}
+        else 
         {
-            if(Input.GetMouseButton(1)){moveSpeed = moveSneak;}
-            else if(Input.GetKey(KeyCode.LeftShift) && !recharging){
-
-                if (currStamina>0 && !recharging && isMoving)
-                {
-                    moveSpeed = moveSprint;
-                    if (animCount<=0){partiSystem.Play(); animCount+=1;}
-                    if (!infSprint) {currStamina -= sprintCost*Time.deltaTime;}
-
-                    if (currStamina<0) {currStamina = 0; recharging = true;}
-                    staminaBar.fillAmount = currStamina/maxStamina;
-
-                    if (recharge != null) {StopCoroutine(recharge);}
-                    recharge = StartCoroutine(RechargeStamina());
-
-                } else{moveSpeed = moveConstant; animCount=0; partiSystem.Stop();}
-            } else{moveSpeed = moveConstant; animCount=0; partiSystem.Stop();}
+            animCount=0;
+            partiSystem.Stop();
         }
 
     
-        viewMap();
+        ViewMap();
 
         if (Vector3.Distance(transform.position, movePoint.position) <= movementInputDelay && !isZooming){
 

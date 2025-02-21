@@ -15,7 +15,7 @@ public class PartySlot : MonoBehaviour
     public bool _isHighlighted;
     public BattleUiHandler battleUiHandler;
     public TextMeshProUGUI playerHealthIndicator;
-    private float fadeDuration = .5f, delayBeforeFade = .8f;
+    private float fadeDuration = .5f, delayBeforeFade = 1.2f;
 
     void OnEnable()
     {
@@ -56,6 +56,7 @@ public class PartySlot : MonoBehaviour
     public void SetHealth(float currentHealth)
     {
         maxHealth = currentHealth;
+        healthBarBar.fillAmount = currentHealth/maxHealth;
         UpdateHealthBar(currentHealth);
     }
 
