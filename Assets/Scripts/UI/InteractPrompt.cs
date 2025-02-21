@@ -5,8 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InteractPrompt : MonoBehaviour
- {
+public class InteractPrompt : MonoBehaviour {
     public LayerMask playerLayer;
     public Player player;
     private float interactRange = 1.5f;
