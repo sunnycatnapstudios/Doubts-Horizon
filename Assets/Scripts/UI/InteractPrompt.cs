@@ -5,7 +5,8 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InteractPrompt : MonoBehaviour {
+public class InteractPrompt : MonoBehaviour
+ {
     public LayerMask playerLayer;
     public Player player;
     private float interactRange = 1.5f;
@@ -33,7 +34,6 @@ public class InteractPrompt : MonoBehaviour {
     public bool isDialogueOpen = false, dialogueFinished = false;
 
     public NPCDialogueHandler npcDialogueHandler;
-    private Dictionary<string, Action> dialogueChoices;
 
     [Serializable]
     private struct AudioClips {
@@ -101,11 +101,6 @@ public class InteractPrompt : MonoBehaviour {
     IEnumerator DeactivateAfterDelay(float delay) {
         yield return new WaitForSeconds(delay);
         // charProfile.sprite = null;
-    }
-
-    void AddDialogueChoice(string id, Action callBack) {
-        Debug.Assert(!dialogueChoices.ContainsKey(id));
-        dialogueChoices.Add(id, callBack);
     }
 
     void Start() {
@@ -212,6 +207,7 @@ public class InteractPrompt : MonoBehaviour {
 
         if (dialogueFinished && npcDialogueHandler.afterDialogue != null) {
             npcDialogueHandler.afterDialogue();
+            npcDialogueHandler.afterDialogue = null;
         }
     }
 

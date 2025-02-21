@@ -78,4 +78,5 @@ crashlytics-build.properties
 
 # Vim files
 .*.swp
+.*.swo
 Session.vim*
