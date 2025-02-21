@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿// TODO REMOVE
+using UnityEngine;
 using UnityEngine.UI;
 
 public class NPC : MonoBehaviour
