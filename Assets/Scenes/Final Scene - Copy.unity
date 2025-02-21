@@ -263,6 +263,9 @@ MonoBehaviour:
   refPosition: {x: 0, y: 0, z: 0}
   changedLevel: 0
   inTransition: 0
+  audioClips:
+    sfxEnterTransition: {fileID: 0}
+    sfxExitTransition: {fileID: 0}
 --- !u!483693784 &43973885
 TilemapRenderer:
   m_ObjectHideFlags: 0
@@ -22670,6 +22673,9 @@ MonoBehaviour:
   refPosition: {x: 0, y: 0, z: 0}
   changedLevel: 0
   inTransition: 0
+  audioClips:
+    sfxEnterTransition: {fileID: 0}
+    sfxExitTransition: {fileID: 0}
 --- !u!483693784 &168759583
 TilemapRenderer:
   m_ObjectHideFlags: 0
@@ -22928,7 +22934,9 @@ MonoBehaviour:
   characterProfile: {fileID: 21300000, guid: 233e090b78912f445af3f602a407830f, type: 3}
   isDialogueOpen: 0
   dialogueFinished: 0
-  NPCDialogueHandler: {fileID: 0}
+  npcDialogueHandler: {fileID: 0}
+  audioClips:
+    sfxOnInteract: {fileID: 0}
 --- !u!212 &181162047
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -23293,7 +23301,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfe630102f35a011b96ac6fe502b3e45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueLines: []
   survivor: {fileID: 11400000, guid: 7ea66f04ca169e844a9a9805f2c6e4b0, type: 2}
 --- !u!1 &266854583
 GameObject:
@@ -23473,7 +23480,9 @@ MonoBehaviour:
   characterProfile: {fileID: 21300000, guid: 233e090b78912f445af3f602a407830f, type: 3}
   isDialogueOpen: 0
   dialogueFinished: 0
-  NPCDialogueHandler: {fileID: 0}
+  npcDialogueHandler: {fileID: 0}
+  audioClips:
+    sfxOnInteract: {fileID: 0}
 --- !u!212 &271334415
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -23822,6 +23831,9 @@ MonoBehaviour:
   refPosition: {x: 0, y: 0, z: 0}
   changedLevel: 0
   inTransition: 0
+  audioClips:
+    sfxEnterTransition: {fileID: 0}
+    sfxExitTransition: {fileID: 0}
 --- !u!114 &336822359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24088,7 +24100,7 @@ RectTransform:
   - {fileID: 1891790867}
   - {fileID: 1350271247}
   m_Father: {fileID: 7866711809216641437}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -24210,7 +24222,9 @@ MonoBehaviour:
   characterProfile: {fileID: 21300000, guid: 233e090b78912f445af3f602a407830f, type: 3}
   isDialogueOpen: 0
   dialogueFinished: 0
-  NPCDialogueHandler: {fileID: 0}
+  npcDialogueHandler: {fileID: 0}
+  audioClips:
+    sfxOnInteract: {fileID: 0}
 --- !u!212 &459218824
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -24805,7 +24819,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.5, y: 36.199997, z: -10}
+  m_LocalPosition: {x: -12.46, y: 36.2, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -25668,6 +25682,9 @@ MonoBehaviour:
   refPosition: {x: 0, y: 0, z: 0}
   changedLevel: 0
   inTransition: 0
+  audioClips:
+    sfxEnterTransition: {fileID: 0}
+    sfxExitTransition: {fileID: 0}
 --- !u!224 &826860088 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3601746471780751792, guid: 60b5810337227034dbd959240033b5f7,
@@ -32576,7 +32593,9 @@ MonoBehaviour:
   characterProfile: {fileID: 21300000, guid: 233e090b78912f445af3f602a407830f, type: 3}
   isDialogueOpen: 0
   dialogueFinished: 0
-  NPCDialogueHandler: {fileID: 0}
+  npcDialogueHandler: {fileID: 0}
+  audioClips:
+    sfxOnInteract: {fileID: 0}
 --- !u!212 &1047770476
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -32962,6 +32981,9 @@ MonoBehaviour:
   refPosition: {x: 0, y: 0, z: 0}
   changedLevel: 0
   inTransition: 0
+  audioClips:
+    sfxEnterTransition: {fileID: 0}
+    sfxExitTransition: {fileID: 0}
 --- !u!1001 &1069770069
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -33042,7 +33064,7 @@ PrefabInstance:
     - target: {fileID: 3601746471780751792, guid: 60b5810337227034dbd959240033b5f7,
         type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 3601746471780751792, guid: 60b5810337227034dbd959240033b5f7,
         type: 3}
@@ -33331,7 +33353,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7866711809216641437}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
@@ -33595,7 +33617,9 @@ MonoBehaviour:
   characterProfile: {fileID: 21300000, guid: 233e090b78912f445af3f602a407830f, type: 3}
   isDialogueOpen: 0
   dialogueFinished: 0
-  NPCDialogueHandler: {fileID: 0}
+  npcDialogueHandler: {fileID: 0}
+  audioClips:
+    sfxOnInteract: {fileID: 0}
 --- !u!50 &1166367098
 Rigidbody2D:
   serializedVersion: 4
@@ -34228,7 +34252,9 @@ MonoBehaviour:
   characterProfile: {fileID: 21300000, guid: 233e090b78912f445af3f602a407830f, type: 3}
   isDialogueOpen: 0
   dialogueFinished: 0
-  NPCDialogueHandler: {fileID: 0}
+  npcDialogueHandler: {fileID: 0}
+  audioClips:
+    sfxOnInteract: {fileID: 0}
 --- !u!212 &1427184478
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -35526,6 +35552,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 71a7b13756eb7a48fa379bf0ee9c36dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  audioClips:
+    startClip: {fileID: 0}
 --- !u!1 &1530809975
 GameObject:
   m_ObjectHideFlags: 0
@@ -35767,6 +35795,7 @@ MonoBehaviour:
   movementRange: 10
   movementDuration: 1
   pupilAnimationSpeed: 10
+  randomDilation: 0
   randomMovement: {x: 0, y: 0}
   randomIdleMovement: {x: 0, y: 0}
 --- !u!114 &1564769573
@@ -36131,7 +36160,9 @@ MonoBehaviour:
   characterProfile: {fileID: 21300000, guid: 233e090b78912f445af3f602a407830f, type: 3}
   isDialogueOpen: 0
   dialogueFinished: 0
-  NPCDialogueHandler: {fileID: 0}
+  npcDialogueHandler: {fileID: 0}
+  audioClips:
+    sfxOnInteract: {fileID: 0}
 --- !u!212 &1818800190
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -36312,6 +36343,9 @@ MonoBehaviour:
   refPosition: {x: 0, y: 0, z: 0}
   changedLevel: 0
   inTransition: 0
+  audioClips:
+    sfxEnterTransition: {fileID: 0}
+    sfxExitTransition: {fileID: 0}
 --- !u!483693784 &1859029253
 TilemapRenderer:
   m_ObjectHideFlags: 0
@@ -36570,7 +36604,9 @@ MonoBehaviour:
   characterProfile: {fileID: 21300000, guid: 233e090b78912f445af3f602a407830f, type: 3}
   isDialogueOpen: 0
   dialogueFinished: 0
-  NPCDialogueHandler: {fileID: 0}
+  npcDialogueHandler: {fileID: 0}
+  audioClips:
+    sfxOnInteract: {fileID: 0}
 --- !u!212 &1887495468
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -37181,7 +37217,9 @@ MonoBehaviour:
   characterProfile: {fileID: 21300000, guid: 233e090b78912f445af3f602a407830f, type: 3}
   isDialogueOpen: 0
   dialogueFinished: 0
-  NPCDialogueHandler: {fileID: 0}
+  npcDialogueHandler: {fileID: 0}
+  audioClips:
+    sfxOnInteract: {fileID: 0}
 --- !u!212 &2013483584
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -40604,7 +40642,9 @@ MonoBehaviour:
   characterProfile: {fileID: 21300000, guid: 233e090b78912f445af3f602a407830f, type: 3}
   isDialogueOpen: 0
   dialogueFinished: 0
-  NPCDialogueHandler: {fileID: 0}
+  npcDialogueHandler: {fileID: 0}
+  audioClips:
+    sfxOnInteract: {fileID: 0}
 --- !u!212 &2046889728
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -45801,6 +45841,9 @@ MonoBehaviour:
   refPosition: {x: 0, y: 0, z: 0}
   changedLevel: 0
   inTransition: 0
+  audioClips:
+    sfxEnterTransition: {fileID: 0}
+    sfxExitTransition: {fileID: 0}
 --- !u!114 &1102627701010119300
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -46198,7 +46241,9 @@ MonoBehaviour:
   characterProfile: {fileID: 21300000, guid: 233e090b78912f445af3f602a407830f, type: 3}
   isDialogueOpen: 0
   dialogueFinished: 0
-  NPCDialogueHandler: {fileID: 0}
+  npcDialogueHandler: {fileID: 0}
+  audioClips:
+    sfxOnInteract: {fileID: 0}
 --- !u!212 &3299673890537269110
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -46286,7 +46331,9 @@ MonoBehaviour:
   characterProfile: {fileID: 21300000, guid: 233e090b78912f445af3f602a407830f, type: 3}
   isDialogueOpen: 0
   dialogueFinished: 0
-  NPCDialogueHandler: {fileID: 0}
+  npcDialogueHandler: {fileID: 0}
+  audioClips:
+    sfxOnInteract: {fileID: 0}
 --- !u!61 &3299673890677685201
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -49694,6 +49741,14 @@ MonoBehaviour:
   floatingTextPrefab: {fileID: 8764126257195605310}
   enemyName: {fileID: 7251264089940862822}
   damageButtonText: {fileID: 7251264088944932317}
+  audioClips:
+    battleMusic: {fileID: 0}
+    oldAmbience: {fileID: 0}
+    oldMusic: {fileID: 0}
+    sfxBell: {fileID: 0}
+    uiSelected: {fileID: 0}
+    uiUnselected: {fileID: 0}
+    uiDrawer: {fileID: 0}
 --- !u!1 &7251264089726218016
 GameObject:
   m_ObjectHideFlags: 0
@@ -51580,6 +51635,7 @@ GameObject:
   - component: {fileID: 7866711807241103514}
   - component: {fileID: 7866711807241103512}
   - component: {fileID: 7866711807241103513}
+  - component: {fileID: 7866711807241103518}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Dialogue Text
@@ -51606,6 +51662,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 7}
   m_SizeDelta: {x: 582, y: 69.7}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &7866711807241103518
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7866711807241103516}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 281c6d03227324c93957cf8b5eebcc12, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!222 &7866711807281615110
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -52295,7 +52363,7 @@ RectTransform:
   - {fileID: 7866711807800911123}
   - {fileID: 7866711807241103517}
   m_Father: {fileID: 7866711809216641437}
-  m_RootOrder: 5
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -52598,7 +52666,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7866711809216641437}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -52722,7 +52790,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7866711809216641437}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -53335,12 +53403,12 @@ RectTransform:
   - {fileID: 73345068}
   - {fileID: 705565802}
   - {fileID: 7866711807515503828}
-  - {fileID: 7866711807658144857}
   - {fileID: 7866711807965752895}
   - {fileID: 385398911}
   - {fileID: 7866711808160783707}
   - {fileID: 1127951115}
   - {fileID: 826860088}
+  - {fileID: 7866711807658144857}
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
