@@ -4,18 +4,18 @@ using TMPro;
 public class Interactable : MonoBehaviour
 {
     [Header("Interaction Settings")]
-    public float interactRange = 2f; 
-    public LayerMask playerLayer; 
-    public string promptText = "e"; 
+    public float interactRange = 2f;
+    public LayerMask playerLayer;
+    public string promptText = "e";
 
     [Header("Pop-Up Prompt")]
-    public GameObject popUpPrefab; 
-    private GameObject currentPopUp; 
-    private TMP_Text popUpText; 
-    private Animator popUpAnimator; 
+    public GameObject popUpPrefab;
+    private GameObject currentPopUp;
+    private TMP_Text popUpText;
+    private Animator popUpAnimator;
 
     [Header("Interaction Events")]
-    public UnityEngine.Events.UnityEvent onInteract; 
+    public UnityEngine.Events.UnityEvent onInteract;
 
     private bool playerInRange = false;
 
@@ -36,7 +36,7 @@ public class Interactable : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.E))
             {
-                onInteract.Invoke(); 
+                onInteract.Invoke();
             }
         }
         else
@@ -65,7 +65,7 @@ public class Interactable : MonoBehaviour
         popUpAnimator = currentPopUp.GetComponent<Animator>();
         if (popUpAnimator != null)
         {
-            popUpAnimator.SetTrigger("PopIn"); 
+            popUpAnimator.SetTrigger("PopIn");
         }
 
         currentPopUp.transform.SetSiblingIndex(0);
