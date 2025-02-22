@@ -13,8 +13,18 @@ public class TurnIndicator : MonoBehaviour
     public bool isMoving = false; // To check if the image is still moving
 
     public BattleUiHandler BattleUiHandler;
+    private GameStatsManager gameStatsManager;
+    private _PartyManager _partyManager;
+    private _BattleUIHandler _battleUIHandler;
     public GameObject turnImagePrefab;
     // Sprite characterSprite;
+    
+    void Start()
+    {
+        gameStatsManager = GameStatsManager.Instance;
+        _partyManager = GameStatsManager.Instance.GetComponentInChildren<_PartyManager>();
+        _battleUIHandler = GameStatsManager.Instance.GetComponentInChildren<_BattleUIHandler>();
+    }
 
     public void SetupTurnIndicator(int orderCount)
     {
@@ -30,14 +40,14 @@ public class TurnIndicator : MonoBehaviour
             newImageObj.name = "Image"; newImageObj.SetActive(true);
             Image newImage = newImageObj.GetComponent<Image>();
 
-            Sprite characterSprite = BattleUiHandler.profileImages.Find(sprite => sprite.name == BattleUiHandler.battleOrder[i].Name);
+            Sprite characterSprite = _partyManager.characterProfiles.Find(sprite => sprite.name == _battleUIHandler.battleOrder[i].Name);
 
             newImageObj.transform.localPosition = targetPositions[i]; // Set position
             turnOrderImages.Add(newImage);
 
             if (characterSprite != null) {turnOrderImages[i].sprite = characterSprite;}
-            if (BattleUiHandler.battleOrder[i].IsEnemy) {
-                foreach (var profilePic in BattleUiHandler.profileImages) {
+            if (_battleUIHandler.battleOrder[i].isEnemy) {
+                foreach (var profilePic in _partyManager.characterProfiles) {
                     if (profilePic.name == "Enemy") {turnOrderImages[i].sprite = profilePic;}
                 }
             }
@@ -49,7 +59,7 @@ public class TurnIndicator : MonoBehaviour
     {
         while (true)
         {
-            currentTurnIndex = BattleUiHandler.currentTurnIndex;
+            currentTurnIndex = _battleUIHandler.currentTurnIndex;
 
             for (int i = 0; i < turnOrderImages.Count; i++)
             {

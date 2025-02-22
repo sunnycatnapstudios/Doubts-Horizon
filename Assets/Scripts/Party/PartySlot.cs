@@ -10,10 +10,13 @@ public class PartySlot : MonoBehaviour
     public Image profile;
     public GameObject healthbarCasing;
     public Image healthBarBar, healthBarTail;
-    public float maxHealth;
+    public float currentHealth, maxHealth;
     public Vector3 defaultImagePosition, initialBarPosition;
     public bool _isHighlighted;
     public BattleUiHandler battleUiHandler;
+    private GameStatsManager gameStatsManager;
+    private _PartyManager _partyManager;
+    private _BattleUIHandler _battleUIHandler;
     public TextMeshProUGUI playerHealthIndicator;
     private float fadeDuration = .5f, delayBeforeFade = 1.2f;
 
@@ -21,15 +24,15 @@ public class PartySlot : MonoBehaviour
     {
         defaultImagePosition = profile.transform.localPosition;
         initialBarPosition = healthbarCasing.transform.localPosition;
-        UpdateHealthBar(maxHealth);
+        UpdateHealthBar(currentHealth);
         playerHealthIndicator.color = new Color(playerHealthIndicator.color.r, playerHealthIndicator.color.g, playerHealthIndicator.color.b, 0f);
     }
 
     public void SelectTarget()
     {
-        if (battleUiHandler != null && Name != "" && battleUiHandler.canSelect)
+        if (_battleUIHandler != null && Name != "" && _battleUIHandler.canSelect)
         {
-            battleUiHandler.ReceiveTargetSelection(Name);
+            _battleUIHandler.ReceiveTargetSelection(Name);
         }
     }
 
@@ -53,18 +56,17 @@ public class PartySlot : MonoBehaviour
         }
     }
 
-    public void SetHealth(float currentHealth)
+    public void SetHealth(float currenthealth, float maxhealth)
     {
-        maxHealth = currentHealth;
+        currentHealth = currenthealth;
+        maxHealth = maxhealth;
         healthBarBar.fillAmount = currentHealth/maxHealth;
         UpdateHealthBar(currentHealth);
     }
 
-    public void UpdateHealthBar(float currentHealth)
+    public void UpdateHealthBar(float currenthealth)
     {
-        if (currentHealth == 0) {healthBarBar.fillAmount = 0;}
-        else {healthBarBar.fillAmount = currentHealth / maxHealth;}
-        
+        currentHealth = currenthealth;
     }
 
     public IEnumerator JutterHealthBar(float duration, float strength)
@@ -121,6 +123,13 @@ public class PartySlot : MonoBehaviour
         }
     }
 
+    void Start()
+    {
+        gameStatsManager = GameStatsManager.Instance;
+        _partyManager = GameStatsManager.Instance.GetComponentInChildren<_PartyManager>();
+        _battleUIHandler = GameStatsManager.Instance.GetComponentInChildren<_BattleUIHandler>();
+    }
+
     void Update()
     {
         if (healthBarTail.fillAmount > healthBarBar.fillAmount && healthBarBar.fillAmount != 0){
@@ -129,7 +138,7 @@ public class PartySlot : MonoBehaviour
             healthBarTail.fillAmount = 0;
         } else {healthBarTail.fillAmount = healthBarBar.fillAmount;}
 
-        if (_isHighlighted && battleUiHandler.canSelect) {
+        if (_isHighlighted && _battleUIHandler.canSelect) {
             HighlightImage();
         } else {
             UnHighlightImage();
@@ -140,5 +149,6 @@ public class PartySlot : MonoBehaviour
         else {
             playerHealthIndicator.text = (((int)(healthBarTail.fillAmount*100f)).ToString()+"%");
         }
+        healthBarBar.fillAmount = (float)currentHealth/maxHealth;
     }
 }

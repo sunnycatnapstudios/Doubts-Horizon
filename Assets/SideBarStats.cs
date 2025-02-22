@@ -10,10 +10,12 @@ public class SideBarStats : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     private GameStatsManager gameStatsManager;
     private _PartyManager _partyManager;
     
-    public RectTransform imageRectTransform;
+    public RectTransform imageRectTransform, healthBarTransform;
     private Vector2 defaultSize = new Vector2(35, 35), expandedSize = new Vector2(45, 45);
+    private Vector2 defaultPosition = new Vector2(-75, 0), expandedPosition;
     private float expandSpeed = 10f;
-    private Coroutine sizeCoroutine;
+    private Coroutine imageCoroutine;
+    private Coroutine healthBarCoroutine;
 
 
 
@@ -32,25 +34,35 @@ public class SideBarStats : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     {
         if (this.name == "Player") return; // Prevent animation for Player
 
-        if (sizeCoroutine != null) StopCoroutine(sizeCoroutine);
-        sizeCoroutine = StartCoroutine(AnimateSize(expandedSize));
+        if (imageCoroutine != null) StopCoroutine(imageCoroutine);
+        imageCoroutine = StartCoroutine(AnimateSize(expandedSize));
+
+        if (healthBarCoroutine != null) StopCoroutine(healthBarCoroutine);
+        healthBarCoroutine = StartCoroutine(AnimateHealthbar(expandedPosition));
 
         CancelInvoke(nameof(DelayedShrink));
+        CancelInvoke(nameof(DelayedHealthbar));
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
         if (this.name == "Player") return; // Prevent animation for Player
 
-        // if (sizeCoroutine != null) StopCoroutine(sizeCoroutine);
-        // sizeCoroutine = StartCoroutine(AnimateSize(defaultSize));
+        // if (imageCoroutine != null) StopCoroutine(imageCoroutine);
+        // imageCoroutine = StartCoroutine(AnimateSize(defaultSize));
         Invoke(nameof(DelayedShrink), 0.2f);
+        Invoke(nameof(DelayedHealthbar), 0.2f);
     }
 
     private void DelayedShrink()
     {
-        if (sizeCoroutine != null) StopCoroutine(sizeCoroutine);
-        sizeCoroutine = StartCoroutine(AnimateSize(defaultSize));
+        if (imageCoroutine != null) StopCoroutine(imageCoroutine);
+        imageCoroutine = StartCoroutine(AnimateSize(defaultSize));
+    }
+    private void DelayedHealthbar()
+    {
+        if (healthBarCoroutine != null) StopCoroutine(healthBarCoroutine);
+        healthBarCoroutine = StartCoroutine(AnimateHealthbar(defaultPosition));
     }
 
     IEnumerator AnimateSize(Vector2 targetSize)
@@ -62,6 +74,15 @@ public class SideBarStats : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         }
         imageRectTransform.sizeDelta = targetSize;
     }
+    IEnumerator AnimateHealthbar(Vector2 targetPos)
+    {
+        while (Vector2.Distance(healthBarTransform.anchoredPosition, targetPos) > 0.1f)
+        {
+            healthBarTransform.anchoredPosition = Vector2.Lerp(healthBarTransform.anchoredPosition, targetPos, Time.deltaTime * expandSpeed*2f);
+            yield return null;
+        }
+        healthBarTransform.anchoredPosition = targetPos;
+    }
 
     void Awake()
     {
@@ -69,6 +90,12 @@ public class SideBarStats : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         // _partyManager = GameStatsManager.Instance._partyManager;
         StartCoroutine(WaitForPartyManager());
         imageRectTransform = transform.GetComponent<Image>().rectTransform;
+        healthBarTransform = transform.Find("Health Bar Base").GetComponent<Image>().rectTransform;
+
+        expandedPosition = healthBarTransform.anchoredPosition;
+        if (this.name != "Player") {
+            healthBarTransform.anchoredPosition = defaultPosition;
+        }
     }
 
     void Update()
@@ -76,11 +103,14 @@ public class SideBarStats : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         if (this.name == "Player" && gameStatsManager != null && _partyManager != null)
         {
             CharacterStats member = gameStatsManager.playerStats["Player"];
-            this.transform.Find("Health").GetComponent<TMP_Text>().text = $"|{member.currentHealth}/{member.maxHealth}";
+            this.transform.Find("Health Bar Base").Find("Health").GetComponent<TMP_Text>().text = $"{member.currentHealth}/{member.maxHealth}";
+            this.transform.Find("Health Bar Base").Find("Healthbar").GetComponent<Image>().fillAmount = (float)member.currentHealth/member.maxHealth;
         } else if (gameStatsManager != null && _partyManager != null)
         {
             CharacterStats member = gameStatsManager.currentPartyMembers.Find(partymember => partymember.Name == this.transform.Find("Name").GetComponent<TMP_Text>().text);
-            this.transform.Find("Health").GetComponent<TMP_Text>().text = $"{member.currentHealth}/{member.maxHealth}";
+            // this.transform.Find("Health").GetComponent<TMP_Text>().text = $"{member.currentHealth}/{member.maxHealth}";
+            this.transform.Find("Health Bar Base").Find("Health").GetComponent<TMP_Text>().text = $"{member.currentHealth}/{member.maxHealth}";
+            this.transform.Find("Health Bar Base").Find("Healthbar").GetComponent<Image>().fillAmount = (float)member.currentHealth/member.maxHealth;
         }
     }
 }

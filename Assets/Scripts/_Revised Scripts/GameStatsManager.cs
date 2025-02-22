@@ -25,6 +25,7 @@ public class GameStatsManager : MonoBehaviour
 {
     public static GameStatsManager Instance { get; private set;}
     public _PartyManager _partyManager;
+    public _BattleUIHandler _battleUIHandler;
 
     // Combat-Related Stats
     public Dictionary<string, CharacterStats> playerStats = new Dictionary<string, CharacterStats>
@@ -41,18 +42,19 @@ public class GameStatsManager : MonoBehaviour
     };
     public Dictionary<string, CharacterStats> L1Enemies = new Dictionary<string, CharacterStats>
     {
-        { "Handy", new CharacterStats("Handy", 38, 100, 100, true, true)},
-        { "Gregor", new CharacterStats("Gregor", 21, 120, 120, true, true)},
-        { "Turf", new CharacterStats("Turf", 31, 150, 150, true, true)}
+        { "Handy", new CharacterStats("Handy", 38, 170, 170, true, true)},
+        { "Gregor", new CharacterStats("Gregor", 21, 210, 210, true, true)},
+        { "Cuboid", new CharacterStats("Cuboid", 31, 180, 180, true, true)}
     };
     public Dictionary<string, CharacterStats> L2AEnemies = new Dictionary<string, CharacterStats>
     {
-
+        
     };
     public Dictionary<string, CharacterStats> L2BEnemies = new Dictionary<string, CharacterStats>
     {
 
     };
+    public List<CharacterStats> currentPlayerStats = new List<CharacterStats>();
     public List<CharacterStats> currentPartyMembers = new List<CharacterStats>();
     public List<GameObject> spawnedPartyMembers = new List<GameObject>();
 
@@ -151,7 +153,11 @@ public class GameStatsManager : MonoBehaviour
         sprintLocked = false;
 
         _partyManager = GetComponentInChildren<_PartyManager>();
+        _battleUIHandler = GetComponentInChildren<_BattleUIHandler>();
+
         staminaBar = GameObject.FindGameObjectWithTag("Stamina Bar").GetComponent<Image>();
+
+        currentPlayerStats.Add (playerStats["Player"]);
     }
     public void Start()
     {

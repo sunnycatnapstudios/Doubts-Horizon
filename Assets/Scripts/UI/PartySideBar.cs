@@ -20,7 +20,7 @@ public class PartySideBar : MonoBehaviour
 
         foreach (var member in gameStatsManager.currentPartyMembers)
         {
-            if (!member.isCombatant) {continue;}
+            // if (!member.isCombatant) {continue;}
 
             GameObject newSideBarProfile = Instantiate(profilePrefab, transform);
             newSideBarProfile.SetActive(true);
@@ -35,7 +35,9 @@ public class PartySideBar : MonoBehaviour
 
             newSideBarProfile.transform.Find("Name").GetComponent<TMP_Text>().text = member.Name;
 
-            newSideBarProfile.transform.Find("Health").GetComponent<TMP_Text>().text = $"{member.currentHealth}/{member.maxHealth}";
+            // newSideBarProfile.transform.Find("Health").GetComponent<TMP_Text>().text = $"{member.currentHealth}/{member.maxHealth}";
+            newSideBarProfile.transform.Find("Health Bar Base").Find("Health").GetComponent<TMP_Text>().text = $"{member.currentHealth}/{member.maxHealth}";
+            newSideBarProfile.transform.Find("Health Bar Base").Find("Healthbar").GetComponent<Image>().fillAmount = member.currentHealth/member.maxHealth;
 
             sideBarSlots.Add(newSideBarProfile);
             newSideBarProfile.name = "Party Slot" + sideBarSlots.Count;

@@ -1,0 +1,2420 @@
+fileFormatVersion: 2
+guid: 1771979b00f61dd4394f12fba4cedc33
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -6940025162982320479
+    second: Cuboid Monster_0
+  - first:
+      213: 4769622896696736040
+    second: Cuboid Monster_1
+  - first:
+      213: -813656086885810668
+    second: Cuboid Monster_2
+  - first:
+      213: -7852017339626458083
+    second: Cuboid Monster_3
+  - first:
+      213: 493665335149796947
+    second: Cuboid Monster_4
+  - first:
+      213: -1911751386348264706
+    second: Cuboid Monster_5
+  - first:
+      213: -4644875281824920332
+    second: Cuboid Monster_6
+  - first:
+      213: 4783472859790144551
+    second: Cuboid Monster_7
+  - first:
+      213: 4464725095980324961
+    second: Cuboid Monster_8
+  - first:
+      213: -7982248083422969469
+    second: Cuboid Monster_9
+  - first:
+      213: 253227091010973927
+    second: Cuboid Monster_10
+  - first:
+      213: 4883119729177642403
+    second: Cuboid Monster_11
+  - first:
+      213: -3064339843643393650
+    second: Cuboid Monster_12
+  - first:
+      213: -6183213889819752213
+    second: Cuboid Monster_13
+  - first:
+      213: -5064839644408363353
+    second: Cuboid Monster_14
+  - first:
+      213: -1078781273654213604
+    second: Cuboid Monster_15
+  - first:
+      213: -8183638437484484140
+    second: Cuboid Monster_16
+  - first:
+      213: 1794238027137592624
+    second: Cuboid Monster_17
+  - first:
+      213: 5400421551745583041
+    second: Cuboid Monster_18
+  - first:
+      213: 1536056264668339893
+    second: Cuboid Monster_19
+  - first:
+      213: 2138251541306445368
+    second: Cuboid Monster_20
+  - first:
+      213: -2361679630169450169
+    second: Cuboid Monster_21
+  - first:
+      213: -8833757303712423499
+    second: Cuboid Monster_22
+  - first:
+      213: -2309659198191054081
+    second: Cuboid Monster_23
+  - first:
+      213: 6293530120516101493
+    second: Cuboid Monster_24
+  - first:
+      213: -9203635141277830271
+    second: Cuboid Monster_25
+  - first:
+      213: -8439419946352919495
+    second: Cuboid Monster_26
+  - first:
+      213: 7589237684984122149
+    second: Cuboid Monster_27
+  - first:
+      213: 5942332600610146040
+    second: Cuboid Monster_28
+  - first:
+      213: -721284808972836928
+    second: Cuboid Monster_29
+  - first:
+      213: -6561037705101395571
+    second: Cuboid Monster_30
+  - first:
+      213: -276738212904313179
+    second: Cuboid Monster_31
+  - first:
+      213: 4595095884494795876
+    second: Cuboid Monster_32
+  - first:
+      213: -8206605170711334050
+    second: Cuboid Monster_33
+  - first:
+      213: 8955765748334022296
+    second: Cuboid Monster_34
+  - first:
+      213: -1827669982617543805
+    second: Cuboid Monster_35
+  - first:
+      213: -1773753727561718203
+    second: Cuboid Monster_36
+  - first:
+      213: -6585008842219064072
+    second: Cuboid Monster_37
+  - first:
+      213: -480276846990179831
+    second: Cuboid Monster_38
+  - first:
+      213: -4195619973355616863
+    second: Cuboid Monster_39
+  - first:
+      213: 1180873431359199285
+    second: Cuboid Monster_40
+  - first:
+      213: -2007810498387808314
+    second: Cuboid Monster_41
+  - first:
+      213: 3777664442478406845
+    second: Cuboid Monster_42
+  - first:
+      213: -3275314889410852224
+    second: Cuboid Monster_43
+  - first:
+      213: -2050695292346972459
+    second: Cuboid Monster_44
+  - first:
+      213: -619008774895729504
+    second: Cuboid Monster_45
+  - first:
+      213: -2131922200670323012
+    second: Cuboid Monster_46
+  - first:
+      213: 2614992910111237682
+    second: Cuboid Monster_47
+  - first:
+      213: 8667337559360792260
+    second: Cuboid Monster_48
+  - first:
+      213: -7861309371300951437
+    second: Cuboid Monster_49
+  - first:
+      213: 4489489999648285060
+    second: Cuboid Monster_50
+  - first:
+      213: 2420946467662062900
+    second: Cuboid Monster_51
+  - first:
+      213: 2470184782970212245
+    second: Cuboid Monster_52
+  - first:
+      213: -4862467076112465965
+    second: Cuboid Monster_53
+  - first:
+      213: 6563951287177863298
+    second: Cuboid Monster_54
+  - first:
+      213: -1629471660977772380
+    second: Cuboid Monster_55
+  - first:
+      213: 4754390290306870616
+    second: Cuboid Monster_56
+  - first:
+      213: 3025149613870178602
+    second: Cuboid Monster_57
+  - first:
+      213: -3063737476697676739
+    second: Cuboid Monster_58
+  - first:
+      213: 5203138845415689411
+    second: Cuboid Monster_59
+  - first:
+      213: 1604720895400632907
+    second: Cuboid Monster_60
+  - first:
+      213: -512065192975687897
+    second: Cuboid Monster_61
+  - first:
+      213: -8118485220475117508
+    second: Cuboid Monster_62
+  - first:
+      213: -7986854738022450408
+    second: Cuboid Monster_63
+  - first:
+      213: -836000291168916634
+    second: Cuboid Monster_64
+  - first:
+      213: 1424280584754427196
+    second: Cuboid Monster_65
+  - first:
+      213: -2403247306422933847
+    second: Cuboid Monster_66
+  - first:
+      213: -3974600360326884943
+    second: Cuboid Monster_67
+  - first:
+      213: 2033130133611063261
+    second: Cuboid Monster_68
+  - first:
+      213: -1311342907931780802
+    second: Cuboid Monster_69
+  - first:
+      213: -1422302954057876374
+    second: Cuboid Monster_70
+  - first:
+      213: -1597233222052602354
+    second: Cuboid Monster_71
+  - first:
+      213: 2917493122109580285
+    second: Cuboid Monster_72
+  - first:
+      213: 6332298407379930570
+    second: Cuboid Monster_73
+  - first:
+      213: -4419122916880583417
+    second: Cuboid Monster_74
+  - first:
+      213: 4089814739971899556
+    second: Cuboid Monster_75
+  - first:
+      213: -7893192406751573431
+    second: Cuboid Monster_76
+  - first:
+      213: -907631333381898481
+    second: Cuboid Monster_77
+  - first:
+      213: -9056207052939970190
+    second: Cuboid Monster_78
+  - first:
+      213: 3885029563121970643
+    second: Cuboid Monster_79
+  - first:
+      213: 2487647880536252541
+    second: Cuboid Monster_80
+  - first:
+      213: 1295943972817124729
+    second: Cuboid Monster_81
+  - first:
+      213: -8940515277947584226
+    second: Cuboid Monster_82
+  - first:
+      213: -3468578085983947262
+    second: Cuboid Monster_83
+  - first:
+      213: 669260705405909051
+    second: Cuboid Monster_84
+  - first:
+      213: -5872979393892046218
+    second: Cuboid Monster_85
+  - first:
+      213: 3484544219205081484
+    second: Cuboid Monster_86
+  - first:
+      213: -7677664948480099050
+    second: Cuboid Monster_87
+  - first:
+      213: -9143310372754990727
+    second: Cuboid Monster_88
+  - first:
+      213: 7221102821018234258
+    second: Cuboid Monster_89
+  - first:
+      213: 3435037809343499401
+    second: Cuboid Monster_90
+  - first:
+      213: -7787134732984421943
+    second: Cuboid Monster_91
+  - first:
+      213: -8057149969601145351
+    second: Cuboid Monster_92
+  - first:
+      213: 7999812789498080769
+    second: Cuboid Monster_93
+  - first:
+      213: 6585051529363833673
+    second: Cuboid Monster_94
+  - first:
+      213: -8925134539857492468
+    second: Cuboid Monster_95
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 16
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Cuboid Monster_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3312
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a69a2452e310bf90800000000000000
+      internalID: -6940025162982320479
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_1
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 3312
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 829bd2601ca113240800000000000000
+      internalID: 4769622896696736040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_2
+      rect:
+        serializedVersion: 2
+        x: 736
+        y: 3312
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 41e36d3991055b4f0800000000000000
+      internalID: -813656086885810668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_3
+      rect:
+        serializedVersion: 2
+        x: 1104
+        y: 3312
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d147b55d4d7080390800000000000000
+      internalID: -7852017339626458083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_4
+      rect:
+        serializedVersion: 2
+        x: 1472
+        y: 3312
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35e178bb10ad9d600800000000000000
+      internalID: 493665335149796947
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_5
+      rect:
+        serializedVersion: 2
+        x: 1840
+        y: 3312
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ef2e9d53e381875e0800000000000000
+      internalID: -1911751386348264706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_6
+      rect:
+        serializedVersion: 2
+        x: 2208
+        y: 3312
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4fc45d07a861a8fb0800000000000000
+      internalID: -4644875281824920332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_7
+      rect:
+        serializedVersion: 2
+        x: 2576
+        y: 3312
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7247388d83f426240800000000000000
+      internalID: 4783472859790144551
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_8
+      rect:
+        serializedVersion: 2
+        x: 2944
+        y: 3312
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 168dda5d1d3e5fd30800000000000000
+      internalID: 4464725095980324961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_9
+      rect:
+        serializedVersion: 2
+        x: 3312
+        y: 3312
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 381088ee8ab593190800000000000000
+      internalID: -7982248083422969469
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2944
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e0f63792b4a38300800000000000000
+      internalID: 253227091010973927
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_11
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 2944
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3a5c555958354c340800000000000000
+      internalID: 4883119729177642403
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_12
+      rect:
+        serializedVersion: 2
+        x: 736
+        y: 2944
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e893f84d5274975d0800000000000000
+      internalID: -3064339843643393650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_13
+      rect:
+        serializedVersion: 2
+        x: 1104
+        y: 2944
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: be8480f2abfc03aa0800000000000000
+      internalID: -6183213889819752213
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_14
+      rect:
+        serializedVersion: 2
+        x: 1472
+        y: 2944
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a649b69d2316b9b0800000000000000
+      internalID: -5064839644408363353
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_15
+      rect:
+        serializedVersion: 2
+        x: 1840
+        y: 2944
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c144f71b5266701f0800000000000000
+      internalID: -1078781273654213604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_16
+      rect:
+        serializedVersion: 2
+        x: 2208
+        y: 2944
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4d9218b2330ed6e80800000000000000
+      internalID: -8183638437484484140
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_17
+      rect:
+        serializedVersion: 2
+        x: 2576
+        y: 2944
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 03da80abaf966e810800000000000000
+      internalID: 1794238027137592624
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_18
+      rect:
+        serializedVersion: 2
+        x: 2944
+        y: 2944
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1c7c825e9c622fa40800000000000000
+      internalID: 5400421551745583041
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_19
+      rect:
+        serializedVersion: 2
+        x: 3312
+        y: 2944
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5bed19ac80b215510800000000000000
+      internalID: 1536056264668339893
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2576
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83e8008a2789cad10800000000000000
+      internalID: 2138251541306445368
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_21
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 2576
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 749597a93e0a93fd0800000000000000
+      internalID: -2361679630169450169
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_22
+      rect:
+        serializedVersion: 2
+        x: 736
+        y: 2576
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5b165381980386580800000000000000
+      internalID: -8833757303712423499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_23
+      rect:
+        serializedVersion: 2
+        x: 1104
+        y: 2576
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff2db93423172ffd0800000000000000
+      internalID: -2309659198191054081
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_24
+      rect:
+        serializedVersion: 2
+        x: 1472
+        y: 2576
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5756590dc4c175750800000000000000
+      internalID: 6293530120516101493
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_25
+      rect:
+        serializedVersion: 2
+        x: 1840
+        y: 2576
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 18335d91a9e164080800000000000000
+      internalID: -9203635141277830271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_26
+      rect:
+        serializedVersion: 2
+        x: 2208
+        y: 2576
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93cb943d54821ea80800000000000000
+      internalID: -8439419946352919495
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_27
+      rect:
+        serializedVersion: 2
+        x: 2576
+        y: 2576
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52b8c790773625960800000000000000
+      internalID: 7589237684984122149
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_28
+      rect:
+        serializedVersion: 2
+        x: 2944
+        y: 2576
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f647943408677250800000000000000
+      internalID: 5942332600610146040
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_29
+      rect:
+        serializedVersion: 2
+        x: 3312
+        y: 2576
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0cfd94ba94b7df5f0800000000000000
+      internalID: -721284808972836928
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_30
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2208
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d89bc7518f282f4a0800000000000000
+      internalID: -6561037705101395571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_31
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 2208
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5aedf04cf04d82cf0800000000000000
+      internalID: -276738212904313179
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_32
+      rect:
+        serializedVersion: 2
+        x: 736
+        y: 2208
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 464fb207c5f05cf30800000000000000
+      internalID: 4595095884494795876
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_33
+      rect:
+        serializedVersion: 2
+        x: 1104
+        y: 2208
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e53fdd3e3184c1e80800000000000000
+      internalID: -8206605170711334050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_34
+      rect:
+        serializedVersion: 2
+        x: 1472
+        y: 2208
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 89e4f099f75494c70800000000000000
+      internalID: 8955765748334022296
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_35
+      rect:
+        serializedVersion: 2
+        x: 1840
+        y: 2208
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38bdf6f85dfc2a6e0800000000000000
+      internalID: -1827669982617543805
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_36
+      rect:
+        serializedVersion: 2
+        x: 2208
+        y: 2208
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 546a8ade16c5267e0800000000000000
+      internalID: -1773753727561718203
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_37
+      rect:
+        serializedVersion: 2
+        x: 2576
+        y: 2208
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f4f9bcc8595d94a0800000000000000
+      internalID: -6585008842219064072
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_38
+      rect:
+        serializedVersion: 2
+        x: 2944
+        y: 2208
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9024e4590c6b559f0800000000000000
+      internalID: -480276846990179831
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_39
+      rect:
+        serializedVersion: 2
+        x: 3312
+        y: 2208
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1a5ca931dd926c5c0800000000000000
+      internalID: -4195619973355616863
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_40
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1840
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5389cd8112e436010800000000000000
+      internalID: 1180873431359199285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_41
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 1840
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6cf6b435df2d224e0800000000000000
+      internalID: -2007810498387808314
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_42
+      rect:
+        serializedVersion: 2
+        x: 736
+        y: 1840
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dbcac86abc5fc6430800000000000000
+      internalID: 3777664442478406845
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_43
+      rect:
+        serializedVersion: 2
+        x: 1104
+        y: 1840
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 08a4e11267ebb82d0800000000000000
+      internalID: -3275314889410852224
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_44
+      rect:
+        serializedVersion: 2
+        x: 1472
+        y: 1840
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5d6c7152f777a83e0800000000000000
+      internalID: -2050695292346972459
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_45
+      rect:
+        serializedVersion: 2
+        x: 1840
+        y: 1840
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a48d738cc6d867f0800000000000000
+      internalID: -619008774895729504
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_46
+      rect:
+        serializedVersion: 2
+        x: 2208
+        y: 1840
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cbeb64ccd04e962e0800000000000000
+      internalID: -2131922200670323012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_47
+      rect:
+        serializedVersion: 2
+        x: 2576
+        y: 1840
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 236685962325a4420800000000000000
+      internalID: 2614992910111237682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_48
+      rect:
+        serializedVersion: 2
+        x: 2944
+        y: 1840
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4c6e916b691984870800000000000000
+      internalID: 8667337559360792260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_49
+      rect:
+        serializedVersion: 2
+        x: 3312
+        y: 1840
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 37a482e17c407e290800000000000000
+      internalID: -7861309371300951437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_50
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1472
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 48164bb4e5fdd4e30800000000000000
+      internalID: 4489489999648285060
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_51
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 1472
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 435eb315cfde89120800000000000000
+      internalID: 2420946467662062900
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_52
+      rect:
+        serializedVersion: 2
+        x: 736
+        y: 1472
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 59fc386f8fbd74220800000000000000
+      internalID: 2470184782970212245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_53
+      rect:
+        serializedVersion: 2
+        x: 1104
+        y: 1472
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3dfb84ce4fb058cb0800000000000000
+      internalID: -4862467076112465965
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_54
+      rect:
+        serializedVersion: 2
+        x: 1472
+        y: 1472
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 280643b1be6d71b50800000000000000
+      internalID: 6563951287177863298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_55
+      rect:
+        serializedVersion: 2
+        x: 1840
+        y: 1472
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a8aadb5824f269e0800000000000000
+      internalID: -1629471660977772380
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_56
+      rect:
+        serializedVersion: 2
+        x: 2208
+        y: 1472
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 85dae4977ccfaf140800000000000000
+      internalID: 4754390290306870616
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_57
+      rect:
+        serializedVersion: 2
+        x: 2576
+        y: 1472
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a21642fbb8d7bf920800000000000000
+      internalID: 3025149613870178602
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_58
+      rect:
+        serializedVersion: 2
+        x: 2944
+        y: 1472
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d3422605ffa6b75d0800000000000000
+      internalID: -3063737476697676739
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_59
+      rect:
+        serializedVersion: 2
+        x: 3312
+        y: 1472
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3ccc9066633453840800000000000000
+      internalID: 5203138845415689411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_60
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1104
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b426006f62d154610800000000000000
+      internalID: 1604720895400632907
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_61
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 1104
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 72f97d68b67c4e8f0800000000000000
+      internalID: -512065192975687897
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_62
+      rect:
+        serializedVersion: 2
+        x: 736
+        y: 1104
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c30625f94b8555f80800000000000000
+      internalID: -8118485220475117508
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_63
+      rect:
+        serializedVersion: 2
+        x: 1104
+        y: 1104
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 81bb6839eedf82190800000000000000
+      internalID: -7986854738022450408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_64
+      rect:
+        serializedVersion: 2
+        x: 1472
+        y: 1104
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 66be0cc1a2ee564f0800000000000000
+      internalID: -836000291168916634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_65
+      rect:
+        serializedVersion: 2
+        x: 1840
+        y: 1104
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c35f5ca45af04c310800000000000000
+      internalID: 1424280584754427196
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_66
+      rect:
+        serializedVersion: 2
+        x: 2208
+        y: 1104
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9a62f39ce43f5aed0800000000000000
+      internalID: -2403247306422933847
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_67
+      rect:
+        serializedVersion: 2
+        x: 2576
+        y: 1104
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1b19396d70267d8c0800000000000000
+      internalID: -3974600360326884943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_68
+      rect:
+        serializedVersion: 2
+        x: 2944
+        y: 1104
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dd7a704a511273c10800000000000000
+      internalID: 2033130133611063261
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_69
+      rect:
+        serializedVersion: 2
+        x: 3312
+        y: 1104
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e399ff1b29c2dcde0800000000000000
+      internalID: -1311342907931780802
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_70
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 736
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a6c346cbff6f24ce0800000000000000
+      internalID: -1422302954057876374
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_71
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 736
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0e1a18d8dc75d9e0800000000000000
+      internalID: -1597233222052602354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_72
+      rect:
+        serializedVersion: 2
+        x: 736
+        y: 736
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: df3acf979840d7820800000000000000
+      internalID: 2917493122109580285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_73
+      rect:
+        serializedVersion: 2
+        x: 1104
+        y: 736
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: acd07aff9d7d0e750800000000000000
+      internalID: 6332298407379930570
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_74
+      rect:
+        serializedVersion: 2
+        x: 1472
+        y: 736
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7057b80ee1f1ca2c0800000000000000
+      internalID: -4419122916880583417
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_75
+      rect:
+        serializedVersion: 2
+        x: 1840
+        y: 736
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a08e2556d0f1c830800000000000000
+      internalID: 4089814739971899556
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_76
+      rect:
+        serializedVersion: 2
+        x: 2208
+        y: 736
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 94a03c3735fb57290800000000000000
+      internalID: -7893192406751573431
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_77
+      rect:
+        serializedVersion: 2
+        x: 2576
+        y: 736
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f0ff1c27c127763f0800000000000000
+      internalID: -907631333381898481
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_78
+      rect:
+        serializedVersion: 2
+        x: 2944
+        y: 736
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 279302dcaa3e15280800000000000000
+      internalID: -9056207052939970190
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_79
+      rect:
+        serializedVersion: 2
+        x: 3312
+        y: 736
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3dda6cbcdc56ae530800000000000000
+      internalID: 3885029563121970643
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_80
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 368
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d70ed953196e58220800000000000000
+      internalID: 2487647880536252541
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_81
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 368
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 97db2945d2e1cf110800000000000000
+      internalID: 1295943972817124729
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_82
+      rect:
+        serializedVersion: 2
+        x: 736
+        y: 368
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e114bfc39b8ece380800000000000000
+      internalID: -8940515277947584226
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_83
+      rect:
+        serializedVersion: 2
+        x: 1104
+        y: 368
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 206f83dab922ddfc0800000000000000
+      internalID: -3468578085983947262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_84
+      rect:
+        serializedVersion: 2
+        x: 1472
+        y: 368
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b38b8dfc011b94900800000000000000
+      internalID: 669260705405909051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_85
+      rect:
+        serializedVersion: 2
+        x: 1840
+        y: 368
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 67a20ed8b5cfe7ea0800000000000000
+      internalID: -5872979393892046218
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_86
+      rect:
+        serializedVersion: 2
+        x: 2208
+        y: 368
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c891cd561869b5030800000000000000
+      internalID: 3484544219205081484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_87
+      rect:
+        serializedVersion: 2
+        x: 2576
+        y: 368
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 61d30694864737590800000000000000
+      internalID: -7677664948480099050
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_88
+      rect:
+        serializedVersion: 2
+        x: 2944
+        y: 368
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9795bc8c8af6c1180800000000000000
+      internalID: -9143310372754990727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_89
+      rect:
+        serializedVersion: 2
+        x: 3312
+        y: 368
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 29dec55b1c2863460800000000000000
+      internalID: 7221102821018234258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_90
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 98c84ff10b4bbaf20800000000000000
+      internalID: 3435037809343499401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_91
+      rect:
+        serializedVersion: 2
+        x: 368
+        y: 0
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9c17b56e73a8ee390800000000000000
+      internalID: -7787134732984421943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_92
+      rect:
+        serializedVersion: 2
+        x: 736
+        y: 0
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9f5dfdf8ac04f2090800000000000000
+      internalID: -8057149969601145351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_93
+      rect:
+        serializedVersion: 2
+        x: 1104
+        y: 0
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10ee8a3e85b050f60800000000000000
+      internalID: 7999812789498080769
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_94
+      rect:
+        serializedVersion: 2
+        x: 1472
+        y: 0
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 943cf531a7dc26b50800000000000000
+      internalID: 6585051529363833673
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Cuboid Monster_95
+      rect:
+        serializedVersion: 2
+        x: 1840
+        y: 0
+        width: 368
+        height: 368
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c0689336c6d832480800000000000000
+      internalID: -8925134539857492468
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

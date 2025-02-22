@@ -5,8 +5,7 @@ using UnityEngine;
 public class Follower : MonoBehaviour
 {
     public int order, partyIndex;
-    public Player Player;
-    public PartyManager partyManager;
+    private Player Player;
     private _PartyManager _partyManager;
     public float followSpeed;
     public Vector3 currentPos, newPos;
@@ -15,11 +14,10 @@ public class Follower : MonoBehaviour
 
     void Awake()
     {
-        
+        Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
     void Start()
     {
-        Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         if (order!=0) {transform.position = Player.transform.position;}
 
         spriteState = GetComponent<SpriteRenderer>();

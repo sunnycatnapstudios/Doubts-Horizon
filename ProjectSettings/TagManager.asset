@@ -23,14 +23,19 @@ TagManager:
   - Main Level
   - Map Bounds
   - Combat UI
-<<<<<<< HEAD
   - Stats Manager
   - Stamina Bar
   - EnemyUI
   - PartyCombatUI
-=======
   - Inventory
->>>>>>> main
+  - Dialogue Box
+  - UI Canvas
+  - Dialogue Options
+  - Continue Arrow
+  - Act Options
+  - Item Options
+  - Complex Enemy
+  - Simple Enemy
   layers:
   - Default
   - TransparentFX

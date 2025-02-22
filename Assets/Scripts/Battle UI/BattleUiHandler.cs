@@ -84,7 +84,7 @@ public class BattleUiHandler : MonoBehaviour
         //CharStats playerStats = new CharStats("player.Name", 21, 321, false);
         battleOrder.Add(playerStats);
         partySlots[0].GetComponent<PartySlot>().Name = player.Name;
-        partySlots[0].GetComponent<PartySlot>().SetHealth(player.CurHealth);
+        partySlots[0].GetComponent<PartySlot>().SetHealth(player.CurHealth, player.CurHealth);
         partySlots[0].GetComponent<PartySlot>().profile.sprite = player.GetSprite();
 
         int slotIndex = 1;
@@ -100,7 +100,7 @@ public class BattleUiHandler : MonoBehaviour
                     // Assign correct profile image
                     // partySlots[slotIndex].profile.sprite = member.profileSprite; // Ensure PartyMember has profileSprite
                     partySlots[slotIndex].GetComponent<PartySlot>().Name = member.Name;
-                    partySlots[slotIndex].GetComponent<PartySlot>().SetHealth(member.Health);
+                    partySlots[slotIndex].GetComponent<PartySlot>().SetHealth(member.Health, member.Health);
                     partySlots[slotIndex].GetComponent<PartySlot>().profile.sprite=member.GetSprite(); //can create add/create other sprites and getters if want to use different sprite
                 }
                 slotIndex++;
