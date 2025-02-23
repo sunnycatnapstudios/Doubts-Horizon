@@ -47,7 +47,6 @@ GameObject:
   - component: {fileID: 210012170400930958}
   - component: {fileID: -4604008991133164472}
   - component: {fileID: -948067017804019575}
-  - component: {fileID: 210012170400930959}
   - component: {fileID: 6990810145461938591}
   m_Layer: 11
   m_Name: Player
@@ -69,7 +68,6 @@ Transform:
   m_Children:
   - {fileID: 210012169932314104}
   - {fileID: 7390693599374058836}
-  - {fileID: 3615547552796417680}
   - {fileID: 4434343550034611816}
   - {fileID: 396053556708651453}
   m_Father: {fileID: 0}
@@ -384,22 +382,6 @@ MonoBehaviour:
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
---- !u!114 &210012170400930959
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 210012170400930955}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b763453337749eb95a174889ff1f2de2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  health: 20
-  healthMax: 0
-  attack: 5
-  speed: 1
 --- !u!114 &6990810145461938591
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -415,87 +397,8 @@ MonoBehaviour:
   inventoryWindow: {fileID: 0}
   test1: {fileID: 0}
   test2: {fileID: 0}
---- !u!1 &2533101456322773200
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 3615547552796417680}
-  - component: {fileID: 5534762934104711682}
-  m_Layer: 0
-  m_Name: SelectionCircle
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &3615547552796417680
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2533101456322773200}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.12, y: 0.12, z: 0.12}
-  m_Children: []
-  m_Father: {fileID: 210012170400930957}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &5534762934104711682
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2533101456322773200}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 2e0c2e7b6f920abf2abb338181a40b54, type: 3}
-  m_Color: {r: 0.017483473, g: 1, b: 0, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 15, y: 15}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
+  audioClips:
+    sfxPickup: {fileID: 0}
 --- !u!1001 &1545461077899872922
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -506,7 +409,7 @@ PrefabInstance:
     - target: {fileID: 2953067640231396594, guid: 206327567294b6d0781cf32757b6b487,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2953067640231396594, guid: 206327567294b6d0781cf32757b6b487,
         type: 3}
@@ -592,7 +495,7 @@ PrefabInstance:
     - target: {fileID: 5426384123864954701, guid: 7dbb6c24bf054ece0b92e94221f90f5a,
         type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5426384123864954701, guid: 7dbb6c24bf054ece0b92e94221f90f5a,
         type: 3}

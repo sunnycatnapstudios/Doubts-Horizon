@@ -574,11 +574,6 @@ MonoBehaviour:
   _isHighlighted: 0
   battleUiHandler: {fileID: 0}
   playerHealthIndicator: {fileID: 0}
-  defaultImagePosition: {x: 0, y: 0, z: 0}
-  initialBarPosition: {x: 0, y: 0, z: 0}
-  _isHighlighted: 0
-  battleUiHandler: {fileID: 0}
-  playerHealthIndicator: {fileID: 0}
 --- !u!1 &7901107716096265686
 GameObject:
   m_ObjectHideFlags: 0
@@ -1585,11 +1580,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   partyUIAnimator: {fileID: 7901107717640802340}
   enemyUIAnimator: {fileID: 7901107715915067297}
-  enemyStatsAnimator: {fileID: 0}
+  enemyStatsAnimator: {fileID: 7901107716542194269}
   actOption: 0
   itemOption: 0
   canSelect: 0
-  overworldUI: {fileID: 0}
+  overworldUI: {fileID: 3427452267074805739, guid: 724c167e3609f25d1a7884ba2bcdce4b,
+    type: 3}
   combatUI: {fileID: 7901107716330422353}
   actOptionBList: {fileID: 7901107717618699623}
   itemOptionBList: {fileID: 7901107716147675402}

@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3299673889596440560}
   - component: {fileID: 3299673889596440527}
   m_Layer: 12
-  m_Name: Interaction Pillar C
+  m_Name: NPC
   m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -101,15 +101,19 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 2048
-  player: {fileID: 0}
-  popUpPrefab: {fileID: 0}
+  player: {fileID: 210012170400930956, guid: ccfc5b2903162cea5bf8daca0154eb07, type: 3}
+  popUpPrefab: {fileID: 1967722894350683128, guid: 7f4db9ccac2dc2c4f9f5989036a87960,
+    type: 3}
   interactBoxPrefab: {fileID: 0}
   interactBoxTextReplacement: 
-  dialogueBox: {fileID: 0}
+  dialogueBox: {fileID: 2310329873098196876, guid: 6ef267433f1eb973ead7e9a84284718b,
+    type: 3}
   characterProfile: {fileID: 21300000, guid: 233e090b78912f445af3f602a407830f, type: 3}
   isDialogueOpen: 0
   dialogueFinished: 0
-  NPCDialogueHandler: {fileID: 0}
+  npcDialogueHandler: {fileID: 0}
+  audioClips:
+    sfxOnInteract: {fileID: 0}
 --- !u!114 &3299673889596440564
 MonoBehaviour:
   m_ObjectHideFlags: 0
