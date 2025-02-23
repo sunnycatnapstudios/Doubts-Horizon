@@ -7,18 +7,14 @@ public class Interactable : MonoBehaviour
     public float interactRange = 2f;
     public LayerMask playerLayer;
     public string promptText = "e";
-
     [Header("Pop-Up Prompt")]
     public GameObject popUpPrefab;
     private GameObject currentPopUp;
     private TMP_Text popUpText;
     private Animator popUpAnimator;
-
     [Header("Interaction Events")]
     public UnityEngine.Events.UnityEvent onInteract;
-
     private bool playerInRange = false;
-
     void Update()
     {
         playerInRange = Physics2D.OverlapCircle(transform.position, interactRange, playerLayer);
@@ -48,7 +44,6 @@ public class Interactable : MonoBehaviour
             }
         }
     }
-
     void CreatePopUp()
     {
         currentPopUp = Instantiate(popUpPrefab,
@@ -61,16 +56,13 @@ public class Interactable : MonoBehaviour
         {
             popUpText.text = promptText;
         }
-
         popUpAnimator = currentPopUp.GetComponent<Animator>();
         if (popUpAnimator != null)
         {
             popUpAnimator.SetTrigger("PopIn");
         }
-
         currentPopUp.transform.SetSiblingIndex(0);
     }
-
     void UpdatePopUpPosition()
     {
         if (currentPopUp != null)
@@ -79,13 +71,11 @@ public class Interactable : MonoBehaviour
                 Camera.main.WorldToScreenPoint(transform.position + Vector3.up * 1f);
         }
     }
-
     void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, interactRange);
     }
-
     void OnDestroy()
     {
         if (currentPopUp != null)
