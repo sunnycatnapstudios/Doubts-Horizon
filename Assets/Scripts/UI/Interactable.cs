@@ -19,6 +19,7 @@ public class Interactable : MonoBehaviour
 
     private bool playerInRange = false;
 
+
     void Update()
     {
         playerInRange = Physics2D.OverlapCircle(transform.position, interactRange, playerLayer);
@@ -71,6 +72,7 @@ public class Interactable : MonoBehaviour
         currentPopUp.transform.SetSiblingIndex(0);
     }
 
+
     void UpdatePopUpPosition()
     {
         if (currentPopUp != null)
@@ -88,8 +90,10 @@ public class Interactable : MonoBehaviour
 
     void OnDestroy()
     {
+
         if (currentPopUp != null)
         {
+
             Destroy(currentPopUp);
         }
     }
