@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using TMPro;
 
 public class Interactable : MonoBehaviour
@@ -18,7 +18,6 @@ public class Interactable : MonoBehaviour
     public UnityEngine.Events.UnityEvent onInteract;
 
     private bool playerInRange = false;
-
 
     void Update()
     {
@@ -72,7 +71,6 @@ public class Interactable : MonoBehaviour
         currentPopUp.transform.SetSiblingIndex(0);
     }
 
-
     void UpdatePopUpPosition()
     {
         if (currentPopUp != null)
@@ -90,10 +88,8 @@ public class Interactable : MonoBehaviour
 
     void OnDestroy()
     {
-
         if (currentPopUp != null)
         {
-
             Destroy(currentPopUp);
         }
     }
