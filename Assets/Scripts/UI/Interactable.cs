@@ -1,5 +1,10 @@
-using UnityEngine;
 using TMPro;
+using System;
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
+using UnityEngine.UI;
 
 public class Interactable : MonoBehaviour
 {
