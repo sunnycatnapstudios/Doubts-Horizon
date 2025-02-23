@@ -22935,7 +22935,7 @@ MonoBehaviour:
   characterProfile: {fileID: 21300000, guid: 233e090b78912f445af3f602a407830f, type: 3}
   isDialogueOpen: 0
   dialogueFinished: 0
-  NPCDialogueHandler: {fileID: 0}
+  npcDialogueHandler: {fileID: 0}
   audioClips:
     sfxOnInteract: {fileID: 0}
 --- !u!212 &181162047
@@ -23314,7 +23314,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfe630102f35a011b96ac6fe502b3e45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueLines: []
   survivor: {fileID: 11400000, guid: 7ea66f04ca169e844a9a9805f2c6e4b0, type: 2}
 --- !u!1 &266854583
 GameObject:
@@ -23494,7 +23493,7 @@ MonoBehaviour:
   characterProfile: {fileID: 21300000, guid: 233e090b78912f445af3f602a407830f, type: 3}
   isDialogueOpen: 0
   dialogueFinished: 0
-  NPCDialogueHandler: {fileID: 0}
+  npcDialogueHandler: {fileID: 0}
   audioClips:
     sfxOnInteract: {fileID: 0}
 --- !u!212 &271334415
@@ -23845,6 +23844,9 @@ MonoBehaviour:
   refPosition: {x: 0, y: 0, z: 0}
   changedLevel: 0
   inTransition: 0
+  audioClips:
+    sfxEnterTransition: {fileID: 0}
+    sfxExitTransition: {fileID: 0}
 --- !u!1 &326803864
 GameObject:
   m_ObjectHideFlags: 0
@@ -23889,10 +23891,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e13f76435992fce4cbb9b001cfdfd612, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  audioClips:
-    sfxEnterTransition: {fileID: 8300000, guid: b65ad0b7590da48d480603a1c3ea23f3,
-      type: 3}
-    sfxExitTransition: {fileID: 8300000, guid: 30a48f6110694570b8b46e0f4da417fa, type: 3}
 --- !u!114 &336822359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24296,7 +24294,7 @@ MonoBehaviour:
   characterProfile: {fileID: 21300000, guid: 233e090b78912f445af3f602a407830f, type: 3}
   isDialogueOpen: 0
   dialogueFinished: 0
-  NPCDialogueHandler: {fileID: 0}
+  npcDialogueHandler: {fileID: 0}
   audioClips:
     sfxOnInteract: {fileID: 0}
 --- !u!212 &459218824
@@ -25695,6 +25693,9 @@ MonoBehaviour:
   refPosition: {x: 0, y: 0, z: 0}
   changedLevel: 0
   inTransition: 0
+  audioClips:
+    sfxEnterTransition: {fileID: 0}
+    sfxExitTransition: {fileID: 0}
 --- !u!1 &824297103
 GameObject:
   m_ObjectHideFlags: 0
@@ -25812,10 +25813,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
-  audioClips:
-    sfxEnterTransition: {fileID: 8300000, guid: b65ad0b7590da48d480603a1c3ea23f3,
-      type: 3}
-    sfxExitTransition: {fileID: 8300000, guid: 30a48f6110694570b8b46e0f4da417fa, type: 3}
 --- !u!1 &826893598
 GameObject:
   m_ObjectHideFlags: 0
@@ -32093,6 +32090,75 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1001 &876611450
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 3261883972054362728, guid: 5f34ddba4d67d668491b417910111049,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3261883972054362728, guid: 5f34ddba4d67d668491b417910111049,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -13.48
+      objectReference: {fileID: 0}
+    - target: {fileID: 3261883972054362728, guid: 5f34ddba4d67d668491b417910111049,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -5.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 3261883972054362728, guid: 5f34ddba4d67d668491b417910111049,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -5.5898438
+      objectReference: {fileID: 0}
+    - target: {fileID: 3261883972054362728, guid: 5f34ddba4d67d668491b417910111049,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3261883972054362728, guid: 5f34ddba4d67d668491b417910111049,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3261883972054362728, guid: 5f34ddba4d67d668491b417910111049,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3261883972054362728, guid: 5f34ddba4d67d668491b417910111049,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3261883972054362728, guid: 5f34ddba4d67d668491b417910111049,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3261883972054362728, guid: 5f34ddba4d67d668491b417910111049,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3261883972054362728, guid: 5f34ddba4d67d668491b417910111049,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3261883972054362733, guid: 5f34ddba4d67d668491b417910111049,
+        type: 3}
+      propertyPath: m_Name
+      value: Rations
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 5f34ddba4d67d668491b417910111049, type: 3}
 --- !u!1 &880038904
 GameObject:
   m_ObjectHideFlags: 0
@@ -32754,7 +32820,7 @@ MonoBehaviour:
   characterProfile: {fileID: 21300000, guid: 233e090b78912f445af3f602a407830f, type: 3}
   isDialogueOpen: 0
   dialogueFinished: 0
-  NPCDialogueHandler: {fileID: 0}
+  npcDialogueHandler: {fileID: 0}
   audioClips:
     sfxOnInteract: {fileID: 0}
 --- !u!212 &1047770476
@@ -33510,7 +33576,7 @@ MonoBehaviour:
   characterProfile: {fileID: 21300000, guid: 233e090b78912f445af3f602a407830f, type: 3}
   isDialogueOpen: 0
   dialogueFinished: 0
-  NPCDialogueHandler: {fileID: 0}
+  npcDialogueHandler: {fileID: 0}
   audioClips:
     sfxOnInteract: {fileID: 0}
 --- !u!50 &1166367098
@@ -34117,7 +34183,7 @@ MonoBehaviour:
   characterProfile: {fileID: 21300000, guid: 233e090b78912f445af3f602a407830f, type: 3}
   isDialogueOpen: 0
   dialogueFinished: 0
-  NPCDialogueHandler: {fileID: 0}
+  npcDialogueHandler: {fileID: 0}
   audioClips:
     sfxOnInteract: {fileID: 0}
 --- !u!212 &1427184478
@@ -35973,7 +36039,7 @@ MonoBehaviour:
   characterProfile: {fileID: 21300000, guid: 233e090b78912f445af3f602a407830f, type: 3}
   isDialogueOpen: 0
   dialogueFinished: 0
-  NPCDialogueHandler: {fileID: 0}
+  npcDialogueHandler: {fileID: 0}
   audioClips:
     sfxOnInteract: {fileID: 0}
 --- !u!212 &1818800190
@@ -36551,7 +36617,7 @@ MonoBehaviour:
   characterProfile: {fileID: 21300000, guid: 233e090b78912f445af3f602a407830f, type: 3}
   isDialogueOpen: 0
   dialogueFinished: 0
-  NPCDialogueHandler: {fileID: 0}
+  npcDialogueHandler: {fileID: 0}
   audioClips:
     sfxOnInteract: {fileID: 0}
 --- !u!212 &1887495468
@@ -37018,75 +37084,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1962619349
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 3261883972054362728, guid: 9e8f95226be2332c1b204beda6fe8f3b,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3261883972054362728, guid: 9e8f95226be2332c1b204beda6fe8f3b,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -18.47
-      objectReference: {fileID: 0}
-    - target: {fileID: 3261883972054362728, guid: 9e8f95226be2332c1b204beda6fe8f3b,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -3.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3261883972054362728, guid: 9e8f95226be2332c1b204beda6fe8f3b,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -5.5898438
-      objectReference: {fileID: 0}
-    - target: {fileID: 3261883972054362728, guid: 9e8f95226be2332c1b204beda6fe8f3b,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3261883972054362728, guid: 9e8f95226be2332c1b204beda6fe8f3b,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3261883972054362728, guid: 9e8f95226be2332c1b204beda6fe8f3b,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3261883972054362728, guid: 9e8f95226be2332c1b204beda6fe8f3b,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3261883972054362728, guid: 9e8f95226be2332c1b204beda6fe8f3b,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3261883972054362728, guid: 9e8f95226be2332c1b204beda6fe8f3b,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3261883972054362728, guid: 9e8f95226be2332c1b204beda6fe8f3b,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 3261883972054362733, guid: 9e8f95226be2332c1b204beda6fe8f3b,
-        type: 3}
-      propertyPath: m_Name
-      value: Rations
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 9e8f95226be2332c1b204beda6fe8f3b, type: 3}
 --- !u!1 &2013483579
 GameObject:
   m_ObjectHideFlags: 0
@@ -37191,7 +37188,7 @@ MonoBehaviour:
   characterProfile: {fileID: 21300000, guid: 233e090b78912f445af3f602a407830f, type: 3}
   isDialogueOpen: 0
   dialogueFinished: 0
-  NPCDialogueHandler: {fileID: 0}
+  npcDialogueHandler: {fileID: 0}
   audioClips:
     sfxOnInteract: {fileID: 0}
 --- !u!212 &2013483584
@@ -40616,7 +40613,7 @@ MonoBehaviour:
   characterProfile: {fileID: 21300000, guid: 233e090b78912f445af3f602a407830f, type: 3}
   isDialogueOpen: 0
   dialogueFinished: 0
-  NPCDialogueHandler: {fileID: 0}
+  npcDialogueHandler: {fileID: 0}
   audioClips:
     sfxOnInteract: {fileID: 0}
 --- !u!212 &2046889728
@@ -46620,7 +46617,7 @@ MonoBehaviour:
   characterProfile: {fileID: 21300000, guid: 233e090b78912f445af3f602a407830f, type: 3}
   isDialogueOpen: 0
   dialogueFinished: 0
-  NPCDialogueHandler: {fileID: 0}
+  npcDialogueHandler: {fileID: 0}
   audioClips:
     sfxOnInteract: {fileID: 8300000, guid: 23802cc61f418c348b956e69d407d8e0, type: 3}
 --- !u!212 &3299673890537269110
@@ -46710,7 +46707,7 @@ MonoBehaviour:
   characterProfile: {fileID: 21300000, guid: 233e090b78912f445af3f602a407830f, type: 3}
   isDialogueOpen: 0
   dialogueFinished: 0
-  NPCDialogueHandler: {fileID: 0}
+  npcDialogueHandler: {fileID: 0}
   audioClips:
     sfxOnInteract: {fileID: 8300000, guid: 23802cc61f418c348b956e69d407d8e0, type: 3}
 --- !u!61 &3299673890677685201
