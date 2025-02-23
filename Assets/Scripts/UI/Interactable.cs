@@ -5,8 +5,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Interactable : MonoBehaviour
-{
+public class Interactable : MonoBehaviour {
     [Header("Interaction Settings")]
     public float interactRange = 2f;
     public LayerMask playerLayer;
@@ -23,77 +22,60 @@ public class Interactable : MonoBehaviour
 
     private bool playerInRange = false;
 
-    void Update()
-    {
+    void Update() {
         playerInRange = Physics2D.OverlapCircle(transform.position, interactRange, playerLayer);
 
-        if (playerInRange)
-        {
-            if (currentPopUp == null)
-            {
+        if (playerInRange) {
+            if (currentPopUp == null) {
                 CreatePopUp();
-            }
-            else
-            {
+            } else {
                 UpdatePopUpPosition();
             }
 
-            if (Input.GetKeyDown(KeyCode.E))
-            {
+            if (Input.GetKeyDown(KeyCode.E)) {
                 onInteract.Invoke();
             }
-        }
-        else
-        {
-            if (currentPopUp != null)
-            {
+        } else {
+            if (currentPopUp != null) {
                 Destroy(currentPopUp);
                 currentPopUp = null;
             }
         }
     }
 
-    void CreatePopUp()
-    {
+    void CreatePopUp() {
         currentPopUp = Instantiate(popUpPrefab,
             Camera.main.WorldToScreenPoint(transform.position + Vector3.up * 1f),
             Quaternion.identity,
             GameObject.FindGameObjectWithTag("Overworld UI").transform);
 
         popUpText = currentPopUp.GetComponentInChildren<TMP_Text>();
-        if (popUpText != null)
-        {
+        if (popUpText != null) {
             popUpText.text = promptText;
         }
 
         popUpAnimator = currentPopUp.GetComponent<Animator>();
-        if (popUpAnimator != null)
-        {
+        if (popUpAnimator != null) {
             popUpAnimator.SetTrigger("PopIn");
         }
 
         currentPopUp.transform.SetSiblingIndex(0);
     }
 
-    void UpdatePopUpPosition()
-    {
-        if (currentPopUp != null)
-        {
+    void UpdatePopUpPosition() {
+        if (currentPopUp != null) {
             currentPopUp.transform.position =
                 Camera.main.WorldToScreenPoint(transform.position + Vector3.up * 1f);
         }
     }
 
-    void OnDrawGizmosSelected()
-    {
+    void OnDrawGizmosSelected() {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position, interactRange);
     }
 
-    void OnDestroy()
-    {
-        if (currentPopUp != null)
-        {
+    void OnDestroy() {
+        if (currentPopUp != null) {
             Destroy(currentPopUp);
         }
     }
