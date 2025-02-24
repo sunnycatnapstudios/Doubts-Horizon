@@ -19,7 +19,8 @@ public class Inventory : MonoBehaviour {
 
     [Serializable]
     private struct AudioClips {
-        public AudioClip sfxPickup;
+        // TODO add other sounds when needed
+        public AudioClip sfxCloseInventory;
     }
 
     [SerializeField] private AudioClips audioClips;
@@ -90,9 +91,9 @@ public class Inventory : MonoBehaviour {
                 itemsInRange.RemoveAt(0);
                 Item item = curObj.GetComponent<Pickupable>().GetItem();
                 addItem(item);
+                AudioManager.Instance.PlaySound(item.GetPickupSound());
                 Debug.Log("did");
 
-                AudioManager.Instance.PlayUiSound(audioClips.sfxPickup);
                 foreach (string slot in inventory.Keys) {
                     Debug.Log(slot + inventory[slot].getCount().ToString());
                 }

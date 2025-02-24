@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 10b04f946d58b654e966190ba09580ee, type: 2}
+  sfxOnPickup: {fileID: 8300000, guid: c6f38b1cf169e1d79972fd231dbba484, type: 3}
 --- !u!58 &3261883972054362729
 CircleCollider2D:
   m_ObjectHideFlags: 0
