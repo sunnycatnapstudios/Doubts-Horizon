@@ -24,6 +24,8 @@ public class Key : Item {
         return sprite;
     }
 
+    public override bool UsableInInventory() => false;
+
     public override void Use() {
     }
 

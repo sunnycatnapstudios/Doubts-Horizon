@@ -398,7 +398,7 @@ MonoBehaviour:
   test1: {fileID: 0}
   test2: {fileID: 0}
   audioClips:
-    sfxCloseInventory: {fileID: 0}
+    sfxPickup: {fileID: 8300000, guid: e8b7b2590daa6e259861371f15be7165, type: 3}
 --- !u!1001 &1545461077899872922
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -567,16 +567,6 @@ PrefabInstance:
       propertyPath: bulletRef.Array.data[2]
       value: 
       objectReference: {fileID: 0}
-    - target: {fileID: 5426384123864954702, guid: 7dbb6c24bf054ece0b92e94221f90f5a,
-        type: 3}
-      propertyPath: audioClips.sfxBulletShot
-      value: 
-      objectReference: {fileID: 8300000, guid: f5085303ae9459b0ba53ff46607de5bb, type: 3}
-    - target: {fileID: 5426384123864954702, guid: 7dbb6c24bf054ece0b92e94221f90f5a,
-        type: 3}
-      propertyPath: audioClips.sfxDrawSlingshot
-      value: 
-      objectReference: {fileID: 8300000, guid: 9752ad916d59e0f42821d542ab2db384, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7dbb6c24bf054ece0b92e94221f90f5a, type: 3}
 --- !u!4 &396053556708651453 stripped

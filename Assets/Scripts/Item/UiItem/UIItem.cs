@@ -20,6 +20,8 @@ public class UIItem : MonoBehaviour
 
     private Item heldItem;
 
+    
+
 
     void Awake()
     {
@@ -31,6 +33,11 @@ public class UIItem : MonoBehaviour
     {
         item = heldItem;
     }
+
+    
+
+
+    
 
     public void OnPointerClick(BaseEventData data)
     {
@@ -55,6 +62,8 @@ public class UIItem : MonoBehaviour
     public void ResetData()
     {
         this.image.gameObject.SetActive(false);
+        heldItem = null;
+        
         empty = true;
     }
     public void Selected()
