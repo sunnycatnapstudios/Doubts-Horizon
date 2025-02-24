@@ -5,7 +5,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-#drag it into the element that needs the hover feature. change the layer to player in the inspector.
 public class Interactable : MonoBehaviour {
     [Header("Interaction Settings")]
     public float interactRange = 2f;
