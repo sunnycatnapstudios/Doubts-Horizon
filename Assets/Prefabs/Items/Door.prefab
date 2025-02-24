@@ -48,10 +48,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteRenderer: {fileID: 0}
-  closeAudio: {fileID: 8300000, guid: 1e582d7cced33e74b95b486a1eea3ea9, type: 3}
-  lockedAudio: {fileID: 8300000, guid: 1e582d7cced33e74b95b486a1eea3ea9, type: 3}
-  openAudio: {fileID: 8300000, guid: 23802cc61f418c348b956e69d407d8e0, type: 3}
-  unlockAudio: {fileID: 8300000, guid: f15d51e18a9b7064e9e5d40ae8d45859, type: 3}
+  closeAudio: {fileID: 8300000, guid: 4c3555067dd18352d97ae95640781b4e, type: 3}
+  lockedAudio: {fileID: 8300000, guid: 276205c94274ead4d8970cba1b9100c2, type: 3}
+  openAudio: {fileID: 8300000, guid: 5f9ce71399f36de0f912076a179619a8, type: 3}
+  unlockAudio: {fileID: 8300000, guid: 7b8276d457cf2f2fda749a5d8466274d, type: 3}
   closed: {fileID: 7822533284659186966, guid: f59c122c4eb43f1dcbdfc750e3a782c2, type: 3}
   open: {fileID: -4935834299494285922, guid: f59c122c4eb43f1dcbdfc750e3a782c2, type: 3}
   isOpen: 0
