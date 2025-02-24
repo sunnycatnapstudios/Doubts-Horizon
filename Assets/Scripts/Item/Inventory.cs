@@ -38,7 +38,11 @@ public class Inventory : MonoBehaviour {
             survivors.Add(test2.GetName(), test2);
         }
 
-        inventoryWindow.InitializeParty();
+        //inventoryWindow.InitializeParty();
+    }
+
+    public Dictionary<string, Slot> getInventory() {
+        return inventory;
     }
 
     private void addItem(Item item) {

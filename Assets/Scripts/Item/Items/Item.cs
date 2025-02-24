@@ -12,6 +12,7 @@ public abstract class Item: ScriptableObject{
    
     public abstract string GetFlavour();
     public abstract Sprite GetSprite();
+    public abstract bool UsableInInventory();
 
 
 
