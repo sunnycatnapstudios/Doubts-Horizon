@@ -36,6 +36,12 @@ TagManager:
   - Item Options
   - Complex Enemy
   - Simple Enemy
+  - Intro Screen
+  - CM Cam
+  - Play Button
+  - Title Card
+  - Menu
+  - Defend Indicator
   layers:
   - Default
   - TransparentFX

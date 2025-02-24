@@ -30,21 +30,21 @@ public class GameStatsManager : MonoBehaviour
     // Combat-Related Stats
     public Dictionary<string, CharacterStats> playerStats = new Dictionary<string, CharacterStats>
     {
-        { "Player", new CharacterStats("Player", 50, 150, 150, true, false)}
+        { "Player", new CharacterStats("Player", 45, 150, 150, true, false)}
     };
     public Dictionary<string, CharacterStats> allPartyMembers = new Dictionary<string, CharacterStats>
     {
         { "MemberA", new CharacterStats("MemberA", 35, 100, 100, true, false)},
         { "MemberB", new CharacterStats("MemberB", 7, 120, 120, false, false)},
         { "MemberC", new CharacterStats("MemberC", 5, 150, 150, false, false)},
-        { "MemberD", new CharacterStats("MemberD", 25, 80, 80, true, false)},
+        { "MemberD", new CharacterStats("MemberD", 25, 210, 210, true, false)},
         { "MemberE", new CharacterStats("MemberE", 42, 170, 170, true, false)}
     };
     public Dictionary<string, CharacterStats> L1Enemies = new Dictionary<string, CharacterStats>
     {
-        { "Handy", new CharacterStats("Handy", 38, 170, 170, true, true)},
-        { "Gregor", new CharacterStats("Gregor", 21, 210, 210, true, true)},
-        { "Cuboid", new CharacterStats("Cuboid", 31, 180, 180, true, true)}
+        { "Handy", new CharacterStats("Handy", 18, 170, 170, true, true)},
+        { "Gregor", new CharacterStats("Gregor", 16, 180, 180, true, true)},
+        { "Cuboid", new CharacterStats("Cuboid", 15, 150, 150, true, true)}
     };
     public Dictionary<string, CharacterStats> L2AEnemies = new Dictionary<string, CharacterStats>
     {

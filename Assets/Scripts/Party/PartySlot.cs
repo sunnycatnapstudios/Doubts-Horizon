@@ -8,6 +8,7 @@ public class PartySlot : MonoBehaviour
 {
     public string Name;
     public Image profile;
+    public CharacterStats playerStats;
     public GameObject healthbarCasing;
     public Image healthBarBar, healthBarTail;
     public float currentHealth, maxHealth;
@@ -22,10 +23,26 @@ public class PartySlot : MonoBehaviour
 
     void OnEnable()
     {
+        _partyManager = GameStatsManager.Instance.GetComponentInChildren<_PartyManager>();
+        _battleUIHandler = GameStatsManager.Instance.GetComponentInChildren<_BattleUIHandler>();
         defaultImagePosition = profile.transform.localPosition;
         initialBarPosition = healthbarCasing.transform.localPosition;
         UpdateHealthBar(currentHealth);
         playerHealthIndicator.color = new Color(playerHealthIndicator.color.r, playerHealthIndicator.color.g, playerHealthIndicator.color.b, 0f);
+    }
+
+    public void Initialize(CharacterStats member)
+    {
+        if (member == null)
+        {
+            Debug.LogError("null member");
+            return;
+        }
+        
+        playerStats = member;
+        Name = member.Name;
+        SetHealth(member.currentHealth, member.maxHealth);
+        profile.sprite = _partyManager.characterProfiles.Find(image => image.name == member.Name);
     }
 
     public void SelectTarget()
@@ -123,11 +140,11 @@ public class PartySlot : MonoBehaviour
         }
     }
 
-    void Start()
+    void Awake()
     {
         gameStatsManager = GameStatsManager.Instance;
-        _partyManager = GameStatsManager.Instance.GetComponentInChildren<_PartyManager>();
-        _battleUIHandler = GameStatsManager.Instance.GetComponentInChildren<_BattleUIHandler>();
+        // _partyManager = GameStatsManager.Instance.GetComponentInChildren<_PartyManager>();
+        // _battleUIHandler = GameStatsManager.Instance.GetComponentInChildren<_BattleUIHandler>();
     }
 
     void Update()
@@ -149,6 +166,6 @@ public class PartySlot : MonoBehaviour
         else {
             playerHealthIndicator.text = (((int)(healthBarTail.fillAmount*100f)).ToString()+"%");
         }
-        healthBarBar.fillAmount = (float)currentHealth/maxHealth;
+        healthBarBar.fillAmount = (float)playerStats.currentHealth/playerStats.maxHealth;
     }
 }

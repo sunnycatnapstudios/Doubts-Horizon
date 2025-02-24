@@ -11,7 +11,7 @@ public class SideBarStats : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     private _PartyManager _partyManager;
     
     public RectTransform imageRectTransform, healthBarTransform;
-    private Vector2 defaultSize = new Vector2(35, 35), expandedSize = new Vector2(45, 45);
+    private Vector2 defaultSize = new Vector2(35, 35), expandedSize = new Vector2(40, 40);
     private Vector2 defaultPosition = new Vector2(-75, 0), expandedPosition;
     private float expandSpeed = 10f;
     private Coroutine imageCoroutine;

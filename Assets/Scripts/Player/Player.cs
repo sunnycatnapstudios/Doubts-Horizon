@@ -28,7 +28,7 @@ public class Player : MonoBehaviour
 
     public CinemachineVirtualCamera vcam;
     public float camMax, camMin;
-    public bool isZooming;
+    public bool isZooming, canControlCam = true;
 
     public bool isMoving;
     public bool faceLeft, faceRight, faceUp, faceDown = true;
@@ -44,12 +44,14 @@ public class Player : MonoBehaviour
     public bool isSneaking, isSprinting;
 
 
-    void ViewMap()
+    void ViewMap(bool cancontrolcam)
     {
         isZooming = Input.GetKey(KeyCode.Q);
         float targetSize = isZooming ? camMax : camMin;
 
-        vcam.m_Lens.OrthographicSize = Mathf.MoveTowards(vcam.m_Lens.OrthographicSize,targetSize,targetSize * Time.deltaTime * 2);
+        if (cancontrolcam) {
+            vcam.m_Lens.OrthographicSize = Mathf.MoveTowards(vcam.m_Lens.OrthographicSize,targetSize,targetSize * Time.deltaTime * 2);
+        }
     }
 
     void UpdateMoveHist()
@@ -117,9 +119,9 @@ public class Player : MonoBehaviour
         }
 
     
-        ViewMap();
+        ViewMap(canControlCam);
 
-        if (Vector3.Distance(transform.position, movePoint.position) <= movementInputDelay && !isZooming){
+        if (Vector3.Distance(transform.position, movePoint.position) <= movementInputDelay && !isZooming && !isPlayerInControl){
 
             pointRef = movePoint.position;
             

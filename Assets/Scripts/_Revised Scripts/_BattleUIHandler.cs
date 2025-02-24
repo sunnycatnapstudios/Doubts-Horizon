@@ -6,7 +6,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
-using UnityEngine.UIElements;
+// using UnityEngine.UIElements;
 using Button = UnityEngine.UIElements.Button;
 using TMPro;
 using Random = UnityEngine.Random;
@@ -33,7 +33,14 @@ public class _BattleUIHandler : MonoBehaviour
     public List<CharacterStats> playerParty;
 
     private CharacterStats currentDefender = null;
-    public bool isDefending;
+    public GameObject floatingText;
+
+    private int healAmount;
+    public List<string> defeatedInCombat = new List<string>();
+    public string endCause;
+    public bool endTurn;
+    public PartySlotHandler partySlotHandler;
+    public RectTransform defendIndicator;
 
     [Serializable]
     private struct AudioClips {
@@ -71,6 +78,7 @@ public class _BattleUIHandler : MonoBehaviour
             } if (obj.CompareTag("Combat UI")) {
                 combatUI = obj;
                 turnIndicator = combatUI.GetComponentInChildren<TurnIndicator>();
+                partySlotHandler = combatUI.GetComponentInChildren<PartySlotHandler>();
             } if (obj.CompareTag("EnemyUI")) {
                 enemySlot = obj;
                 enemyStatsAnimator = obj.GetComponent<Animator>();
@@ -84,9 +92,9 @@ public class _BattleUIHandler : MonoBehaviour
             } if (obj.CompareTag("PartyCombatUI")) {
                 partyUIAnimator = obj.GetComponent<Animator>();
                 partyUIAnimator.updateMode = AnimatorUpdateMode.UnscaledTime;
+            } if (obj.CompareTag("Defend Indicator")) {
+                defendIndicator = obj.GetComponent<RectTransform>();
             } // if (obj.CompareTag("")) {
-
-            // } if (obj.CompareTag("")) {
 
             // } if (obj.CompareTag("")) {
 
@@ -176,6 +184,10 @@ public class _BattleUIHandler : MonoBehaviour
 
     public IEnumerator StartBattle()
     {
+        endCause = "";
+        endTurn = false;
+        defendIndicator.SetParent(partyUIAnimator.transform, false); defendIndicator.SetSiblingIndex(0);
+        defendIndicator.anchoredPosition = new Vector2(-2000, 48);
         battleOrder.Clear();
         // Survivor player = GameObject.FindGameObjectWithTag("Player").GetComponent<PartyManager>().getPlayer();
             // Debug.Log(player);
@@ -184,30 +196,32 @@ public class _BattleUIHandler : MonoBehaviour
         //CharStats playerStats = new CharStats("player.Name", 21, 321, false);
         battleOrder.Add(player);
 
-        partySlots[0].GetComponent<PartySlot>().Name = player.Name;
-        partySlots[0].GetComponent<PartySlot>().SetHealth(player.currentHealth, player.maxHealth);
-        partySlots[0].GetComponent<PartySlot>().profile.sprite = _partyManager.characterProfiles.Find(image => image.name == player.Name);
+        // partySlots[0].GetComponent<PartySlot>().Name = player.Name;
+        // partySlots[0].GetComponent<PartySlot>().SetHealth(player.currentHealth, player.maxHealth);
+        // partySlots[0].GetComponent<PartySlot>().profile.sprite = _partyManager.characterProfiles.Find(image => image.name == player.Name);
 
         int slotIndex = 1;
         foreach (var member in gameStatsManager.currentPartyMembers)
         {
-            if (member.isCombatant)
+            // if (member.isCombatant)
             {
                 battleOrder.Add(member);
 
-                if (slotIndex < partySlots.Count)
-                {
-                    // Assign correct profile image
-                    partySlots[slotIndex].GetComponent<PartySlot>().Name = member.Name;
-                    partySlots[slotIndex].GetComponent<PartySlot>().SetHealth(member.currentHealth, member.maxHealth);
-                    partySlots[slotIndex].GetComponent<PartySlot>().profile.sprite = _partyManager.characterProfiles.Find(image => image.name == member.Name);
-                }
+                // if (slotIndex < partySlots.Count)
+                // {
+                //     // Assign correct profile image
+                //     partySlots[slotIndex].GetComponent<PartySlot>().Name = member.Name;
+                //     partySlots[slotIndex].GetComponent<PartySlot>().SetHealth(member.currentHealth, member.maxHealth);
+                //     partySlots[slotIndex].GetComponent<PartySlot>().profile.sprite = _partyManager.characterProfiles.Find(image => image.name == member.Name);
+                // }
                 slotIndex++;
             }
         }
 
         enemySlot.GetComponent<EnemyHealthbar>().SetHealth(enemyStats.currentHealth);
         battleOrder.Add(enemyStats);
+        playerParty = battleOrder.FindAll(c => !c.isEnemy); // Exclude Enemy from selection
+        partySlotHandler.UpdateSlots();
 
         battleOrder = ShuffleList(battleOrder);
         
@@ -263,6 +277,9 @@ public class _BattleUIHandler : MonoBehaviour
             }
         }
     }
+    void EnemyAttack() {;}
+    void EnemyGotAttacked() {;}
+
     public List<CharacterStats> ShuffleList(List<CharacterStats> list)
     {
         for (int i = 0; i < list.Count; i++)
@@ -275,8 +292,6 @@ public class _BattleUIHandler : MonoBehaviour
 
     private IEnumerator TurnLoop()
     {
-        playerParty = battleOrder.FindAll(c => !c.isEnemy); // Exclude Enemy from selection
-        
         while (battleInProgress)
         {
             if (currentTurnIndex >= battleOrder.Count)
@@ -304,24 +319,151 @@ public class _BattleUIHandler : MonoBehaviour
                 Debug.Log("Battle has ended!");
 
                 // enemyUIAnimator.Play("Handy Stop");
-                EndEncounter();
+                EndEncounter(endCause);
                 battleInProgress = false;
                 yield break;
             }
 
             currentTurnIndex++;
+            endTurn = false;
 
         }
     }
+    void SpawnDefendIndicator(CharacterStats player)
+    {
+        PartySlot targetSlot = partySlotHandler.partySlots.Find(slot => slot.playerStats == player);
+        defendIndicator.sizeDelta = new Vector2(25, 25);
+        defendIndicator.GetComponent<DefendIndicator>().inAnimation = true;
+        defendIndicator.GetComponent<DefendIndicator>().isAssigned = true;
+        defendIndicator.GetComponent<DefendIndicator>().parentRectTransform = partySlotHandler.GetComponent<RectTransform>();
+
+        if (targetSlot != null)
+        {
+            defendIndicator.SetParent(targetSlot.transform, false);
+            Vector2 targetPos = new Vector2(35, 15);
+
+            defendIndicator.localScale = Vector3.zero;
+            defendIndicator.anchoredPosition = targetPos;
+
+            StartCoroutine(ZoomIntoFrame(defendIndicator, targetPos, 0.5f));
+        }
+        else {Debug.LogWarning("No matching party slot");}
+    }
+    IEnumerator ZoomIntoFrame(RectTransform indicator, Vector2 targetAnchoredPosition, float duration)
+    {
+        Vector3 startScale = Vector3.zero;
+        Vector3 endScale = Vector3.one;
+
+        Vector2 startPos = indicator.anchoredPosition;
+        Vector2 overshootPos = targetAnchoredPosition + new Vector2(15, -15); // Slight overshoot
+        Vector2 endPos = targetAnchoredPosition;
+
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            elapsed += Time.unscaledDeltaTime;
+            float t = elapsed / duration;
+
+            // Apply ease-out-back style overshoot curve
+            t = Mathf.SmoothStep(0, 1, t);
+
+            indicator.localScale = Vector3.Lerp(startScale, endScale, t);
+
+            // First move towards the overshoot position
+            if (t < 0.7f) 
+                indicator.anchoredPosition = Vector2.Lerp(startPos, overshootPos, t / 0.7f);
+            else 
+                indicator.anchoredPosition = Vector2.Lerp(overshootPos, endPos, (t - 0.7f) / 0.3f);
+
+            yield return null;
+        }
+
+        // Ensure it lands precisely at the end position
+        indicator.localScale = endScale;
+        indicator.anchoredPosition = endPos;
+        
+        defendIndicator.GetComponent<DefendIndicator>().inAnimation = false;
+    }
+    IEnumerator ShakeDefendIndicator(float duration, float strength)
+    {
+        defendIndicator.GetComponent<DefendIndicator>().inAnimation = true;
+
+        Vector2 startPos = defendIndicator.anchoredPosition;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            float jutterAmount = Mathf.Sin(elapsedTime * 30f) * strength;  // Small oscillations
+            defendIndicator.anchoredPosition = startPos + new Vector2(jutterAmount, 0f); // Jutter left/right
+
+            elapsedTime += Time.unscaledDeltaTime;
+            yield return null; // Wait for next frame
+        }
+
+        defendIndicator.anchoredPosition = startPos; // Return to original position after jutter
+        
+        defendIndicator.GetComponent<DefendIndicator>().inAnimation = false;
+    }
+    IEnumerator DestroyDefend()
+    {
+        defendIndicator.GetComponent<DefendIndicator>().inAnimation = true;
+        float jitterDuration = 0.3f;
+        float expandDuration = 0.5f;
+        float jitterAmount = 3f;
+        float elapsed = 0f;
+
+        Vector2 originalPos = defendIndicator.anchoredPosition;
+
+        while (elapsed < jitterDuration)
+        {
+            elapsed += Time.unscaledDeltaTime;
+            float offsetX = Random.Range(-jitterAmount, jitterAmount);
+            float offsetY = Random.Range(-jitterAmount, jitterAmount);
+            defendIndicator.anchoredPosition = originalPos + new Vector2(offsetX, offsetY);
+            yield return new WaitForSecondsRealtime(0.05f);
+        }
+        defendIndicator.anchoredPosition = originalPos;
+
+        elapsed = 0f;
+        Vector2 originalScale = defendIndicator.sizeDelta;
+        Vector2 alteredScale = new Vector2(150, 150);
+
+        // Expand and fade out
+        while (elapsed < expandDuration)
+        {
+            elapsed += Time.unscaledDeltaTime;
+            float t = elapsed / expandDuration;
+            
+            // Scale up
+            defendIndicator.sizeDelta = Vector3.Lerp(originalScale, alteredScale, t);
+            
+            // Fade out
+            Color color = defendIndicator.GetComponent<Image>().color;
+            color.a = Mathf.Lerp(1f, 0f, t);
+            defendIndicator.GetComponent<Image>().color = color;
+            
+            yield return null;
+        }
+        defendIndicator.SetParent(partyUIAnimator.transform, false); defendIndicator.SetSiblingIndex(0);
+        defendIndicator.anchoredPosition = new Vector2(-2000, 48);
+        defendIndicator.GetComponent<Image>().color = Color.white;
+        defendIndicator.GetComponent<DefendIndicator>().inAnimation = false;
+        defendIndicator.GetComponent<DefendIndicator>().isAssigned = false;
+    }
+
     private IEnumerator PlayerTurn(CharacterStats player)
     {
         Debug.Log($"{player.Name}'s turn. Choose an action!");
+        partySlotHandler.MoveToActivePlayer(player);
 
         selectedAction = null;
         while (selectedAction == null)
         {
             yield return null;
         }
+
+        if (endTurn) {yield break;}
 
         while (selectedAction == "Heal" || selectedAction == "Defend")
         {
@@ -335,7 +477,7 @@ public class _BattleUIHandler : MonoBehaviour
                 // If the action is changed mid-selection, restart decision phase
                 if (selectedAction == "Attack" || selectedAction == "Defend")
                 {
-                    Debug.Log("Action switched to Attack. Restarting action selection...");
+                    Debug.Log("Action switched");
                     break;  // Go back to the start of the loop
                 }
             }
@@ -350,29 +492,48 @@ public class _BattleUIHandler : MonoBehaviour
                 if (currentDefender == null)
                 {
                     currentDefender = player;
+                    SpawnDefendIndicator(player);
                     Debug.Log($"{player.Name} chose to defend the Party!!!");
                 }
-                else {Debug.Log("There's already someone defending :(");}
+                else 
+                {
+                    StartCoroutine(ShakeDefendIndicator(Random.Range(.2f, .4f), Random.Range(20f, 30f)));
+                    Debug.Log("There's already someone defending :(");
+                }
                 selectedTarget = player.Name;
             }
             else if (selectedAction == "Heal")
             {
                 CharacterStats healTarget = battleOrder.Find(member => member.Name == selectedTarget);
 
-                int healAmount = Random.Range(30, 50);
+                if (player.isCombatant)  {healAmount = (1+(60 - player.attack)/60)*(Random.Range(20, 40));}
+                else {healAmount = Random.Range(20, 40);}
+
                 if (selectedTarget == player.Name) {healAmount/=2; Debug.Log("Pretty greedy to try healing yourself");}
                 healTarget.currentHealth += healAmount;
 
-                foreach (GameObject mem in partySlots)
+                // foreach (GameObject mem in partySlots)
+                // {
+                //     if (mem.GetComponent<PartySlot>().Name == healTarget.Name)
+                //     {
+                //         if (healTarget.currentHealth > mem.GetComponent<PartySlot>().maxHealth)
+                //         {
+                //             healTarget.currentHealth = (int)mem.GetComponent<PartySlot>().maxHealth;
+                //         }
+                //         mem.GetComponent<PartySlot>().UpdateHealthBar(healTarget.currentHealth);
+                //         mem.GetComponent<PartySlot>().ShowHealthChange();
+                //         ShowFloatingText(healAmount, Color.green, mem.transform.position, true);
+                //     }
+                // }
+                foreach (PartySlot mem in partySlotHandler.partySlots)
                 {
-                    if (mem.GetComponent<PartySlot>().Name == healTarget.Name)
+                    if (mem.playerStats.Name == healTarget.Name)
                     {
-                        if (healTarget.currentHealth > mem.GetComponent<PartySlot>().maxHealth)
+                        if (healTarget.currentHealth > mem.playerStats.maxHealth)
                         {
-                            healTarget.currentHealth = (int)mem.GetComponent<PartySlot>().maxHealth;
+                            healTarget.currentHealth = healTarget.maxHealth;
                         }
-                        mem.GetComponent<PartySlot>().UpdateHealthBar(healTarget.currentHealth);
-                        mem.GetComponent<PartySlot>().ShowHealthChange();
+                        mem.ShowHealthChange();
                         ShowFloatingText(healAmount, Color.green, mem.transform.position, true);
                     }
                 }
@@ -398,14 +559,18 @@ public class _BattleUIHandler : MonoBehaviour
             if (currentEnemyCurrentHealth <= 0)
             {
                 Debug.Log($"{enemyStats.Name} has been defeated!");
+                endCause = "Lose";
                 battleOrder.Remove(enemyStats);
             }
         }
 
         enemySlot.GetComponent<EnemyHealthbar>().UpdateHealthBar(currentEnemyCurrentHealth);
-        foreach (GameObject mem in partySlots) {
-            if (mem.GetComponent<PartySlot>().Name == player.Name) {mem.GetComponent<PartySlot>().UpdateHealthBar(player.currentHealth);}
-        }
+        // foreach (GameObject mem in partySlots) {
+        //     if (mem.GetComponent<PartySlot>().Name == player.Name) {mem.GetComponent<PartySlot>().UpdateHealthBar(player.currentHealth);}
+        // }
+        // foreach (PartySlot mem in partySlotHandler.partyslots) {
+        //     if (mem.playerStats.Name == player.Name)
+        // }
 
         Debug.Log($"Player chose {selectedAction}");
         yield return new WaitForSecondsRealtime(.5f);
@@ -415,86 +580,125 @@ public class _BattleUIHandler : MonoBehaviour
     {
         Debug.Log($"Enemy's Turn: {enemy.Name}");
         yield return new WaitForSecondsRealtime(1f);
-        // Select a random target from the player's party
-        
+
         if (playerParty.Count > 0)
         {
             CharacterStats target = playerParty[Random.Range(0, playerParty.Count)];
-            // Survivor guyGettingHit;
-            // if (target.Name == partyManager.getPlayer().Name) {
+            partySlotHandler.MoveToActivePlayer(target);
+            int enemyDamage = (int)Random.Range(enemy.attack * 0.6f, enemy.attack * 1.2f);
 
-            //      guyGettingHit = partyManager.getPlayer();
-            // } else {
-            //      guyGettingHit = partyManager.currentPartyMembers.Find(c=>c.Name ==target.Name);
-            // }
-
-            // Simulate attack
-            int enemyDamage = (int)Random.Range(enemy.attack*.6f, enemy.attack*1.2f);
-
-            if (currentDefender != null && currentDefender != target) // Defender takes the hit
+            if (currentDefender != null && currentDefender != target) // If there's an active defender
             {
-                int defenderDamage = (int)(enemyDamage * Random.Range(0.5f, 0.9f));
-                int remainingDamage = enemyDamage - defenderDamage;
+                // Calculate negation percentage
+                float healthRatio = currentDefender.currentHealth / (float)currentDefender.maxHealth;
+                float negationPercentage = 0.4f * healthRatio * (currentDefender.attack / 100f); // Adjust 100f for balance
+                negationPercentage = Mathf.Clamp(negationPercentage, 0f, 0.4f); // Ensure within 0-40%
 
+                // Calculate negated damage
+                int damageNegated = (int)(enemyDamage * negationPercentage);
+                int remainingDamage = enemyDamage - damageNegated;
+
+                // Calculate defender's share of the remaining damage (50% - 100%)
+                float defenderRatio = 0.5f + 0.5f * healthRatio;
+                int defenderDamage = (int)(remainingDamage * defenderRatio);
+                int targetDamage = remainingDamage - defenderDamage;
+
+                // Apply damage
                 currentDefender.currentHealth -= defenderDamage;
-                target.currentHealth -= remainingDamage;
+                target.currentHealth -= targetDamage;
 
-                Debug.Log($"{enemy.Name} attacks {target.Name}, but is blocked by {currentDefender.Name}" +
-                $"\n{currentDefender.Name} takes {defenderDamage}, while {target.Name} takes {remainingDamage}");
+                Debug.Log($"{enemy.Name} attacks {target.Name}, but is blocked by {currentDefender.Name}!" +
+                        $"\nDamage Negated: {damageNegated}" +
+                        $"\n{currentDefender.Name} takes {defenderDamage}, {target.Name} takes {targetDamage}");
 
-                foreach (GameObject mem in partySlots)
+                // // Update Defender's Health UI
+                // foreach (GameObject mem in partySlots)
+                // {
+                //     if (mem.GetComponent<PartySlot>().Name == currentDefender.Name)
+                //     {
+                //         mem.GetComponent<PartySlot>().UpdateHealthBar(currentDefender.currentHealth);
+                //         mem.GetComponent<PartySlot>().ShowHealthChange();
+                //         ShowFloatingText(defenderDamage, Color.blue, mem.transform.position, false);
+                //         StartCoroutine(mem.GetComponent<PartySlot>().JutterHealthBar(0.2f, 10f));
+                //     }
+                // }
+                foreach (PartySlot mem in partySlotHandler.partySlots)
                 {
-                    if (mem.GetComponent<PartySlot>().Name == currentDefender.Name)
+                    if (mem.playerStats.Name == currentDefender.Name)
                     {
-                        mem.GetComponent<PartySlot>().UpdateHealthBar(currentDefender.currentHealth);
-                        mem.GetComponent<PartySlot>().ShowHealthChange();
-                        ShowFloatingText(defenderDamage, Color.red, mem.transform.position, false);
-                        StartCoroutine(mem.GetComponent<PartySlot>().JutterHealthBar(0.2f, 10f));
+                        mem.ShowHealthChange();
+                        ShowFloatingText(defenderDamage, Color.blue, mem.transform.position, false);
+                        StartCoroutine(mem.JutterHealthBar(0.2f, 10f));
                     }
                 }
 
-                foreach (GameObject mem in partySlots)
+                // // Update Target's Health UI
+                // foreach (GameObject mem in partySlots)
+                // {
+                //     if (mem.GetComponent<PartySlot>().Name == target.Name)
+                //     {
+                //         mem.GetComponent<PartySlot>().UpdateHealthBar(target.currentHealth);
+                //         mem.GetComponent<PartySlot>().ShowHealthChange();
+                //         ShowFloatingText(targetDamage, Color.red, mem.transform.position, false);
+                //         StartCoroutine(mem.GetComponent<PartySlot>().JutterHealthBar(0.2f, 10f));
+                //     }
+                // }
+                foreach (PartySlot mem in partySlotHandler.partySlots)
                 {
-                    if (mem.GetComponent<PartySlot>().Name == target.Name)
+                    if (mem.playerStats.Name == target.Name)
                     {
-                        mem.GetComponent<PartySlot>().UpdateHealthBar(target.currentHealth);
-                        mem.GetComponent<PartySlot>().ShowHealthChange();
-                        ShowFloatingText(remainingDamage, Color.red, mem.transform.position, false);
-                        StartCoroutine(mem.GetComponent<PartySlot>().JutterHealthBar(0.2f, 10f));
+                        mem.ShowHealthChange();
+                        ShowFloatingText(targetDamage, Color.red, mem.transform.position, false);
+                        StartCoroutine(mem.JutterHealthBar(0.2f, 10f));
                     }
                 }
 
+                // Check if defender is defeated
                 if (currentDefender.currentHealth <= 0)
                 {
                     Debug.Log($"{currentDefender.Name} has been defeated!");
+                    defeatedInCombat.Add(currentDefender.Name);
                     battleOrder.Remove(currentDefender);
+                    currentDefender = null;
                 }
             }
-            else
+            else // No defender, target takes full damage
             {
                 target.currentHealth -= enemyDamage;
                 Debug.Log($"{enemy.Name} attacks {target.Name} for {enemyDamage} damage!");
-                
-                foreach (GameObject mem in partySlots)
+
+                // foreach (GameObject mem in partySlots)
+                // {
+                //     if (mem.GetComponent<PartySlot>().Name == target.Name)
+                //     {
+                //         mem.GetComponent<PartySlot>().UpdateHealthBar(target.currentHealth);
+                //         mem.GetComponent<PartySlot>().ShowHealthChange();
+                //         ShowFloatingText(enemyDamage, Color.red, mem.transform.position, false);
+                //         StartCoroutine(mem.GetComponent<PartySlot>().JutterHealthBar(0.2f, 10f));
+                //     }
+                // }
+                foreach (PartySlot mem in partySlotHandler.partySlots)
                 {
-                    if (mem.GetComponent<PartySlot>().Name == target.Name)
+                    if (mem.playerStats.Name == target.Name)
                     {
-                        mem.GetComponent<PartySlot>().UpdateHealthBar(target.currentHealth);
-                        mem.GetComponent<PartySlot>().ShowHealthChange();
+                        mem.ShowHealthChange();
                         ShowFloatingText(enemyDamage, Color.red, mem.transform.position, false);
-                        StartCoroutine(mem.GetComponent<PartySlot>().JutterHealthBar(0.2f, 10f));
+                        StartCoroutine(mem.JutterHealthBar(0.2f, 10f));
                     }
                 }
             }
-            
-            
+
             // Check if target is defeated
             if (target.currentHealth <= 0)
             {
                 Debug.Log($"{target.Name} has been defeated!");
+                defeatedInCombat.Add(target.Name);
                 battleOrder.Remove(target);
             }
-            currentDefender = null; // Reset Current Defender
+
+            // Reset defender at the end of the turn
+            currentDefender = null;
+            StartCoroutine(DestroyDefend());
         }
         yield return new WaitForSecondsRealtime(.3f);
     }
@@ -517,8 +721,8 @@ public class _BattleUIHandler : MonoBehaviour
 
     void ShowFloatingText(int damage, Color color, Vector3 targetTransform, bool ishealing)
     {
-        Vector3 spawnPosition = targetTransform + new Vector3(0, 20f, 0);
-        GameObject floatingText = Instantiate(floatingTextPrefab, spawnPosition, Quaternion.identity, GameObject.FindGameObjectWithTag("Combat UI").transform);
+        Vector3 spawnPosition = targetTransform + new Vector3(0, 60f, 0);
+        floatingText = Instantiate(floatingTextPrefab, spawnPosition, Quaternion.identity, GameObject.FindGameObjectWithTag("Combat UI").transform);
         floatingText.SetActive(true);
         floatingText.GetComponent<DamageIndicator>().SetText(damage.ToString(), color);
         floatingText.GetComponent<DamageIndicator>().isHealing = ishealing;
@@ -531,36 +735,47 @@ public class _BattleUIHandler : MonoBehaviour
         bool playersAlive = battleOrder.Exists(c => !c.isEnemy);
         bool enemiesAlive = battleOrder.Exists(c => c.isEnemy);
 
+        endCause = playersAlive? "Natural": "Lose";
+
         return !playersAlive || !enemiesAlive;
         // return false;
     }
 
     // Called when the battle should end. Use to transition back to overworld
-    private void EndEncounter()
+    private void EndEncounter(string reason)
     {
-        if (partyUIAnimator != null)
+        if (reason == "Natural")
         {
-            partyUIAnimator.ResetTrigger("Open");
-            partyUIAnimator.ResetTrigger("Close");
-            partyUIAnimator.ResetTrigger("Reset");
+            if (partyUIAnimator != null)
+            {
+                partyUIAnimator.ResetTrigger("Open");
+                partyUIAnimator.ResetTrigger("Close");
+                partyUIAnimator.ResetTrigger("Reset");
 
-            if (itemOption||actOption) {
-                partyUIAnimator.SetTrigger("Close");
-                actOption = itemOption = false;
+                if (itemOption||actOption) {
+                    partyUIAnimator.SetTrigger("Close");
+                    actOption = itemOption = false;
+                }
             }
+            if (floatingText != null)
+            {
+                Destroy(floatingText);
+            }
+
+            actOptionBList.SetActive(actOption);
+            itemOptionBList.SetActive(itemOption);
+            overworldUI.SetActive(true);
+            combatUI.SetActive(false);
+
+            turnIndicator.ClearTurnIndicators();
+
+            // Switch back to original sounds
+            AudioManager.Instance.CrossFadeAmbienceSound(audioClips.oldAmbience, 1f, 1f, 1f);
+            AudioManager.Instance.CrossFadeMusicSound(audioClips.oldMusic, 1f, 1f, 1f);
+
+            battleInProgress = false;
+            Time.timeScale = 1;
         }
-        actOptionBList.SetActive(actOption);
-        itemOptionBList.SetActive(itemOption);
-        overworldUI.SetActive(true);
-        combatUI.SetActive(false);
-
-        turnIndicator.ClearTurnIndicators();
-
-        // Switch back to original sounds
-        AudioManager.Instance.CrossFadeAmbienceSound(audioClips.oldAmbience, 1f, 1f, 1f);
-        AudioManager.Instance.CrossFadeMusicSound(audioClips.oldMusic, 1f, 1f, 1f);
-
-        Time.timeScale = 1;
     }
 
     public void OnActionButtonPressed(string action)
@@ -632,21 +847,53 @@ public class _BattleUIHandler : MonoBehaviour
     }
     public void Escape()
     {
+        selectedAction = "Escape";
+        
         AudioManager.Instance.PlayUiSound(audioClips.uiDrawer);
-        EndEncounter();
+
+        float totalCurrentHealth = 0f, totalMaxHealth = 0f;
+        int partyCount = 0;
+
+        foreach (CharacterStats partyMember in battleOrder)
+        {
+            if (!partyMember.isEnemy)
+            {
+                partyCount++;
+                totalCurrentHealth += partyMember.currentHealth;
+                totalMaxHealth += partyMember.maxHealth;
+            }
+        }
+        int escapeChance = (int)(35+(((totalMaxHealth-totalCurrentHealth)/totalMaxHealth)*65));
+        int roll = Random.Range(0, 100);
+        
+        Debug.Log($"Chance of escape: {escapeChance}%");
+
+        if (roll<= escapeChance)
+        {
+            Debug.Log($"Wow, rolled a {roll}, you made it!!!");
+            endCause = "Natural";
+            EndEncounter(endCause);
+        }
+        else
+        {
+            Debug.Log($"Oof, rolled a {roll}, didn't make it lol");
+            SkipTurns();
+        }
+
+
+        // EndEncounter();
+    }
+    void SkipTurns()
+    {
+        int enemyIndex = battleOrder.IndexOf(enemyStats);
+        endTurn = true;
+        currentTurnIndex = enemyIndex-1;
     }
 
     private IEnumerator WaitForCloseThenToggle(GameObject targetContent, bool state)
     {
         AnimatorStateInfo stateInfo = partyUIAnimator.GetCurrentAnimatorStateInfo(0);
 
-        // while (stateInfo.IsName("Slot Closed") && stateInfo.normalizedTime < 1.0f || stateInfo.IsName("Reset"))
-        // {
-        //     yield return null; // Wait for next frame
-        //     stateInfo = partyUIAnimator.GetCurrentAnimatorStateInfo(0); // Update state info
-
-        //     if (stateInfo.IsName("Slot Open")) {break;}
-        // }
         if (!state)
         {
             while (!stateInfo.IsName("Slot Closed") || stateInfo.normalizedTime < 1.0f)
