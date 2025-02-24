@@ -55,6 +55,8 @@ public class UIItem : MonoBehaviour
     public void ResetData()
     {
         this.image.gameObject.SetActive(false);
+        heldItem = null;
+        
         empty = true;
     }
     public void Selected()

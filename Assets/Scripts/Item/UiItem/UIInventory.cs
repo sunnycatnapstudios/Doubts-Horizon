@@ -99,6 +99,15 @@ public class UIInventory : MonoBehaviour
         }
 
     }
+    private void clearUIInventory() {
+        foreach (UIItem item in listOfItems) {
+            item.ResetData();
+        }
+        foreach (UIPartyMember member in listOfMembers) {
+            Destroy(member);
+        }
+    }
+
 
 
 
@@ -135,13 +144,14 @@ public class UIInventory : MonoBehaviour
 
     public void Show(Dictionary<string, Slot> inventory)
     {
+        clearUIInventory();
         gameObject.SetActive(true);
         descriptionUI.ResetDescription();
         int counter = 0;
         foreach(Slot Slot in inventory.Values) {
             listOfItems[counter].SetdisplayItem(Slot.GetItem(),Slot.getCount());
-            counter++;
-            
+            Debug.Log(Slot.ToString());
+            counter++;    
         }
         counter = 0;
         partyManager = GameObject.FindWithTag("Player").GetComponent<PartyManager>();
@@ -154,8 +164,6 @@ public class UIInventory : MonoBehaviour
             Debug.Log(listOfMembers.Count);
             listOfMembers[counter].SetdisplayItem(member);
             counter++;
-       
-
         }
 
     }
