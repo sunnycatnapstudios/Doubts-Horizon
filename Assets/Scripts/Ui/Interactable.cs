@@ -7,9 +7,9 @@ using UnityEngine.UI;
 
 public class Interactable : MonoBehaviour {
     [Header("Interaction Settings")]
-    public float interactRange = 2f;
+    public float interactRange = 0.6f;
     public LayerMask playerLayer;
-    public string promptText = "e";
+    public string promptText = "E";
 
     [Header("Pop-Up Prompt")]
     public GameObject popUpPrefab;
@@ -45,7 +45,7 @@ public class Interactable : MonoBehaviour {
 
     void CreatePopUp() {
         currentPopUp = Instantiate(popUpPrefab,
-            Camera.main.WorldToScreenPoint(transform.position + Vector3.up * 1f),
+            Camera.main.WorldToScreenPoint(transform.position + Vector3.up * 0.6f),
             Quaternion.identity,
             GameObject.FindGameObjectWithTag("Overworld UI").transform);
 
@@ -65,7 +65,7 @@ public class Interactable : MonoBehaviour {
     void UpdatePopUpPosition() {
         if (currentPopUp != null) {
             currentPopUp.transform.position =
-                Camera.main.WorldToScreenPoint(transform.position + Vector3.up * 1f);
+                Camera.main.WorldToScreenPoint(transform.position + Vector3.up * 0.6f);
         }
     }
 
