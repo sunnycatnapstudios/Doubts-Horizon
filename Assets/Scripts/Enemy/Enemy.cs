@@ -23,7 +23,7 @@ public class Enemy : MonoBehaviour
 
     public GameObject overworldUI, combatUI;
 
-   
+
 
     void Start()
     {
@@ -45,7 +45,7 @@ public class Enemy : MonoBehaviour
         if (iscaught && !caught)
         {
             caught = true;
-            
+
             StartCoroutine(CaptureScreen());
             Time.timeScale = 0;
         }
@@ -78,7 +78,7 @@ public class Enemy : MonoBehaviour
         overlayRect.anchorMin = Vector2.zero;
         overlayRect.anchorMax = Vector2.one;
         overlayRect.pivot = new Vector2(0.5f, 0.5f);
-        
+
         // Start the animation
         StartCoroutine(ZoomInAnimation(screenOverlay, overlayImage));
     }
@@ -96,10 +96,10 @@ public class Enemy : MonoBehaviour
 
         float duration = 1.5f;  // Animation duration
         float time = 0f;
-        
+
         Color startColor = overlayImage.color;
         Color targetColor = new Color(0, 0, 0, 0);  // Fully dark and transparent
-        
+
         while (time < duration)
         {
             time += Time.unscaledDeltaTime;
@@ -167,7 +167,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    
+
 
     void Update()
     {
@@ -180,7 +180,7 @@ public class Enemy : MonoBehaviour
         direction.Normalize();
 
         if (playerDist <= detectRange || attack &&! stun){ // Attack Player // Will be changed later to account for pathfinding
-            
+
             if (!demotestFreeze){transform.position = Vector3.MoveTowards(transform.position, target.position, attackSpeed*Time.deltaTime);}
             attack = true;
             EnterCombat(Physics2D.OverlapCircle((transform.position), caughtRange, player));

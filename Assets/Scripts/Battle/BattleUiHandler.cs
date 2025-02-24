@@ -58,9 +58,9 @@ public class BattleUiHandler : MonoBehaviour
         [HideInInspector] public AudioClip oldAmbience;      // Use to swap back to old scene
         [HideInInspector] public AudioClip oldMusic;         // Use to swap back to old scene
         public AudioClip sfxBell;
-        public AudioClip uiSelected;
-        public AudioClip uiUnselected;
-        public AudioClip uiDrawer;
+        public AudioClip uiSelect;
+        public AudioClip uiOpenDrawer;
+        public AudioClip uiCloseDrawer;
     }
     [SerializeField] private AudioClips audioClips;
 
@@ -113,8 +113,8 @@ public class BattleUiHandler : MonoBehaviour
         battleOrder.Add(enemyStats);
 
         battleOrder = ShuffleList(battleOrder);
-        
-       
+
+
 
         foreach (var Char in battleOrder)
         {
@@ -424,7 +424,7 @@ public class BattleUiHandler : MonoBehaviour
 
     public void OnActionButtonPressed(string action)
     {
-        AudioManager.Instance.PlayUiSound(audioClips.uiSelected);
+        AudioManager.Instance.PlayUiSound(audioClips.uiSelect);
 
         if (selectedAction == "Heal" || selectedAction == "Defend"){
             selectedTarget = null;
@@ -445,14 +445,17 @@ public class BattleUiHandler : MonoBehaviour
 
             if (actOption) {
                 partyUIAnimator.SetTrigger("Close");
+                AudioManager.Instance.PlayUiSound(audioClips.uiCloseDrawer);
                 actOption = false;
             } else if (itemOption) {
                 partyUIAnimator.SetTrigger("Reset");
+                AudioManager.Instance.PlayUiSound(audioClips.uiCloseDrawer);
                 itemOption = false;
                 actOption = true;
             }
             else {
                 partyUIAnimator.SetTrigger("Open");
+                AudioManager.Instance.PlayUiSound(audioClips.uiOpenDrawer);
                 actOption = true;
             }
             // actOptionBList.SetActive(actOption);
@@ -460,7 +463,6 @@ public class BattleUiHandler : MonoBehaviour
             itemOptionBList.SetActive(itemOption);
         }
 
-        AudioManager.Instance.PlayUiSound(audioClips.uiDrawer);
     }
     public void Item()
     {
@@ -472,14 +474,17 @@ public class BattleUiHandler : MonoBehaviour
 
             if (itemOption) {
                 partyUIAnimator.SetTrigger("Close");
+                AudioManager.Instance.PlayUiSound(audioClips.uiCloseDrawer);
                 itemOption = false;
             } else if (actOption) {
                 partyUIAnimator.SetTrigger("Reset");
+                AudioManager.Instance.PlayUiSound(audioClips.uiCloseDrawer);
                 actOption = false;
                 itemOption = true;
             }
             else {
                 partyUIAnimator.SetTrigger("Open");
+                AudioManager.Instance.PlayUiSound(audioClips.uiOpenDrawer);
                 itemOption = true;
             }
 
@@ -487,11 +492,10 @@ public class BattleUiHandler : MonoBehaviour
             // itemOptionBList.SetActive(itemOption);
             StartCoroutine(WaitForCloseThenToggle(itemOptionBList, itemOption));
         }
-        AudioManager.Instance.PlayUiSound(audioClips.uiDrawer);
     }
     public void Escape()
     {
-        AudioManager.Instance.PlayUiSound(audioClips.uiDrawer);
+        AudioManager.Instance.PlayUiSound(audioClips.uiSelect);
         EndEncounter();
     }
 
