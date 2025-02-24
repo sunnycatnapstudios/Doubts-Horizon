@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIInventory : MonoBehaviour
 {
@@ -31,11 +32,27 @@ public class UIInventory : MonoBehaviour
     List<UIItem> listOfItems= new List<UIItem>();
     List<UIPartyMember> listOfMembers = new List<UIPartyMember>();
     private PartyManager partyManager;
+
+    private Item selectedItem;
+    private Survivor selectedMember;
     
+    private Item usingItem;
+    private Player player;
+
+    //for updating view in inventory after item because im stupid long sigh
+    private UIPartyMember _uIPartyMember;
+    private UIItem _uIItem;
+
+    [SerializeField]
+
+    private Button useButton;
+    //[SerializeField]
+    private TMPro.TMP_Text buttonText;
     void Start()
     {
-
+        player = GameObject.FindWithTag("Player").GetComponent<Player>();
         partyManager = GameObject.FindWithTag("Player").GetComponent<PartyManager>();
+
         Debug.Log(partyManager);
     }
     public void InitializeInventory(int inventorySlotsAmount) {
@@ -53,6 +70,13 @@ public class UIInventory : MonoBehaviour
     {
         Hide();
         descriptionUI.ResetDescription();
+        useButton.onClick.AddListener(OnButtonClick);
+        buttonText = useButton.GetComponentInChildren<TMPro.TMP_Text>();
+        buttonText.text = "use";
+
+
+
+
 
     }
     
@@ -66,8 +90,7 @@ public class UIInventory : MonoBehaviour
             person.transform.SetParent(partyPanel, false);
             listOfMembers.Add(person);
             person.OnItemClicked += HandlePartySelection;
-            Debug.Log("dsfa");
-
+            //Debug.Log("dsfa");
         
     }
 
@@ -104,8 +127,9 @@ public class UIInventory : MonoBehaviour
             item.ResetData();
         }
         foreach (UIPartyMember member in listOfMembers) {
-            Destroy(member);
+            Destroy(member.gameObject);
         }
+        listOfMembers.Clear();
     }
 
 
@@ -116,13 +140,22 @@ public class UIInventory : MonoBehaviour
         Debug.Log("here????");
         
            
-            Survivor held = member.GetMember();
-            if (held != null)
-            {
-                descriptionUI.SetDescription(held.GetName(), held.GetHealth().ToString());
-                ClearSelected();
-                member.Selected();
-            }
+        Survivor held = member.GetMember();
+        if (held != null)
+        {
+            descriptionUI.SetDescription(held.GetName(), held.GetHealth().ToString());
+            ClearSelected();
+            member.Selected();
+            selectedMember = member.GetMember();
+        }
+        if (usingItem != null) {
+            buttonText.text = "use " + usingItem.GetName() + " on "+selectedMember.GetName();
+            _uIPartyMember = member;
+
+        } else {
+            refreshButton();
+        }
+
         
     }
 
@@ -133,23 +166,71 @@ public class UIInventory : MonoBehaviour
             Item held = item.getItem();
         if (held != null)
         {
+
             descriptionUI.SetDescription(held.GetName(), held.GetDesc());
             ClearSelected();
+            refreshButton();
             item.Selected();
+            UsableInInventory thisItem = item.getItem() as UsableInInventory;
+            if (thisItem != null) {
+                selectedItem = held;
+                useButton.gameObject.SetActive(true);
+
+            }
+
+            
         }
         
-       }
+    }
+    private void OnButtonClick() {
+        if (usingItem == null && selectedMember == null) {
+            usingItem = selectedItem;
+            buttonText.text = "use " + usingItem.GetName() + " on Who?";
+        } else if (usingItem!=null &&selectedMember!=null){
+            buttonText.text = "using " + usingItem.GetName() + " on "+selectedMember.GetName();
+            //use item
+            
+            UsableInInventory thisItem  = usingItem as UsableInInventory;
+            if (thisItem != null) {
+                thisItem.UseOnMember(selectedMember);
+                _uIPartyMember.SetdisplayItem(selectedMember);
+                
+                player.inventory.removeItemByName(usingItem.GetName());
+                Show(player.inventory.getInventory());
+
+                
+                
+
+            }
+            //after
+            refreshButton();
+
+        }
+
+
+    }
+    private void refreshButton() {
+        usingItem = null;
+        ClearSelected();
+        buttonText.text = "use";
+        useButton.gameObject.SetActive(false);
+
+    }
+
+
 
     public void DisplayItem() { }
 
     public void Show(Dictionary<string, Slot> inventory)
     {
         clearUIInventory();
+        useButton.gameObject.SetActive(false);
         gameObject.SetActive(true);
         descriptionUI.ResetDescription();
         int counter = 0;
         foreach(Slot Slot in inventory.Values) {
             listOfItems[counter].SetdisplayItem(Slot.GetItem(),Slot.getCount());
+
             Debug.Log(Slot.ToString());
             counter++;    
         }
@@ -177,6 +258,10 @@ public class UIInventory : MonoBehaviour
         {
             member.Deselect();
         }
+        selectedMember = null;
+        selectedItem = null;
+        _uIPartyMember = null;
+
     }
 
     public void Hide()

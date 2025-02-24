@@ -21,11 +21,15 @@ public class Survivor : ScriptableObject
     private bool isCombatant;
     public bool IsCombatant { get { return isCombatant; } }
 
+    private bool fed;
+    public bool Fed { get { return fed; } set { fed = value; } }
+
     private int curHealth;
     public int CurHealth { get { return curHealth; } set { curHealth = value; } }
 
     public void Start() {
         curHealth = health;
+        fed =false;
     }
 
 
