@@ -61,7 +61,7 @@ public class UIPartyMember : MonoBehaviour
     }
     public void Selected()
     {
-        SelectedImage.enabled = true;
+        SelectedImage.enabled =true;
 
     }
 
