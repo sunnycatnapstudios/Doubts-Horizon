@@ -113,6 +113,7 @@ MonoBehaviour:
   npcDialogueHandler: {fileID: 3299673889596440564}
   audioClips:
     sfxOnInteract: {fileID: 8300000, guid: 6cd56f21cb2f650af8f57f98c9dfab0f, type: 3}
+    sfxTypewriter: {fileID: 8300000, guid: 28c78a651100df1cea783ae402a74437, type: 3}
 --- !u!114 &3299673889596440564
 MonoBehaviour:
   m_ObjectHideFlags: 0

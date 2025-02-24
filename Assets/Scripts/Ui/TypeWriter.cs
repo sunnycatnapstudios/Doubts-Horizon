@@ -15,6 +15,9 @@ public class TypeWriter : MonoBehaviour {
 
     public bool hasStartedTyping = false, isTyping = false, skipTyping = false;
     public float textChirp;
+    private AudioClip _sfxTyping;
+
+    public void SetSfxTyping(AudioClip clip) {_sfxTyping = clip;}
 
     public void StartTypewriter(string newText) {
         _tmpProText.text = "";
@@ -58,9 +61,9 @@ public class TypeWriter : MonoBehaviour {
 
             textChirp += .095f;
 
-            if (GetComponent<AudioSource>() != null && textChirp >= 0.2f) {
-                GetComponent<AudioSource>().Play();
+            if (textChirp >= 0.2f) {
                 textChirp = 0f;
+                AudioManager.Instance.PlaySound(_sfxTyping);
             }
             yield return new WaitForSeconds(timeBtwChars);
         }

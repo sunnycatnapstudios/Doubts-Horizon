@@ -24293,6 +24293,11 @@ PrefabInstance:
       propertyPath: interactBoxPrefab
       value: 
       objectReference: {fileID: 1949228901}
+    - target: {fileID: 3299673889596440561, guid: ab88db3bdfe6ce91b92a44906fb297b8,
+        type: 3}
+      propertyPath: audioClips.sfxTypewriter
+      value: 
+      objectReference: {fileID: 8300000, guid: 28c78a651100df1cea783ae402a74437, type: 3}
     - target: {fileID: 3299673889596440563, guid: ab88db3bdfe6ce91b92a44906fb297b8,
         type: 3}
       propertyPath: m_RootOrder
