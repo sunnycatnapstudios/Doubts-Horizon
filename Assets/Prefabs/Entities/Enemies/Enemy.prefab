@@ -298,8 +298,10 @@ MonoBehaviour:
   pathDist: {x: 2, y: 3}
   enemyAnim: {fileID: 0}
   spriteState: {fileID: 0}
-  overworldUI: {fileID: 0}
-  combatUI: {fileID: 0}
+  overworldUI: {fileID: 3427452267074805739, guid: 724c167e3609f25d1a7884ba2bcdce4b,
+    type: 3}
+  combatUI: {fileID: 7901107716330422353, guid: 2c91fd78c8bd94749ba7e8180dd49d56,
+    type: 3}
 --- !u!212 &6497700935085715811
 SpriteRenderer:
   m_ObjectHideFlags: 0
