@@ -57,6 +57,7 @@ public class BattleUiHandler : MonoBehaviour {
         [HideInInspector] public AudioClip oldAmbience; // Use to swap back to old scene
         [HideInInspector] public AudioClip oldMusic; // Use to swap back to old scene
         public AudioClip sfxBell;
+        public AudioClip sfxSwing;
         public AudioClip uiSelect;
         public AudioClip uiOpenDrawer;
         public AudioClip uiCloseDrawer;
@@ -232,6 +233,7 @@ public class BattleUiHandler : MonoBehaviour {
         if (selectedAction == "Attack") {
             int playerDamage = (int)Random.Range(player.Attack * .8f, player.Attack * 1.6f);
             enemyStats.Health -= playerDamage;
+            AudioManager.Instance.PlayUiSound(audioClips.sfxSwing);
             Debug.Log($"{player.Name} attacks {enemyStats.Name} for {playerDamage} damage!");
 
             ShowFloatingText(playerDamage, Color.red, (enemySlot.transform.position + (new Vector3(-80f, 0f, 0f))),

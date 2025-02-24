@@ -1881,13 +1881,14 @@ MonoBehaviour:
   enemyName: {fileID: 7901107716246076664}
   damageButtonText: {fileID: 8117628085070202529}
   audioClips:
-    battleMusic: {fileID: 8300000, guid: 32bf3b4052153f15aaae718c6ff2a8ba, type: 3}
+    battleMusic: {fileID: 8300000, guid: ba2ddd2007028223283c97b5b2f0f8a2, type: 3}
     oldAmbience: {fileID: 0}
     oldMusic: {fileID: 0}
     sfxBell: {fileID: 8300000, guid: a6bc35b0ac6c5da2b9d9c7062b2506d5, type: 3}
-    uiSelect: {fileID: 0}
-    uiOpenDrawer: {fileID: 0}
-    uiCloseDrawer: {fileID: 0}
+    sfxSwing: {fileID: 8300000, guid: f15b3ee17ec6cf8db80210662608d733, type: 3}
+    uiSelect: {fileID: 8300000, guid: 81a93b2ed86f6cd288ed4aa160ed756d, type: 3}
+    uiOpenDrawer: {fileID: 8300000, guid: b4039f555a91f4e238eac4e0df62d358, type: 3}
+    uiCloseDrawer: {fileID: 8300000, guid: e8dfa48a4940222b688da4e87608586e, type: 3}
 --- !u!114 &7901107716330422356
 MonoBehaviour:
   m_ObjectHideFlags: 0

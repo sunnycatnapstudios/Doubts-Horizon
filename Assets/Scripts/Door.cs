@@ -1,12 +1,20 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Door : MonoBehaviour {
-    AudioSource audioSource;
     Player player;
     [HideInInspector] public SpriteRenderer spriteRenderer;
-    [SerializeField] AudioClip closeAudio, lockedAudio, openAudio, unlockAudio;
+    [Serializable]
+    private struct AudioClips {
+        public AudioClip sfxLocked;
+        public AudioClip sfxUnlock;
+        public AudioClip sfxOpen;
+        public AudioClip sfxClose;
+    }
+
+    [SerializeField] private AudioClips audioClips;
     bool interactable = false;
 
     public Sprite closed, open;
@@ -15,7 +23,6 @@ public class Door : MonoBehaviour {
     // Start is called before the first frame update
     void Start() {
         spriteRenderer = GetComponent<SpriteRenderer>();
-        audioSource = gameObject.AddComponent<AudioSource>();
         player = GameObject.FindWithTag("Player").GetComponent<Player>();
         if (isOpen) {
             Open();
@@ -49,7 +56,7 @@ public class Door : MonoBehaviour {
                 player.inventory.removeItemByName("Key");
             } else {
                 Debug.Log(GetHashCode().ToString() + ": locked");
-                audioSource.PlayOneShot(lockedAudio);
+                AudioManager.Instance.PlaySound(audioClips.sfxLocked);
             }
         } else {
             if (isOpen) {
@@ -66,7 +73,7 @@ public class Door : MonoBehaviour {
         isOpen = false;
         this.gameObject.layer = LayerMask.NameToLayer("Can't Traverse");
         if (interactable) {
-            audioSource.PlayOneShot(closeAudio);
+            AudioManager.Instance.PlaySound(audioClips.sfxClose);
         }
     }
 
@@ -75,7 +82,7 @@ public class Door : MonoBehaviour {
         spriteRenderer.sprite = open;
         isOpen = true;
         this.gameObject.layer = LayerMask.NameToLayer("Default");
-        audioSource.PlayOneShot(openAudio);
+        AudioManager.Instance.PlaySound(audioClips.sfxOpen);
     }
 
     void Lock() {
@@ -86,7 +93,7 @@ public class Door : MonoBehaviour {
     void Unlock() {
         Debug.Log(GetHashCode().ToString() + ": unlock");
         isLocked = false;
-        audioSource.PlayOneShot(unlockAudio);
+        AudioManager.Instance.PlaySound(audioClips.sfxUnlock);
     }
 }
 

@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -32,6 +34,13 @@ public class Enemy : MonoBehaviour {
 
     public GameObject overworldUI, combatUI;
 
+    private bool playSpottedSfx = true;
+    [Serializable]
+    private struct AudioClips {
+        public AudioClip sfxSpotted;
+    }
+
+    [SerializeField] private AudioClips audioClips;
 
     void Start() {
         startPos = transform.position;
@@ -185,6 +194,10 @@ public class Enemy : MonoBehaviour {
 
         if (playerDist <= detectRange || attack && !stun) {
             // Attack Player // Will be changed later to account for pathfinding
+            if (playSpottedSfx) {
+                playSpottedSfx = false;
+                AudioManager.Instance.PlaySound(audioClips.sfxSpotted);
+            }
 
             if (!demotestFreeze) {
                 transform.position =
@@ -238,6 +251,7 @@ public class Enemy : MonoBehaviour {
                 searching = false;
             }
         } else if (!demotestFreeze) {
+            playSpottedSfx = true;
             EnemyPatrol();
         } // Enemy Idle Movement Path
 
