@@ -48,7 +48,7 @@ public class InteractPrompt : MonoBehaviour {
         Gizmos.DrawWireSphere(transform.position, interactRange);
     }
 
-    // public void PopUp(string text)
+    // public void PopUp(string text) 
     // {
     //     if (currentPopUp){
     //         popUpText.text = text;
