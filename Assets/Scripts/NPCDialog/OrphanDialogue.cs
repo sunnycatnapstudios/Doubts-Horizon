@@ -25,7 +25,7 @@ public class OrphanDialogue : MonoBehaviour {
             "Mommy?!",
             "... *sobs*",
             "I can't find my mommy.",
-            $"Can you<link=\"{takeMeTag}\"><b><#d4af37>help me</color></b></link>"
+            $"Can you <link=\"{takeMeTag}\"><b><#d4af37>help me</color></b></link>"
         };
 
         npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
