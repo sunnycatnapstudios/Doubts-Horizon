@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class InteractPrompt : MonoBehaviour {
     public LayerMask playerLayer;
-    public Player player;
+    private Player player;
     private float interactRange = 1.5f;
     int interactCount = 0;
 
@@ -101,6 +101,10 @@ public class InteractPrompt : MonoBehaviour {
     IEnumerator DeactivateAfterDelay(float delay) {
         yield return new WaitForSeconds(delay);
         // charProfile.sprite = null;
+    }
+
+    void Awake() {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
 
     void Start() {
