@@ -21,13 +21,6 @@ public class BFFDialogue : MonoBehaviour {
         };
         dialogueInputHandler.AddDialogueChoice(takeMeTag, takeMe);
 
-        string orNotTag = "Or not";
-        Action orNot = () => {
-            Debug.Log("Or not callback.");
-            Destroy(gameObject);
-        };
-        dialogueInputHandler.AddDialogueChoice(orNotTag, orNot);
-
         npcDialogueHandler.dialogueLines = new List<string> {
             "Oh good, you're okay too.",
             "That was some crazy storm..",
