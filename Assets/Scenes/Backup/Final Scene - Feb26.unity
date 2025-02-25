@@ -64487,6 +64487,16 @@ PrefabInstance:
       objectReference: {fileID: 7251264089722215375}
     - target: {fileID: 6497700935085715838, guid: df773ca1892821b36ae70caa58921358,
         type: 3}
+      propertyPath: baseRange
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6497700935085715838, guid: df773ca1892821b36ae70caa58921358,
+        type: 3}
+      propertyPath: detectRange
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6497700935085715838, guid: df773ca1892821b36ae70caa58921358,
+        type: 3}
       propertyPath: overworldUI
       value: 
       objectReference: {fileID: 7866711809216641441}
@@ -76261,9 +76271,24 @@ PrefabInstance:
       objectReference: {fileID: 7251264089722215375}
     - target: {fileID: 6497700935085715838, guid: df773ca1892821b36ae70caa58921358,
         type: 3}
+      propertyPath: baseRange
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 6497700935085715838, guid: df773ca1892821b36ae70caa58921358,
+        type: 3}
+      propertyPath: detectRange
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6497700935085715838, guid: df773ca1892821b36ae70caa58921358,
+        type: 3}
       propertyPath: overworldUI
       value: 
       objectReference: {fileID: 7866711809216641441}
+    - target: {fileID: 6497700935085715838, guid: df773ca1892821b36ae70caa58921358,
+        type: 3}
+      propertyPath: pursueRange
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df773ca1892821b36ae70caa58921358, type: 3}
 --- !u!1 &1225495711
@@ -77047,6 +77072,16 @@ PrefabInstance:
       propertyPath: combatUI
       value: 
       objectReference: {fileID: 7251264089722215375}
+    - target: {fileID: 6497700935085715838, guid: df773ca1892821b36ae70caa58921358,
+        type: 3}
+      propertyPath: baseRange
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 6497700935085715838, guid: df773ca1892821b36ae70caa58921358,
+        type: 3}
+      propertyPath: detectRange
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 6497700935085715838, guid: df773ca1892821b36ae70caa58921358,
         type: 3}
       propertyPath: overworldUI
