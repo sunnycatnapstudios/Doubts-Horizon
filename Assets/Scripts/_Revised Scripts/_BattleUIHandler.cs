@@ -68,6 +68,8 @@ public class _BattleUIHandler : MonoBehaviour
 
         gameStatsManager = GameStatsManager.Instance;
         _partyManager = gameStatsManager._partyManager;
+        
+        currentEnemies = new List<CharacterStats>(gameStatsManager.L1Enemies.Values);
     }
     void Start()
     {
@@ -103,7 +105,6 @@ public class _BattleUIHandler : MonoBehaviour
             // if (combatUI != null && overworldUI != null && enemySlot != null) {break;}
         }
 
-        currentEnemies = new List<CharacterStats>(gameStatsManager.L1Enemies.Values);
         Debug.Log("MAKE SURE TO IMPLEMENT A METHOD FOR ENEMIES TO ASSIGN SPECIFIC LOCATIONS TO SPECIFIC ENEMY LISTS");
     }
 
@@ -260,7 +261,9 @@ public class _BattleUIHandler : MonoBehaviour
                     obj.SetActive(false);
                 }
             }
-            enemyUIAnimator = GameObject.Find("Simple Enemy").GetComponent<Animator>();
+
+            GameObject simpleUIAnimator = GameObject.FindGameObjectWithTag("Simple Enemy");
+            enemyUIAnimator = simpleUIAnimator.GetComponent<Animator>();
             enemyUIAnimator.updateMode = AnimatorUpdateMode.UnscaledTime;
             enemyUIAnimator.Play($"{enemyStats.Name} Idle");
         }

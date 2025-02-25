@@ -69,7 +69,7 @@ public class Player : MonoBehaviour
 
     void Awake()
     {
-        _partyManager = GameStatsManager.Instance._partyManager;
+        
     }
     void Start()
     {
@@ -78,6 +78,8 @@ public class Player : MonoBehaviour
         walkAudi = GetComponent<AudioSource>();
         inventory = GetComponent<Inventory>();
         partyManager = GetComponent<PartyManager>();
+
+        _partyManager = GameStatsManager.Instance._partyManager;
 
         // // Sets Up Variables to prevent confusion
         // moveSpeed = 5f; sprintConstant = 1.7f; sneakConstant = .5f; movementInputDelay = .1f;
