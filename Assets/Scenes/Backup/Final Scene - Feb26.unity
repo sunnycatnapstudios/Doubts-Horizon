@@ -41936,7 +41936,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 420c9a8359960064991821d89a55275c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objects: []
+  objects:
+  - {fileID: 2082559088}
+  - {fileID: 1279383441}
   positionSpawn: {x: 140, y: 4, z: 0}
 --- !u!224 &738415355
 RectTransform:
