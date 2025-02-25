@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JoinerDialogue : MonoBehaviour {
+public class SaveeDialogue : MonoBehaviour {
     private DialogueInputHandler dialogueInputHandler;
     private NPCDialogueHandler npcDialogueHandler;
     public Survivor survivor;
