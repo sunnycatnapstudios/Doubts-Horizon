@@ -93736,11 +93736,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2082559088}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 737bdf039704b05c291b390f115f0cb0, type: 3}
+  m_Script: {fileID: 11500000, guid: 5756b15092f3e6f469d69c32fc1f66e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dialogueLines: []
-  Survivor: {fileID: 11400000, guid: c264d9f0cfa3ffe45bacd2971f275c63, type: 2}
+  survivor: {fileID: 11400000, guid: c264d9f0cfa3ffe45bacd2971f275c63, type: 2}
 --- !u!114 &2082559091
 MonoBehaviour:
   m_ObjectHideFlags: 0

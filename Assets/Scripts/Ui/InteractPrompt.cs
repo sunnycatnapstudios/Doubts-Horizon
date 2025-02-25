@@ -132,6 +132,40 @@ public class InteractPrompt : MonoBehaviour {
         // }
     }
 
+    public void forceDialogueEnd() {
+        interactCount++;
+        if (CompareTag("Interactable")) {
+            AudioManager.Instance.PlayUiSound(audioClips.sfxOnInteract);
+            Debug.Log($"YEP, YOU'VE TAPPED {this.name} {interactCount} TIMES!!!");
+        } else if (CompareTag("NPC")) {
+            // Debug.Log($"Dialogue Interacted with {interactCount} times");
+            if (!isDialogueOpen && !bodyTypeWriter.isTyping) {
+                nameText.text = this.name;
+                // isDialogueOpen = true;
+                charProfile.sprite = characterProfile;
+                npcDialogueHandler.ResetDialogue();
+                string nextLine = npcDialogueHandler.GetNextLine();
+
+                if (nextLine != null) {
+                    OpenDialogue(nextLine);
+                    dialogueFinished = false;
+                }
+            } else if (!bodyTypeWriter.isTyping && !bodyTypeWriter.hasStartedTyping) {
+                string nextLine = npcDialogueHandler.GetNextLine();
+
+                if (nextLine != null) {
+                    UpdateDialogue(nextLine);
+                } else {
+                    CloseDialogue();
+                    Debug.Log("Finished Dialogue Segment");
+                    dialogueFinished = true;
+                }
+            }
+        }
+
+
+    }
+
     void Update() {
         bool playerInRange = Physics2D.OverlapCircle(transform.position, interactRange, playerLayer);
 
