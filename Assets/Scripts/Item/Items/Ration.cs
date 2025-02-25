@@ -4,7 +4,7 @@ using UnityEngine;
 
 [CreateAssetMenu]
 
-public class Ration : Item,UsableInInventory
+public class Ration : Item
 {
     public Pickupable ration;
     public Sprite Sprite;
@@ -34,11 +34,11 @@ public class Ration : Item,UsableInInventory
     {
         
     }
-    public override bool UsableInInventory() => true;
-    public void UseOnMember(Survivor survivor) {
-        survivor.Fed = true;
+    public override bool UsableInInventory() => false;
+    //public void UseOnMember(Survivor survivor) {
+    //    survivor.Fed = true;
 
-    }
+    //}
     // Start is called before the first frame update
 
 }

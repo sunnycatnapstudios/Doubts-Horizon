@@ -148,7 +148,7 @@ public class UIInventory : MonoBehaviour
         Survivor held = member.GetMember();
         if (held != null)
         {
-            descriptionUI.SetDescription(held.GetName(), held.GetHealth().ToString());
+            descriptionUI.SetDescription(held.GetName(), held.CurHealth.ToString()+"/"+held.GetHealth().ToString());
             ClearSelected();
             member.Selected();
             Debug.Log("here????");

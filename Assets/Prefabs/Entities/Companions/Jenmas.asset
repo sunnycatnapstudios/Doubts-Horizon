@@ -16,6 +16,7 @@ MonoBehaviour:
   damage: 43
   health: 334
   isCombatant: 1
+  unKickable: 0
   Animcontroller: {fileID: 9100000, guid: 4114f537b7ab6d04b9e5a76a756ae683, type: 2}
   Sprite: {fileID: 9059487470431131927, guid: ab2fb4d632829cc428952cc52fd902c8, type: 3}
   walkingSprite: {fileID: 0}
