@@ -25,7 +25,6 @@ public class TypeWriter : MonoBehaviour {
         _tmpProText.text = "";
         if (isTyping) StopAllCoroutines();
         writer = newText;
-        StartCoroutine("TypeWriterTMP");
     }
 
     IEnumerator TypeWriterTMP() {
