@@ -11,7 +11,7 @@ public class fireplace : MonoBehaviour
     private bool isActive;
     private GameObject player;
     private PartyManager partyManager;
-
+    GameObject[] followers;
 
     public Dictionary<string, GameObject> possibleNpcs;
     // Start is called before the first frame update
@@ -20,11 +20,20 @@ public class fireplace : MonoBehaviour
         partyManager = player.GetComponent<PartyManager>();
     }
 
+    public GameObject[] getFollowers() {
+        return followers;
+    }
+
     // Update is called once per frame
     private void OnTriggerEnter2D(Collider2D other) {
         
         SpawnMembers();
-        
+       followers = GameObject.FindGameObjectsWithTag("Followers");
+        foreach (GameObject follower in followers) {
+            //follower.SetActive(false);
+            follower.GetComponent<SpriteRenderer>().enabled = false;
+
+        }
     }
 
     private void SpawnMembers() {
