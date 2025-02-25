@@ -351,6 +351,8 @@ public class _BattleUIHandler : MonoBehaviour
 
         }
     }
+    private bool runningAnimation = false;
+
     void SpawnDefendIndicator(CharacterStats player)
     {
         PartySlot targetSlot = partySlotHandler.partySlots.Find(slot => slot.playerStats == player);
@@ -367,10 +369,20 @@ public class _BattleUIHandler : MonoBehaviour
             defendIndicator.localScale = Vector3.zero;
             defendIndicator.anchoredPosition = targetPos;
 
-            StartCoroutine(ZoomIntoFrame(defendIndicator, targetPos, 0.5f));
+            StartCoroutine(WaitForAnimationAndPlay(() => ZoomIntoFrame(defendIndicator, targetPos, 0.5f)));
         }
-        else {Debug.LogWarning("No matching party slot");}
+        else { Debug.LogWarning("No matching party slot"); }
     }
+
+    IEnumerator WaitForAnimationAndPlay(Func<IEnumerator> newAnimation)
+    {
+        while (runningAnimation) yield return null; // Wait if an animation is running
+
+        runningAnimation = true;
+        yield return StartCoroutine(newAnimation()); // Run the new animation
+        runningAnimation = false;
+    }
+
     IEnumerator ZoomIntoFrame(RectTransform indicator, Vector2 targetAnchoredPosition, float duration)
     {
         Vector3 startScale = Vector3.zero;
@@ -385,53 +397,58 @@ public class _BattleUIHandler : MonoBehaviour
         while (elapsed < duration)
         {
             elapsed += Time.unscaledDeltaTime;
-            float t = elapsed / duration;
-
-            // Apply ease-out-back style overshoot curve
-            t = Mathf.SmoothStep(0, 1, t);
+            float t = Mathf.SmoothStep(0, 1, elapsed / duration);
 
             indicator.localScale = Vector3.Lerp(startScale, endScale, t);
 
-            // First move towards the overshoot position
-            if (t < 0.7f) 
+            if (t < 0.7f)
                 indicator.anchoredPosition = Vector2.Lerp(startPos, overshootPos, t / 0.7f);
-            else 
+            else
                 indicator.anchoredPosition = Vector2.Lerp(overshootPos, endPos, (t - 0.7f) / 0.3f);
 
             yield return null;
         }
 
-        // Ensure it lands precisely at the end position
         indicator.localScale = endScale;
         indicator.anchoredPosition = endPos;
         
         defendIndicator.GetComponent<DefendIndicator>().inAnimation = false;
     }
+
     IEnumerator ShakeDefendIndicator(float duration, float strength)
     {
-        defendIndicator.GetComponent<DefendIndicator>().inAnimation = true;
+        yield return StartCoroutine(WaitForAnimationAndPlay(() => ShakeDefendInternal(duration, strength)));
+    }
 
+    IEnumerator ShakeDefendInternal(float duration, float strength)
+    {
+        defendIndicator.GetComponent<DefendIndicator>().inAnimation = true;
         Vector2 startPos = defendIndicator.anchoredPosition;
         float elapsedTime = 0f;
 
         while (elapsedTime < duration)
         {
-            float jutterAmount = Mathf.Sin(elapsedTime * 30f) * strength;  // Small oscillations
-            defendIndicator.anchoredPosition = startPos + new Vector2(jutterAmount, 0f); // Jutter left/right
+            float jitterAmount = Mathf.Sin(elapsedTime * 30f) * strength;
+            defendIndicator.anchoredPosition = startPos + new Vector2(jitterAmount, 0f);
 
             elapsedTime += Time.unscaledDeltaTime;
-            yield return null; // Wait for next frame
+            yield return null;
         }
 
-        defendIndicator.anchoredPosition = startPos; // Return to original position after jutter
-        
+        defendIndicator.anchoredPosition = startPos;
         defendIndicator.GetComponent<DefendIndicator>().inAnimation = false;
     }
+
     IEnumerator DestroyDefend()
     {
+        yield return StartCoroutine(WaitForAnimationAndPlay(() => DestroyDefendInternal()));
+    }
+
+    IEnumerator DestroyDefendInternal()
+    {
         defendIndicator.GetComponent<DefendIndicator>().inAnimation = true;
-        float jitterDuration = 0.3f;
-        float expandDuration = 0.5f;
+        float jitterDuration = 0.1f;
+        float expandDuration = 0.3f;
         float jitterAmount = 3f;
         float elapsed = 0f;
 
@@ -451,23 +468,22 @@ public class _BattleUIHandler : MonoBehaviour
         Vector2 originalScale = defendIndicator.sizeDelta;
         Vector2 alteredScale = new Vector2(150, 150);
 
-        // Expand and fade out
         while (elapsed < expandDuration)
         {
             elapsed += Time.unscaledDeltaTime;
             float t = elapsed / expandDuration;
             
-            // Scale up
             defendIndicator.sizeDelta = Vector3.Lerp(originalScale, alteredScale, t);
             
-            // Fade out
             Color color = defendIndicator.GetComponent<Image>().color;
             color.a = Mathf.Lerp(1f, 0f, t);
             defendIndicator.GetComponent<Image>().color = color;
             
             yield return null;
         }
-        defendIndicator.SetParent(partyUIAnimator.transform, false); defendIndicator.SetSiblingIndex(0);
+        
+        defendIndicator.SetParent(partyUIAnimator.transform, false);
+        defendIndicator.SetSiblingIndex(0);
         defendIndicator.anchoredPosition = new Vector2(-2000, 48);
         defendIndicator.GetComponent<Image>().color = Color.white;
         defendIndicator.GetComponent<DefendIndicator>().inAnimation = false;

@@ -98,7 +98,7 @@ public class _PartyManager : MonoBehaviour
     
     public void Awake()
     {
-        gameStatsManager = GameStatsManager.Instance;
+    //     gameStatsManager = GameStatsManager.Instance;
 
         // partySideBar = GameObject.FindWithTag("PartySidebar").GetComponent<PartySideBar>();
         
@@ -106,6 +106,7 @@ public class _PartyManager : MonoBehaviour
     }
     void Start()
     {
+        gameStatsManager = GameStatsManager.Instance;
         GameObject player = GameObject.FindWithTag("Player");
         partyMemberTemplate = player.GetComponentInChildren<Follower>().gameObject;
         
