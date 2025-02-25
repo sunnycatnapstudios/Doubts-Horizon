@@ -68,6 +68,14 @@ public class Inventory : MonoBehaviour {
         return inventory.ContainsKey(name);
     }
 
+    public int getCountofItem(string name) {
+        if (inventory.ContainsKey(name)) {
+            return inventory[name].getCount();
+        }
+        Debug.Log(inventory.ToString());
+        return 0;
+    }
+
     public void removeItemByName(string name) {
         Debug.Log("removing " + name);
         Slot slot = inventory[name];
