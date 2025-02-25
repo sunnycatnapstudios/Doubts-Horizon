@@ -48,7 +48,7 @@ public class InteractPrompt : MonoBehaviour {
         Gizmos.DrawWireSphere(transform.position, interactRange);
     }
 
-    // public void PopUp(string text) 
+    // public void PopUp(string text)
     // {
     //     if (currentPopUp){
     //         popUpText.text = text;
@@ -57,6 +57,8 @@ public class InteractPrompt : MonoBehaviour {
     // }
 
     void OpenDialogue(string text) {
+        AudioManager.Instance.PlayUiSound(audioClips.sfxTypewriter);    // TODO temp solution
+
         // dialogueBox.SetActive(true);
         bodyTypeWriter.skipTyping = false;
         dialogueAnimator.SetTrigger("SlideIn");
@@ -74,6 +76,8 @@ public class InteractPrompt : MonoBehaviour {
     }
 
     void UpdateDialogue(string text) {
+        AudioManager.Instance.PlayUiSound(audioClips.sfxTypewriter);        // TODO temp solution
+
         bodyTypeWriter.skipTyping = false;
         bodyTypeWriter.hasStartedTyping = true;
         if (bodyTypeWriter != null) {
@@ -118,7 +122,7 @@ public class InteractPrompt : MonoBehaviour {
 
             // nameTypeWriter = nameText.GetComponent<TypeWriter>();
             bodyTypeWriter = dialogueText.GetComponent<TypeWriter>();
-            bodyTypeWriter.SetSfxTyping(audioClips.sfxTypewriter);
+            bodyTypeWriter.SetSfxTyping(audioClips.sfxTypewriter);  // TODO NO LONGERS WORKS?
 
             screenPanelAnimator = GameObject.FindGameObjectWithTag("Dark Screen").GetComponent<Animator>();
             screenPanelAnimator.Play("Blank");
@@ -135,7 +139,6 @@ public class InteractPrompt : MonoBehaviour {
     public void forceDialogueEnd() {
         interactCount++;
         if (CompareTag("Interactable")) {
-            AudioManager.Instance.PlayUiSound(audioClips.sfxOnInteract);
             Debug.Log($"YEP, YOU'VE TAPPED {this.name} {interactCount} TIMES!!!");
         } else if (CompareTag("NPC")) {
             // Debug.Log($"Dialogue Interacted with {interactCount} times");
