@@ -20,7 +20,7 @@ public class PartySlotHandler : MonoBehaviour
 
     private Vector2 baseRectSize = new Vector2(430, 130);
     private Vector2 baseRectPosition = new Vector2(-215, 65);
-    public float sizeIncrement = 50f;
+    
     
     void OnEnable()
     {
@@ -84,11 +84,15 @@ public class PartySlotHandler : MonoBehaviour
         // Update layout based on new slot count
         AdjustSize(slotCount);
     }
-    public void AdjustSize(int childCount)
+    public void AdjustSize(int slotcount)
     {
-        horizRectTransform.sizeDelta = new Vector2(childCount*108, baseRectSize.y);
-        horizRectTransform.anchoredPosition = new Vector2(baseRectPosition.x+1000, baseRectPosition.y);
-        Debug.Log("Adjusting size with child count: " + childCount);
+        if (slotcount > 4) {
+            horizRectTransform.sizeDelta = new Vector2(slotcount*108, baseRectSize.y);
+            horizRectTransform.anchoredPosition = new Vector2(baseRectPosition.x+1000, baseRectPosition.y);
+        } else {
+            horizRectTransform.sizeDelta = new Vector2(100, baseRectSize.y);
+            horizRectTransform.anchoredPosition = new Vector2(baseRectPosition.x+1000, baseRectPosition.y);
+        }
     }
 
     public int GetPlayerIndex(CharacterStats player)
@@ -102,16 +106,18 @@ public class PartySlotHandler : MonoBehaviour
         }
         return -1;  // Player not found
     }
-    public void MoveToActivePlayer(CharacterStats activePlayer)
+    public void MoveToActivePlayer(CharacterStats activePlayer, bool enemyAttacking)
     {
         int playerIndex = GetPlayerIndex(activePlayer);
         if (playerIndex != -1 && scrollbar != null)
         {
             float targetPosition = Mathf.Clamp01((float)playerIndex / (playerParty.Count - 1));
             StartCoroutine(SmoothScroll(targetPosition, .3f));
+            if (!enemyAttacking) {
+                StartCoroutine(BobSlot(partySlots[playerIndex].GetComponentInChildren<Image>().transform.GetComponent<RectTransform>(), 20f, 0.25f));
+            }
         }
     }
-
     private IEnumerator SmoothScroll(float targetValue, float duration)
     {
         float startValue = scrollbar.value;
@@ -128,6 +134,25 @@ public class PartySlotHandler : MonoBehaviour
         }
 
         scrollbar.value = targetValue;
+    }
+    private IEnumerator BobSlot(RectTransform slot, float bobHeight, float duration)
+    {
+        Vector2 startPosition = slot.anchoredPosition;
+        float time = 0f;
+
+        yield return new WaitForSecondsRealtime(.3f);
+
+        while (time < duration)
+        {
+            time += Time.unscaledDeltaTime;
+            float t = time / duration;
+            float offset = Mathf.Sin(t * Mathf.PI) * bobHeight;
+
+            slot.anchoredPosition = startPosition + new Vector2(0, offset);
+            yield return null;
+        }
+
+        slot.anchoredPosition = startPosition;
     }
 
     void Update()

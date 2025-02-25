@@ -455,7 +455,7 @@ public class _BattleUIHandler : MonoBehaviour
     private IEnumerator PlayerTurn(CharacterStats player)
     {
         Debug.Log($"{player.Name}'s turn. Choose an action!");
-        partySlotHandler.MoveToActivePlayer(player);
+        partySlotHandler.MoveToActivePlayer(player, false);
 
         selectedAction = null;
         while (selectedAction == null)
@@ -494,13 +494,18 @@ public class _BattleUIHandler : MonoBehaviour
                     currentDefender = player;
                     SpawnDefendIndicator(player);
                     Debug.Log($"{player.Name} chose to defend the Party!!!");
+                    canSelect = false;
                 }
                 else 
                 {
                     StartCoroutine(ShakeDefendIndicator(Random.Range(.2f, .4f), Random.Range(20f, 30f)));
                     Debug.Log("There's already someone defending :(");
+
+                    selectedAction = null;
+                    selectedTarget = null;
+                    continue;
                 }
-                selectedTarget = player.Name;
+                // selectedTarget = player.Name;
             }
             else if (selectedAction == "Heal")
             {
@@ -509,22 +514,9 @@ public class _BattleUIHandler : MonoBehaviour
                 if (player.isCombatant)  {healAmount = (1+(60 - player.attack)/60)*(Random.Range(20, 40));}
                 else {healAmount = Random.Range(20, 40);}
 
-                if (selectedTarget == player.Name) {healAmount/=2; Debug.Log("Pretty greedy to try healing yourself");}
+                if (selectedTarget == player.Name) {healAmount=(int)(healAmount*.666f); Debug.Log("Pretty greedy to try healing yourself");}
                 healTarget.currentHealth += healAmount;
 
-                // foreach (GameObject mem in partySlots)
-                // {
-                //     if (mem.GetComponent<PartySlot>().Name == healTarget.Name)
-                //     {
-                //         if (healTarget.currentHealth > mem.GetComponent<PartySlot>().maxHealth)
-                //         {
-                //             healTarget.currentHealth = (int)mem.GetComponent<PartySlot>().maxHealth;
-                //         }
-                //         mem.GetComponent<PartySlot>().UpdateHealthBar(healTarget.currentHealth);
-                //         mem.GetComponent<PartySlot>().ShowHealthChange();
-                //         ShowFloatingText(healAmount, Color.green, mem.transform.position, true);
-                //     }
-                // }
                 foreach (PartySlot mem in partySlotHandler.partySlots)
                 {
                     if (mem.playerStats.Name == healTarget.Name)
@@ -539,9 +531,8 @@ public class _BattleUIHandler : MonoBehaviour
                 }
 
                 Debug.Log($"{selectedTarget} was healed by {player.Name} for {healAmount} HP!");
+                canSelect = false;
             }
-
-            canSelect = false;
             break; // Move forward in the turn after completing Heal/Defend
         }
 
@@ -565,12 +556,6 @@ public class _BattleUIHandler : MonoBehaviour
         }
 
         enemySlot.GetComponent<EnemyHealthbar>().UpdateHealthBar(currentEnemyCurrentHealth);
-        // foreach (GameObject mem in partySlots) {
-        //     if (mem.GetComponent<PartySlot>().Name == player.Name) {mem.GetComponent<PartySlot>().UpdateHealthBar(player.currentHealth);}
-        // }
-        // foreach (PartySlot mem in partySlotHandler.partyslots) {
-        //     if (mem.playerStats.Name == player.Name)
-        // }
 
         Debug.Log($"Player chose {selectedAction}");
         yield return new WaitForSecondsRealtime(.5f);
@@ -584,7 +569,7 @@ public class _BattleUIHandler : MonoBehaviour
         if (playerParty.Count > 0)
         {
             CharacterStats target = playerParty[Random.Range(0, playerParty.Count)];
-            partySlotHandler.MoveToActivePlayer(target);
+            partySlotHandler.MoveToActivePlayer(target, true);
             int enemyDamage = (int)Random.Range(enemy.attack * 0.6f, enemy.attack * 1.2f);
 
             if (currentDefender != null && currentDefender != target) // If there's an active defender
@@ -667,16 +652,6 @@ public class _BattleUIHandler : MonoBehaviour
                 target.currentHealth -= enemyDamage;
                 Debug.Log($"{enemy.Name} attacks {target.Name} for {enemyDamage} damage!");
 
-                // foreach (GameObject mem in partySlots)
-                // {
-                //     if (mem.GetComponent<PartySlot>().Name == target.Name)
-                //     {
-                //         mem.GetComponent<PartySlot>().UpdateHealthBar(target.currentHealth);
-                //         mem.GetComponent<PartySlot>().ShowHealthChange();
-                //         ShowFloatingText(enemyDamage, Color.red, mem.transform.position, false);
-                //         StartCoroutine(mem.GetComponent<PartySlot>().JutterHealthBar(0.2f, 10f));
-                //     }
-                // }
                 foreach (PartySlot mem in partySlotHandler.partySlots)
                 {
                     if (mem.playerStats.Name == target.Name)

@@ -27,17 +27,17 @@ public class TurnIndicator : MonoBehaviour
     }
     void OnEnable()
     {
-        StartCoroutine(GetPrefab());
+        // StartCoroutine(GetPrefab());
     }
 
-    IEnumerator GetPrefab()
-    {
-        while (GetComponentInChildren<Image>() == null)
-        {
-            yield return null;
-        }
-        turnImagePrefab = GetComponentInChildren<Image>().gameObject;
-    }
+    // IEnumerator GetPrefab()
+    // {
+    //     while (GetComponentInChildren<Image>() == null)
+    //     {
+    //         yield return null;
+    //     }
+    //     turnImagePrefab = GameObject.Find("TurnIndicator");
+    // }
 
     public void SetupTurnIndicator(int orderCount)
     {
