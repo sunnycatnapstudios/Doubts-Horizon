@@ -15,7 +15,7 @@ public class TypeWriter : MonoBehaviour {
 
     public bool hasStartedTyping = false, isTyping = false, skipTyping = false;
     public float textChirp;
-    private AudioClip _sfxTyping;
+    public AudioClip _sfxTyping;
 
     public void SetSfxTyping(AudioClip clip) {
         _sfxTyping = clip;
@@ -28,6 +28,7 @@ public class TypeWriter : MonoBehaviour {
     }
 
     IEnumerator TypeWriterTMP() {
+
         isTyping = true;
         _tmpProText.text = leadingCharBeforeDelay ? leadingChar : "";
         yield return new WaitForSeconds(delayBeforeStart);
@@ -43,21 +44,24 @@ public class TypeWriter : MonoBehaviour {
             if (writer[i] == '<') {
                 int start = i;
                 while (i < writer.Length) {
-                    ++i;
                     if (writer[i] == '>') {
                         break;
                     }
+                    // this will break if we have two openers '<' in a row
+                    ++i;
                 }
-
-                _tmpProText.text += writer.Substring(start, i - start);
-                if (i >= writer.Length) {
-                    break;
+                if (i < writer.Length) {
+                    _tmpProText.text += writer.Substring(start, i - start);
+                } else {
+                    // Didn't find a real tag
+                    i = start;
                 }
             }
 
             char c = writer[i];
             if (_tmpProText.text.Length > 0) {
                 _tmpProText.text = _tmpProText.text.Substring(0, _tmpProText.text.Length - leadingChar.Length);
+                // TODO null clip?? AudioManager.Instance.PlaySound(_sfxTyping);
             }
 
             _tmpProText.text += c;
@@ -67,7 +71,6 @@ public class TypeWriter : MonoBehaviour {
 
             if (textChirp >= 0.2f) {
                 textChirp = 0f;
-                AudioManager.Instance.PlaySound(_sfxTyping);
             }
 
             yield return new WaitForSeconds(timeBtwChars);

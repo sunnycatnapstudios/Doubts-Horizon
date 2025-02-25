@@ -126,11 +126,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3210b3f07a8829c4b95b4fbd95a29f30, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactRange: 2
+  interactRange: 0.6
   playerLayer:
     serializedVersion: 2
     m_Bits: 2048
-  promptText: e
+  promptText: E
   popUpPrefab: {fileID: 5665048404440187164, guid: 7eeee5a54ca28c54e825d2b0f42c421b,
     type: 3}
   onInteract:

@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 7332034241916929209}
   m_Layer: 0
   m_Name: Follower Template
-  m_TagString: Untagged
+  m_TagString: Followers
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -100,10 +100,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   order: 0
   partyIndex: 0
-  target: {fileID: 0}
   Player: {fileID: 0}
-  newPos: {x: 0, y: 0, z: 0}
+  partyManager: {fileID: 0}
+  followSpeed: 0
   currentPos: {x: 0, y: 0, z: 0}
+  newPos: {x: 0, y: 0, z: 0}
   spriteState: {fileID: 0}
   partyAnim: {fileID: 0}
 --- !u!50 &4072896816711425519
