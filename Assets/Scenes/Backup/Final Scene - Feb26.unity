@@ -22870,6 +22870,7 @@ MonoBehaviour:
   npcDialogueHandler: {fileID: 0}
   audioClips:
     sfxOnInteract: {fileID: 0}
+    sfxTypewriter: {fileID: 0}
 --- !u!212 &181162047
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -23416,6 +23417,7 @@ MonoBehaviour:
   npcDialogueHandler: {fileID: 0}
   audioClips:
     sfxOnInteract: {fileID: 0}
+    sfxTypewriter: {fileID: 0}
 --- !u!212 &271334415
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -24159,6 +24161,7 @@ MonoBehaviour:
   npcDialogueHandler: {fileID: 0}
   audioClips:
     sfxOnInteract: {fileID: 0}
+    sfxTypewriter: {fileID: 0}
 --- !u!212 &459218824
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -24367,9 +24370,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Enemy: {fileID: 1172916556}
   Alert: {fileID: 0}
-  alertAudi: {fileID: 0}
   playCount: 0
   animPlayCount: 0
+  audioClips:
+    sfxSpotted: {fileID: 0}
 --- !u!95 &459476180
 Animator:
   serializedVersion: 3
@@ -24710,6 +24714,66 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 014b00bdb3c4f5c9ea341e6749883554, type: 3}
+--- !u!1 &519318379
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 519318380}
+  - component: {fileID: 519318381}
+  m_Layer: 0
+  m_Name: PartyManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &519318380
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519318379}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1151231024}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &519318381
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 519318379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02a092b472cf4a14caf6bbf903178557, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  partyCount: 0
+  partyMemberTemplate: {fileID: 0}
+  partyAnimControllers:
+  - {fileID: 9100000, guid: b7ebaf1ad5021b94488991b85cf9c177, type: 2}
+  - {fileID: 9100000, guid: 4114f537b7ab6d04b9e5a76a756ae683, type: 2}
+  - {fileID: 9100000, guid: ffcf3fd7ed2c1024ab6b6aad59d0e314, type: 2}
+  - {fileID: 9100000, guid: 9b454cd6a9bc678428b46c5d51ed0f67, type: 2}
+  - {fileID: 9100000, guid: 9a882ddb0f3cb7b43903c67235503f7e, type: 2}
+  characterProfiles:
+  - {fileID: 6976219667641568234, guid: d068f37a9b8556241a344075120966b1, type: 3}
+  - {fileID: 7285113142106033975, guid: d068f37a9b8556241a344075120966b1, type: 3}
+  - {fileID: 7598356176507770372, guid: d068f37a9b8556241a344075120966b1, type: 3}
+  - {fileID: 2800134929008680334, guid: d068f37a9b8556241a344075120966b1, type: 3}
+  - {fileID: -6880863064677239369, guid: d068f37a9b8556241a344075120966b1, type: 3}
+  - {fileID: 7848933253139272174, guid: d068f37a9b8556241a344075120966b1, type: 3}
+  - {fileID: 21300000, guid: 0de23456a689eaf4489916e58ddf246d, type: 3}
+  partySideBar: {fileID: 0}
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -24822,12 +24886,104 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -12.5, y: 36.199997, z: -10}
+  m_LocalPosition: {x: -12.46, y: 36.2, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &530429463
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 530429464}
+  - component: {fileID: 530429465}
+  m_Layer: 0
+  m_Name: Battle UI Handler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &530429464
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 530429463}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1151231024}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &530429465
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 530429463}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1642aca1da9545146b2785f113e1edb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  partyUIAnimator: {fileID: 0}
+  enemyUIAnimator: {fileID: 0}
+  enemyStatsAnimator: {fileID: 0}
+  actOption: 0
+  itemOption: 0
+  canSelect: 0
+  overworldUI: {fileID: 0}
+  combatUI: {fileID: 0}
+  actOptionBList: {fileID: 0}
+  itemOptionBList: {fileID: 0}
+  enemySlot: {fileID: 0}
+  floatingTextPrefab: {fileID: 0}
+  partySlots:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  battleOrder: []
+  currentTurnIndex: 0
+  currentEnemies: []
+  turnIndicator: {fileID: 0}
+  enemyName: {fileID: 0}
+  damageButtonText: {fileID: 0}
+  selectedAction: 
+  selectedTarget: 
+  enemyStats:
+    Name: 
+    attack: 0
+    currentHealth: 0
+    maxHealth: 0
+    isCombatant: 0
+    isEnemy: 0
+  currentEnemyCurrentHealth: 0
+  currentEnemyMaxHealth: 0
+  playerParty: []
+  floatingText: {fileID: 0}
+  defeatedInCombat: []
+  endCause: 
+  endTurn: 0
+  partySlotHandler: {fileID: 0}
+  defendIndicator: {fileID: 0}
+  audioClips:
+    battleMusic: {fileID: 8300000, guid: 32bf3b4052153f15aaae718c6ff2a8ba, type: 3}
+    oldAmbience: {fileID: 0}
+    oldMusic: {fileID: 0}
+    sfxBell: {fileID: 8300000, guid: a6bc35b0ac6c5da2b9d9c7062b2506d5, type: 3}
+    uiSelected: {fileID: 8300000, guid: 81a93b2ed86f6cd288ed4aa160ed756d, type: 3}
+    uiUnselected: {fileID: 8300000, guid: 81a93b2ed86f6cd288ed4aa160ed756d, type: 3}
+    uiDrawer: {fileID: 8300000, guid: e8dfa48a4940222b688da4e87608586e, type: 3}
 --- !u!1001 &540170946
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -25443,6 +25599,7 @@ MonoBehaviour:
   npcDialogueHandler: {fileID: 0}
   audioClips:
     sfxOnInteract: {fileID: 0}
+    sfxTypewriter: {fileID: 0}
 --- !u!1 &771855557
 GameObject:
   m_ObjectHideFlags: 0
@@ -32655,6 +32812,7 @@ MonoBehaviour:
   npcDialogueHandler: {fileID: 0}
   audioClips:
     sfxOnInteract: {fileID: 0}
+    sfxTypewriter: {fileID: 0}
 --- !u!212 &1047770476
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -33685,6 +33843,65 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1127951114}
   m_CullTransparentMesh: 0
+--- !u!1 &1151231022
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1151231024}
+  - component: {fileID: 1151231023}
+  m_Layer: 0
+  m_Name: GameStatsManager
+  m_TagString: Stats Manager
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1151231023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1151231022}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e13f76435992fce4cbb9b001cfdfd612, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _partyManager: {fileID: 0}
+  _battleUIHandler: {fileID: 0}
+  currentPlayerStats: []
+  currentPartyMembers: []
+  spawnedPartyMembers: []
+  infSprint: 0
+  staminaRecharging: 0
+  sprintLocked: 0
+  isCurrentlySprinting: 0
+  currStamina: 0
+  maxStamina: 100
+  sprintCost: 35
+--- !u!4 &1151231024
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1151231022}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1828662312}
+  - {fileID: 519318380}
+  - {fileID: 530429464}
+  - {fileID: 1595848619}
+  m_Father: {fileID: 0}
+  m_RootOrder: 18
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1162558806
 GameObject:
   m_ObjectHideFlags: 0
@@ -33865,6 +34082,7 @@ MonoBehaviour:
   npcDialogueHandler: {fileID: 0}
   audioClips:
     sfxOnInteract: {fileID: 0}
+    sfxTypewriter: {fileID: 0}
 --- !u!50 &1166367098
 Rigidbody2D:
   serializedVersion: 4
@@ -34034,11 +34252,6 @@ MonoBehaviour:
   demotestFreeze: 0
   enemySpeed: 2
   attackSpeed: 3.5
-  counter_: 0
-  stunTime: 4
-  stunTimer: 0
-  searchTimer: 0
-  intervalCheck: 0.4
   detectRange: 4
   caughtRange: 1
   baseRange: 4
@@ -34047,8 +34260,6 @@ MonoBehaviour:
   playerDist: 0
   refX: 0
   refY: 0
-  startPos: {x: 0, y: 0, z: 0}
-  pathBounds: {x: 0, y: 0, z: 0}
   target: {fileID: 0}
   projectile:
     serializedVersion: 2
@@ -34057,8 +34268,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2048
   pathDist: {x: 2, y: 3}
-  enemyAnim: {fileID: 0}
-  spriteState: {fileID: 0}
   overworldUI: {fileID: 7866711809216641441}
   combatUI: {fileID: 7251264089722215375}
 --- !u!4 &1172916557
@@ -34500,6 +34709,7 @@ MonoBehaviour:
   npcDialogueHandler: {fileID: 0}
   audioClips:
     sfxOnInteract: {fileID: 0}
+    sfxTypewriter: {fileID: 0}
 --- !u!212 &1427184478
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -36091,6 +36301,56 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!1 &1595848618
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1595848619}
+  - component: {fileID: 1595848620}
+  m_Layer: 0
+  m_Name: Dialogue Handler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1595848619
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1595848618}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1151231024}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1595848620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1595848618}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e00919e34356024bb5c5de41e891eff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactPromptPrefab: {fileID: 0}
+  smallDialogueBox: {fileID: 0}
+  NPCLayer:
+    serializedVersion: 2
+    m_Bits: 4096
+  dialogueAnimator: {fileID: 0}
+  darkScreenAnimator: {fileID: 0}
 --- !u!1001 &1699109740
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36416,6 +36676,7 @@ MonoBehaviour:
   npcDialogueHandler: {fileID: 0}
   audioClips:
     sfxOnInteract: {fileID: 0}
+    sfxTypewriter: {fileID: 0}
 --- !u!212 &1818800190
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -36466,6 +36727,51 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1828662311
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1828662312}
+  - component: {fileID: 1828662313}
+  m_Layer: 0
+  m_Name: Intro Handler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1828662312
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1828662311}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1151231024}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1828662313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1828662311}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eeca82b8cd167554593531a684ba227e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  cinematicCamMax: 10
+  cinematicCamMin: 8
 --- !u!1 &1859029247
 GameObject:
   m_ObjectHideFlags: 0
@@ -36935,6 +37241,7 @@ MonoBehaviour:
   npcDialogueHandler: {fileID: 0}
   audioClips:
     sfxOnInteract: {fileID: 0}
+    sfxTypewriter: {fileID: 0}
 --- !u!212 &1887495468
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -37548,6 +37855,7 @@ MonoBehaviour:
   npcDialogueHandler: {fileID: 0}
   audioClips:
     sfxOnInteract: {fileID: 0}
+    sfxTypewriter: {fileID: 0}
 --- !u!212 &2013483584
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -40969,6 +41277,7 @@ MonoBehaviour:
   npcDialogueHandler: {fileID: 0}
   audioClips:
     sfxOnInteract: {fileID: 0}
+    sfxTypewriter: {fileID: 0}
 --- !u!212 &2046889728
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -46569,6 +46878,7 @@ MonoBehaviour:
   npcDialogueHandler: {fileID: 0}
   audioClips:
     sfxOnInteract: {fileID: 0}
+    sfxTypewriter: {fileID: 0}
 --- !u!212 &3299673890537269110
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -46659,6 +46969,7 @@ MonoBehaviour:
   npcDialogueHandler: {fileID: 0}
   audioClips:
     sfxOnInteract: {fileID: 0}
+    sfxTypewriter: {fileID: 0}
 --- !u!61 &3299673890677685201
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -47166,9 +47477,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Enemy: {fileID: 6497700934576521013}
   Alert: {fileID: 0}
-  alertAudi: {fileID: 0}
   playCount: 0
   animPlayCount: 0
+  audioClips:
+    sfxSpotted: {fileID: 0}
 --- !u!212 &6497700934576521000
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -47332,11 +47644,6 @@ MonoBehaviour:
   demotestFreeze: 0
   enemySpeed: 2
   attackSpeed: 3.5
-  counter_: 0
-  stunTime: 4
-  stunTimer: 0
-  searchTimer: 0
-  intervalCheck: 0.4
   detectRange: 4
   caughtRange: 1
   baseRange: 4
@@ -47345,8 +47652,6 @@ MonoBehaviour:
   playerDist: 0
   refX: 0
   refY: 0
-  startPos: {x: 0, y: 0, z: 0}
-  pathBounds: {x: 0, y: 0, z: 0}
   target: {fileID: 0}
   projectile:
     serializedVersion: 2
@@ -47355,8 +47660,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2048
   pathDist: {x: 0, y: 0}
-  enemyAnim: {fileID: 0}
-  spriteState: {fileID: 0}
   overworldUI: {fileID: 7866711809216641441}
   combatUI: {fileID: 7251264089722215375}
 --- !u!222 &7251264088389145945
@@ -49459,9 +49762,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 
   profile: {fileID: 7251264089701365409}
+  playerStats:
+    Name: 
+    attack: 0
+    currentHealth: 0
+    maxHealth: 0
+    isCombatant: 0
+    isEnemy: 0
   healthbarCasing: {fileID: 7251264088458660665}
   healthBarBar: {fileID: 7251264090271665797}
   healthBarTail: {fileID: 7251264088901744703}
+  currentHealth: 0
   maxHealth: 0
   defaultImagePosition: {x: 0, y: 0, z: 0}
   initialBarPosition: {x: 0, y: 0, z: 0}
@@ -50071,6 +50382,7 @@ MonoBehaviour:
     oldAmbience: {fileID: 0}
     oldMusic: {fileID: 0}
     sfxBell: {fileID: 8300000, guid: a6bc35b0ac6c5da2b9d9c7062b2506d5, type: 3}
+    sfxSwing: {fileID: 0}
     uiSelect: {fileID: 8300000, guid: 81a93b2ed86f6cd288ed4aa160ed756d, type: 3}
     uiOpenDrawer: {fileID: 8300000, guid: b4039f555a91f4e238eac4e0df62d358, type: 3}
     uiCloseDrawer: {fileID: 8300000, guid: e8dfa48a4940222b688da4e87608586e, type: 3}
@@ -50105,7 +50417,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turnOrderImages: []
   targetPositions: []
-  moveSpeed: 5
   currentTurnIndex: 0
   isMoving: 0
   BattleUiHandler: {fileID: 7251264089722215383}
@@ -51233,9 +51544,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 
   profile: {fileID: 7251264089079438653}
+  playerStats:
+    Name: 
+    attack: 0
+    currentHealth: 0
+    maxHealth: 0
+    isCombatant: 0
+    isEnemy: 0
   healthbarCasing: {fileID: 7251264089356629841}
   healthBarBar: {fileID: 7251264089592373091}
   healthBarTail: {fileID: 7251264090423319578}
+  currentHealth: 0
   maxHealth: 0
   defaultImagePosition: {x: 0, y: 0, z: 0}
   initialBarPosition: {x: 0, y: 0, z: 0}
@@ -51256,9 +51575,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 
   profile: {fileID: 7251264089839349062}
+  playerStats:
+    Name: 
+    attack: 0
+    currentHealth: 0
+    maxHealth: 0
+    isCombatant: 0
+    isEnemy: 0
   healthbarCasing: {fileID: 7251264089319516177}
   healthBarBar: {fileID: 7251264089740571367}
   healthBarTail: {fileID: 7251264089591055431}
+  currentHealth: 0
   maxHealth: 0
   defaultImagePosition: {x: 0, y: 0, z: 0}
   initialBarPosition: {x: 0, y: 0, z: 0}
@@ -51317,9 +51644,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 
   profile: {fileID: 7251264089130111332}
+  playerStats:
+    Name: 
+    attack: 0
+    currentHealth: 0
+    maxHealth: 0
+    isCombatant: 0
+    isEnemy: 0
   healthbarCasing: {fileID: 7251264089362440583}
   healthBarBar: {fileID: 7251264088713888865}
   healthBarTail: {fileID: 7251264089464132235}
+  currentHealth: 0
   maxHealth: 0
   defaultImagePosition: {x: 0, y: 0, z: 0}
   initialBarPosition: {x: 0, y: 0, z: 0}
@@ -53630,7 +53965,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 21.7
+  m_fontSize: 23.6
   m_fontSizeBase: 26
   m_fontWeight: 400
   m_enableAutoSizing: 1
