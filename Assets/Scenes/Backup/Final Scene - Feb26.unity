@@ -39586,7 +39586,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -144, y: -50, z: -10}
+  m_LocalPosition: {x: -144.7, y: -50.42, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -39622,12 +39622,12 @@ PrefabInstance:
     - target: {fileID: 210012170400930957, guid: ccfc5b2903162cea5bf8daca0154eb07,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -144
+      value: -144.7
       objectReference: {fileID: 0}
     - target: {fileID: 210012170400930957, guid: ccfc5b2903162cea5bf8daca0154eb07,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -50
+      value: -50.42
       objectReference: {fileID: 0}
     - target: {fileID: 210012170400930957, guid: ccfc5b2903162cea5bf8daca0154eb07,
         type: 3}
@@ -72834,10 +72834,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc4363cca338e644ab928a0e8a0c9a9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionAnimator: {fileID: 0}
+  transitionAnimator: {fileID: 7866711808160783706}
   entranceDirection: {x: 0, y: 2, z: 0}
   exitDirection: {x: 0, y: 2, z: 0}
-  exitLocation: {x: -85.18, y: -15.56, z: -4}
+  exitLocation: {x: -101.18, y: -10.56, z: -4}
   endPosition: {x: 0, y: 0, z: 0}
   playerPosition: {x: 0, y: 0, z: 0}
   refPosition: {x: 0, y: 0, z: 0}
@@ -116281,7 +116281,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1102627701010119323}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -144, y: -50, z: -10}
+  m_LocalPosition: {x: -144.7, y: -50.42, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1102627701314293111}
