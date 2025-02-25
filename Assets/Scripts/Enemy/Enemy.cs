@@ -67,7 +67,7 @@ public class Enemy : MonoBehaviour {
 
         GameObject screenOverlay = new GameObject("ScreenOverlay");
         combatUI.SetActive(true);
-        overworldUI.SetActive(false);
+//         overworldUI.SetActive(false);
         screenOverlay.transform.SetParent(combatUI.transform, false);
 
         // Leave enemy stunned after battle, because it looks cool
