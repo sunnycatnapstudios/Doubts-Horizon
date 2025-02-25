@@ -7,14 +7,37 @@ public class TurnIndicator : MonoBehaviour
 {
     public List<Image> turnOrderImages; // List of images that represent each character's turn
     public List<Vector3> targetPositions; // List of target positions for each image
-    public float moveSpeed = 5f; // How fast the images should move
+    private float moveSpeed = 5f; // How fast the images should move
 
     public int currentTurnIndex = 0; // Index of the current turn
     public bool isMoving = false; // To check if the image is still moving
 
     public BattleUiHandler BattleUiHandler;
+    private GameStatsManager gameStatsManager;
+    private _PartyManager _partyManager;
+    private _BattleUIHandler _battleUIHandler;
     public GameObject turnImagePrefab;
     // Sprite characterSprite;
+    
+    void Start()
+    {
+        gameStatsManager = GameStatsManager.Instance;
+        _partyManager = GameStatsManager.Instance.GetComponentInChildren<_PartyManager>();
+        _battleUIHandler = GameStatsManager.Instance.GetComponentInChildren<_BattleUIHandler>();
+    }
+    void OnEnable()
+    {
+        // StartCoroutine(GetPrefab());
+    }
+
+    // IEnumerator GetPrefab()
+    // {
+    //     while (GetComponentInChildren<Image>() == null)
+    //     {
+    //         yield return null;
+    //     }
+    //     turnImagePrefab = GameObject.Find("TurnIndicator");
+    // }
 
     public void SetupTurnIndicator(int orderCount)
     {
@@ -27,18 +50,18 @@ public class TurnIndicator : MonoBehaviour
 
             // Instantiate new turn order image
             GameObject newImageObj = Instantiate(turnImagePrefab, transform);
-            newImageObj.name = "Image"; newImageObj.SetActive(true);
-            Image newImage = newImageObj.GetComponent<Image>();
+            newImageObj.name = "Turn Image"+(i+1); newImageObj.SetActive(true);
+            Image newImage = newImageObj.transform.Find("Profile").GetComponent<Image>();
 
-            Sprite characterSprite = BattleUiHandler.profileImages.Find(sprite => sprite.name == BattleUiHandler.battleOrder[i].Name);
+            Sprite characterSprite = _partyManager.characterProfiles.Find(sprite => sprite.name == _battleUIHandler.battleOrder[i].Name);
 
             newImageObj.transform.localPosition = targetPositions[i]; // Set position
-            turnOrderImages.Add(newImage);
+            turnOrderImages.Add(newImage.gameObject.transform.parent.GetComponent<Image>());
 
-            if (characterSprite != null) {turnOrderImages[i].sprite = characterSprite;}
-            if (BattleUiHandler.battleOrder[i].IsEnemy) {
-                foreach (var profilePic in BattleUiHandler.profileImages) {
-                    if (profilePic.name == "Enemy") {turnOrderImages[i].sprite = profilePic;}
+            if (characterSprite != null) {turnOrderImages[i].transform.Find("Profile").GetComponent<Image>().sprite = characterSprite;}
+            if (_battleUIHandler.battleOrder[i].isEnemy) {
+                foreach (var profilePic in _partyManager.characterProfiles) {
+                    if (profilePic.name == "Enemy") {turnOrderImages[i].transform.Find("Profile").GetComponent<Image>().sprite = profilePic;}
                 }
             }
         }
@@ -49,12 +72,12 @@ public class TurnIndicator : MonoBehaviour
     {
         while (true)
         {
-            currentTurnIndex = BattleUiHandler.currentTurnIndex;
+            currentTurnIndex = _battleUIHandler.currentTurnIndex;
 
             for (int i = 0; i < turnOrderImages.Count; i++)
             {
                 Vector3 targetPos = targetPositions[(i - currentTurnIndex + 1 + turnOrderImages.Count) % turnOrderImages.Count]; // Circular shift logic
-                if (i != (currentTurnIndex + 1) % turnOrderImages.Count) {targetPos.y = -5;}
+                if (i != (currentTurnIndex) % turnOrderImages.Count) {targetPos.y = 7;}
                 
                 turnOrderImages[i].transform.localPosition = Vector3.Lerp(
                     turnOrderImages[i].transform.localPosition,

@@ -27,6 +27,8 @@ public class Eyeball : MonoBehaviour
         initialBarPosition = eyePupil.localPosition;
         currentPupilRadius = normalPupilRadius;
 
+        canvas = this.transform.GetComponentInParent<Canvas>();
+
         StartCoroutine(RandomPupilMovement());
         StartCoroutine(RandomEyeState());
         StartCoroutine(RandomPupilDialation());

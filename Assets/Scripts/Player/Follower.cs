@@ -5,22 +5,24 @@ using UnityEngine;
 public class Follower : MonoBehaviour
 {
     public int order, partyIndex;
-    public Player Player;
-    public PartyManager partyManager;
+    private Player Player;
+    private _PartyManager _partyManager;
     public float followSpeed;
     public Vector3 currentPos, newPos;
     public SpriteRenderer spriteState;
     public Animator partyAnim;
 
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+    }
+    void Start()
+    {
         if (order!=0) {transform.position = Player.transform.position;}
 
         spriteState = GetComponent<SpriteRenderer>();
         partyAnim = GetComponent<Animator>();
-        partyManager = GameObject.FindGameObjectWithTag("Player").GetComponent<PartyManager>();
+        _partyManager = GameStatsManager.Instance._partyManager;
         
     }
 
@@ -30,7 +32,8 @@ public class Follower : MonoBehaviour
         float refX = transform.position.x, refY = transform.position.y;
 
         // Handles Party Movement and Placement
-        partyIndex = Mathf.Abs(partyManager.partyCount-order);
+        // partyIndex = Mathf.Abs(partyManager.partyCount-order);
+        partyIndex = Mathf.Abs(_partyManager.partyCount-order);
 
         if (partyIndex >= 0 && partyIndex < Player.moveHist.Count){ newPos = Player.moveHist[partyIndex];}
         else {newPos = transform.position;}

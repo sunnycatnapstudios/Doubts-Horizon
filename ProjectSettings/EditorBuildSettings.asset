@@ -17,9 +17,12 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/Development/Final Scene.unity
     guid: 8e091617833c032419e54526ab426362
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/Backup/Final Scene - Feb26.unity
     guid: a34ba069fdfc41e44a2595f56d5ff7f1
+  - enabled: 1
+    path: Assets/Scenes/Game.unity
+    guid: 4fcee02bd2498cd3982eda79bf29e5a4
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: 427da3dc14e60364ba37ed659f1e212b,
       type: 2}
