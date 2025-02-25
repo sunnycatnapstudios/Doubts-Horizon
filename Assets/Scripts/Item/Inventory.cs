@@ -105,10 +105,12 @@ public class Inventory : MonoBehaviour {
                 curObj.GetComponent<Pickupable>().DestroyInWorld();
             }
         } else if (Input.GetKeyDown(KeyCode.I) && timer <= 1) {
-            //Debug.Log(timer.ToString());
+            Debug.Log("got I");
             if (inventoryWindow.isActiveAndEnabled == false) {
+                Debug.Log("a");
                 inventoryWindow.Show(inventory);
             } else {
+                Debug.Log("b");
                 inventoryWindow.Hide();
             }
 

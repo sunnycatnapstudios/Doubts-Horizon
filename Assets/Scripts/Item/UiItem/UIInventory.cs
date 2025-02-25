@@ -128,6 +128,7 @@ public class UIInventory : MonoBehaviour
 
     }
     private void clearUIInventory() {
+        Debug.Log("clearing");
         foreach (UIItem item in listOfItems) {
             item.ResetData();
         }
@@ -247,6 +248,7 @@ public class UIInventory : MonoBehaviour
 
     public void Show(Dictionary<string, Slot> inventory)
     {
+        Debug.Log("showing");
         clearUIInventory();
         useButton.gameObject.SetActive(false);
         gameObject.SetActive(true);
