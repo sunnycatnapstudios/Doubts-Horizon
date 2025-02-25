@@ -26,10 +26,8 @@ public class Enemy : MonoBehaviour
 
     public GameObject overworldUI, combatUI;
 
-   
 
-    void Start()
-    {
+    void Start() {
         startPos = transform.position;
         enemyAnim = GetComponent<Animator>();
         spriteState = GetComponent<SpriteRenderer>();
@@ -42,15 +40,14 @@ public class Enemy : MonoBehaviour
         _battleUIHandler = GameStatsManager.Instance._battleUIHandler;
     }
 
-    void OnDrawGizmos() { // Draws a Debug for NPC interact radius
+    void OnDrawGizmos() {
+        // Draws a Debug for NPC interact radius
         Gizmos.color = Color.white;
         Gizmos.DrawWireSphere(transform.position, detectRange);
     }
 
-    void EnterCombat(bool iscaught)
-    {
-        if (iscaught && !caught)
-        {
+    void EnterCombat(bool iscaught) {
+        if (iscaught && !caught) {
             caught = true;
             
             // StartCoroutine(CaptureScreen());
@@ -62,8 +59,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public IEnumerator CaptureScreen()
-    {
+    public IEnumerator CaptureScreen() {
         yield return new WaitForEndOfFrame();
         yield return null;
 
@@ -89,13 +85,12 @@ public class Enemy : MonoBehaviour
         overlayRect.anchorMin = Vector2.zero;
         overlayRect.anchorMax = Vector2.one;
         overlayRect.pivot = new Vector2(0.5f, 0.5f);
-        
+
         // Start the animation
         StartCoroutine(ZoomInAnimation(screenOverlay, overlayImage));
     }
 
-    IEnumerator ZoomInAnimation(GameObject overlay, RawImage overlayImage)
-    {
+    IEnumerator ZoomInAnimation(GameObject overlay, RawImage overlayImage) {
         RectTransform rect = overlay.GetComponent<RectTransform>();
 
         // Start with slightly zoomed out
@@ -105,16 +100,15 @@ public class Enemy : MonoBehaviour
         // Wait for a short delay
         yield return new WaitForSecondsRealtime(0.8f);
 
-        float duration = 1.5f;  // Animation duration
+        float duration = 1.5f; // Animation duration
         float time = 0f;
-        
+
         Color startColor = overlayImage.color;
-        Color targetColor = new Color(0, 0, 0, 0);  // Fully dark and transparent
-        
-        while (time < duration)
-        {
+        Color targetColor = new Color(0, 0, 0, 0); // Fully dark and transparent
+
+        while (time < duration) {
             time += Time.unscaledDeltaTime;
-            float t = time / duration;  // Normalize time (0 to 1)
+            float t = time / duration; // Normalize time (0 to 1)
 
             // Zoom in effect
             float scale = Mathf.Lerp(initialScale, 2.5f, t);
@@ -129,46 +123,50 @@ public class Enemy : MonoBehaviour
 
             yield return null;
         }
+
         // Destroy object after animation completes
         Destroy(overlay);
         // caught = false;
     }
 
-    void EnemyPatrol()
-    {
-        if (pathDist.x *pathDist.y == 0){ // Checks if it's a straight line
+    void EnemyPatrol() {
+        if (pathDist.x * pathDist.y == 0) {
+            // Checks if it's a straight line
 
             pathBounds = startPos + new Vector3(pathDist.x, pathDist.y, 0f);
 
-            if (!pathReturn){
-                counter_+=Time.deltaTime;
-                if (counter_>=1.5f){
-                    transform.position = Vector3.MoveTowards(transform.position, pathBounds, enemySpeed*Time.deltaTime);
-                    if (transform.position == pathBounds){
+            if (!pathReturn) {
+                counter_ += Time.deltaTime;
+                if (counter_ >= 1.5f) {
+                    transform.position =
+                        Vector3.MoveTowards(transform.position, pathBounds, enemySpeed * Time.deltaTime);
+                    if (transform.position == pathBounds) {
                         counter_ = 0f;
-                        pathReturn = true;}
+                        pathReturn = true;
+                    }
                 }
             } else {
-                counter_+=Time.deltaTime;
-                if (counter_ >= 1.5f){
-                    transform.position = Vector3.MoveTowards(transform.position, startPos, enemySpeed*Time.deltaTime);
-                    if (transform.position == startPos){
+                counter_ += Time.deltaTime;
+                if (counter_ >= 1.5f) {
+                    transform.position = Vector3.MoveTowards(transform.position, startPos, enemySpeed * Time.deltaTime);
+                    if (transform.position == startPos) {
                         counter_ = 0f;
                         pathReturn = false;
                     }
                 }
             }
-        } else { // Handles Square Paths
-            Vector3[] squarePoints = new Vector3[]
-            {
+        } else {
+            // Handles Square Paths
+            Vector3[] squarePoints = new Vector3[] {
                 startPos,
                 startPos + new Vector3(pathDist.x, 0, 0),
                 startPos + new Vector3(pathDist.x, pathDist.y, 0),
                 startPos + new Vector3(0, pathDist.y, 0)
             };
-            counter_+=Time.deltaTime;
-            if (counter_>=1.5) {
-                transform.position = Vector3.MoveTowards(transform.position, squarePoints[currentTargetIndex], enemySpeed * Time.deltaTime);
+            counter_ += Time.deltaTime;
+            if (counter_ >= 1.5) {
+                transform.position = Vector3.MoveTowards(transform.position, squarePoints[currentTargetIndex],
+                    enemySpeed * Time.deltaTime);
 
                 if (transform.position == squarePoints[currentTargetIndex]) {
                     counter_ = 0f;
@@ -178,10 +176,8 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    
 
-    void Update()
-    {
+    void Update() {
         if (caught) return;
         playerDist = Vector3.Distance(target.position, transform.position);
         refX = transform.position.x;
@@ -190,23 +186,36 @@ public class Enemy : MonoBehaviour
         Vector3 direction = target.position - transform.position;
         direction.Normalize();
 
-        if (playerDist <= detectRange || attack &&! stun){ // Attack Player // Will be changed later to account for pathfinding
-            
-            if (!demotestFreeze){transform.position = Vector3.MoveTowards(transform.position, target.position, attackSpeed*Time.deltaTime);}
+        if (playerDist <= detectRange || attack && !stun) {
+            // Attack Player // Will be changed later to account for pathfinding
+
+            if (!demotestFreeze) {
+                transform.position =
+                    Vector3.MoveTowards(transform.position, target.position, attackSpeed * Time.deltaTime);
+            }
+
             attack = true;
             EnterCombat(Physics2D.OverlapCircle((transform.position), caughtRange, player));
-            searchTimer = 0f; detectRange = baseRange; intervalCheck = .4f; searching = false;
-            if (playerDist >= pursueRange){
+            searchTimer = 0f;
+            detectRange = baseRange;
+            intervalCheck = .4f;
+            searching = false;
+            if (playerDist >= pursueRange) {
                 attack = false;
             }
-        } else if (Physics2D.OverlapCircle((transform.position), .5f, projectile)||stun) // Stun Enemy
+        } else if (Physics2D.OverlapCircle((transform.position), .5f, projectile) || stun) // Stun Enemy
         {
             searchTimer = 0f;
-            if (stunTimer<=stunTime) {stunTimer+=Time.deltaTime; stun = true;} else {stun = false;}
-
-            if (stunTimer<=stunTime){
+            if (stunTimer <= stunTime) {
+                stunTimer += Time.deltaTime;
                 stun = true;
-                stunTimer+=Time.deltaTime;
+            } else {
+                stun = false;
+            }
+
+            if (stunTimer <= stunTime) {
+                stun = true;
+                stunTimer += Time.deltaTime;
                 detectRange = 0f;
                 enemyAnim.Play("Stun Down");
             } else {
@@ -218,24 +227,38 @@ public class Enemy : MonoBehaviour
         } else if (searching) // Search for Player w Temp Increased Radius
         {
             enemyAnim.Play("Enem Left");
-            if (searchTimer<=2.1f) {
-               searchTimer+=Time.deltaTime;
-                if (searchTimer>=intervalCheck) {spriteState.flipX = !spriteState.flipX; intervalCheck+=.4f;}
+            if (searchTimer <= 2.1f) {
+                searchTimer += Time.deltaTime;
+                if (searchTimer >= intervalCheck) {
+                    spriteState.flipX = !spriteState.flipX;
+                    intervalCheck += .4f;
+                }
             } else {
                 enemyAnim.Play("Enem Down");
-                searchTimer = 0f; detectRange = baseRange; intervalCheck = .4f; searching = false;
+                searchTimer = 0f;
+                detectRange = baseRange;
+                intervalCheck = .4f;
+                searching = false;
             }
-        } else if (!demotestFreeze){EnemyPatrol();} // Enemy Idle Movement Path
+        } else if (!demotestFreeze) {
+            EnemyPatrol();
+        } // Enemy Idle Movement Path
 
-        if (Mathf.Abs(transform.position.x-refX) > Mathf.Abs(transform.position.y-refY) && !stun && !searching){
-            if (transform.position.x-refX > 0){
+        if (Mathf.Abs(transform.position.x - refX) > Mathf.Abs(transform.position.y - refY) && !stun && !searching) {
+            if (transform.position.x - refX > 0) {
                 spriteState.flipX = true;
-            } else {spriteState.flipX = false;}
+            } else {
+                spriteState.flipX = false;
+            }
+
             enemyAnim.Play("Enem Left");
-        } else if (Mathf.Abs(transform.position.x-refX) <= Mathf.Abs(transform.position.y-refY) && !stun && !searching){
-            if (transform.position.y-refY > 0){
+        } else if (Mathf.Abs(transform.position.x - refX) <= Mathf.Abs(transform.position.y - refY) && !stun &&
+                   !searching) {
+            if (transform.position.y - refY > 0) {
                 enemyAnim.Play("Enem Up");
-            } else {enemyAnim.Play("Enem Down");}
+            } else {
+                enemyAnim.Play("Enem Down");
+            }
         }
     }
 }
