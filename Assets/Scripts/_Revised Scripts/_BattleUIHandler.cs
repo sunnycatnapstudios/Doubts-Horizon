@@ -15,7 +15,7 @@ public class _BattleUIHandler : MonoBehaviour
 {
     private GameStatsManager gameStatsManager;
     private _PartyManager _partyManager;
-    
+
     public Animator partyUIAnimator, enemyUIAnimator, enemyStatsAnimator;
     public bool actOption = false, itemOption = false, canSelect = false;
     public GameObject overworldUI, combatUI;
@@ -48,10 +48,12 @@ public class _BattleUIHandler : MonoBehaviour
         [HideInInspector] public AudioClip oldAmbience;      // Use to swap back to old scene
         [HideInInspector] public AudioClip oldMusic;         // Use to swap back to old scene
         public AudioClip sfxBell;
-        public AudioClip uiSelected;
-        public AudioClip uiUnselected;
-        public AudioClip uiDrawer;
+        public AudioClip sfxSwing;
+        public AudioClip uiSelect;
+        public AudioClip uiOpenDrawer;
+        public AudioClip uiCloseDrawer;
     }
+
     [SerializeField] private AudioClips audioClips;
 
     void Awake()
@@ -68,7 +70,7 @@ public class _BattleUIHandler : MonoBehaviour
 
         gameStatsManager = GameStatsManager.Instance;
         _partyManager = gameStatsManager._partyManager;
-        
+
         currentEnemies = new List<CharacterStats>(gameStatsManager.L1Enemies.Values);
     }
     void Start()
@@ -101,7 +103,7 @@ public class _BattleUIHandler : MonoBehaviour
             // } if (obj.CompareTag("")) {
 
             // }
-            
+
             // if (combatUI != null && overworldUI != null && enemySlot != null) {break;}
         }
 
@@ -140,7 +142,7 @@ public class _BattleUIHandler : MonoBehaviour
         overlayRect.anchorMin = Vector2.zero;
         overlayRect.anchorMax = Vector2.one;
         overlayRect.pivot = new Vector2(0.5f, 0.5f);
-        
+
         // Start the animation
         StartCoroutine(ZoomInAnimation(screenOverlay, overlayImage));
     }
@@ -158,9 +160,9 @@ public class _BattleUIHandler : MonoBehaviour
 
         float duration = 1.5f;  // Animation duration
         float time = 0f;
-        
+
         Color startColor = overlayImage.color, targetColor = new Color(0, 0, 0, 0);  // Starting Color, Fully dark and transparent
-        
+
         while (time < duration)
         {
             time += Time.unscaledDeltaTime;
@@ -225,8 +227,8 @@ public class _BattleUIHandler : MonoBehaviour
         partySlotHandler.UpdateSlots();
 
         battleOrder = ShuffleList(battleOrder);
-        
-       
+
+
 
         foreach (var Char in battleOrder)
         {
@@ -374,9 +376,9 @@ public class _BattleUIHandler : MonoBehaviour
             indicator.localScale = Vector3.Lerp(startScale, endScale, t);
 
             // First move towards the overshoot position
-            if (t < 0.7f) 
+            if (t < 0.7f)
                 indicator.anchoredPosition = Vector2.Lerp(startPos, overshootPos, t / 0.7f);
-            else 
+            else
                 indicator.anchoredPosition = Vector2.Lerp(overshootPos, endPos, (t - 0.7f) / 0.3f);
 
             yield return null;
@@ -385,7 +387,7 @@ public class _BattleUIHandler : MonoBehaviour
         // Ensure it lands precisely at the end position
         indicator.localScale = endScale;
         indicator.anchoredPosition = endPos;
-        
+
         defendIndicator.GetComponent<DefendIndicator>().inAnimation = false;
     }
     IEnumerator ShakeDefendIndicator(float duration, float strength)
@@ -405,7 +407,7 @@ public class _BattleUIHandler : MonoBehaviour
         }
 
         defendIndicator.anchoredPosition = startPos; // Return to original position after jutter
-        
+
         defendIndicator.GetComponent<DefendIndicator>().inAnimation = false;
     }
     IEnumerator DestroyDefend()
@@ -437,15 +439,15 @@ public class _BattleUIHandler : MonoBehaviour
         {
             elapsed += Time.unscaledDeltaTime;
             float t = elapsed / expandDuration;
-            
+
             // Scale up
             defendIndicator.sizeDelta = Vector3.Lerp(originalScale, alteredScale, t);
-            
+
             // Fade out
             Color color = defendIndicator.GetComponent<Image>().color;
             color.a = Mathf.Lerp(1f, 0f, t);
             defendIndicator.GetComponent<Image>().color = color;
-            
+
             yield return null;
         }
         defendIndicator.SetParent(partyUIAnimator.transform, false); defendIndicator.SetSiblingIndex(0);
@@ -499,7 +501,7 @@ public class _BattleUIHandler : MonoBehaviour
                     Debug.Log($"{player.Name} chose to defend the Party!!!");
                     canSelect = false;
                 }
-                else 
+                else
                 {
                     StartCoroutine(ShakeDefendIndicator(Random.Range(.2f, .4f), Random.Range(20f, 30f)));
                     Debug.Log("There's already someone defending :(");
@@ -548,6 +550,7 @@ public class _BattleUIHandler : MonoBehaviour
             currentEnemyCurrentHealth -= playerDamage;
             Debug.Log($"{player.Name} attacks {enemyStats.Name} for {playerDamage} damage!");
 
+            AudioManager.Instance.PlayUiSound(audioClips.sfxSwing);
             ShowFloatingText(playerDamage, Color.red, (enemySlot.transform.position+(new Vector3(-80f,0f,0f))), false);
 
             if (currentEnemyCurrentHealth <= 0)
@@ -758,7 +761,7 @@ public class _BattleUIHandler : MonoBehaviour
 
     public void OnActionButtonPressed(string action)
     {
-        AudioManager.Instance.PlayUiSound(audioClips.uiSelected);
+        AudioManager.Instance.PlayUiSound(audioClips.uiSelect);
 
         if (selectedAction == "Heal" || selectedAction == "Defend"){
             selectedTarget = null;
@@ -779,22 +782,23 @@ public class _BattleUIHandler : MonoBehaviour
 
             if (actOption) {
                 partyUIAnimator.SetTrigger("Close");
+                AudioManager.Instance.PlayUiSound(audioClips.uiCloseDrawer);
                 actOption = false;
             } else if (itemOption) {
                 partyUIAnimator.SetTrigger("Reset");
+                AudioManager.Instance.PlayUiSound(audioClips.uiCloseDrawer);
                 itemOption = false;
                 actOption = true;
             }
             else {
                 partyUIAnimator.SetTrigger("Open");
+                AudioManager.Instance.PlayUiSound(audioClips.uiOpenDrawer);
                 actOption = true;
             }
             // actOptionBList.SetActive(actOption);
             StartCoroutine(WaitForCloseThenToggle(actOptionBList, actOption));
             itemOptionBList.SetActive(itemOption);
         }
-
-        AudioManager.Instance.PlayUiSound(audioClips.uiDrawer);
     }
     public void Item()
     {
@@ -806,14 +810,17 @@ public class _BattleUIHandler : MonoBehaviour
 
             if (itemOption) {
                 partyUIAnimator.SetTrigger("Close");
+                AudioManager.Instance.PlayUiSound(audioClips.uiCloseDrawer);
                 itemOption = false;
             } else if (actOption) {
                 partyUIAnimator.SetTrigger("Reset");
+                AudioManager.Instance.PlayUiSound(audioClips.uiCloseDrawer);
                 actOption = false;
                 itemOption = true;
             }
             else {
                 partyUIAnimator.SetTrigger("Open");
+                AudioManager.Instance.PlayUiSound(audioClips.uiOpenDrawer);
                 itemOption = true;
             }
 
@@ -821,13 +828,12 @@ public class _BattleUIHandler : MonoBehaviour
             // itemOptionBList.SetActive(itemOption);
             StartCoroutine(WaitForCloseThenToggle(itemOptionBList, itemOption));
         }
-        AudioManager.Instance.PlayUiSound(audioClips.uiDrawer);
     }
     public void Escape()
     {
         selectedAction = "Escape";
-        
-        AudioManager.Instance.PlayUiSound(audioClips.uiDrawer);
+
+        AudioManager.Instance.PlayUiSound(audioClips.uiSelect);
 
         float totalCurrentHealth = 0f, totalMaxHealth = 0f;
         int partyCount = 0;
@@ -843,7 +849,7 @@ public class _BattleUIHandler : MonoBehaviour
         }
         int escapeChance = (int)(35+(((totalMaxHealth-totalCurrentHealth)/totalMaxHealth)*65));
         int roll = Random.Range(0, 100);
-        
+
         Debug.Log($"Chance of escape: {escapeChance}%");
 
         if (roll<= escapeChance)
