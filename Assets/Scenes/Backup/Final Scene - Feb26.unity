@@ -39101,7 +39101,12 @@ PrefabInstance:
     - target: {fileID: 3299673889596440526, guid: ab88db3bdfe6ce91b92a44906fb297b8,
         type: 3}
       propertyPath: m_Name
-      value: Damsel
+      value: Hachiware
+      objectReference: {fileID: 0}
+    - target: {fileID: 3299673889596440560, guid: ab88db3bdfe6ce91b92a44906fb297b8,
+        type: 3}
+      propertyPath: m_UsedByComposite
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3299673889596440561, guid: ab88db3bdfe6ce91b92a44906fb297b8,
         type: 3}
@@ -41364,9 +41369,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 420c9a8359960064991821d89a55275c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  positions:
-  - {fileID: 0}
-  - {fileID: 0}
+  objects: []
   positionSpawn: {x: 140, y: 4, z: 0}
 --- !u!224 &738415355
 RectTransform:
@@ -75735,8 +75738,9 @@ GameObject:
   - component: {fileID: 1279383445}
   - component: {fileID: 1279383444}
   - component: {fileID: 1279383443}
+  - component: {fileID: 1279383449}
   m_Layer: 12
-  m_Name: Joiner
+  m_Name: Jenmas
   m_TagString: NPC
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -75845,10 +75849,10 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 2048
-  popUpPrefab: {fileID: 0}
-  interactBoxPrefab: {fileID: 0}
+  popUpPrefab: {fileID: 73345067}
+  interactBoxPrefab: {fileID: 705565801}
   interactBoxTextReplacement: 
-  dialogueBox: {fileID: 0}
+  dialogueBox: {fileID: 7866711807658144856}
   characterProfile: {fileID: 21300000, guid: 233e090b78912f445af3f602a407830f, type: 3}
   isDialogueOpen: 0
   dialogueFinished: 0
@@ -75906,6 +75910,19 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1279383449
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1279383441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a7c1ff98f0867743baf21cdc238942f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  survivor: {fileID: 11400000, guid: 7ea66f04ca169e844a9a9805f2c6e4b0, type: 2}
 --- !u!1001 &1295292431
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -93557,6 +93574,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueLines: []
   Survivor: {fileID: 11400000, guid: c264d9f0cfa3ffe45bacd2971f275c63, type: 2}
+--- !u!114 &2082559091
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2082559088}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a7c1ff98f0867743baf21cdc238942f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  survivor: {fileID: 11400000, guid: c264d9f0cfa3ffe45bacd2971f275c63, type: 2}
 --- !u!1 &2091386271
 GameObject:
   m_ObjectHideFlags: 0
