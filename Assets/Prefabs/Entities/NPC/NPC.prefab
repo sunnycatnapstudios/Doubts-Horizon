@@ -102,18 +102,18 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2048
   player: {fileID: 210012170400930956, guid: ccfc5b2903162cea5bf8daca0154eb07, type: 3}
-  popUpPrefab: {fileID: 1967722894350683128, guid: 7f4db9ccac2dc2c4f9f5989036a87960,
+  popUpPrefab: {fileID: 5665048404440187164, guid: 7eeee5a54ca28c54e825d2b0f42c421b,
     type: 3}
   interactBoxPrefab: {fileID: 0}
   interactBoxTextReplacement: 
-  dialogueBox: {fileID: 2310329873098196876, guid: 6ef267433f1eb973ead7e9a84284718b,
-    type: 3}
+  dialogueBox: {fileID: 0}
   characterProfile: {fileID: 21300000, guid: 233e090b78912f445af3f602a407830f, type: 3}
   isDialogueOpen: 0
   dialogueFinished: 0
-  npcDialogueHandler: {fileID: 0}
+  npcDialogueHandler: {fileID: 3299673889596440564}
   audioClips:
-    sfxOnInteract: {fileID: 0}
+    sfxOnInteract: {fileID: 8300000, guid: 6cd56f21cb2f650af8f57f98c9dfab0f, type: 3}
+    sfxTypewriter: {fileID: 8300000, guid: 28c78a651100df1cea783ae402a74437, type: 3}
 --- !u!114 &3299673889596440564
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -19,13 +19,22 @@ public class Survivor : ScriptableObject
     public int Health { get { return health; } }
     [SerializeField]
     private bool isCombatant;
+
+    [SerializeField]
+    private bool unKickable;
+
+    public bool UnKickable { get { return unKickable; } }
     public bool IsCombatant { get { return isCombatant; } }
+
+    private bool fed;
+    public bool Fed { get { return fed; } set { fed = value; } }
 
     private int curHealth;
     public int CurHealth { get { return curHealth; } set { curHealth = value; } }
 
     public void Start() {
         curHealth = health;
+        fed =false;
     }
 
 

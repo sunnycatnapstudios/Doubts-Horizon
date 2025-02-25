@@ -61,7 +61,7 @@ public class UIPartyMember : MonoBehaviour
     }
     public void Selected()
     {
-        SelectedImage.enabled = true;
+        SelectedImage.enabled =true;
 
     }
 
@@ -76,7 +76,7 @@ public class UIPartyMember : MonoBehaviour
         this.image.gameObject.SetActive(true);
         this.image.sprite = member.GetSprite();
         nameText.text = member.GetName();
-        description.text = member.GetHealth().ToString();
+        description.text = member.Fed.ToString();
         
        
         this.member = member;

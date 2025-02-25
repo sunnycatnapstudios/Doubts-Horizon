@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -31,7 +33,6 @@ public class Enemy : MonoBehaviour {
     int currentTargetIndex;
 
     public GameObject overworldUI, combatUI;
-
 
     void Start() {
         startPos = transform.position;
@@ -185,7 +186,6 @@ public class Enemy : MonoBehaviour {
 
         if (playerDist <= detectRange || attack && !stun) {
             // Attack Player // Will be changed later to account for pathfinding
-
             if (!demotestFreeze) {
                 transform.position =
                     Vector3.MoveTowards(transform.position, target.position, attackSpeed * Time.deltaTime);

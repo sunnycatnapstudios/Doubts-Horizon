@@ -398,7 +398,7 @@ MonoBehaviour:
   test1: {fileID: 0}
   test2: {fileID: 0}
   audioClips:
-    sfxPickup: {fileID: 0}
+    sfxPickup: {fileID: 8300000, guid: e8b7b2590daa6e259861371f15be7165, type: 3}
 --- !u!1001 &1545461077899872922
 PrefabInstance:
   m_ObjectHideFlags: 0

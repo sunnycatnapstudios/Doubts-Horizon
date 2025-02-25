@@ -19,6 +19,7 @@ public class Slot
     {
         count++;
     }
+    public override string ToString() => item.GetName()+" "+ count.ToString();
     public void decCount() { count--; }
     public void setCount(int count) { this.count = count; }
     public string getName() { return item.GetName(); }
