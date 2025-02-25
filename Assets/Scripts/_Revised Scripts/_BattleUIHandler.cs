@@ -271,7 +271,7 @@ public class _BattleUIHandler : MonoBehaviour
         if (enemyStats.Name == "Cuboid" || enemyStats.Name == "Handy")
         {
             // Debug.Log("ITS A SIMPLE ENEMY");
-            GameObject[] allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
+            var allObjects = GetAllObjectsOnlyInScene();
             foreach (GameObject obj in allObjects) {
                 if (obj.CompareTag("Simple Enemy")) {
                     obj.SetActive(true);
@@ -289,7 +289,7 @@ public class _BattleUIHandler : MonoBehaviour
         else if (enemyStats.Name == "Gregor")
         {
             // Debug.Log("ITS A COMPLEX ENEMY");
-            GameObject[] allObjects = Resources.FindObjectsOfTypeAll<GameObject>();
+            var allObjects = GetAllObjectsOnlyInScene();
             foreach (GameObject obj in allObjects) {
                 if (obj.CompareTag("Simple Enemy")) {
                     obj.SetActive(false);
@@ -341,6 +341,8 @@ public class _BattleUIHandler : MonoBehaviour
                 Debug.Log("Battle has ended!");
 
                 // enemyUIAnimator.Play("Handy Stop");
+                yield return new WaitForSecondsRealtime(2f);
+
                 EndEncounter(endCause);
                 battleInProgress = false;
                 yield break;
@@ -858,10 +860,28 @@ public class _BattleUIHandler : MonoBehaviour
         }
         AudioManager.Instance.PlayUiSound(audioClips.uiDrawer);
     }
+    private bool escapePressedOnce = false;
+    private float escapeTimer = 0f,  escapeTimeout = 2f; // Time window for second press
     public void Escape()
     {
+        if (!escapePressedOnce)
+        {
+            escapePressedOnce = true;
+            escapeTimer = Time.time; // Start the timer
+            Debug.Log("Press Escape again to confirm fleeing.");
+            return; // Wait for second press
+        }
+
+        // If too much time passed, reset and require another double press
+        if (Time.time - escapeTimer > escapeTimeout)
+        {
+            escapePressedOnce = true;
+            escapeTimer = Time.time;
+            Debug.Log("Press Escape again to confirm fleeing.");
+            return;
+        }
+
         selectedAction = "Escape";
-        
         AudioManager.Instance.PlayUiSound(audioClips.uiDrawer);
 
         float totalCurrentHealth = 0f, totalMaxHealth = 0f;
@@ -892,9 +912,8 @@ public class _BattleUIHandler : MonoBehaviour
             Debug.Log($"Oof, rolled a {roll}, didn't make it lol");
             SkipTurns();
         }
-
-
-        // EndEncounter();
+        // Reset confirmation state after execution
+        escapePressedOnce = false;
     }
     void SkipTurns()
     {

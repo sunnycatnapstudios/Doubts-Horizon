@@ -132,8 +132,8 @@ public class PartySlot : MonoBehaviour
 
     public void ShowHealthChange()
     {
+        if (!gameObject.activeInHierarchy) return;
         // Show health text and start fading it out
-        // if (playerHealthIndicator.color.a == 0) // If it was previously invisible
         {
             StopAllCoroutines(); // Stop previous coroutines
             StartCoroutine(FadeOutHealthText());

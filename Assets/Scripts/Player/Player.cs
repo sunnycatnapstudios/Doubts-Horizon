@@ -161,6 +161,7 @@ public class Player : MonoBehaviour
                 if (isTraversable(movePoint.position+moveDir))
                 {
                     movePoint.position+=moveDir;
+                }
 
                     // if (playerInput.x!=0)
                     if (moveDir.x!=0)
@@ -181,7 +182,7 @@ public class Player : MonoBehaviour
 
                         faceUp = movingUp; faceDown = !movingUp;
                         faceLeft = faceRight = false;
-                    }
+                    // }
                 }
             }
             UpdateMoveHist();
