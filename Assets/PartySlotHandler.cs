@@ -113,7 +113,7 @@ public class PartySlotHandler : MonoBehaviour
         {
             float targetPosition = Mathf.Clamp01((float)playerIndex / (playerParty.Count - 1));
             StartCoroutine(SmoothScroll(targetPosition, .3f));
-            if (!enemyAttacking) {
+            if (!enemyAttacking&&playerParty.Count>4) {
                 StartCoroutine(BobSlot(partySlots[playerIndex].GetComponentInChildren<Image>().transform.GetComponent<RectTransform>(), 20f, 0.25f));
             }
         }

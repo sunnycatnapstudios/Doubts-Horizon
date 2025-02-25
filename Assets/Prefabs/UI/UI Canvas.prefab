@@ -3299,9 +3299,10 @@ MonoBehaviour:
     oldAmbience: {fileID: 0}
     oldMusic: {fileID: 0}
     sfxBell: {fileID: 0}
-    uiSelected: {fileID: 0}
-    uiUnselected: {fileID: 0}
-    uiDrawer: {fileID: 0}
+    sfxSwing: {fileID: 0}
+    uiSelect: {fileID: 0}
+    uiOpenDrawer: {fileID: 0}
+    uiCloseDrawer: {fileID: 0}
 --- !u!222 &1128582352745499947
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6917,7 +6918,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 69c8ca3638c75394eb1fbf5eaf8bde46, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_WarningMessage: 

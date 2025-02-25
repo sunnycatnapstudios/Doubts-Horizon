@@ -134,11 +134,11 @@ public class Player : MonoBehaviour
         ViewMap(canControlCam);
         OpenPauseMenu(canControlCam);
 
+        playerInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
         if (Vector3.Distance(transform.position, movePoint.position) <= movementInputDelay && !isZooming && !isPlayerInControl){
 
             pointRef = movePoint.position;
 
-            playerInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
             Vector3 moveDir = Vector3.zero;
 
             if (playerInput.x != 0 && lastInput.x == 0) {

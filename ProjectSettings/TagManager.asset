@@ -42,6 +42,8 @@ TagManager:
   - Title Card
   - Menu
   - Defend Indicator
+  - Damage Numbers
+  - PartySideBar
   layers:
   - Default
   - TransparentFX

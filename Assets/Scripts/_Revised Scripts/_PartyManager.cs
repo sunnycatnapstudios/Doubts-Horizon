@@ -99,6 +99,17 @@ public class _PartyManager : MonoBehaviour
     public void Awake()
     {
         gameStatsManager = GameStatsManager.Instance;
+
+        // partySideBar = GameObject.FindWithTag("PartySidebar").GetComponent<PartySideBar>();
+        
+        // partySideBar = GameObject.GetComponent<PartySideBar>();
+    }
+    void Start()
+    {
+        GameObject player = GameObject.FindWithTag("Player");
+        partyMemberTemplate = player.GetComponentInChildren<Follower>().gameObject;
+        
+        // partySideBar = GameObject.GetComponent<PartySideBar>();
     }
 
     void Update()
