@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3261883972054362731}
   - component: {fileID: 3261883972054362730}
   - component: {fileID: 3261883972054362729}
+  - component: {fileID: 1605090157518718593}
   m_Layer: 0
   m_Name: Rations
   m_TagString: Item
@@ -97,7 +98,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 10b04f946d58b654e966190ba09580ee, type: 2}
-  sfxOnPickup: {fileID: 8300000, guid: c6f38b1cf169e1d79972fd231dbba484, type: 3}
 --- !u!58 &3261883972054362729
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -114,3 +114,25 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
+--- !u!114 &1605090157518718593
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3261883972054362733}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3210b3f07a8829c4b95b4fbd95a29f30, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  interactRange: 2
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 2048
+  promptText: e
+  popUpPrefab: {fileID: 5665048404440187164, guid: 7eeee5a54ca28c54e825d2b0f42c421b,
+    type: 3}
+  onInteract:
+    m_PersistentCalls:
+      m_Calls: []

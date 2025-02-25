@@ -35,8 +35,7 @@ public class Ration : Item{
     //}
     // Start is called before the first frame update
 
-    public override void Use() {
-    }
+    
 
     public override AudioClip GetPickupSound() {
         return sfxPickup;

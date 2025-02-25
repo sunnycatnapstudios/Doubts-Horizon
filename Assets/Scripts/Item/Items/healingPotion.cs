@@ -7,6 +7,7 @@ public class healingPotion : Item,UsableInInventory
 {
     public Pickupable _healingPotion;
     public Sprite Sprite;
+    public AudioClip sfxPickup;
 
 
     public override string GetDesc() {
@@ -34,5 +35,9 @@ public class healingPotion : Item,UsableInInventory
         Debug.Log(survivor.CurHealth);
         
 
+    }
+
+    public override AudioClip GetPickupSound() {
+        return sfxPickup;
     }
 }
