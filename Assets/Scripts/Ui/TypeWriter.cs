@@ -43,15 +43,17 @@ public class TypeWriter : MonoBehaviour {
             if (writer[i] == '<') {
                 int start = i;
                 while (i < writer.Length) {
-                    ++i;
                     if (writer[i] == '>') {
                         break;
                     }
+                    // this will break if we have two openers '<' in a row
+                    ++i;
                 }
-
-                _tmpProText.text += writer.Substring(start, i - start);
-                if (i >= writer.Length) {
-                    break;
+                if (i < writer.Length) {
+                    _tmpProText.text += writer.Substring(start, i - start);
+                } else {
+                    // Didn't find a real tag
+                    i = start;
                 }
             }
 
