@@ -48,6 +48,11 @@ public class UIInventory : MonoBehaviour
     private Button useButton;
     //[SerializeField]
     private TMPro.TMP_Text buttonText;
+    private ButtonState state;
+    enum ButtonState {
+        item,
+        member
+    }
     void Start()
     {
         player = GameObject.FindWithTag("Player").GetComponent<Player>();
@@ -137,24 +142,32 @@ public class UIInventory : MonoBehaviour
 
     private void HandlePartySelection(UIPartyMember member)
     {
-        Debug.Log("here????");
+        
         
            
         Survivor held = member.GetMember();
         if (held != null)
         {
-            descriptionUI.SetDescription(held.GetName(), held.GetHealth().ToString());
+            descriptionUI.SetDescription(held.GetName(), held.CurHealth.ToString()+"/"+held.GetHealth().ToString());
             ClearSelected();
             member.Selected();
+            Debug.Log("here????");
             selectedMember = member.GetMember();
-        }
-        if (usingItem != null) {
-            buttonText.text = "use " + usingItem.GetName() + " on "+selectedMember.GetName();
-            _uIPartyMember = member;
+            if (usingItem != null) {
+                buttonText.text = "use " + usingItem.GetName() + " on " + selectedMember.GetName();
+                _uIPartyMember = member;
+            } else if (!held.UnKickable) {
+                
 
-        } else {
-            refreshButton();
+                useButton.gameObject.SetActive(true);
+                buttonText.text = "kick" + held.GetName();
+                state = ButtonState.member;
+            } else {
+                refreshButton();
+                member.Selected();
+            }
         }
+        
 
         
     }
@@ -175,6 +188,7 @@ public class UIInventory : MonoBehaviour
             if (thisItem != null) {
                 selectedItem = held;
                 useButton.gameObject.SetActive(true);
+                state = ButtonState.item;
 
             }
 
@@ -183,28 +197,38 @@ public class UIInventory : MonoBehaviour
         
     }
     private void OnButtonClick() {
-        if (usingItem == null && selectedMember == null) {
-            usingItem = selectedItem;
-            buttonText.text = "use " + usingItem.GetName() + " on Who?";
-        } else if (usingItem!=null &&selectedMember!=null){
-            buttonText.text = "using " + usingItem.GetName() + " on "+selectedMember.GetName();
-            //use item
-            
-            UsableInInventory thisItem  = usingItem as UsableInInventory;
-            if (thisItem != null) {
-                thisItem.UseOnMember(selectedMember);
-                _uIPartyMember.SetdisplayItem(selectedMember);
-                
-                player.inventory.removeItemByName(usingItem.GetName());
+
+        Debug.Log(state.ToString());
+        switch (state) {
+            case (ButtonState.item):
+
+                if (usingItem == null && selectedMember == null) {
+                    usingItem = selectedItem;
+                    buttonText.text = "use " + usingItem.GetName() + " on Who?";
+                } else if (usingItem != null && selectedMember != null) {
+                    buttonText.text = "using " + usingItem.GetName() + " on " + selectedMember.GetName();
+                    //use item
+
+                    UsableInInventory thisItem = usingItem as UsableInInventory;
+                    if (thisItem != null) {
+                        thisItem.UseOnMember(selectedMember);
+                        _uIPartyMember.SetdisplayItem(selectedMember);
+
+                        player.inventory.removeItemByName(usingItem.GetName());
+                        Show(player.inventory.getInventory());
+                    }
+                    //after
+                    refreshButton();
+
+                }
+                break;
+            case (ButtonState.member):
+                partyManager.RemoveFromParty(selectedMember);
                 Show(player.inventory.getInventory());
+                refreshButton();
 
-                
-                
 
-            }
-            //after
-            refreshButton();
-
+                break;
         }
 
 

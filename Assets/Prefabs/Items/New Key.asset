@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   key: {fileID: 4747754362219137549, guid: 014b00bdb3c4f5c9ea341e6749883554, type: 3}
   sprite: {fileID: 5525693023308922211, guid: d520d64d83c5adc5fa853207fe08837b, type: 3}
+  sfxPickup: {fileID: 8300000, guid: 6d431500fe3d58295989c4b262546c84, type: 3}

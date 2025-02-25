@@ -33,12 +33,14 @@ public class BattleUiHandler : MonoBehaviour {
     public int currentTurnIndex = 0;
     private bool battleInProgress = false;
 
-    public Dictionary<string, CharStats> L1Enemies = new Dictionary<string, CharStats>//i think these should also be prefabs
-    {
-        { "Handy", new CharStats("Handy", 38, 100, true)},
-        { "Gregor", new CharStats("Gregor", 21, 120, true)},
-        { "Turf", new CharStats("Turf", 31, 150, true)}
-    };
+    public Dictionary<string, CharStats> L1Enemies =
+        new Dictionary<string, CharStats> //i think these should also be prefabs
+        {
+            { "Handy", new CharStats("Handy", 38, 100, true) },
+            { "Gregor", new CharStats("Gregor", 21, 120, true) },
+            { "Turf", new CharStats("Turf", 31, 150, true) }
+        };
+
     public Dictionary<string, CharStats> L2Enemies = new Dictionary<string, CharStats>();
     public List<CharStats> currentEnemies = new List<CharStats>();
     public List<Sprite> profileImages;
@@ -55,10 +57,12 @@ public class BattleUiHandler : MonoBehaviour {
         [HideInInspector] public AudioClip oldAmbience;      // Use to swap back to old scene
         [HideInInspector] public AudioClip oldMusic;         // Use to swap back to old scene
         public AudioClip sfxBell;
-        public AudioClip uiSelected;
-        public AudioClip uiUnselected;
-        public AudioClip uiDrawer;
+        public AudioClip sfxSwing;
+        public AudioClip uiSelect;
+        public AudioClip uiOpenDrawer;
+        public AudioClip uiCloseDrawer;
     }
+
     [SerializeField] private AudioClips audioClips;
 
     void OnEnable() {
@@ -70,6 +74,7 @@ public class BattleUiHandler : MonoBehaviour {
 
         StartCoroutine(StartBattle());
     }
+
     public IEnumerator StartBattle() {
         battleOrder.Clear();
         partyManager = GameObject.FindGameObjectWithTag("Player").GetComponent<PartyManager>();
@@ -85,7 +90,9 @@ public class BattleUiHandler : MonoBehaviour {
         int slotIndex = 1;
         foreach (var member in partyManager.currentPartyMembers) {
             if (member.IsCombatant) {
-                CharStats newChar = new CharStats(member.Name, member.Damage, member.Health, false);//probably need to change abit to be able to use current health as well as max health
+                CharStats
+                    newChar = new CharStats(member.Name, member.Damage, member.Health,
+                        false); //probably need to change abit to be able to use current health as well as max health
                 battleOrder.Add(newChar);
 
                 if (slotIndex < partySlots.Count) {
@@ -93,8 +100,10 @@ public class BattleUiHandler : MonoBehaviour {
                     // partySlots[slotIndex].profile.sprite = member.profileSprite; // Ensure PartyMember has profileSprite
                     partySlots[slotIndex].GetComponent<PartySlot>().Name = member.Name;
                     partySlots[slotIndex].GetComponent<PartySlot>().SetHealth(member.Health, member.Health);
-                    partySlots[slotIndex].GetComponent<PartySlot>().profile.sprite = member.GetSprite(); //can create add/create other sprites and getters if want to use different sprite
+                    partySlots[slotIndex].GetComponent<PartySlot>().profile.sprite =
+                        member.GetSprite(); //can create add/create other sprites and getters if want to use different sprite
                 }
+
                 slotIndex++;
             }
         }
@@ -107,10 +116,10 @@ public class BattleUiHandler : MonoBehaviour {
         battleOrder = ShuffleList(battleOrder);
 
 
-
         foreach (var Char in battleOrder) {
             Debug.Log($"{Char.Name}: {Char.Attack} Damage, {Char.Health} HP");
         }
+
         battleInProgress = true;
         turnIndicator.SetupTurnIndicator(battleOrder.Count);
 
@@ -125,16 +134,17 @@ public class BattleUiHandler : MonoBehaviour {
         yield return new WaitForSecondsRealtime(2.0f);
         StartCoroutine(TurnLoop());
     }
+
     public List<CharStats> ShuffleList(List<CharStats> list) {
         for (int i = 0; i < list.Count; i++) {
             int randomIndex = Random.Range(0, list.Count);
             (list[i], list[randomIndex]) = (list[randomIndex], list[i]);
         }
+
         return list;
     }
 
     private IEnumerator TurnLoop() {
-
         while (battleInProgress) {
             if (currentTurnIndex >= battleOrder.Count) {
                 currentTurnIndex = 0; // Loop back to the first combatant
@@ -147,8 +157,8 @@ public class BattleUiHandler : MonoBehaviour {
             if (currentCombatant.IsEnemy) // Enemy turn
             {
                 yield return EnemyTurn(currentCombatant);
-            } else if (!currentCombatant.IsEnemy)// Player turn
-              {
+            } else if (!currentCombatant.IsEnemy) // Player turn
+            {
                 damageButtonText.text = $"Attack:{currentCombatant.Attack}";
                 yield return PlayerTurn(currentCombatant);
             }
@@ -164,9 +174,9 @@ public class BattleUiHandler : MonoBehaviour {
             }
 
             currentTurnIndex++;
-
         }
     }
+
     private IEnumerator PlayerTurn(CharStats player) {
         Debug.Log($"{player.Name}'s turn. Choose an action!");
 
@@ -185,7 +195,7 @@ public class BattleUiHandler : MonoBehaviour {
                 // If the action is changed mid-selection, restart decision phase
                 if (selectedAction == "Attack") {
                     Debug.Log("Action switched to Attack. Restarting action selection...");
-                    break;  // Go back to the start of the loop
+                    break; // Go back to the start of the loop
                 }
             }
 
@@ -206,6 +216,7 @@ public class BattleUiHandler : MonoBehaviour {
                         if (healTarget.Health > mem.GetComponent<PartySlot>().maxHealth) {
                             healTarget.Health = (int)mem.GetComponent<PartySlot>().maxHealth;
                         }
+
                         mem.GetComponent<PartySlot>().UpdateHealthBar(healTarget.Health);
                         mem.GetComponent<PartySlot>().ShowHealthChange();
                         ShowFloatingText(healAmount, Color.green, mem.transform.position, true);
@@ -222,9 +233,11 @@ public class BattleUiHandler : MonoBehaviour {
         if (selectedAction == "Attack") {
             int playerDamage = (int)Random.Range(player.Attack * .8f, player.Attack * 1.6f);
             enemyStats.Health -= playerDamage;
+            AudioManager.Instance.PlayUiSound(audioClips.sfxSwing);
             Debug.Log($"{player.Name} attacks {enemyStats.Name} for {playerDamage} damage!");
 
-            ShowFloatingText(playerDamage, Color.red, (enemySlot.transform.position + (new Vector3(-80f, 0f, 0f))), false);
+            ShowFloatingText(playerDamage, Color.red, (enemySlot.transform.position + (new Vector3(-80f, 0f, 0f))),
+                false);
 
             if (enemyStats.Health <= 0) {
                 Debug.Log($"{enemyStats.Name} has been defeated!");
@@ -280,7 +293,9 @@ public class BattleUiHandler : MonoBehaviour {
 
         enemySlot.GetComponent<EnemyHealthbar>().UpdateHealthBar(enemyStats.Health);
         foreach (GameObject mem in partySlots) {
-            if (mem.GetComponent<PartySlot>().Name == player.Name) { mem.GetComponent<PartySlot>().UpdateHealthBar(player.Health); }
+            if (mem.GetComponent<PartySlot>().Name == player.Name) {
+                mem.GetComponent<PartySlot>().UpdateHealthBar(player.Health);
+            }
         }
 
         Debug.Log($"Player chose {selectedAction}");
@@ -295,7 +310,6 @@ public class BattleUiHandler : MonoBehaviour {
             CharStats target = playerParty[Random.Range(0, playerParty.Count)];
             Survivor guyGettingHit;
             if (target.Name == partyManager.getPlayer().Name) {
-
                 guyGettingHit = partyManager.getPlayer();
             } else {
                 guyGettingHit = partyManager.currentPartyMembers.Find(c => c.Name == target.Name);
@@ -314,6 +328,7 @@ public class BattleUiHandler : MonoBehaviour {
                     StartCoroutine(mem.GetComponent<PartySlot>().JutterHealthBar(0.2f, 10f));
                 }
             }
+
             // Check if target is defeated
             Debug.Log(guyGettingHit.ToString());
             if (guyGettingHit.Health <= 0) {
@@ -321,6 +336,7 @@ public class BattleUiHandler : MonoBehaviour {
                 battleOrder.Remove(target);
             }
         }
+
         yield return new WaitForSecondsRealtime(.3f);
     }
 
@@ -328,18 +344,21 @@ public class BattleUiHandler : MonoBehaviour {
         selectedTarget = targetName;
         Debug.Log($"Target selected: {selectedTarget}");
     }
+
     private IEnumerator WaitForTargetSelection(System.Action<string> callback) {
         string selectedTarget = null;
         while (string.IsNullOrEmpty(selectedTarget)) {
             yield return null;
         }
+
         callback(selectedTarget); // Return the selected name
     }
 
 
     void ShowFloatingText(int damage, Color color, Vector3 targetTransform, bool ishealing) {
         Vector3 spawnPosition = targetTransform + new Vector3(0, 20f, 0);
-        GameObject floatingText = Instantiate(floatingTextPrefab, spawnPosition, Quaternion.identity, GameObject.FindGameObjectWithTag("Combat UI").transform);
+        GameObject floatingText = Instantiate(floatingTextPrefab, spawnPosition, Quaternion.identity,
+            GameObject.FindGameObjectWithTag("Combat UI").transform);
         floatingText.SetActive(true);
         floatingText.GetComponent<DamageIndicator>().SetText(damage.ToString(), color);
         floatingText.GetComponent<DamageIndicator>().isHealing = ishealing;
@@ -367,6 +386,7 @@ public class BattleUiHandler : MonoBehaviour {
                 actOption = itemOption = false;
             }
         }
+
         actOptionBList.SetActive(actOption);
         itemOptionBList.SetActive(itemOption);
         overworldUI.SetActive(true);
@@ -382,7 +402,7 @@ public class BattleUiHandler : MonoBehaviour {
     }
 
     public void OnActionButtonPressed(string action) {
-        AudioManager.Instance.PlayUiSound(audioClips.uiSelected);
+        AudioManager.Instance.PlayUiSound(audioClips.uiSelect);
 
         if (selectedAction == "Heal" || selectedAction == "Defend") {
             selectedTarget = null;
@@ -401,22 +421,25 @@ public class BattleUiHandler : MonoBehaviour {
 
             if (actOption) {
                 partyUIAnimator.SetTrigger("Close");
+                AudioManager.Instance.PlayUiSound(audioClips.uiCloseDrawer);
                 actOption = false;
             } else if (itemOption) {
                 partyUIAnimator.SetTrigger("Reset");
+                AudioManager.Instance.PlayUiSound(audioClips.uiCloseDrawer);
                 itemOption = false;
                 actOption = true;
             } else {
                 partyUIAnimator.SetTrigger("Open");
+                AudioManager.Instance.PlayUiSound(audioClips.uiOpenDrawer);
                 actOption = true;
             }
+
             // actOptionBList.SetActive(actOption);
             StartCoroutine(WaitForCloseThenToggle(actOptionBList, actOption));
             itemOptionBList.SetActive(itemOption);
         }
-
-        AudioManager.Instance.PlayUiSound(audioClips.uiDrawer);
     }
+
     public void Item() {
         if (partyUIAnimator != null) {
             partyUIAnimator.ResetTrigger("Open");
@@ -425,13 +448,16 @@ public class BattleUiHandler : MonoBehaviour {
 
             if (itemOption) {
                 partyUIAnimator.SetTrigger("Close");
+                AudioManager.Instance.PlayUiSound(audioClips.uiCloseDrawer);
                 itemOption = false;
             } else if (actOption) {
                 partyUIAnimator.SetTrigger("Reset");
+                AudioManager.Instance.PlayUiSound(audioClips.uiCloseDrawer);
                 actOption = false;
                 itemOption = true;
             } else {
                 partyUIAnimator.SetTrigger("Open");
+                AudioManager.Instance.PlayUiSound(audioClips.uiOpenDrawer);
                 itemOption = true;
             }
 
@@ -439,10 +465,10 @@ public class BattleUiHandler : MonoBehaviour {
             // itemOptionBList.SetActive(itemOption);
             StartCoroutine(WaitForCloseThenToggle(itemOptionBList, itemOption));
         }
-        AudioManager.Instance.PlayUiSound(audioClips.uiDrawer);
     }
+
     public void Escape() {
-        AudioManager.Instance.PlayUiSound(audioClips.uiDrawer);
+        AudioManager.Instance.PlayUiSound(audioClips.uiSelect);
         EndEncounter();
     }
 
@@ -467,9 +493,12 @@ public class BattleUiHandler : MonoBehaviour {
                 yield return null;
                 stateInfo = partyUIAnimator.GetCurrentAnimatorStateInfo(0);
 
-                if (stateInfo.IsName("Slot Open")) { break; }
+                if (stateInfo.IsName("Slot Open")) {
+                    break;
+                }
             }
         }
+
         targetContent.SetActive(state);
     }
 }

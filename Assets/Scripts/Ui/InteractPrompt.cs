@@ -37,6 +37,7 @@ public class InteractPrompt : MonoBehaviour {
     [Serializable]
     private struct AudioClips {
         public AudioClip sfxOnInteract;
+        public AudioClip sfxTypewriter;
     }
 
     [SerializeField] private AudioClips audioClips;
@@ -47,7 +48,7 @@ public class InteractPrompt : MonoBehaviour {
         Gizmos.DrawWireSphere(transform.position, interactRange);
     }
 
-    // public void PopUp(string text)
+    // public void PopUp(string text) 
     // {
     //     if (currentPopUp){
     //         popUpText.text = text;
@@ -113,6 +114,7 @@ public class InteractPrompt : MonoBehaviour {
 
             // nameTypeWriter = nameText.GetComponent<TypeWriter>();
             bodyTypeWriter = dialogueText.GetComponent<TypeWriter>();
+            bodyTypeWriter.SetSfxTyping(audioClips.sfxTypewriter);
 
             screenPanelAnimator = GameObject.FindGameObjectWithTag("Dark Screen").GetComponent<Animator>();
             screenPanelAnimator.Play("Blank");

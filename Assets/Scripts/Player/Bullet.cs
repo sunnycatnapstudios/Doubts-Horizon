@@ -179,6 +179,9 @@ public class Bullet : MonoBehaviour {
 
     void Update() {
         UpdateUI();
+        if (Input.GetMouseButtonDown(1) && !shoot) {
+            AudioManager.Instance.PlaySound(audioClips.sfxDrawSlingshot);
+        }
 
         if (Input.GetMouseButtonUp(1) && !shoot && bulletCount > 0 && !isReloading) {
             ChangeBulletCount(bulletCount - 1);
