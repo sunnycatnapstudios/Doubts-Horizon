@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ration: {fileID: 3261883972054362730, guid: 5f34ddba4d67d668491b417910111049, type: 3}
   Sprite: {fileID: -5026382189375324304, guid: 6f50c0858b0ac274b8a6a39f515c04b3, type: 3}
+  sfxPickup: {fileID: 8300000, guid: c6f38b1cf169e1d79972fd231dbba484, type: 3}

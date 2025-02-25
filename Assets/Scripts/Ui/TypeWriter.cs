@@ -15,6 +15,11 @@ public class TypeWriter : MonoBehaviour {
 
     public bool hasStartedTyping = false, isTyping = false, skipTyping = false;
     public float textChirp;
+    private AudioClip _sfxTyping;
+
+    public void SetSfxTyping(AudioClip clip) {
+        _sfxTyping = clip;
+    }
 
     public void StartTypewriter(string newText) {
         _tmpProText.text = "";
@@ -43,6 +48,7 @@ public class TypeWriter : MonoBehaviour {
                         break;
                     }
                 }
+
                 _tmpProText.text += writer.Substring(start, i - start);
                 if (i >= writer.Length) {
                     break;
@@ -53,22 +59,26 @@ public class TypeWriter : MonoBehaviour {
             if (_tmpProText.text.Length > 0) {
                 _tmpProText.text = _tmpProText.text.Substring(0, _tmpProText.text.Length - leadingChar.Length);
             }
+
             _tmpProText.text += c;
             _tmpProText.text += leadingChar;
 
             textChirp += .095f;
 
-            if (GetComponent<AudioSource>() != null && textChirp >= 0.2f) {
-                GetComponent<AudioSource>().Play();
+            if (textChirp >= 0.2f) {
                 textChirp = 0f;
+                AudioManager.Instance.PlaySound(_sfxTyping);
             }
+
             yield return new WaitForSeconds(timeBtwChars);
         }
 
         if (leadingChar != "") {
             _tmpProText.text = _tmpProText.text.Substring(0, _tmpProText.text.Length - leadingChar.Length);
         }
-        isTyping = false; skipTyping = false;
+
+        isTyping = false;
+        skipTyping = false;
     }
 
     void Start() {
@@ -84,13 +94,14 @@ public class TypeWriter : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (Input.GetKeyDown(KeyCode.E) && isTyping && _tmpProText.text.Length > 3) { skipTyping = true; }
+        if (Input.GetKeyDown(KeyCode.E) && isTyping && _tmpProText.text.Length > 3) {
+            skipTyping = true;
+        }
 
         // Start typing only after activation and delay
         if (hasStartedTyping && !isTyping) {
             hasStartedTyping = false;
             StartCoroutine("TypeWriterTMP");
-
         }
     }
 }
