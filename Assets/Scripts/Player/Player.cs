@@ -43,6 +43,8 @@ public class Player : MonoBehaviour
     public bool isPlayerInControl;
     public bool isSneaking, isSprinting;
 
+    public Transform pauseMenu;
+    private bool isPaused = false;
 
     void ViewMap(bool cancontrolcam)
     {
@@ -54,12 +56,20 @@ public class Player : MonoBehaviour
         }
     }
 
+    void OpenPauseMenu(bool cancontrolcam) {
+        if (cancontrolcam && Input.GetKeyDown(KeyCode.Escape)) {
+            isPaused = !isPaused;
+            Time.timeScale = isPaused ? 0 : 1;
+            pauseMenu.gameObject.SetActive(isPaused);
+        }
+    }
+
     void UpdateMoveHist()
     {
         if (moveHist.Count < _partyManager.partyCount&&
             movePoint.position == pointRef)
         {
-            // for (int i = 0; i<partyManager.partyCount; i++) 
+            // for (int i = 0; i<partyManager.partyCount; i++)
             {moveHist.Add(movePoint.position);}
         }
         if (movePoint.position != pointRef) {moveHist.Add(pointRef);}
@@ -69,7 +79,7 @@ public class Player : MonoBehaviour
 
     void Awake()
     {
-        
+
     }
     void Start()
     {
@@ -103,7 +113,7 @@ public class Player : MonoBehaviour
         transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed*Time.deltaTime);
         Vector3 endRef = transform.position;
         isMoving = startRef!=endRef;
-        
+
         isSneaking = Input.GetMouseButton(1);
         isSprinting = Input.GetKey(KeyCode.LeftShift) && GameStatsManager.Instance.CanSprint() && !isSneaking;
         GameStatsManager.Instance.isCurrentlySprinting = isSprinting && isMoving;
@@ -114,22 +124,23 @@ public class Player : MonoBehaviour
             moveSpeed = isSneaking ? moveSneak : ((isSprinting&&isMoving) ? moveSprint : moveConstant);
         }
         if (isSprinting && isMoving) {if (animCount<=0){partiSystem.Play(); animCount+=1;}}
-        else 
+        else
         {
             animCount=0;
             partiSystem.Stop();
         }
 
-    
+
         ViewMap(canControlCam);
+        OpenPauseMenu(canControlCam);
 
         if (Vector3.Distance(transform.position, movePoint.position) <= movementInputDelay && !isZooming && !isPlayerInControl){
 
             pointRef = movePoint.position;
-            
+
             playerInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
             Vector3 moveDir = Vector3.zero;
-            
+
             if (playerInput.x != 0 && lastInput.x == 0) {
                 lastInput = new Vector2(playerInput.x, 0f);
             }
