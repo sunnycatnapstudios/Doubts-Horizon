@@ -68,6 +68,14 @@ public class Inventory : MonoBehaviour {
         return inventory.ContainsKey(name);
     }
 
+    public int getCountofItem(string name) {
+        if (inventory.ContainsKey(name)) {
+            return inventory[name].getCount();
+        }
+        Debug.Log(inventory.ToString());
+        return 0;
+    }
+
     public void removeItemByName(string name) {
         Debug.Log("removing " + name);
         Slot slot = inventory[name];
@@ -105,10 +113,12 @@ public class Inventory : MonoBehaviour {
                 curObj.GetComponent<Pickupable>().DestroyInWorld();
             }
         } else if (Input.GetKeyDown(KeyCode.I) && timer <= 1) {
-            //Debug.Log(timer.ToString());
+            Debug.Log("got I");
             if (inventoryWindow.isActiveAndEnabled == false) {
+                Debug.Log("a");
                 inventoryWindow.Show(inventory);
             } else {
+                Debug.Log("b");
                 inventoryWindow.Hide();
             }
 

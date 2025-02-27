@@ -7,7 +7,7 @@ using UnityEngine.UI;
 
 public class InteractPrompt : MonoBehaviour {
     public LayerMask playerLayer;
-    public Player player;
+    private Player player;
     private float interactRange = 1.5f;
     int interactCount = 0;
 
@@ -48,7 +48,7 @@ public class InteractPrompt : MonoBehaviour {
         Gizmos.DrawWireSphere(transform.position, interactRange);
     }
 
-    // public void PopUp(string text) 
+    // public void PopUp(string text)
     // {
     //     if (currentPopUp){
     //         popUpText.text = text;
@@ -57,6 +57,8 @@ public class InteractPrompt : MonoBehaviour {
     // }
 
     void OpenDialogue(string text) {
+        AudioManager.Instance.PlayUiSound(audioClips.sfxTypewriter);    // TODO temp solution
+
         // dialogueBox.SetActive(true);
         bodyTypeWriter.skipTyping = false;
         dialogueAnimator.SetTrigger("SlideIn");
@@ -74,6 +76,8 @@ public class InteractPrompt : MonoBehaviour {
     }
 
     void UpdateDialogue(string text) {
+        AudioManager.Instance.PlayUiSound(audioClips.sfxTypewriter);        // TODO temp solution
+
         bodyTypeWriter.skipTyping = false;
         bodyTypeWriter.hasStartedTyping = true;
         if (bodyTypeWriter != null) {
@@ -103,6 +107,10 @@ public class InteractPrompt : MonoBehaviour {
         // charProfile.sprite = null;
     }
 
+    void Awake() {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+    }
+
     void Start() {
         if (CompareTag("NPC")) {
             nameText = GameObject.FindGameObjectWithTag("Name Card").GetComponent<TMP_Text>();
@@ -114,7 +122,7 @@ public class InteractPrompt : MonoBehaviour {
 
             // nameTypeWriter = nameText.GetComponent<TypeWriter>();
             bodyTypeWriter = dialogueText.GetComponent<TypeWriter>();
-            bodyTypeWriter.SetSfxTyping(audioClips.sfxTypewriter);
+            bodyTypeWriter.SetSfxTyping(audioClips.sfxTypewriter);  // TODO NO LONGERS WORKS?
 
             screenPanelAnimator = GameObject.FindGameObjectWithTag("Dark Screen").GetComponent<Animator>();
             screenPanelAnimator.Play("Blank");
@@ -126,6 +134,39 @@ public class InteractPrompt : MonoBehaviour {
         // if (CompareTag("Interactable")) {
         //     Debug.Log("YEEEEEEEEEEEAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHH");
         // }
+    }
+
+    public void forceDialogueEnd() {
+        interactCount++;
+        if (CompareTag("Interactable")) {
+            Debug.Log($"YEP, YOU'VE TAPPED {this.name} {interactCount} TIMES!!!");
+        } else if (CompareTag("NPC")) {
+            // Debug.Log($"Dialogue Interacted with {interactCount} times");
+            if (!isDialogueOpen && !bodyTypeWriter.isTyping) {
+                nameText.text = this.name;
+                // isDialogueOpen = true;
+                charProfile.sprite = characterProfile;
+                npcDialogueHandler.ResetDialogue();
+                string nextLine = npcDialogueHandler.GetNextLine();
+
+                if (nextLine != null) {
+                    OpenDialogue(nextLine);
+                    dialogueFinished = false;
+                }
+            } else if (!bodyTypeWriter.isTyping && !bodyTypeWriter.hasStartedTyping) {
+                string nextLine = npcDialogueHandler.GetNextLine();
+
+                if (nextLine != null) {
+                    UpdateDialogue(nextLine);
+                } else {
+                    CloseDialogue();
+                    Debug.Log("Finished Dialogue Segment");
+                    dialogueFinished = true;
+                }
+            }
+        }
+
+
     }
 
     void Update() {
