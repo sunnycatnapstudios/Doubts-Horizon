@@ -400,9 +400,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Enemy: {fileID: 439506002}
   Alert: {fileID: 0}
-  alertAudi: {fileID: 0}
   playCount: 0
   animPlayCount: 0
+  audioClips:
+    sfxSpotted: {fileID: 0}
 --- !u!95 &28124116
 Animator:
   serializedVersion: 3
@@ -24394,6 +24395,7 @@ MonoBehaviour:
   npcDialogueHandler: {fileID: 0}
   audioClips:
     sfxOnInteract: {fileID: 0}
+    sfxTypewriter: {fileID: 0}
 --- !u!212 &181162047
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -25098,9 +25100,10 @@ MonoBehaviour:
     oldAmbience: {fileID: 0}
     oldMusic: {fileID: 0}
     sfxBell: {fileID: 0}
-    uiSelected: {fileID: 0}
-    uiUnselected: {fileID: 0}
-    uiDrawer: {fileID: 0}
+    sfxSwing: {fileID: 0}
+    uiSelect: {fileID: 0}
+    uiOpenDrawer: {fileID: 0}
+    uiCloseDrawer: {fileID: 0}
 --- !u!95 &228733527
 Animator:
   serializedVersion: 3
@@ -25692,6 +25695,7 @@ MonoBehaviour:
   npcDialogueHandler: {fileID: 0}
   audioClips:
     sfxOnInteract: {fileID: 0}
+    sfxTypewriter: {fileID: 0}
 --- !u!212 &271334415
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -28343,6 +28347,7 @@ MonoBehaviour:
   npcDialogueHandler: {fileID: 0}
   audioClips:
     sfxOnInteract: {fileID: 0}
+    sfxTypewriter: {fileID: 0}
 --- !u!212 &459218824
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -28551,9 +28556,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Enemy: {fileID: 1172916556}
   Alert: {fileID: 0}
-  alertAudi: {fileID: 0}
   playCount: 0
   animPlayCount: 0
+  audioClips:
+    sfxSpotted: {fileID: 0}
 --- !u!95 &459476180
 Animator:
   serializedVersion: 3
@@ -41236,6 +41242,7 @@ MonoBehaviour:
   npcDialogueHandler: {fileID: 0}
   audioClips:
     sfxOnInteract: {fileID: 0}
+    sfxTypewriter: {fileID: 0}
 --- !u!212 &1047770476
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -43131,6 +43138,7 @@ MonoBehaviour:
   npcDialogueHandler: {fileID: 0}
   audioClips:
     sfxOnInteract: {fileID: 0}
+    sfxTypewriter: {fileID: 0}
 --- !u!50 &1166367098
 Rigidbody2D:
   serializedVersion: 4
@@ -45585,6 +45593,7 @@ MonoBehaviour:
   npcDialogueHandler: {fileID: 0}
   audioClips:
     sfxOnInteract: {fileID: 0}
+    sfxTypewriter: {fileID: 0}
 --- !u!212 &1427184478
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -58546,6 +58555,7 @@ MonoBehaviour:
   npcDialogueHandler: {fileID: 0}
   audioClips:
     sfxOnInteract: {fileID: 0}
+    sfxTypewriter: {fileID: 0}
 --- !u!212 &1818800190
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -59555,6 +59565,7 @@ MonoBehaviour:
   npcDialogueHandler: {fileID: 0}
   audioClips:
     sfxOnInteract: {fileID: 0}
+    sfxTypewriter: {fileID: 0}
 --- !u!212 &1887495468
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -60742,6 +60753,7 @@ MonoBehaviour:
   npcDialogueHandler: {fileID: 0}
   audioClips:
     sfxOnInteract: {fileID: 0}
+    sfxTypewriter: {fileID: 0}
 --- !u!212 &2013483584
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -64167,6 +64179,7 @@ MonoBehaviour:
   npcDialogueHandler: {fileID: 0}
   audioClips:
     sfxOnInteract: {fileID: 0}
+    sfxTypewriter: {fileID: 0}
 --- !u!212 &2046889728
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -70639,6 +70652,7 @@ MonoBehaviour:
   isPlayerInControl: 0
   isSneaking: 0
   isSprinting: 0
+  pauseMenu: {fileID: 0}
 --- !u!1 &210012170770942188
 GameObject:
   m_ObjectHideFlags: 0
@@ -71257,6 +71271,7 @@ MonoBehaviour:
   npcDialogueHandler: {fileID: 0}
   audioClips:
     sfxOnInteract: {fileID: 8300000, guid: 23802cc61f418c348b956e69d407d8e0, type: 3}
+    sfxTypewriter: {fileID: 0}
 --- !u!212 &3299673890537269110
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -71347,6 +71362,7 @@ MonoBehaviour:
   npcDialogueHandler: {fileID: 0}
   audioClips:
     sfxOnInteract: {fileID: 8300000, guid: 23802cc61f418c348b956e69d407d8e0, type: 3}
+    sfxTypewriter: {fileID: 0}
 --- !u!61 &3299673890677685201
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -77097,9 +77113,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Enemy: {fileID: 6497700934576521013}
   Alert: {fileID: 0}
-  alertAudi: {fileID: 0}
   playCount: 0
   animPlayCount: 0
+  audioClips:
+    sfxSpotted: {fileID: 0}
 --- !u!212 &6497700934576521000
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -77376,7 +77393,7 @@ MonoBehaviour:
   test1: {fileID: 0}
   test2: {fileID: 0}
   audioClips:
-    sfxPickup: {fileID: 8300000, guid: 23802cc61f418c348b956e69d407d8e0, type: 3}
+    sfxCloseInventory: {fileID: 0}
 --- !u!222 &7251264088389145945
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -80097,9 +80114,10 @@ MonoBehaviour:
     oldAmbience: {fileID: 0}
     oldMusic: {fileID: 0}
     sfxBell: {fileID: 8300000, guid: a6bc35b0ac6c5da2b9d9c7062b2506d5, type: 3}
-    uiSelected: {fileID: 8300000, guid: 1f1f7aee441eb6c9a8d68cbb546ce7b0, type: 3}
-    uiUnselected: {fileID: 8300000, guid: 1f1f7aee441eb6c9a8d68cbb546ce7b0, type: 3}
-    uiDrawer: {fileID: 8300000, guid: b42079d2d16c1705d8fda510d7cc8624, type: 3}
+    sfxSwing: {fileID: 0}
+    uiSelect: {fileID: 0}
+    uiOpenDrawer: {fileID: 0}
+    uiCloseDrawer: {fileID: 0}
 --- !u!1 &7251264089726218016
 GameObject:
   m_ObjectHideFlags: 0

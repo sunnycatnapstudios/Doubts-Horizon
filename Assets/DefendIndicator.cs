@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class DefendIndicator : MonoBehaviour
 {
-    public bool inAnimation = false, isAssigned = false;
+    public bool inAnimation = false, isAssigned = false, overEdge;
     private RectTransform rectTransform;
     public RectTransform parentRectTransform;
 
@@ -20,13 +20,10 @@ public class DefendIndicator : MonoBehaviour
     {
         rectScreenPos = RectTransformUtility.WorldToScreenPoint(null, rectTransform.position);
         parentScreenPos = RectTransformUtility.WorldToScreenPoint(null, parentRectTransform.position);
-     
+
         parentWidth = parentRectTransform.rect.width / 3;
 
-        if (rectScreenPos.x > parentScreenPos.x+parentWidth||rectScreenPos.x < parentScreenPos.x-parentWidth)
-        {
-            // Debug.Log("Edge Exceeded!");
-        }
+        overEdge = (rectScreenPos.x > parentScreenPos.x+parentWidth||rectScreenPos.x < parentScreenPos.x-parentWidth);
     }
 
     void Update()

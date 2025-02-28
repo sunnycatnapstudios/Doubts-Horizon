@@ -26,6 +26,7 @@ public class GameStatsManager : MonoBehaviour
     public static GameStatsManager Instance { get; private set;}
     public _PartyManager _partyManager;
     public _BattleUIHandler _battleUIHandler;
+    public _DialogueHandler _dialogueHandler;
 
     // Combat-Related Stats
     public Dictionary<string, CharacterStats> playerStats = new Dictionary<string, CharacterStats>
@@ -154,6 +155,7 @@ public class GameStatsManager : MonoBehaviour
 
         _partyManager = GetComponentInChildren<_PartyManager>();
         _battleUIHandler = GetComponentInChildren<_BattleUIHandler>();
+        _dialogueHandler = GetComponentInChildren<_DialogueHandler>();
 
         staminaBar = GameObject.FindGameObjectWithTag("Stamina Bar").GetComponent<Image>();
 
@@ -161,9 +163,7 @@ public class GameStatsManager : MonoBehaviour
     }
     public void Start()
     {
-        // PrintCharacterStats(playerStats, "Player");
-        // PrintCharacterStats(allPartyMembers, "Party Members");
-        // PrintCharacterStats(L1Enemies, "Enemies");
+        
     }
     public void Update()
     {

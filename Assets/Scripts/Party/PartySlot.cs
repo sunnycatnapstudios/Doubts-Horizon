@@ -14,10 +14,9 @@ public class PartySlot : MonoBehaviour
     public float currentHealth, maxHealth;
     public Vector3 defaultImagePosition, initialBarPosition;
     public bool _isHighlighted;
-    public BattleUiHandler battleUiHandler;
     private GameStatsManager gameStatsManager;
-    private _PartyManager _partyManager;
-    private _BattleUIHandler _battleUIHandler;
+    public _PartyManager _partyManager;
+    public _BattleUIHandler _battleUIHandler;
     public TextMeshProUGUI playerHealthIndicator;
     private float fadeDuration = .5f, delayBeforeFade = 1.2f;
 
@@ -104,11 +103,6 @@ public class PartySlot : MonoBehaviour
 
     private IEnumerator FadeOutHealthText()
     {
-        // if (!playerHealthIndicator.color.a.Equals(1f))
-        // {
-        //     playerHealthIndicator.text = ((int)(healthBarTail.fillAmount * 100f)).ToString() + "%";
-        //     playerHealthIndicator.color = new Color(playerHealthIndicator.color.r, playerHealthIndicator.color.g, playerHealthIndicator.color.b, 1f); // Fully opaque
-        // }
         playerHealthIndicator.color = new Color(playerHealthIndicator.color.r, playerHealthIndicator.color.g, playerHealthIndicator.color.b, 1f);
         float timeElapsed = 0f;
         
@@ -127,17 +121,40 @@ public class PartySlot : MonoBehaviour
 
         // Ensure the text is fully transparent at the end
         playerHealthIndicator.color = new Color(startColor.r, startColor.g, startColor.b, 0f);
-        // playerHealthIndicator.text = ""; //
+    }
+    private IEnumerator LerpHealthBarColor(Color targetColor, float duration)
+    {
+        healthBarBar.color = Color.green;
+        Color startColor = Color.green;
+        float elapsedTime = 0f;
+
+        yield return new WaitForSecondsRealtime(.5f);
+
+        while (elapsedTime < duration)
+        {
+            healthBarBar.color = Color.Lerp(startColor, targetColor, elapsedTime / duration);
+            elapsedTime += Time.unscaledDeltaTime;
+            yield return null;
+        }
+
+        healthBarBar.color = targetColor;
     }
 
     public void ShowHealthChange()
     {
         if (!gameObject.activeInHierarchy) return;
+
         // Show health text and start fading it out
-        {
-            StopAllCoroutines(); // Stop previous coroutines
-            StartCoroutine(FadeOutHealthText());
-        }
+        StopAllCoroutines(); // Stop previous coroutines
+        StartCoroutine(FadeOutHealthText());
+    }
+    public void HealHealthBar()
+    {
+        if (!gameObject.activeInHierarchy) return;
+        
+        StopAllCoroutines(); // Stop previous coroutines
+        StartCoroutine(FadeOutHealthText());
+        StartCoroutine(LerpHealthBarColor(Color.red, fadeDuration*2f));
     }
 
     void Awake()
@@ -161,7 +178,6 @@ public class PartySlot : MonoBehaviour
             UnHighlightImage();
         }
 
-        // playerHealthIndicator.text = (((int)(healthBarTail.fillAmount*100f)).ToString()+"%");
         if (healthBarBar.fillAmount == 0) {playerHealthIndicator.text = "";}
         else {
             playerHealthIndicator.text = (((int)(healthBarTail.fillAmount*100f)).ToString()+"%");

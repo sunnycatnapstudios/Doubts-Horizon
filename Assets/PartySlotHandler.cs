@@ -6,14 +6,15 @@ using UnityEngine.UI;
 public class PartySlotHandler : MonoBehaviour
 {
     private GameStatsManager gameStatsManager;
-    private _PartyManager _partyManager;
-    private _BattleUIHandler _battleUIHandler;
+    public _PartyManager _partyManager;
+    public _BattleUIHandler _battleUIHandler;
 
     public HorizontalLayoutGroup horizLayoutGroup;
+    public CanvasGroup ViewPortCanvasGroup;
     private RectTransform horizRectTransform;
-    private int previousChildCount = -1, slotCount;
+    private int slotCount;
     public GameObject partySlotPrefab;
-    private Scrollbar scrollbar;
+    public Scrollbar scrollbar;
 
     public List<CharacterStats> playerParty = new List<CharacterStats>();
     public List<PartySlot> partySlots = new List<PartySlot>();
@@ -22,19 +23,35 @@ public class PartySlotHandler : MonoBehaviour
     private Vector2 baseRectPosition = new Vector2(-215, 65);
     
     
+    void Start()
+    {
+    //     gameStatsManager = GameStatsManager.Instance;
+    //     _partyManager = GameStatsManager.Instance.GetComponentInChildren<_PartyManager>();
+    //     _battleUIHandler = GameStatsManager.Instance.GetComponentInChildren<_BattleUIHandler>();
+        StartCoroutine(WaitForPartyManager());
+    }
+    IEnumerator WaitForPartyManager()
+    {
+        while (GameStatsManager.Instance == null || GameStatsManager.Instance._partyManager == null || GameStatsManager.Instance._battleUIHandler == null)
+        {
+            yield return null; // Wait until it's ready
+        }
+
+        gameStatsManager = GameStatsManager.Instance;
+        _partyManager = gameStatsManager._partyManager;
+        _battleUIHandler = gameStatsManager._battleUIHandler;
+
+        UpdateSlots();
+    }
     void OnEnable()
     {
-        gameStatsManager = GameStatsManager.Instance;
-        _partyManager = GameStatsManager.Instance.GetComponentInChildren<_PartyManager>();
-        _battleUIHandler = GameStatsManager.Instance.GetComponentInChildren<_BattleUIHandler>();
-        
         horizLayoutGroup = this.GetComponentInChildren<HorizontalLayoutGroup>();
         if (horizLayoutGroup != null)
             horizRectTransform = horizLayoutGroup.GetComponent<RectTransform>();
         
-        scrollbar = this.GetComponentInChildren<Scrollbar>();
+        // scrollbar = GetComponentInChildren<Scrollbar>();
 
-        UpdateSlots();
+        // StartCoroutine(WaitForPartyManager());
     }
 
     public void UpdateSlots()
@@ -88,10 +105,10 @@ public class PartySlotHandler : MonoBehaviour
     {
         if (slotcount > 4) {
             horizRectTransform.sizeDelta = new Vector2(slotcount*108, baseRectSize.y);
-            horizRectTransform.anchoredPosition = new Vector2(baseRectPosition.x+1000, baseRectPosition.y);
+            // horizRectTransform.anchoredPosition = new Vector2(baseRectPosition.x+1000, baseRectPosition.y);
         } else {
             horizRectTransform.sizeDelta = new Vector2(100, baseRectSize.y);
-            horizRectTransform.anchoredPosition = new Vector2(baseRectPosition.x+1000, baseRectPosition.y);
+            // horizRectTransform.anchoredPosition = new Vector2(baseRectPosition.x+1000, baseRectPosition.y);
         }
     }
 
@@ -106,15 +123,19 @@ public class PartySlotHandler : MonoBehaviour
         }
         return -1;  // Player not found
     }
-    public void MoveToActivePlayer(CharacterStats activePlayer, bool enemyAttacking)
+    public void MoveToActivePlayer(CharacterStats activePlayer, bool dontBob)
     {
         int playerIndex = GetPlayerIndex(activePlayer);
-        if (playerIndex != -1 && scrollbar != null)
+        playerParty = _battleUIHandler.playerParty;
+
+        if (playerIndex != -1 && scrollbar != null && playerParty.Count > 1)
         {
             float targetPosition = Mathf.Clamp01((float)playerIndex / (playerParty.Count - 1));
             StartCoroutine(SmoothScroll(targetPosition, .3f));
-            if (!enemyAttacking&&playerParty.Count>4) {
-                StartCoroutine(BobSlot(partySlots[playerIndex].GetComponentInChildren<Image>().transform.GetComponent<RectTransform>(), 20f, 0.25f));
+
+            if (!dontBob && playerParty.Count>4)
+            {
+                StartCoroutine(BobSlot(partySlots[playerIndex].GetComponentInChildren<Image>().transform.GetComponent<RectTransform>(), 15f, 0.25f));
             }
         }
     }
@@ -138,6 +159,9 @@ public class PartySlotHandler : MonoBehaviour
     private IEnumerator BobSlot(RectTransform slot, float bobHeight, float duration)
     {
         Vector2 startPosition = slot.anchoredPosition;
+        Vector2 targetPosition = startPosition + new Vector2(0, bobHeight);
+        Vector2 endPosition = startPosition + new Vector2(0, 5);
+
         float time = 0f;
 
         yield return new WaitForSecondsRealtime(.3f);
@@ -151,21 +175,38 @@ public class PartySlotHandler : MonoBehaviour
             slot.anchoredPosition = startPosition + new Vector2(0, offset);
             yield return null;
         }
-
         slot.anchoredPosition = startPosition;
+        // slot.anchoredPosition = startPosition;
+
+        // while (time < duration / 2)
+        // {
+        //     time += Time.unscaledDeltaTime;
+        //     float t = time / duration;
+        //     // t = t * t * (3f - 2f * t);
+        //     float offset = Mathf.Lerp(0, bobHeight, t);
+
+        //     slot.anchoredPosition = startPosition + new Vector2(0, offset);
+        //     yield return null;
+        // }
+        // slot.anchoredPosition = targetPosition;
+        // time = 0;
+        // while (time < duration / 2)
+        // {
+        //     time += Time.unscaledDeltaTime;
+        //     float t = time / (duration / 2);
+        //     // t = t * t * (3f - 2f * t);
+        //     float offset = Mathf.Lerp(bobHeight, 5, t);
+
+        //     slot.anchoredPosition = startPosition + new Vector2(0, offset);
+        //     yield return null;
+        // }
+        // slot.anchoredPosition = endPosition;
     }
 
     void Update()
     {
 
-        if (horizRectTransform == null) return;
-
-        int currentChildCount = horizRectTransform.childCount;
-        if (currentChildCount != previousChildCount)
-        {
-            AdjustSize(slotCount);
-            previousChildCount = currentChildCount;
-        }
+        // if (horizRectTransform == null) return;
 
     }
 }

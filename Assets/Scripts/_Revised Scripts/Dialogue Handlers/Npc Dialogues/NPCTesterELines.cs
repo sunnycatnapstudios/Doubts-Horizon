@@ -5,12 +5,15 @@ using UnityEngine;
 public class NPCTesterELines : MonoBehaviour
 {
     private DialogueBoxHandler dialogueBoxHandler;
+    public _DialogueInputHandler _dialogueInputHandler;
     public List<string> dialogueLines;
     private List<string> introLines, positiveAnswer, negativeAnswer;
+    private bool waitingForResponse;
 
     void Start ()
     {
         dialogueBoxHandler = GetComponent<DialogueBoxHandler>();
+        _dialogueInputHandler = GameObject.FindGameObjectWithTag("Dialogue Text").GetComponent<_DialogueInputHandler>();
         
         introLines = new List<string>
         {
@@ -36,6 +39,7 @@ public class NPCTesterELines : MonoBehaviour
             "Sorry......"
         };
         dialogueLines = introLines;
+
     }
     void Update ()
     {

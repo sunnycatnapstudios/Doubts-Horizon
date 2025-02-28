@@ -15,6 +15,15 @@ public class DialogueButtons : MonoBehaviour
         dialogueHandler = gameStatsManager.GetComponentInChildren<_DialogueHandler>();
     }
 
+    public void ChoicesAppear()
+    {
+        
+    }
+    public void ChoicesDissapear()
+    {
+
+    }
+
     public void ChoiceA() {
         Debug.Log("ChoiceA");
         choiceA = true;

@@ -4,20 +4,23 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 public class _DialogueHandler : MonoBehaviour
 {
     private float detectionRadius = 1.2f;
-    private GameObject player, currentNPC, dialogueBox, currentInteractPrompt, currentSmallDialogueBox, dialogueOptions;
+    public GameObject currentNPC, newNPC;
+    private GameObject player, dialogueBox, currentInteractPrompt, currentSmallDialogueBox, dialogueOptions;
     public GameObject interactPromptPrefab, smallDialogueBox;
     public LayerMask NPCLayer;
 
     private TextMeshProUGUI dialogueText, dialogueName, smallDialogueText;
     private Image dialogueProfile, continueArrow;
-    public Animator dialogueAnimator, darkScreenAnimator;
+    private Animator dialogueAnimator, darkScreenAnimator;
     private bool isDialogueActive = false;
 
     private DialogueBoxHandler dialogueBoxHandler;
+    private _DialogueInputHandler _dialogueInputHandler;
     private TypeWriter typeWriter;
 
     private List<string> positiveAnswer, negativeAnswer;
@@ -26,35 +29,40 @@ public class _DialogueHandler : MonoBehaviour
 
     void Awake()
     {
-        player = GameObject.FindWithTag("Player");
-        dialogueBox = GameObject.FindWithTag("Dialogue Box");
+        GameObject UICanvas = GameObject.FindWithTag("UI Canvas");
 
-        dialogueProfile = GameObject.FindWithTag("Character Profile").GetComponent<Image>();
-        dialogueText = GameObject.FindWithTag("Dialogue Text").GetComponentInChildren<TextMeshProUGUI>();
-        dialogueName = GameObject.FindWithTag("Name Card").GetComponentInChildren<TextMeshProUGUI>();
+        player = GameObject.FindWithTag("Player");
+        dialogueBox = UICanvas.GetComponentsInChildren<Transform>(true)
+            .FirstOrDefault(t => t.CompareTag("Dialogue Box"))?.gameObject;
+
+        // dialogueProfile = UICanvas.FindWithTag("Character Profile").GetComponent<Image>();
+        dialogueProfile = dialogueBox.GetComponentsInChildren<Transform>(true)
+            .FirstOrDefault(t => t.CompareTag("Character Profile"))?.gameObject.GetComponent<Image>();
+
+        // dialogueText = UICanvas.FindWithTag("Dialogue Text").GetComponentInChildren<TextMeshProUGUI>();
+        dialogueText = dialogueBox.GetComponentsInChildren<Transform>(true)
+            .FirstOrDefault(t => t.CompareTag("Dialogue Text"))?.gameObject.GetComponentInChildren<TextMeshProUGUI>();
+
+        // dialogueName = UICanvas.FindWithTag("Name Card").GetComponentInChildren<TextMeshProUGUI>();
+        dialogueName = dialogueBox.GetComponentsInChildren<Transform>(true)
+            .FirstOrDefault(t => t.CompareTag("Name Card"))?.gameObject.GetComponentInChildren<TextMeshProUGUI>();
+
         dialogueAnimator = dialogueBox.GetComponent<Animator>();
 
-        darkScreenAnimator = GameObject.FindWithTag("Dark Screen").GetComponent<Animator>();
+
+        // darkScreenAnimator = UICanvas.FindWithTag("Dark Screen").GetComponent<Animator>();
+        darkScreenAnimator = UICanvas.GetComponentsInChildren<Transform>(true)
+            .FirstOrDefault(t => t.CompareTag("Dark Screen"))?.gameObject.GetComponent<Animator>();
+
         typeWriter = dialogueBox.GetComponentInChildren<TypeWriter>();
 
-        dialogueOptions = GameObject.FindWithTag("Dialogue Options");
+        // dialogueOptions = UICanvas.FindWithTag("Dialogue Options");
+        dialogueOptions = dialogueBox.GetComponentsInChildren<Transform>(true)
+            .FirstOrDefault(t => t.CompareTag("Dialogue Options"))?.gameObject;
+
+        _dialogueInputHandler = dialogueBox.GetComponentInChildren<_DialogueInputHandler>();
+
         // dialogueOptions.SetActive(false);
-
-        positiveAnswer = new List<string> 
-        { 
-            "Oh that's nice, hope it stays cheerful!!!",
-            "...",
-            "See ya later then..."
-        };
-
-        negativeAnswer = new List<string>
-        { 
-            ".....Oh, sorry it's not going that great",
-            "Hoping it gets better then...",
-            "I'll leave you to it then......",
-            ".....",
-            "Sorry......"
-        };
     }
 
     void Start()
@@ -65,7 +73,7 @@ public class _DialogueHandler : MonoBehaviour
     void Update()
     {
         Collider2D npcCollider = Physics2D.OverlapCircle(player.transform.position, detectionRadius, NPCLayer);
-        GameObject newNPC = npcCollider ? npcCollider.gameObject : null;
+        newNPC = npcCollider ? npcCollider.gameObject : null;
 
         if (newNPC == null)
         {
@@ -74,8 +82,8 @@ public class _DialogueHandler : MonoBehaviour
                 Destroy(currentInteractPrompt);
                 currentInteractPrompt = null;
             }
-            CloseDialogueBox();
             currentNPC = null;
+            CloseDialogueBox();
             return;
         }
         if (currentNPC != newNPC)
@@ -85,11 +93,16 @@ public class _DialogueHandler : MonoBehaviour
                 Destroy(currentInteractPrompt);
                 currentInteractPrompt = null;
             }
+            currentNPC = null;
+            CloseDialogueBox();
+            if (isDialogueActive) return;
         }
 
         // Assign new NPC
         currentNPC = newNPC;
         dialogueBoxHandler = currentNPC.GetComponent<DialogueBoxHandler>();
+        if (dialogueBoxHandler == null) {return;}
+
         dialogueProfile.sprite = dialogueBoxHandler.npcProfile;
 
         Color color = continueArrow.color;
@@ -139,6 +152,12 @@ public class _DialogueHandler : MonoBehaviour
         }
     }
 
+    void UpdateTypewriter()
+    {
+        typeWriter.StartTypewriter(dialogueBoxHandler.GetCurrentDialogueLine());
+        typeWriter.skipTyping = false;
+        typeWriter.hasStartedTyping = true;
+    }
     void OpenDialogueBox()
     {
         if (isDialogueActive) {
@@ -154,8 +173,10 @@ public class _DialogueHandler : MonoBehaviour
         dialogueAnimator.Play("Dialogue Appear");
         darkScreenAnimator.Play("Darken Screen");
 
+        player.GetComponent<Player>().isPlayerInControl = true;
+
         // if (dialogueBoxHandler.hasChoice) {ShowChoice();}
-        typeWriter.StartTypewriter(dialogueBoxHandler.GetCurrentDialogueLine());
+        UpdateTypewriter();
     }
     void UpdateDialogueBox()
     {
@@ -171,7 +192,7 @@ public class _DialogueHandler : MonoBehaviour
         }
 
         // if (dialogueBoxHandler.hasChoice) {ShowChoice();}
-        typeWriter.StartTypewriter(dialogueBoxHandler.GetCurrentDialogueLine());
+        UpdateTypewriter();
     }
     void CloseDialogueBox()
     {
@@ -180,6 +201,8 @@ public class _DialogueHandler : MonoBehaviour
         isDialogueActive = false;
         darkScreenAnimator.Play("Lighten Screen");
         dialogueAnimator.Play("Dialogue Dissapear");
+
+        player.GetComponent<Player>().isPlayerInControl = false;
     }
     
     // void ShowChoice()

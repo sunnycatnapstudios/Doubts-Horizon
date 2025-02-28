@@ -109,7 +109,7 @@ public class InteractPrompt : MonoBehaviour {
             dialogueText = GameObject.FindGameObjectWithTag("Dialogue Text").GetComponent<TMP_Text>();
             charProfile = GameObject.FindGameObjectWithTag("Character Profile").GetComponent<Image>();
 
-            nameText.text = this.name;
+            if (nameText != null) nameText.text = this.name;
             // Debug.Log("" + nameText.text);
 
             // nameTypeWriter = nameText.GetComponent<TypeWriter>();
