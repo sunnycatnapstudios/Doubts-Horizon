@@ -26,7 +26,7 @@ public class LevelTransition : MonoBehaviour {
 
     [SerializeField] private AudioClips audioClips;
 
-    private void OnTriggerEnter2D(Collider2D other) {
+    private IEnumerator OnTriggerEnter2D(Collider2D other) {
         if (other.CompareTag(tagTarget)) {
             if (player == null) {
                 playerObject = other.gameObject;
@@ -41,24 +41,20 @@ public class LevelTransition : MonoBehaviour {
             sceneAnimation.SetTrigger("Leave Scene");
             AudioManager.Instance.PlaySound(audioClips.sfxEnterTransition);
 
+            yield return new WaitForSeconds(sceneAnimation.GetCurrentAnimatorStateInfo(0).length);
 
-
+            CompleteTransition();
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other) {
-        if (other.CompareTag(tagTarget)) {
-            if (player == null) {
-                playerObject = other.gameObject;
-                player = other.gameObject.GetComponent<Player>();
-            }
+    private void CompleteTransition() {
+        exitLocation = targetTransition.position; // Temp
+        player.movePoint.transform.position = exitLocation;
+        playerObject.transform.position = exitLocation;
 
-            player.isPlayerInControl = false;
-            AudioManager.Instance.PlaySound(audioClips.sfxExitTransition);
-        }
 
         sceneAnimation.SetTrigger("Enter Scene");
-
+        AudioManager.Instance.PlaySound(audioClips.sfxExitTransition);
 
 
         int i = 0;
@@ -73,7 +69,6 @@ public class LevelTransition : MonoBehaviour {
 
         changedLevel = false;
     }
-
     void Start() {
         if (transitionAnimator == null) {
             Debug.Log(this.name + " has no animation to load");
@@ -82,11 +77,9 @@ public class LevelTransition : MonoBehaviour {
         }
     }
 
-    void Update() {
-        if (sceneAnimation.GetCurrentAnimatorStateInfo(0).normalizedTime > 1) {
-            exitLocation = targetTransition.position; // Temp
-            player.movePoint.transform.position = exitLocation;
-            playerObject.transform.position = exitLocation;
-        }
-    }
+    // void Update() {
+    //     if (sceneAnimation.GetCurrentAnimatorStateInfo(0).normalizedTime > 1) {
+    //         CompleteTransition();
+    //     }
+    // }
 }
