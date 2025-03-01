@@ -10,13 +10,11 @@ public class LevelTransition : MonoBehaviour {
 
     private Animator sceneAnimation;
 
-    public Vector3 entranceDirection, exitDirection, exitLocation, endPosition;
-    public Transform targetTransition;
+    public Transform targetTransition;      // A transform under the transition to target where to place the player
+    private Vector3 exitLocation;
 
     private GameObject playerObject;
     private Player player;
-
-    public bool changedLevel;
 
     [Serializable]
     private struct AudioClips {
@@ -33,53 +31,41 @@ public class LevelTransition : MonoBehaviour {
                 player = other.gameObject.GetComponent<Player>();
             }
 
-            //player.movePoint.transform.position += entranceDirection;
             player.isPlayerInControl = true;
-            player.moveSpeed = 3f;
 
-            changedLevel = true;
             sceneAnimation.SetTrigger("Leave Scene");
             AudioManager.Instance.PlaySound(audioClips.sfxEnterTransition);
 
             yield return new WaitForSeconds(sceneAnimation.GetCurrentAnimatorStateInfo(0).length);
 
-            CompleteTransition();
+            // We wait for the transition to complete before moving the player and party
+            player.movePoint.transform.position = exitLocation;
+            playerObject.transform.position = exitLocation;
+
+            int i = 0;
+            var partyMembers = playerObject.GetComponent<PartyManager>().spawnedPartyMembers;
+            foreach (GameObject partyMember in partyMembers) {
+                partyMember.transform.position = exitLocation;
+                player.moveHist[i] = exitLocation;
+                i++;
+            }
+
+            // Wait a second before playing the exit transition
+            yield return new WaitForSeconds(1);
+
+            sceneAnimation.SetTrigger("Enter Scene");
+            AudioManager.Instance.PlaySound(audioClips.sfxExitTransition);
+
+            player.isPlayerInControl = false;
         }
     }
 
-    private void CompleteTransition() {
-        exitLocation = targetTransition.position; // Temp
-        player.movePoint.transform.position = exitLocation;
-        playerObject.transform.position = exitLocation;
-
-
-        sceneAnimation.SetTrigger("Enter Scene");
-        AudioManager.Instance.PlaySound(audioClips.sfxExitTransition);
-
-
-        int i = 0;
-        var partyMembers = playerObject.GetComponent<PartyManager>().spawnedPartyMembers;
-        foreach (GameObject partyMember in partyMembers) {
-            partyMember.transform.position = exitLocation;
-            player.moveHist[i] = exitLocation;
-            i++;
-        }
-
-        player.isPlayerInControl = false;
-
-        changedLevel = false;
-    }
     void Start() {
+        exitLocation = targetTransition.position;
         if (transitionAnimator == null) {
             Debug.Log(this.name + " has no animation to load");
         } else {
             sceneAnimation = transitionAnimator.GetComponent<Animator>();
         }
     }
-
-    // void Update() {
-    //     if (sceneAnimation.GetCurrentAnimatorStateInfo(0).normalizedTime > 1) {
-    //         CompleteTransition();
-    //     }
-    // }
 }
