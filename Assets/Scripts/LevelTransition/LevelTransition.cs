@@ -11,6 +11,7 @@ public class LevelTransition : MonoBehaviour {
     private Animator sceneAnimation;
 
     public Vector3 entranceDirection, exitDirection, exitLocation, endPosition;
+    public Transform targetTransition;
 
     private GameObject playerObject;
     private Player player;
@@ -57,6 +58,8 @@ public class LevelTransition : MonoBehaviour {
 
     void ChangeLevel() {
         sceneAnimation.SetTrigger("Enter Scene");
+
+        exitLocation = targetTransition.position;
 
         player.movePoint.transform.position = exitLocation + exitDirection;
         playerObject.transform.position = exitLocation;
