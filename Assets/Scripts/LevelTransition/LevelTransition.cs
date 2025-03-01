@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class LevelTransition : MonoBehaviour {
     private readonly string tagTarget = "Player";
@@ -10,7 +11,7 @@ public class LevelTransition : MonoBehaviour {
 
     private Animator sceneAnimation;
 
-    public Transform targetTransition;      // A transform under the transition to target where to place the player
+    public Transform targetTransform;      // A transform under the transition to target where to place the player
     private Vector3 exitLocation;
 
     private GameObject playerObject;
@@ -61,7 +62,7 @@ public class LevelTransition : MonoBehaviour {
     }
 
     void Start() {
-        exitLocation = targetTransition.position;
+        exitLocation = targetTransform.position;
         if (transitionAnimator == null) {
             Debug.Log(this.name + " has no animation to load");
         } else {
