@@ -33,13 +33,16 @@ public class LevelTransition : MonoBehaviour {
                 player = other.gameObject.GetComponent<Player>();
             }
 
-            player.movePoint.transform.position += entranceDirection;
+            //player.movePoint.transform.position += entranceDirection;
             player.isPlayerInControl = true;
             player.moveSpeed = 3f;
 
-            // inTransition = true;
+            changedLevel = true;
             sceneAnimation.SetTrigger("Leave Scene");
             AudioManager.Instance.PlaySound(audioClips.sfxEnterTransition);
+
+
+
         }
     }
 
@@ -52,23 +55,17 @@ public class LevelTransition : MonoBehaviour {
 
             player.isPlayerInControl = false;
             AudioManager.Instance.PlaySound(audioClips.sfxExitTransition);
-            changedLevel = true;
         }
-    }
 
-    void ChangeLevel() {
         sceneAnimation.SetTrigger("Enter Scene");
 
-        exitLocation = targetTransition.position;
 
-        player.movePoint.transform.position = exitLocation + exitDirection;
-        playerObject.transform.position = exitLocation;
 
         int i = 0;
         var partyMembers = playerObject.GetComponent<PartyManager>().spawnedPartyMembers;
         foreach (GameObject partyMember in partyMembers) {
-            partyMember.transform.position = exitLocation + exitDirection;
-            player.moveHist[i] = exitLocation + exitDirection;
+            partyMember.transform.position = exitLocation;
+            player.moveHist[i] = exitLocation;
             i++;
         }
 
@@ -86,8 +83,10 @@ public class LevelTransition : MonoBehaviour {
     }
 
     void Update() {
-        if (changedLevel && !sceneAnimation.GetCurrentAnimatorStateInfo(0).IsName("Scene Transition In")) {
-            ChangeLevel();
+        if (sceneAnimation.GetCurrentAnimatorStateInfo(0).normalizedTime > 1) {
+            exitLocation = targetTransition.position; // Temp
+            player.movePoint.transform.position = exitLocation;
+            playerObject.transform.position = exitLocation;
         }
     }
 }
