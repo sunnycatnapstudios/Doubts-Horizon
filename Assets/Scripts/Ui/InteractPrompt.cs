@@ -168,6 +168,9 @@ public class InteractPrompt : MonoBehaviour {
 
 
     }
+    public void forceFinishDialogue() {
+        dialogueFinished = true;
+    }
 
     void Update() {
         bool playerInRange = Physics2D.OverlapCircle(transform.position, interactRange, playerLayer);
