@@ -3,8 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HachiwareScript : MonoBehaviour
-{
+public class HachiwareScript : MonoBehaviour {
     private DialogueInputHandler dialogueInputHandler;
     private NPCDialogueHandler npcDialogueHandler;
     public Survivor survivor;
@@ -23,7 +22,7 @@ public class HachiwareScript : MonoBehaviour
         Action takeMe = () => {
             Debug.Log("Take me callback.");
             PartyManager partyManager = GameObject.FindGameObjectWithTag("Player").GetComponent<PartyManager>();
-            
+
             if (inventory.hasItemByName("Ration")) {
                 survivor.Fed = true;
                 fedOrNot = true;
@@ -33,13 +32,8 @@ public class HachiwareScript : MonoBehaviour
             } else {
                 npcDialogueHandler.dialogueLines.Add($"You dont even have any for yourself");
             }
-            
+
             prompt.forceDialogueEnd();
-
-
-
-
-
         };
         dialogueInputHandler.AddDialogueChoice(Feedme, takeMe);
 
@@ -48,9 +42,6 @@ public class HachiwareScript : MonoBehaviour
             Debug.Log("Or not callback.");
             fedOrNot = false;
             prompt.forceDialogueEnd();
-
-
-
         };
         dialogueInputHandler.AddDialogueChoice(orNotTag, orNot);
 
@@ -59,14 +50,13 @@ public class HachiwareScript : MonoBehaviour
             $"<link=\"{Feedme}\"><b><#d4af37>Feed</color></b></link>.\n...\n<link=\"{orNotTag}\"><b><#a40000>Or not...</color></b></link>."
         };
         npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
-
-
     }
+
     void AfterDialogue() {
         Debug.Log("Completed dialogue.");
         if (fedOrNot) {
-            npcDialogueHandler.dialogueLines = new List<string> { "thank you for saving me mister", "im forever in your debt!" };
-
+            npcDialogueHandler.dialogueLines = new List<string>
+                { "thank you for saving me mister", "im forever in your debt!" };
         } else {
             npcDialogueHandler.dialogueLines = new List<string> { "oh ok....", "i guess i see how it is...." };
         }
