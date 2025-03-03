@@ -28,6 +28,7 @@ public class JenmasScript : MonoBehaviour
                 survivor.Fed = true;
                 fedOrNot = true;
                 inventory.removeItemByName("Ration");
+                prompt.forceFinishDialogue();
                 npcDialogueHandler.dialogueLines.Add($"You have {inventory.getCountofItem("Ration")} rations left");
             } else {
                 npcDialogueHandler.dialogueLines.Add($"You dont even have any for yourself");
