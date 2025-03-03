@@ -12,7 +12,10 @@ public class LevelTransition : MonoBehaviour {
     private Animator sceneAnimation;
 
     public Transform targetTransform;      // A transform under the transition to target where to place the player
-    private Vector3 exitLocation;
+
+    //private Vector3 exitLocation;
+    public Vector3 entranceDirection, exitDirection, exitLocation, endPosition;  // TODO eventually phase out
+
 
     private GameObject playerObject;
     private Player player;
@@ -32,6 +35,7 @@ public class LevelTransition : MonoBehaviour {
                 player = other.gameObject.GetComponent<Player>();
             }
 
+            player.movePoint.transform.position += entranceDirection;   // TODO move forward. Should be found within player script instead
             player.isPlayerInControl = true;
 
             sceneAnimation.SetTrigger("Leave Scene");
@@ -40,14 +44,14 @@ public class LevelTransition : MonoBehaviour {
             yield return new WaitForSeconds(sceneAnimation.GetCurrentAnimatorStateInfo(0).length);
 
             // We wait for the transition to complete before moving the player and party
-            player.movePoint.transform.position = exitLocation;
+            player.movePoint.transform.position = exitLocation + exitDirection;
             playerObject.transform.position = exitLocation;
 
             int i = 0;
             var partyMembers = playerObject.GetComponent<PartyManager>().spawnedPartyMembers;
             foreach (GameObject partyMember in partyMembers) {
-                partyMember.transform.position = exitLocation;
-                player.moveHist[i] = exitLocation;
+                partyMember.transform.position = exitLocation + exitDirection;
+                player.moveHist[i] = exitLocation + exitDirection;
                 i++;
             }
 
@@ -62,7 +66,10 @@ public class LevelTransition : MonoBehaviour {
     }
 
     void Start() {
-        exitLocation = targetTransform.position;
+        if (targetTransform != null) {
+            exitLocation = targetTransform.position;
+        }
+
         if (transitionAnimator == null) {
             Debug.Log(this.name + " has no animation to load");
         } else {
