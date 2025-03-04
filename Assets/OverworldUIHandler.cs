@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OverworldUIHandler : MonoBehaviour
-{
+public class OverworldUIHandler : MonoBehaviour {
     private GameStatsManager gameStatsManager;
     private _PartyManager _partyManager;
     private _DialogueHandler _dialogueHandler;
@@ -15,15 +14,12 @@ public class OverworldUIHandler : MonoBehaviour
     public bool isPaused, overworldUIActive, combatUIActive;
     public Animator currentDarkScreen;
 
-    void Awake()
-    {
+    void Awake() {
         StartCoroutine(WaitForPartyManager());
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
     }
-    IEnumerator WaitForPartyManager()
-    {
-        while (GameStatsManager.Instance == null || GameStatsManager.Instance._partyManager == null)
-        {
+    IEnumerator WaitForPartyManager() {
+        while (GameStatsManager.Instance == null || GameStatsManager.Instance._partyManager == null) {
             yield return null; // Wait until it's ready
         }
 
@@ -33,44 +29,32 @@ public class OverworldUIHandler : MonoBehaviour
         _battleUIHandler = gameStatsManager._battleUIHandler;
     }
 
-    void CheckOpenMenu()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape) && player.canControlCam) {Open_CloseMenu(isPaused);}
+    void CheckOpenMenu() {
+        if (Input.GetKeyDown(KeyCode.Escape) && player.canControlCam) { Open_CloseMenu(isPaused); }
     }
-    public void Open_CloseMenu(bool ispaused)
-    {
+    public void Open_CloseMenu(bool ispaused) {
         isPaused = !ispaused;
         // Time.timeScale = isPaused ? 0 : 1;
-        if (isPaused)
-        {
+        if (isPaused) {
             overworldMenuAnimator.Play("OpenMenu");
-            if (overworldUI != null && overworldUI.activeSelf)
-            {
+            if (overworldUI != null && overworldUI.activeSelf) {
                 overworldDarkScreen.Play("Darken Screen");
                 Time.timeScale = 0;
-            }
-            else if (combatUI != null && combatUI.activeSelf)
-            {
+            } else if (combatUI != null && combatUI.activeSelf) {
                 combatDarkScreen.Play("Darken Screen");
             }
-        }
-        else
-        {
+        } else {
             overworldMenuAnimator.Play("CloseMenu");
-            if (overworldUI != null && overworldUI.activeSelf)
-            {
+            if (overworldUI != null && overworldUI.activeSelf) {
                 overworldDarkScreen.Play("Lighten Screen");
                 Time.timeScale = 1;
-            }
-            else if (combatUI != null && combatUI.activeSelf)
-            {
+            } else if (combatUI != null && combatUI.activeSelf) {
                 combatDarkScreen.Play("Lighten Screen");
             }
         }
     }
 
-    void Update()
-    {
+    void Update() {
         if (combatUI == null) combatUI = GameObject.FindGameObjectWithTag("Combat UI");
         if (overworldUI == null) overworldUI = GameObject.FindGameObjectWithTag("Overworld UI");
         if (overworldMenu == null) overworldMenu = GameObject.FindGameObjectWithTag("OverworldMenu");
@@ -88,7 +72,7 @@ public class OverworldUIHandler : MonoBehaviour
             overworldMenuAnimator = overworldMenu.GetComponent<Animator>();
             overworldMenuAnimator.updateMode = AnimatorUpdateMode.UnscaledTime;
         }
-        
+
         CheckOpenMenu();
     }
 }

@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class BattleTransition : MonoBehaviour
-{
+public class BattleTransition : MonoBehaviour {
     public Image left, right;
     public bool _start;
 
-    void Start()
-    {
+    void Start() {
         left = this.transform.Find("Left").GetComponent<Image>();
         right = this.transform.Find("Right").GetComponent<Image>();
 
@@ -18,20 +16,17 @@ public class BattleTransition : MonoBehaviour
         left.fillOrigin = (int)Image.OriginHorizontal.Left;
         right.fillOrigin = (int)Image.OriginHorizontal.Right;
     }
-    
-    public void LeaveBattle()
-    {
+
+    public void LeaveBattle() {
         _start = false;
         StartCoroutine(LeaveBattleAnim());
     }
-    public IEnumerator LeaveBattleAnim()
-    {
+    public IEnumerator LeaveBattleAnim() {
         left.fillOrigin = (int)Image.OriginHorizontal.Left;
         right.fillOrigin = (int)Image.OriginHorizontal.Right;
 
         float elapsedTime = 0f; float duration = .5f;
-        while (elapsedTime < duration)
-        {
+        while (elapsedTime < duration) {
             float t = elapsedTime / duration;
             float easedT = 1f - Mathf.Pow(1f - t, 3);
 
@@ -48,8 +43,7 @@ public class BattleTransition : MonoBehaviour
         yield return new WaitForSecondsRealtime(.4f);
 
         elapsedTime = 0f;
-        while (elapsedTime < duration)
-        {
+        while (elapsedTime < duration) {
             float t = elapsedTime / duration;
             float easedT = 1f - Mathf.Pow(1f - t, 3);
 
@@ -63,10 +57,8 @@ public class BattleTransition : MonoBehaviour
         left.fillOrigin = (int)Image.OriginHorizontal.Left;
         right.fillOrigin = (int)Image.OriginHorizontal.Right;
     }
-    void Update()
-    {
-        if (_start)
-        {
+    void Update() {
+        if (_start) {
             LeaveBattle();
         }
     }

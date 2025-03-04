@@ -1,11 +1,10 @@
 ﻿using System.Collections;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 
-public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
-{
+public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler {
     private RectTransform buttonPosition;
     private RectTransform shadowRect;
     private Vector2 defaultPos, targetPos;
@@ -14,8 +13,7 @@ public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     private float liftSpeed = 20f;
     private GameObject shadowObject;
 
-    void Start()
-    {
+    void Start() {
         buttonPosition = GetComponent<RectTransform>();
         defaultPos = buttonPosition.anchoredPosition;
         targetPos = defaultPos;
@@ -41,8 +39,7 @@ public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         // Add and configure shadow image
         Image shadowImage = shadowObject.AddComponent<Image>();
         Image buttonImage = GetComponent<Image>(); // Get the original button image
-        if (buttonImage != null)
-        {
+        if (buttonImage != null) {
             shadowImage.sprite = buttonImage.sprite;
             shadowImage.type = buttonImage.type;  // Handles Simple, Sliced, Tiled, and Filled images
             shadowImage.pixelsPerUnitMultiplier = buttonImage.pixelsPerUnitMultiplier;
@@ -60,24 +57,20 @@ public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         shadowObject.transform.SetSiblingIndex(transform.GetSiblingIndex());
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
-    {
+    public void OnPointerEnter(PointerEventData eventData) {
         targetPos = defaultPos + liftAmount;
         StopAllCoroutines();
         StartCoroutine(LerpButtonPosition(targetPos));
     }
 
-    public void OnPointerExit(PointerEventData eventData)
-    {
+    public void OnPointerExit(PointerEventData eventData) {
         targetPos = defaultPos;
         StopAllCoroutines();
         StartCoroutine(LerpButtonPosition(targetPos));
     }
 
-    private IEnumerator LerpButtonPosition(Vector2 target)
-    {
-        while ((buttonPosition.anchoredPosition - target).sqrMagnitude > 0.01f)
-        {
+    private IEnumerator LerpButtonPosition(Vector2 target) {
+        while ((buttonPosition.anchoredPosition - target).sqrMagnitude > 0.01f) {
             buttonPosition.anchoredPosition = Vector2.Lerp(buttonPosition.anchoredPosition, target, Time.unscaledDeltaTime * liftSpeed);
             yield return null;
         }

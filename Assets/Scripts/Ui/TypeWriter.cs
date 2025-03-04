@@ -43,8 +43,8 @@ public class TypeWriter : MonoBehaviour {
         for (int i = 0; i < writer.Length; ++i) {
             if (skipTyping && !waitingForPause) {
                 _tmpProText.text = System.Text.RegularExpressions.Regex.Replace(
-                    writer.Replace("{pause}", ""), 
-                    @"\{dialoguePrompt:[^}]*\}", 
+                    writer.Replace("{pause}", ""),
+                    @"\{dialoguePrompt:[^}]*\}",
                     ""
                 );
                 break;
@@ -75,7 +75,7 @@ public class TypeWriter : MonoBehaviour {
                 waitingForResponse = false;
                 continue;
             }
-                
+
             // If there is a style tag attach the whole thing
             if (writer[i] == '<') {
                 int start = i;
@@ -136,7 +136,7 @@ public class TypeWriter : MonoBehaviour {
         while (elapsedTime < 0.1f) { // Duration of drop animation
             elapsedTime += Time.deltaTime;
             float offset = Mathf.Lerp(dropDistance, 0, elapsedTime / 0.1f); // Smooth drop
-            
+
             _tmpProText.ForceMeshUpdate(); // Ensure text is updated
             if (charIndex >= textInfo.characterCount) break; // Safety check
 
@@ -167,7 +167,7 @@ public class TypeWriter : MonoBehaviour {
 
     void ShowChoices() {
         Debug.Log($"Prompt: {dialogueChoices[0]}\nChoices: {dialogueChoices[1]}, {dialogueChoices[2]}");
-        
+
         if (_dialogueInputHandler != null) {
             _dialogueInputHandler.ShowChoices(dialogueChoices[0], dialogueChoices[1], dialogueChoices[2]);
         } else {

@@ -2,25 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DialogueButtons : MonoBehaviour
-{
+public class DialogueButtons : MonoBehaviour {
     private GameStatsManager gameStatsManager;
     private _DialogueHandler dialogueHandler;
 
     public bool choiceA, choiceB;
 
-    public void Start()
-    {
+    public void Start() {
         gameStatsManager = GameStatsManager.Instance;
         dialogueHandler = gameStatsManager.GetComponentInChildren<_DialogueHandler>();
     }
 
-    public void ChoicesAppear()
-    {
-        
+    public void ChoicesAppear() {
+
     }
-    public void ChoicesDissapear()
-    {
+    public void ChoicesDissapear() {
 
     }
 
@@ -37,5 +33,5 @@ public class DialogueButtons : MonoBehaviour
         // dialogueHandler.OnChoiceMade("B");
     }
 
-    public void ResetChoice() {choiceA = choiceB = false;}
+    public void ResetChoice() { choiceA = choiceB = false; }
 }

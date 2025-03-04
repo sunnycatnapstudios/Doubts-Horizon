@@ -1,13 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.InputSystem;
 using Cinemachine;
+using UnityEngine;
+using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
-public class Player : MonoBehaviour
-{
+public class Player : MonoBehaviour {
 
     [HideInInspector] public Animator anim;
     [HideInInspector] public SpriteRenderer spritestate;
@@ -47,8 +46,7 @@ public class Player : MonoBehaviour
     public Transform pauseMenu;
     private bool isPaused = false;
 
-    void ViewMap(bool cancontrolcam)
-    {
+    void ViewMap(bool cancontrolcam) {
         isZooming = Input.GetKey(KeyCode.Q);
         // float targetSize = isZooming ? camMax : camMin;
 
@@ -56,7 +54,7 @@ public class Player : MonoBehaviour
             currentCamSize = Mathf.Clamp(currentCamSize, 4f, 6f);
             float targetSize = isZooming ? camMax : (currentCamSize >= 6) ? 6 : (currentCamSize <= 4) ? 4 : currentCamSize;
             // vcam.m_Lens.OrthographicSize = Mathf.MoveTowards(vcam.m_Lens.OrthographicSize,targetSize,targetSize * Time.deltaTime * 2);
-            vcam.m_Lens.OrthographicSize = Mathf.Lerp(vcam.m_Lens.OrthographicSize,targetSize, targetSize * Time.deltaTime);
+            vcam.m_Lens.OrthographicSize = Mathf.Lerp(vcam.m_Lens.OrthographicSize, targetSize, targetSize * Time.deltaTime);
 
             if (!isZooming) currentCamSize -= Input.mouseScrollDelta.y * .4f;
             // currentCamSize = Mathf.Clamp(currentCamSize, 4f, 6f);
@@ -71,38 +69,33 @@ public class Player : MonoBehaviour
         }
     }
 
-    void UpdateMoveHist()
-    {
+    void UpdateMoveHist() {
         if (moveHist.Count < _partyManager.partyCount &&
-            movePoint.position == pointRef)
-        {
+            movePoint.position == pointRef) {
             Vector3 spawnPos = GetValidSpawnPosition();
             moveHist.Add(spawnPos);
         }
 
-        if (movePoint.position != pointRef) {moveHist.Add(pointRef);}
+        if (movePoint.position != pointRef) { moveHist.Add(pointRef); }
 
-        if (moveHist.Count > _partyManager.partyCount) {moveHist.RemoveAt(0);}
+        if (moveHist.Count > _partyManager.partyCount) { moveHist.RemoveAt(0); }
     }
-    Vector3 GetValidSpawnPosition()
-    {
+    Vector3 GetValidSpawnPosition() {
         Vector3[] possibleOffsets = new Vector3[]
         {
-            new Vector3(-1, 0, 0), 
+            new Vector3(-1, 0, 0),
             new Vector3(-1, -1, 0),
-            new Vector3(0, -1, 0), 
-            new Vector3(1, -1, 0), 
-            new Vector3(1, 0, 0),  
-            new Vector3(-1, 1, 0), 
-            new Vector3(1, 1, 0),  
-            new Vector3(0, 1, 0)   
+            new Vector3(0, -1, 0),
+            new Vector3(1, -1, 0),
+            new Vector3(1, 0, 0),
+            new Vector3(-1, 1, 0),
+            new Vector3(1, 1, 0),
+            new Vector3(0, 1, 0)
         };
 
-        foreach (Vector3 offset in possibleOffsets)
-        {
+        foreach (Vector3 offset in possibleOffsets) {
             Vector3 candidate = pointRef + offset;
-            if (!moveHist.Contains(candidate) && isTraversable(candidate))
-            {
+            if (!moveHist.Contains(candidate) && isTraversable(candidate)) {
                 return candidate; // Return the first valid position in order
             }
         }
@@ -111,12 +104,10 @@ public class Player : MonoBehaviour
     }
 
 
-    void Awake()
-    {
+    void Awake() {
 
     }
-    void Start()
-    {
+    void Start() {
         anim = GetComponent<Animator>();
         spritestate = GetComponent<SpriteRenderer>();
         walkAudi = GetComponent<AudioSource>();
@@ -140,12 +131,11 @@ public class Player : MonoBehaviour
         // for (int i = 0; i<partyManager.partyCount; i++) {moveHist.Add(movePoint.position); Debug.Log("AAAAAAAAA");}
     }
 
-    void Update()
-    {
+    void Update() {
         Vector3 startRef = transform.position;
-        transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed*Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed * Time.deltaTime);
         Vector3 endRef = transform.position;
-        isMoving = startRef!=endRef;
+        isMoving = startRef != endRef;
 
         isSneaking = Input.GetMouseButton(1);
         isSprinting = Input.GetKey(KeyCode.LeftShift) && GameStatsManager.Instance.CanSprint() && !isSneaking;
@@ -154,12 +144,10 @@ public class Player : MonoBehaviour
         GameStatsManager.Instance.Sprint();
 
         if (!isPlayerInControl) {
-            moveSpeed = (isSneaking && !bullet.isReloading) ? moveSneak : ((isSprinting&&isMoving) ? moveSprint : moveConstant);
+            moveSpeed = (isSneaking && !bullet.isReloading) ? moveSneak : ((isSprinting && isMoving) ? moveSprint : moveConstant);
         }
-        if (isSprinting && isMoving) {if (animCount<=0){partiSystem.Play(); animCount+=1;}}
-        else
-        {
-            animCount=0;
+        if (isSprinting && isMoving) { if (animCount <= 0) { partiSystem.Play(); animCount += 1; } } else {
+            animCount = 0;
             partiSystem.Stop();
         }
 
@@ -168,7 +156,7 @@ public class Player : MonoBehaviour
 
         playerInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
-        if (Vector3.Distance(transform.position, movePoint.position) <= movementInputDelay && !isZooming && !isPlayerInControl){
+        if (Vector3.Distance(transform.position, movePoint.position) <= movementInputDelay && !isZooming && !isPlayerInControl) {
 
             pointRef = movePoint.position;
 
@@ -176,36 +164,31 @@ public class Player : MonoBehaviour
 
             if (playerInput.x != 0 && lastInput.x == 0) {
                 lastInput = new Vector2(playerInput.x, 0f);
-            }
-            else if (playerInput.y != 0 && lastInput.y == 0) {
+            } else if (playerInput.y != 0 && lastInput.y == 0) {
                 lastInput = new Vector2(0f, playerInput.y);
             }
 
-            if (playerInput.x * lastInput.x == -1f || playerInput.y * lastInput.y == -1f) {lastInput = playerInput;}
+            if (playerInput.x * lastInput.x == -1f || playerInput.y * lastInput.y == -1f) { lastInput = playerInput; }
 
-            if (playerInput == Vector2.zero) {lastInput = Vector2.zero;}
+            if (playerInput == Vector2.zero) { lastInput = Vector2.zero; }
             Vector3 moveDir = new Vector3(lastInput.x, lastInput.y, 0f);
             // Vector3 moveDir = new Vector3(playerInput.x, playerInput.y, 0f);
 
             // Vector3 moveDir = new Vector3(playerInput.x, playerInput.y, 0f).normalized;
 
-            if (isTraversable(movePoint.position+moveDir))
-            {
-                movePoint.position+=moveDir;
+            if (isTraversable(movePoint.position + moveDir)) {
+                movePoint.position += moveDir;
             }
 
-            if (moveDir.x!=0)
-            {
-                spritestate.flipX = moveDir.x<0;
+            if (moveDir.x != 0) {
+                spritestate.flipX = moveDir.x < 0;
                 partiSystem.transform.eulerAngles = new Vector3(0f, moveDir.x < 0 ? 90f : -90f, 90f);
 
                 faceLeft = moveDir.x < 0; faceRight = moveDir.x > 0;
                 faceUp = faceDown = false;
 
                 anim.Play("Walk Left");
-            }
-            else if (moveDir.y!=0)
-            {
+            } else if (moveDir.y != 0) {
                 bool movingUp = moveDir.y > 0;
                 anim.Play(movingUp ? "Walk Up" : "Walk Down");
                 partiSystem.transform.eulerAngles = new Vector3(movingUp ? 90f : -90f, 0f, 0f);
@@ -215,10 +198,9 @@ public class Player : MonoBehaviour
             }
             UpdateMoveHist();
         }
-        if (!walkAudi.isPlaying && walkAudiCount <=0 && isMoving) {
-            walkAudi.Play(); walkAudiCount+=1; walkAudi.Play();
-        }
-        else if (!isMoving) {walkAudi.Stop(); walkAudiCount = 0;}
+        if (!walkAudi.isPlaying && walkAudiCount <= 0 && isMoving) {
+            walkAudi.Play(); walkAudiCount += 1; walkAudi.Play();
+        } else if (!isMoving) { walkAudi.Stop(); walkAudiCount = 0; }
     }
 
     bool isTraversable(Vector2 pos) {

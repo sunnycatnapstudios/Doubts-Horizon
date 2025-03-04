@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class ButtonInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
-{
+public class ButtonInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler {
     public GameObject infoButton;
     private ButtonInfoPosition buttonInfoPosition;
     public List<string> buttonInfoList = new List<string>();
@@ -15,35 +14,29 @@ public class ButtonInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     private bool isHovering;
     private float movementThreshold = 20f;
 
-    void OnEnable()
-    {
+    void OnEnable() {
         infoButton = GameObject.FindGameObjectWithTag("InfoButton");
         buttonInfoPosition = infoButton.GetComponent<ButtonInfoPosition>();
     }
 
-    public void OnPointerEnter(PointerEventData eventData)
-    {
+    public void OnPointerEnter(PointerEventData eventData) {
         isHovering = true; // Mark that we're inside the button area
-        if (stopCheckCoroutine != null)
-        {
+        if (stopCheckCoroutine != null) {
             StopCoroutine(stopCheckCoroutine);
         }
         stopCheckCoroutine = StartCoroutine(CheckIfStoppedMoving());
     }
 
-    public void OnPointerExit(PointerEventData eventData)
-    {
+    public void OnPointerExit(PointerEventData eventData) {
         isHovering = false;
         StopAllCoroutines();
     }
 
-    public void OnPointerClick(PointerEventData eventData)
-    {
+    public void OnPointerClick(PointerEventData eventData) {
         buttonInfoPosition.NVM(true);
     }
 
-    private IEnumerator CheckIfStoppedMoving()
-    {
+    private IEnumerator CheckIfStoppedMoving() {
         float stopThreshold = movementThreshold / 2;
         Vector2 lastPosition = Input.mousePosition;
         float elapsedTime = 0f;
@@ -54,13 +47,10 @@ public class ButtonInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             Vector2 currentPos = Input.mousePosition;
             float distance = Vector2.Distance(lastPosition, currentPos);
 
-            if (distance > stopThreshold)
-            {
+            if (distance > stopThreshold) {
                 elapsedTime = 0f;  // Reset timer if user moves too much
                 lastPosition = currentPos;
-            }
-            else
-            {
+            } else {
                 elapsedTime += Time.unscaledDeltaTime;
                 if (elapsedTime >= 0.3f) // Cursor has stopped for a certain duration
                 {
@@ -76,17 +66,14 @@ public class ButtonInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         }
     }
 
-    private IEnumerator HoverCheck()
-    {
+    private IEnumerator HoverCheck() {
         buttonInfoPosition.IWantAHint(buttonInfoList);
 
-        while (isHovering)
-        {
+        while (isHovering) {
             Vector2 currentPointerPos = Input.mousePosition;
             float distance = Vector2.Distance(stoppedPointerPos, currentPointerPos);
 
-            if (distance > movementThreshold)
-            {
+            if (distance > movementThreshold) {
                 StartCoroutine(DelayedClose());
                 hoverCoroutine = null;
                 yield break;
@@ -96,22 +83,18 @@ public class ButtonInfo : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         }
     }
 
-    private IEnumerator DelayedClose()
-    {
+    private IEnumerator DelayedClose() {
         yield return new WaitForSecondsRealtime(0.1f);
         buttonInfoPosition.NVM(false);
         hoverCoroutine = null;
     }
 
-    private void StopAllCoroutines()
-    {
-        if (stopCheckCoroutine != null)
-        {
+    private void StopAllCoroutines() {
+        if (stopCheckCoroutine != null) {
             StopCoroutine(stopCheckCoroutine);
             stopCheckCoroutine = null;
         }
-        if (hoverCoroutine != null)
-        {
+        if (hoverCoroutine != null) {
             StopCoroutine(hoverCoroutine);
             hoverCoroutine = null;
         }

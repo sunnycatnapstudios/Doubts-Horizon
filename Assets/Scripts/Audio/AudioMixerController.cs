@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Audio;
-public class AudioMixerController : MonoBehaviour
-{
+public class AudioMixerController : MonoBehaviour {
     [SerializeField] private AudioMixer audioMixer;
 
     public void SetMasterVolume(float volume) {

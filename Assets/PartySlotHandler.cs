@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PartySlotHandler : MonoBehaviour
-{
+public class PartySlotHandler : MonoBehaviour {
     private GameStatsManager gameStatsManager;
     public _PartyManager _partyManager;
     public _BattleUIHandler _battleUIHandler;
@@ -21,19 +20,16 @@ public class PartySlotHandler : MonoBehaviour
 
     private Vector2 baseRectSize = new Vector2(430, 130);
     private Vector2 baseRectPosition = new Vector2(-215, 65);
-    
-    
-    void Start()
-    {
-    //     gameStatsManager = GameStatsManager.Instance;
-    //     _partyManager = GameStatsManager.Instance.GetComponentInChildren<_PartyManager>();
-    //     _battleUIHandler = GameStatsManager.Instance.GetComponentInChildren<_BattleUIHandler>();
+
+
+    void Start() {
+        //     gameStatsManager = GameStatsManager.Instance;
+        //     _partyManager = GameStatsManager.Instance.GetComponentInChildren<_PartyManager>();
+        //     _battleUIHandler = GameStatsManager.Instance.GetComponentInChildren<_BattleUIHandler>();
         StartCoroutine(WaitForPartyManager());
     }
-    IEnumerator WaitForPartyManager()
-    {
-        while (GameStatsManager.Instance == null || GameStatsManager.Instance._partyManager == null || GameStatsManager.Instance._battleUIHandler == null)
-        {
+    IEnumerator WaitForPartyManager() {
+        while (GameStatsManager.Instance == null || GameStatsManager.Instance._partyManager == null || GameStatsManager.Instance._battleUIHandler == null) {
             yield return null; // Wait until it's ready
         }
 
@@ -43,25 +39,22 @@ public class PartySlotHandler : MonoBehaviour
 
         UpdateSlots();
     }
-    void OnEnable()
-    {
+    void OnEnable() {
         horizLayoutGroup = this.GetComponentInChildren<HorizontalLayoutGroup>();
         if (horizLayoutGroup != null)
             horizRectTransform = horizLayoutGroup.GetComponent<RectTransform>();
-        
+
         // scrollbar = GetComponentInChildren<Scrollbar>();
 
         // StartCoroutine(WaitForPartyManager());
     }
 
-    public void UpdateSlots()
-    {
+    public void UpdateSlots() {
         playerParty = _battleUIHandler.playerParty;
         Debug.Log($"{playerParty.Count}");
 
         // Destroy old slots
-        foreach (Transform child in horizRectTransform.transform)
-        {
+        foreach (Transform child in horizRectTransform.transform) {
             if (!child.gameObject.activeSelf) continue;
             Destroy(child.gameObject);
         }
@@ -69,24 +62,20 @@ public class PartySlotHandler : MonoBehaviour
         slotCount = 0;
 
         // Instantiate new slots
-        foreach (CharacterStats member in playerParty)
-        {
+        foreach (CharacterStats member in playerParty) {
             GameObject newSlot = Instantiate(partySlotPrefab, horizRectTransform.transform);
             newSlot.SetActive(true);
-            newSlot.name = "PartySlot"+(partySlots.Count+1);
+            newSlot.name = "PartySlot" + (partySlots.Count + 1);
             PartySlot slotComponent = newSlot.GetComponent<PartySlot>();
             slotCount++;
 
-            if (slotComponent != null)
-            {
+            if (slotComponent != null) {
                 slotComponent.Initialize(member);
                 partySlots.Add(slotComponent);
             }
         }
-        if (slotCount < 4)
-        {
-            for (int currentSlots = slotCount; currentSlots < 4; currentSlots++)
-            {
+        if (slotCount < 4) {
+            for (int currentSlots = slotCount; currentSlots < 4; currentSlots++) {
                 GameObject newSlot = Instantiate(partySlotPrefab, horizRectTransform.transform);
                 newSlot.SetActive(true);
                 newSlot.name = "FillerSlot" + (currentSlots + 1);
@@ -101,10 +90,9 @@ public class PartySlotHandler : MonoBehaviour
         // Update layout based on new slot count
         AdjustSize(slotCount);
     }
-    public void AdjustSize(int slotcount)
-    {
+    public void AdjustSize(int slotcount) {
         if (slotcount > 4) {
-            horizRectTransform.sizeDelta = new Vector2(slotcount*108, baseRectSize.y);
+            horizRectTransform.sizeDelta = new Vector2(slotcount * 108, baseRectSize.y);
             // horizRectTransform.anchoredPosition = new Vector2(baseRectPosition.x+1000, baseRectPosition.y);
         } else {
             horizRectTransform.sizeDelta = new Vector2(100, baseRectSize.y);
@@ -112,40 +100,32 @@ public class PartySlotHandler : MonoBehaviour
         }
     }
 
-    public int GetPlayerIndex(CharacterStats player)
-    {
-        for (int i = 0; i < playerParty.Count; i++)
-        {
-            if (playerParty[i] == player)
-            {
+    public int GetPlayerIndex(CharacterStats player) {
+        for (int i = 0; i < playerParty.Count; i++) {
+            if (playerParty[i] == player) {
                 return i;
             }
         }
         return -1;  // Player not found
     }
-    public void MoveToActivePlayer(CharacterStats activePlayer, bool dontBob)
-    {
+    public void MoveToActivePlayer(CharacterStats activePlayer, bool dontBob) {
         int playerIndex = GetPlayerIndex(activePlayer);
         playerParty = _battleUIHandler.playerParty;
 
-        if (playerIndex != -1 && scrollbar != null && playerParty.Count > 1 && this.gameObject.activeSelf)
-        {
+        if (playerIndex != -1 && scrollbar != null && playerParty.Count > 1 && this.gameObject.activeSelf) {
             float targetPosition = Mathf.Clamp01((float)playerIndex / (playerParty.Count - 1));
             StartCoroutine(SmoothScroll(targetPosition, .3f));
 
-            if (!dontBob && playerParty.Count>4)
-            {
+            if (!dontBob && playerParty.Count > 4) {
                 StartCoroutine(BobSlot(partySlots[playerIndex].GetComponentInChildren<Image>().transform.GetComponent<RectTransform>(), 7.5f, 0.25f));
             }
         }
     }
-    private IEnumerator SmoothScroll(float targetValue, float duration)
-    {
+    private IEnumerator SmoothScroll(float targetValue, float duration) {
         float startValue = scrollbar.value;
         float time = 0f;
 
-        while (time < duration)
-        {
+        while (time < duration) {
             time += Time.unscaledDeltaTime; // Use unscaledDeltaTime to keep it smooth even when paused
             float t = time / duration;
             t = t * t * (3f - 2f * t); // Lil "Smoothstep" trick I picked up from a friend
@@ -156,8 +136,7 @@ public class PartySlotHandler : MonoBehaviour
 
         scrollbar.value = targetValue;
     }
-    private IEnumerator BobSlot(RectTransform slot, float bobHeight, float duration)
-    {
+    private IEnumerator BobSlot(RectTransform slot, float bobHeight, float duration) {
         Vector2 startPosition = slot.anchoredPosition;
         Vector2 targetPosition = startPosition + new Vector2(0, bobHeight);
         Vector2 endPosition = startPosition + new Vector2(0, 5);
@@ -166,8 +145,7 @@ public class PartySlotHandler : MonoBehaviour
 
         yield return new WaitForSecondsRealtime(.3f);
 
-        while (time < duration)
-        {
+        while (time < duration) {
             time += Time.unscaledDeltaTime;
             float t = time / duration;
             float offset = Mathf.Sin(t * Mathf.PI) * bobHeight;
@@ -203,8 +181,7 @@ public class PartySlotHandler : MonoBehaviour
         // slot.anchoredPosition = endPosition;
     }
 
-    void Update()
-    {
+    void Update() {
 
         // if (horizRectTransform == null) return;
 

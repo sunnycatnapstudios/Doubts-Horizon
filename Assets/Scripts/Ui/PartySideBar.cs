@@ -1,11 +1,10 @@
-﻿﻿using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;
 
-public class PartySideBar : MonoBehaviour
-{
+public class PartySideBar : MonoBehaviour {
     public GameObject profilePrefab;
     // public List<Image> sideBarProfilePictures;
     public List<GameObject> sideBarSlots;
@@ -13,13 +12,11 @@ public class PartySideBar : MonoBehaviour
     private GameStatsManager gameStatsManager;
     private _PartyManager _partyManager;
 
-    public void UpdateSideBar()
-    {
-        foreach (var slot in sideBarSlots) {Destroy(slot);}
+    public void UpdateSideBar() {
+        foreach (var slot in sideBarSlots) { Destroy(slot); }
         sideBarSlots.Clear();
 
-        foreach (var member in gameStatsManager.currentPartyMembers)
-        {
+        foreach (var member in gameStatsManager.currentPartyMembers) {
             // if (!member.isCombatant) {continue;}
 
             GameObject newSideBarProfile = Instantiate(profilePrefab, transform);
@@ -29,7 +26,7 @@ public class PartySideBar : MonoBehaviour
             Sprite profilePic = _partyManager.characterProfiles.Find(profile => profile.name == member.Name);
             if (profilePic != null) {
                 newSideBarProfile.GetComponent<Image>().sprite = profilePic;
-            } else {Debug.Log($"No matching profilePic found for {member.Name}. Check if the Sprite is properly named");}
+            } else { Debug.Log($"No matching profilePic found for {member.Name}. Check if the Sprite is properly named"); }
 
             newSideBarProfile.GetComponent<Image>().rectTransform.sizeDelta = new Vector2(35, 35);
 
@@ -37,18 +34,16 @@ public class PartySideBar : MonoBehaviour
 
             // newSideBarProfile.transform.Find("Health").GetComponent<TMP_Text>().text = $"{member.currentHealth}/{member.maxHealth}";
             newSideBarProfile.transform.Find("Health Bar Base").Find("Health").GetComponent<TMP_Text>().text = $"{member.currentHealth}/{member.maxHealth}";
-            newSideBarProfile.transform.Find("Health Bar Base").Find("Healthbar").GetComponent<Image>().fillAmount = member.currentHealth/member.maxHealth;
+            newSideBarProfile.transform.Find("Health Bar Base").Find("Healthbar").GetComponent<Image>().fillAmount = member.currentHealth / member.maxHealth;
 
             sideBarSlots.Add(newSideBarProfile);
             newSideBarProfile.name = "Party Slot" + sideBarSlots.Count;
-            
+
         }
     }
 
-    IEnumerator WaitForPartyManager()
-    {
-        while (GameStatsManager.Instance == null || GameStatsManager.Instance._partyManager == null)
-        {
+    IEnumerator WaitForPartyManager() {
+        while (GameStatsManager.Instance == null || GameStatsManager.Instance._partyManager == null) {
             yield return null; // Wait until it's ready
         }
 
@@ -56,24 +51,21 @@ public class PartySideBar : MonoBehaviour
         _partyManager = gameStatsManager._partyManager;
     }
 
-    void Awake()
-    {
+    void Awake() {
         // gameStatsManager = GameStatsManager.Instance;
         // _partyManager = GameStatsManager.Instance._partyManager;
         StartCoroutine(WaitForPartyManager());
     }
 
-    void Start()
-    {
+    void Start() {
         // UpdateSideBar();
     }
 
     // Update is called once per frame
-    void Update()
-    {
+    void Update() {
         this.GetComponent<VerticalLayoutGroup>().spacing = Mathf.Lerp(
             this.GetComponent<VerticalLayoutGroup>().spacing,
-            15 - ((sideBarSlots.Count-1)*2),
+            15 - ((sideBarSlots.Count - 1) * 2),
             Time.deltaTime * 10f);
     }
 }
