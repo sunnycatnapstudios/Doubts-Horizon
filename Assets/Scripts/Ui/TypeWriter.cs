@@ -42,10 +42,12 @@ public class TypeWriter : MonoBehaviour {
             if (writer.Substring(i).StartsWith("{pause}")) {
                 waitingForPause = true;
                 while (true) {
+                    // isTyping = false;
                     if (Input.GetKeyDown(KeyCode.E)) break; // Wait for player input
                     yield return null;
                 }
                 i += 6;
+                isTyping = true;
                 continue;
             }
                 

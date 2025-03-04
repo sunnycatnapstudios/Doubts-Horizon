@@ -16,7 +16,7 @@ public class DefendStatusIcon : MonoBehaviour, IPointerEnterHandler, IPointerExi
     private Coroutine ExpandOut, ExpandIn;
     private Image iconImage;
     private float expandSpeed = 20f, expand = 30f;
-    private bool inAnimation = false;
+    // private bool inAnimation = false;
     public bool triggerSlideIn, triggerSlideOut;
 
     void Start()
@@ -106,14 +106,14 @@ public class DefendStatusIcon : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        inAnimation = true;
+        // inAnimation = true;
         if (ExpandIn != null) StopCoroutine(ExpandIn);
         ExpandOut = StartCoroutine(LerpIconSize(targetSize));
     }
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        inAnimation = true;
+        // inAnimation = true;
         if (ExpandOut != null) StopCoroutine(ExpandOut);
         ExpandIn = StartCoroutine(LerpIconSize(defaultSize));
     }
@@ -173,7 +173,7 @@ public class DefendStatusIcon : MonoBehaviour, IPointerEnterHandler, IPointerExi
         defendStatusIcon.sizeDelta = target;
         
         if (target == defaultSize) {iconImage.maskable = true;}
-        inAnimation = false;
+        // inAnimation = false;
     }
 
     void Update()

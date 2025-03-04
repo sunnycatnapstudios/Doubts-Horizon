@@ -106,7 +106,7 @@ public class _DialogueHandler : MonoBehaviour
         dialogueProfile.sprite = dialogueBoxHandler.npcProfile;
 
         Color color = continueArrow.color;
-        color.a = typeWriter.isTyping ? 0 : 1f;
+        color.a = (typeWriter.isTyping&&!typeWriter.waitingForPause) ? 0 : 1f;
         continueArrow.color = color;
 
         // If there's no prompt, instantiate one

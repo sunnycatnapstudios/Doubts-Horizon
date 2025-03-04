@@ -17,11 +17,11 @@ public class NPCTesterELines : MonoBehaviour
         
         introLines = new List<string>
         {
-            "... {pause}\n...........",
+            "...{pause}\n...........",
             "......?",
             "....Oh hi?...",
             "So...",
-            "How's your day been?"
+            "How's your{pause} day been?"
         };
         positiveAnswer = new List<string>
         {

@@ -9,14 +9,17 @@ TextureImporter:
       213: 3481267430190992831
     second: EscapePromptButtons_1
   - first:
+      213: 4054650009602632788
+    second: EscapePromptButtons_4
+  - first:
+      213: 1293927272164512062
+    second: EscapePromptButtons_5
+  - first:
       213: -5896423755629299190
     second: EscapePromptButtons_2
   - first:
       213: 3407252262253549052
     second: EscapePromptButtons_3
-  - first:
-      213: 4054650009602632788
-    second: EscapePromptButtons_4
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -61,7 +64,7 @@ TextureImporter:
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 16
-  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteBorder: {x: 4, y: 5, z: 36, w: 4}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
@@ -118,12 +121,12 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 16
-        width: 9
+        y: 0
+        width: 16
         height: 16
-      alignment: 0
+      alignment: 9
       pivot: {x: 0.5, y: 0.5}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 4, y: 5, z: 4, w: 4}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -138,13 +141,13 @@ TextureImporter:
       name: EscapePromptButtons_1
       rect:
         serializedVersion: 2
-        x: 8
-        y: 16
-        width: 31
-        height: 16
-      alignment: 9
-      pivot: {x: 0.5, y: 0.525}
-      border: {x: 4, y: 5, z: 4, w: 4}
+        x: 16
+        y: 6
+        width: 18
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -156,16 +159,58 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
+      name: EscapePromptButtons_4
+      rect:
+        serializedVersion: 2
+        x: 34
+        y: 5
+        width: 7
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 45c26e683b2054830800000000000000
+      internalID: 4054650009602632788
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: EscapePromptButtons_5
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 0
+        width: 24
+        height: 6
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e315e8e9ff3f4f110800000000000000
+      internalID: 1293927272164512062
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
       name: EscapePromptButtons_2
       rect:
         serializedVersion: 2
-        x: 7
-        y: 0
-        width: 33
-        height: 16
-      alignment: 9
-      pivot: {x: 0.5, y: 0.525}
-      border: {x: 4, y: 5, z: 4, w: 4}
+        x: 38
+        y: 5
+        width: 3
+        height: 10
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -180,10 +225,10 @@ TextureImporter:
       name: EscapePromptButtons_3
       rect:
         serializedVersion: 2
-        x: 39
-        y: 0
-        width: 9
-        height: 16
+        x: 38
+        y: 5
+        width: 7
+        height: 10
       alignment: 0
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -193,27 +238,6 @@ TextureImporter:
       bones: []
       spriteID: cf5d4cf41edf84f20800000000000000
       internalID: 3407252262253549052
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: EscapePromptButtons_4
-      rect:
-        serializedVersion: 2
-        x: 6
-        y: 16
-        width: 3
-        height: 16
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: 45c26e683b2054830800000000000000
-      internalID: 4054650009602632788
       vertices: []
       indices: 
       edges: []
