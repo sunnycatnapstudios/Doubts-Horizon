@@ -158,7 +158,7 @@ public class _DialogueHandler : MonoBehaviour
         typeWriter.skipTyping = false;
         typeWriter.hasStartedTyping = true;
     }
-    void OpenDialogueBox()
+    public void OpenDialogueBox()
     {
         if (isDialogueActive) {
             UpdateDialogueBox();
@@ -178,12 +178,17 @@ public class _DialogueHandler : MonoBehaviour
         // if (dialogueBoxHandler.hasChoice) {ShowChoice();}
         UpdateTypewriter();
     }
-    void UpdateDialogueBox()
+    public void UpdateDialogueBox()
     {
         if (typeWriter.isTyping)
         {
-            typeWriter.skipTyping = true;
-            return;
+            if (typeWriter.waitingForPause) {
+                typeWriter.waitingForPause = false;
+                return;
+            } else {
+                typeWriter.skipTyping = true;
+                return;
+            }
         }
         else if (dialogueBoxHandler.CanClose())
         {
@@ -194,7 +199,7 @@ public class _DialogueHandler : MonoBehaviour
         // if (dialogueBoxHandler.hasChoice) {ShowChoice();}
         UpdateTypewriter();
     }
-    void CloseDialogueBox()
+    public void CloseDialogueBox()
     {
         if (!isDialogueActive) {return;}
 

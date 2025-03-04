@@ -40,11 +40,13 @@ TagManager:
   - CM Cam
   - Play Button
   - Title Card
-  - Menu
   - Defend Indicator
   - Damage Numbers
   - PartySideBar
   - InfoButton
+  - PartyMembers Group
+  - OverworldMenu
+  - CombatMenu
   layers:
   - Default
   - TransparentFX

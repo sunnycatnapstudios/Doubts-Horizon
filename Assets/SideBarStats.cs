@@ -5,17 +5,16 @@ using UnityEngine.UI;
 using TMPro;
 using UnityEngine.EventSystems;
 
-public class SideBarStats : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class SideBarStats : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
 {
     private GameStatsManager gameStatsManager;
     private _PartyManager _partyManager;
     
-    public RectTransform imageRectTransform, healthBarTransform;
+    public RectTransform imageRectTransform, healthBarTransform, memberNameTransform;
     private Vector2 defaultSize = new Vector2(35, 35), expandedSize = new Vector2(40, 40);
-    private Vector2 defaultPosition = new Vector2(-75, 0), expandedPosition;
+    private Vector2 defaultPosition = new Vector2(-75, 0), expandedPosition, expandedNamePosition;
     private float expandSpeed = 10f;
-    private Coroutine imageCoroutine;
-    private Coroutine healthBarCoroutine;
+    private Coroutine imageCoroutine, healthBarCoroutine, nameCoroutine;
 
 
 
@@ -37,21 +36,32 @@ public class SideBarStats : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         if (imageCoroutine != null) StopCoroutine(imageCoroutine);
         imageCoroutine = StartCoroutine(AnimateSize(expandedSize));
 
+        // if (healthBarCoroutine != null) StopCoroutine(healthBarCoroutine);
+        // healthBarCoroutine = StartCoroutine(AnimateHealthbar(expandedPosition));
+
+        if (nameCoroutine != null) StopCoroutine(nameCoroutine);
+        nameCoroutine = StartCoroutine(AnimateName(expandedNamePosition));
+
+        CancelInvoke(nameof(DelayedShrink));
+        // CancelInvoke(nameof(DelayedHealthbar));
+        CancelInvoke(nameof(DelayedName));
+    }
+    public void OnPointerExit(PointerEventData eventData)
+    {
+        if (this.name == "Player") return;
+
+        Invoke(nameof(DelayedShrink), 0.2f);
+        Invoke(nameof(DelayedHealthbar), 0.2f);
+        Invoke(nameof(DelayedName), 0.2f);
+    }
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        if (this.name == "Player") return;
+
         if (healthBarCoroutine != null) StopCoroutine(healthBarCoroutine);
         healthBarCoroutine = StartCoroutine(AnimateHealthbar(expandedPosition));
 
-        CancelInvoke(nameof(DelayedShrink));
         CancelInvoke(nameof(DelayedHealthbar));
-    }
-
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        if (this.name == "Player") return; // Prevent animation for Player
-
-        // if (imageCoroutine != null) StopCoroutine(imageCoroutine);
-        // imageCoroutine = StartCoroutine(AnimateSize(defaultSize));
-        Invoke(nameof(DelayedShrink), 0.2f);
-        Invoke(nameof(DelayedHealthbar), 0.2f);
     }
 
     private void DelayedShrink()
@@ -63,6 +73,11 @@ public class SideBarStats : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
     {
         if (healthBarCoroutine != null) StopCoroutine(healthBarCoroutine);
         healthBarCoroutine = StartCoroutine(AnimateHealthbar(defaultPosition));
+    }
+    private void DelayedName()
+    {
+        if (nameCoroutine != null) StopCoroutine(nameCoroutine);
+        nameCoroutine = StartCoroutine(AnimateName(defaultPosition));
     }
 
     IEnumerator AnimateSize(Vector2 targetSize)
@@ -83,6 +98,15 @@ public class SideBarStats : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         }
         healthBarTransform.anchoredPosition = targetPos;
     }
+    IEnumerator AnimateName(Vector2 targetPos)
+    {
+        while (Vector2.Distance(memberNameTransform.anchoredPosition, targetPos) > 0.1f)
+        {
+            memberNameTransform.anchoredPosition = Vector2.Lerp(memberNameTransform.anchoredPosition, targetPos, Time.deltaTime * expandSpeed * 2f);
+            yield return null;
+        }
+        memberNameTransform.anchoredPosition = targetPos;
+    }
 
     void Awake()
     {
@@ -91,10 +115,14 @@ public class SideBarStats : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
         StartCoroutine(WaitForPartyManager());
         imageRectTransform = transform.GetComponent<Image>().rectTransform;
         healthBarTransform = transform.Find("Health Bar Base").GetComponent<Image>().rectTransform;
+        memberNameTransform = transform.GetComponentInChildren<TMP_Text>().rectTransform;
 
         expandedPosition = healthBarTransform.anchoredPosition;
+        expandedNamePosition = memberNameTransform.anchoredPosition;
+        
         if (this.name != "Player") {
             healthBarTransform.anchoredPosition = defaultPosition;
+            memberNameTransform.anchoredPosition = defaultPosition;
         }
     }
 

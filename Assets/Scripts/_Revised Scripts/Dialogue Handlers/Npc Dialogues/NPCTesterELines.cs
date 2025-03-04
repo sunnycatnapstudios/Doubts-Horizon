@@ -17,8 +17,7 @@ public class NPCTesterELines : MonoBehaviour
         
         introLines = new List<string>
         {
-            "...",
-            "...........",
+            "... {pause}\n...........",
             "......?",
             "....Oh hi?...",
             "So...",

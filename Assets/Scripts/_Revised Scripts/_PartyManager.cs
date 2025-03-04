@@ -13,7 +13,7 @@ public class _PartyManager : MonoBehaviour
     public List<Sprite> characterProfiles = new List<Sprite>();
 
     // UI Elements to Update
-    public PartySideBar partySideBar;
+    private PartySideBar partySideBar;
 
     void AssignAnimator(GameObject memberObject, string memberName)
     {
@@ -35,7 +35,7 @@ public class _PartyManager : MonoBehaviour
         // Spawn GameObjects for each current party member
         for (int i = 0; i < gameStatsManager.currentPartyMembers.Count; i++)
         {
-            GameObject newPartyObject = Instantiate(partyMemberTemplate);
+            GameObject newPartyObject = Instantiate(partyMemberTemplate, GameObject.FindGameObjectWithTag("PartyMembers Group").transform);
 
             newPartyObject.name = gameStatsManager.currentPartyMembers[i].Name;
             newPartyObject.GetComponent<Follower>().order = i+1;
@@ -109,6 +109,8 @@ public class _PartyManager : MonoBehaviour
         gameStatsManager = GameStatsManager.Instance;
         GameObject player = GameObject.FindWithTag("Player");
         partyMemberTemplate = player.GetComponentInChildren<Follower>().gameObject;
+
+        partySideBar = GameObject.FindWithTag("PartySideBar").GetComponent<PartySideBar>();
         
         // partySideBar = GameObject.GetComponent<PartySideBar>();
     }

@@ -128,14 +128,14 @@ public class PartySlotHandler : MonoBehaviour
         int playerIndex = GetPlayerIndex(activePlayer);
         playerParty = _battleUIHandler.playerParty;
 
-        if (playerIndex != -1 && scrollbar != null && playerParty.Count > 1)
+        if (playerIndex != -1 && scrollbar != null && playerParty.Count > 1 && this.gameObject.activeSelf)
         {
             float targetPosition = Mathf.Clamp01((float)playerIndex / (playerParty.Count - 1));
             StartCoroutine(SmoothScroll(targetPosition, .3f));
 
             if (!dontBob && playerParty.Count>4)
             {
-                StartCoroutine(BobSlot(partySlots[playerIndex].GetComponentInChildren<Image>().transform.GetComponent<RectTransform>(), 15f, 0.25f));
+                StartCoroutine(BobSlot(partySlots[playerIndex].GetComponentInChildren<Image>().transform.GetComponent<RectTransform>(), 7.5f, 0.25f));
             }
         }
     }

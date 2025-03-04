@@ -13,7 +13,7 @@ public class TypeWriter : MonoBehaviour {
     [SerializeField] string leadingChar = ""; // TODO: do we ever plan to use this? can it be removed?
     [SerializeField] bool leadingCharBeforeDelay = false;
 
-    public bool hasStartedTyping = false, isTyping = false, skipTyping = false;
+    public bool hasStartedTyping = false, isTyping = false, skipTyping = false, waitingForPause = false;
     public float textChirp;
     private AudioClip _sfxTyping;
 
@@ -34,11 +34,21 @@ public class TypeWriter : MonoBehaviour {
         textChirp = 0f;
 
         for (int i = 0; i < writer.Length; ++i) {
-            if (skipTyping) {
-                _tmpProText.text = writer;
+            if (skipTyping && !waitingForPause) {
+                _tmpProText.text = writer.Replace("{pause}", "");;
                 break;
             }
 
+            if (writer.Substring(i).StartsWith("{pause}")) {
+                waitingForPause = true;
+                while (true) {
+                    if (Input.GetKeyDown(KeyCode.E)) break; // Wait for player input
+                    yield return null;
+                }
+                i += 6;
+                continue;
+            }
+                
             // If there is a style tag attach the whole thing
             if (writer[i] == '<') {
                 int start = i;
@@ -79,6 +89,7 @@ public class TypeWriter : MonoBehaviour {
 
         isTyping = false;
         skipTyping = false;
+        waitingForPause = false;
     }
 
     void Start() {
@@ -94,7 +105,7 @@ public class TypeWriter : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (Input.GetKeyDown(KeyCode.E) && isTyping && _tmpProText.text.Length > 3) {
+        if (Input.GetKeyDown(KeyCode.E) && isTyping && _tmpProText.text.Length > 3 && !waitingForPause) {
             skipTyping = true;
         }
 

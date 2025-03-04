@@ -15,7 +15,7 @@ public class DefendStatusIcon : MonoBehaviour, IPointerEnterHandler, IPointerExi
     public PartySlotHandler partySlotHandler;
     private Coroutine ExpandOut, ExpandIn;
     private Image iconImage;
-    private float expandSpeed = 20f, expand = 30f, slideSpeed = 5f;
+    private float expandSpeed = 20f, expand = 30f;
     private bool inAnimation = false;
     public bool triggerSlideIn, triggerSlideOut;
 

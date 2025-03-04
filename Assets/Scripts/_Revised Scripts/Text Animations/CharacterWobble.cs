@@ -12,7 +12,7 @@ public class CharacterWobble : MonoBehaviour
 
     void Start()
     {
-        modifier = 1f;
+        if (modifier == 0) modifier = 1f;
         textMesh = GetComponent<TMP_Text>();
     }
 
@@ -28,7 +28,7 @@ public class CharacterWobble : MonoBehaviour
 
             int index = c.vertexIndex;
 
-            Vector3 offset = Wobble(Time.time + i);
+            Vector3 offset = Wobble(Time.unscaledTime + i);
             vertices[index] += offset;
             vertices[index + 1] += offset;
             vertices[index + 2] += offset;

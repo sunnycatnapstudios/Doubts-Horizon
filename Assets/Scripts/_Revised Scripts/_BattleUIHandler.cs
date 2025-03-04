@@ -16,6 +16,7 @@ public class _BattleUIHandler : MonoBehaviour
 {
     private GameStatsManager gameStatsManager;
     private _PartyManager _partyManager;
+    private _DialogueHandler _dialogueHandler;
     
     public Animator partyUIAnimator, enemyUIAnimator, enemyStatsAnimator;
     public bool actOption = false, itemOption = false, canSelect = false;
@@ -46,6 +47,9 @@ public class _BattleUIHandler : MonoBehaviour
     private BattleTransition battleTransition;
     private DefendStatusIcon defendStatusIcon;
 
+    public int roll, escapeChance;
+    public EscapePrompt escapePrompt;
+
     [Serializable]
     private struct AudioClips {
         public AudioClip battleMusic;
@@ -72,6 +76,7 @@ public class _BattleUIHandler : MonoBehaviour
 
         gameStatsManager = GameStatsManager.Instance;
         _partyManager = gameStatsManager._partyManager;
+        _dialogueHandler = gameStatsManager._dialogueHandler;
         
         currentEnemies = new List<CharacterStats>(gameStatsManager.L1Enemies.Values);
     }
@@ -90,6 +95,7 @@ public class _BattleUIHandler : MonoBehaviour
                 turnIndicator = combatUI.GetComponentInChildren<TurnIndicator>();
                 partySlotHandler = combatUI.GetComponentInChildren<PartySlotHandler>();
                 defendStatusIcon = combatUI.GetComponentInChildren<DefendStatusIcon>();
+                escapePrompt = combatUI.GetComponentInChildren<EscapePrompt>();
             } if (obj.CompareTag("EnemyUI")) {
                 enemySlot = obj;
                 enemyStatsAnimator = obj.GetComponent<Animator>();
@@ -135,6 +141,7 @@ public class _BattleUIHandler : MonoBehaviour
 
     public void EnterCombat()
     {
+        _dialogueHandler.CloseDialogueBox();
         AudioManager.Instance.PlayUiSound(audioClips.sfxBell);
         AudioManager.Instance.CrossFadeAmbienceToZero(1f);
         AudioManager.Instance.CrossFadeMusicSound(audioClips.battleMusic, 2f, 1f, 1f);
@@ -245,6 +252,7 @@ public class _BattleUIHandler : MonoBehaviour
         battleOrder.Add(enemyStats);
         playerParty = battleOrder.FindAll(c => !c.isEnemy); // Exclude Enemy from selection
         partySlotHandler.UpdateSlots();
+        SetEscapePercentage();
 
         battleOrder = ShuffleList(battleOrder);
         
@@ -380,7 +388,7 @@ public class _BattleUIHandler : MonoBehaviour
                 battleInProgress = false;
                 yield break;
             }
-
+            SetEscapePercentage();
             currentTurnIndex++;
             endTurn = false;
 
@@ -405,7 +413,7 @@ public class _BattleUIHandler : MonoBehaviour
             defendIndicator.anchoredPosition = targetPos;
 
             StartCoroutine(WaitForAnimationAndPlay(() => ZoomIntoFrame(defendIndicator, targetPos, 0.5f)));
-            StartCoroutine(defendStatusIcon.SlideIn());
+            // StartCoroutine(defendStatusIcon.SlideIn());
         }
         else { Debug.LogWarning("No matching party slot"); }
     }
@@ -421,6 +429,7 @@ public class _BattleUIHandler : MonoBehaviour
 
     IEnumerator ZoomIntoFrame(RectTransform indicator, Vector2 targetAnchoredPosition, float duration)
     {
+        StartCoroutine(defendStatusIcon.SlideIn());
         Vector3 startScale = Vector3.zero;
         Vector3 endScale = Vector3.one;
 
@@ -453,13 +462,13 @@ public class _BattleUIHandler : MonoBehaviour
 
     IEnumerator ShakeDefendIndicator()
     {
-        StartCoroutine(defendStatusIcon.ShakeDefendIcon(.3f, .8f));
         yield return StartCoroutine(WaitForAnimationAndPlay(() => ShakeDefendInternal(Random.Range(.2f, .4f), Random.Range(5f, 20f))));
     }
 
     IEnumerator ShakeDefendInternal(float duration, float strength)
     {
         defendIndicator.GetComponent<DefendIndicator>().inAnimation = true;
+        StartCoroutine(defendStatusIcon.ShakeDefendIcon(.3f, .8f));
         Vector2 startPos = defendIndicator.anchoredPosition;
         float elapsedTime = 0f;
 
@@ -485,6 +494,7 @@ public class _BattleUIHandler : MonoBehaviour
     IEnumerator DestroyDefendInternal()
     {
         defendIndicator.GetComponent<DefendIndicator>().inAnimation = true;
+        StartCoroutine(defendStatusIcon.SlideOut());
         float jitterDuration = 0.1f;
         float expandDuration = 0.3f;
         float jitterAmount = 3f;
@@ -505,7 +515,6 @@ public class _BattleUIHandler : MonoBehaviour
         elapsed = 0f;
         Vector2 originalScale = defendIndicator.sizeDelta;
         Vector2 alteredScale = new Vector2(150, 150);
-        StartCoroutine(defendStatusIcon.SlideOut());
 
         while (elapsed < expandDuration)
         {
@@ -550,6 +559,7 @@ public class _BattleUIHandler : MonoBehaviour
 
             if (selectedAction == "Heal") {
                 partySlotHandler.ViewPortCanvasGroup.blocksRaycasts = false;
+                canSelect = true;
             }
 
             while (selectedTarget == null)
@@ -571,7 +581,6 @@ public class _BattleUIHandler : MonoBehaviour
                     }
                     else if (selectedAction == "Defend" && currentDefender != null)
                     {
-                        Debug.Log("WE IN DA LOOP");
                         partySlotHandler.MoveToActivePlayer(currentDefender, false);
                         StartCoroutine(ShakeDefendIndicator());
                         selectedAction = selectedTarget = null;
@@ -617,7 +626,10 @@ public class _BattleUIHandler : MonoBehaviour
                 if (player.isCombatant)  {healAmount = (1+(60 - player.attack)/60)*(Random.Range(20, 40));}
                 else {healAmount = Random.Range(20, 40);}
 
-                if (selectedTarget == player.Name) {healAmount=(int)(healAmount*.4f); Debug.Log($"Pretty greedy to try healing yourself {healAmount/.4f}:{healAmount}");}
+                if (selectedTarget == player.Name) {
+                    healAmount=(int)(healAmount*.4f);
+                    Debug.Log($"Pretty greedy to try healing yourself {healAmount/.4f}:{healAmount}");
+                }
                 healTarget.currentHealth += healAmount;
                 partySlotHandler.MoveToActivePlayer(healTarget, true);
 
@@ -635,9 +647,9 @@ public class _BattleUIHandler : MonoBehaviour
                 }
 
                 Debug.Log($"{selectedTarget} was healed by {player.Name} for {healAmount} HP!");
-                canSelect = false;
+                // canSelect = false;
+                break; // Move forward in the turn after completing Heal/Defend
             }
-            break; // Move forward in the turn after completing Heal/Defend
         }
 
         if (selectedAction == "Attack")
@@ -662,6 +674,7 @@ public class _BattleUIHandler : MonoBehaviour
 
         enemySlot.GetComponent<EnemyHealthbar>().UpdateHealthBar(currentEnemyCurrentHealth);
         partySlotHandler.ViewPortCanvasGroup.blocksRaycasts = true;
+        canSelect = false;
 
         Debug.Log($"Player chose {selectedAction}");
         yield return new WaitForSecondsRealtime(.6f);
@@ -703,6 +716,8 @@ public class _BattleUIHandler : MonoBehaviour
                         $"\nDamage Negated: {damageNegated}" +
                         $"\n{currentDefender.Name} takes {defenderDamage}, {target.Name} takes {targetDamage}");
 
+                yield return new WaitForSecondsRealtime(.2f);
+
                 foreach (PartySlot mem in partySlotHandler.partySlots)
                 {
                     if (mem.playerStats.Name == currentDefender.Name)
@@ -737,6 +752,8 @@ public class _BattleUIHandler : MonoBehaviour
                 partySlotHandler.MoveToActivePlayer(target, true);
                 Debug.Log($"{enemy.Name} attacks {target.Name} for {enemyDamage} damage!");
 
+                yield return new WaitForSecondsRealtime(.2f);
+
                 foreach (PartySlot mem in partySlotHandler.partySlots)
                 {
                     if (mem.playerStats.Name == target.Name)
@@ -757,7 +774,7 @@ public class _BattleUIHandler : MonoBehaviour
             }
 
             // Reset defender at the end of the turn
-            StartCoroutine(DestroyDefend());
+            if (currentDefender != null) StartCoroutine(DestroyDefend());
             currentDefender = null;
             EnemyIsAttacking(enemyStats.Name);
         }
@@ -782,6 +799,8 @@ public class _BattleUIHandler : MonoBehaviour
 
     void ShowFloatingText(int damage, Color color, Vector3 targetTransform, bool ishealing)
     {
+        if (combatUI == null) return;
+        
         Vector3 spawnPosition = targetTransform + new Vector3(0, 60f, 0);
         floatingText = Instantiate(floatingTextPrefab, spawnPosition, Quaternion.identity, GameObject.FindGameObjectWithTag("Combat UI").transform);
         floatingText.SetActive(true);
@@ -848,7 +867,7 @@ public class _BattleUIHandler : MonoBehaviour
 
         if (selectedAction == "Heal" || selectedAction == "Defend"){
             selectedTarget = null;
-            canSelect = false;
+            // canSelect = false;
         }
 
         selectedAction = action;
@@ -913,6 +932,7 @@ public class _BattleUIHandler : MonoBehaviour
     private float escapeTimer = 0f,  escapeTimeout = 2f; // Time window for second press
     public void Escape()
     {
+        escapePrompt.OpenPrompt();
         if (!escapePressedOnce)
         {
             escapePressedOnce = true;
@@ -933,20 +953,21 @@ public class _BattleUIHandler : MonoBehaviour
         selectedAction = "Escape";
         AudioManager.Instance.PlayUiSound(audioClips.uiDrawer);
 
-        float totalCurrentHealth = 0f, totalMaxHealth = 0f;
-        int partyCount = 0;
+        SetEscapePercentage();
+        // float totalCurrentHealth = 0f, totalMaxHealth = 0f;
+        // int partyCount = 0;
 
-        foreach (CharacterStats partyMember in battleOrder)
-        {
-            if (!partyMember.isEnemy)
-            {
-                partyCount++;
-                totalCurrentHealth += partyMember.currentHealth;
-                totalMaxHealth += partyMember.maxHealth;
-            }
-        }
-        int escapeChance = (int)(35+(((totalMaxHealth-totalCurrentHealth)/totalMaxHealth)*65));
-        int roll = Random.Range(0, 100);
+        // foreach (CharacterStats partyMember in battleOrder)
+        // {
+        //     if (!partyMember.isEnemy)
+        //     {
+        //         partyCount++;
+        //         totalCurrentHealth += partyMember.currentHealth;
+        //         totalMaxHealth += partyMember.maxHealth;
+        //     }
+        // }
+        // escapeChance = (int)(35+(((totalMaxHealth-totalCurrentHealth)/totalMaxHealth)*65));
+        roll = Random.Range(0, 100);
         
         Debug.Log($"Chance of escape: {escapeChance}%");
 
@@ -969,6 +990,22 @@ public class _BattleUIHandler : MonoBehaviour
         int enemyIndex = battleOrder.IndexOf(enemyStats);
         endTurn = true;
         currentTurnIndex = enemyIndex-1;
+    }
+    void SetEscapePercentage()
+    {
+        float totalCurrentHealth = 0f, totalMaxHealth = 0f;
+        int partyCount = 0;
+
+        foreach (CharacterStats partyMember in playerParty)
+        {
+            // if (!partyMember.isEnemy)
+            {
+                partyCount++;
+                totalCurrentHealth += partyMember.currentHealth;
+                totalMaxHealth += partyMember.maxHealth;
+            }
+        }
+        escapeChance = (int)(35 + (((totalMaxHealth-totalCurrentHealth)/totalMaxHealth)*65));
     }
 
     private IEnumerator WaitForCloseThenToggle(GameObject targetContent, bool state)
