@@ -6,14 +6,13 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.EventSystems;
 
-public class _DialogueInputHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler
+public class _DialogueInputHandler : MonoBehaviour
 {
     private Player player;
     private _DialogueHandler dialogueHandler;
     private DialogueButtons dialogueButtons;
-    private TextMeshProUGUI choiceAText, choiceBText;
-    public CanvasGroup DialogueInputCanvasGroup;
-    public bool hovering;
+    public TextMeshProUGUI promptText, choiceAText, choiceBText;
+    private CanvasGroup DialogueInputCanvasGroup;
 
     void OnEnable()
     {
@@ -21,22 +20,22 @@ public class _DialogueInputHandler : MonoBehaviour, IPointerEnterHandler, IPoint
         dialogueHandler = FindObjectOfType<_DialogueHandler>();
 
         DialogueInputCanvasGroup = GetComponent<CanvasGroup>();
-
         DialogueInputCanvasGroup.alpha = 0f;
         // DialogueInputCanvasGroup.interactable
         DialogueInputCanvasGroup.blocksRaycasts = false;
     }
-
-    public void OnPointerEnter(PointerEventData eventData) {
-        // Debug.Log("DialogueInPutHandler OnPointerEnter()");
-        hovering = true;
-    }
-    public void OnPointerExit(PointerEventData eventData) {
-        // Debug.Log("DialogueInPutHandler OnPointerExit()");
-        hovering = false;
-    }
-    public void OnPointerClick(PointerEventData eventData)
+    public void ShowChoices(string prompt, string choiceA, string choiceB)
     {
-        
+        DialogueInputCanvasGroup.alpha = 1f; DialogueInputCanvasGroup.blocksRaycasts = true;
+
+        SetupChoiceTypewriter(promptText, prompt);
+        SetupChoiceTypewriter(choiceAText, choiceA);
+        SetupChoiceTypewriter(choiceBText, choiceB);
+    }
+    void SetupChoiceTypewriter(TextMeshProUGUI textGameObject, string text)
+    {
+        textGameObject.GetComponent<TypeWriter>().StartTypewriter(text);
+        textGameObject.GetComponent<TypeWriter>().skipTyping = false;
+        textGameObject.GetComponent<TypeWriter>().hasStartedTyping = true;
     }
 }

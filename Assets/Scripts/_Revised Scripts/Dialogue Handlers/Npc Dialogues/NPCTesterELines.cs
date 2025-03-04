@@ -8,7 +8,6 @@ public class NPCTesterELines : MonoBehaviour
     public _DialogueInputHandler _dialogueInputHandler;
     public List<string> dialogueLines;
     private List<string> introLines, positiveAnswer, negativeAnswer;
-    private bool waitingForResponse;
 
     void Start ()
     {
@@ -21,7 +20,11 @@ public class NPCTesterELines : MonoBehaviour
             "......?",
             "....Oh hi?...",
             "So...",
-            "How's your{pause} day been?"
+            "How's your{pause} day been?",
+            "Sorry{pause}, I should've told you{pause}\nI need your help on something",
+            "Will you help me?",
+            "{dialoguePrompt:Will you help me?|Sure I can help|I don't think we can help you here}",
+            "Thanks for the response"
         };
         positiveAnswer = new List<string>
         {

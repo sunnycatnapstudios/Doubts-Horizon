@@ -12,6 +12,8 @@ public class JoinerDialogue : MonoBehaviour {
         dialogueInputHandler = GameObject.FindGameObjectWithTag("Dialogue Text").GetComponent<DialogueInputHandler>();
         npcDialogueHandler = GetComponent<NPCDialogueHandler>();
 
+        if (dialogueInputHandler == null) return;
+
         string takeMeTag = "Take me";
         Action takeMe = () => {
             Debug.Log("Take me callback.");

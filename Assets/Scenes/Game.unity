@@ -1725,6 +1725,7 @@ GameObject:
   - component: {fileID: 349054755}
   - component: {fileID: 349054756}
   - component: {fileID: 349054757}
+  - component: {fileID: 349054758}
   m_Layer: 5
   m_Name: Option Container
   m_TagString: Untagged
@@ -1751,7 +1752,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 0}
   m_AnchoredPosition: {x: 0, y: 63}
-  m_SizeDelta: {x: -650, y: 90}
+  m_SizeDelta: {x: 0, y: 90}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!225 &349054756
 CanvasGroup:
@@ -1761,7 +1762,7 @@ CanvasGroup:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 349054754}
   m_Enabled: 1
-  m_Alpha: 0
+  m_Alpha: 1
   m_Interactable: 1
   m_BlocksRaycasts: 0
   m_IgnoreParentGroups: 0
@@ -1777,8 +1778,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d61b983c2641cb5449e1ad1795a02bb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DialogueInputCanvasGroup: {fileID: 0}
-  hovering: 0
+  promptText: {fileID: 1128582353914606637}
+  choiceAText: {fileID: 1128582353063167972}
+  choiceBText: {fileID: 1128582353036945869}
+--- !u!114 &349054758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 349054754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15f35d637b7e8a34dae41f99bc154a5a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  choiceA: 0
+  choiceB: 0
 --- !u!1 &359003644
 GameObject:
   m_ObjectHideFlags: 0
@@ -73538,7 +73554,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 70}
-  m_SizeDelta: {x: 700, y: 150}
+  m_SizeDelta: {x: 0, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1128582352485100537
 GameObject:
@@ -74249,7 +74265,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1128582354355367373}
+        - m_Target: {fileID: 349054758}
           m_MethodName: ChoiceB
           m_Mode: 1
           m_Arguments:
@@ -77452,6 +77468,7 @@ GameObject:
   - component: {fileID: 1128582353036945868}
   - component: {fileID: 1128582353036945869}
   - component: {fileID: 1128582353036945871}
+  - component: {fileID: 1128582353036945870}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -77558,6 +77575,31 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1128582353036945870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1128582353036945867}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 589742b73e583834895176149ee12673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delayBeforeStart: 1.2
+  timeBtwChars: 0.02
+  leadingChar: 
+  leadingCharBeforeDelay: 0
+  hasStartedTyping: 0
+  isTyping: 0
+  skipTyping: 0
+  waitingForPause: 0
+  waitingForResponse: 0
+  choiceMade: 0
+  textChirp: 0
+  dropTextEffect: 0
+  _dialogueInputHandler: {fileID: 0}
 --- !u!114 &1128582353036945871
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -77685,6 +77727,7 @@ GameObject:
   - component: {fileID: 1128582353063167975}
   - component: {fileID: 1128582353063167972}
   - component: {fileID: 1128582353063167974}
+  - component: {fileID: 1128582353063167971}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -77692,6 +77735,31 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &1128582353063167971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1128582353063167970}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 589742b73e583834895176149ee12673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delayBeforeStart: 0.7
+  timeBtwChars: 0.02
+  leadingChar: 
+  leadingCharBeforeDelay: 0
+  hasStartedTyping: 0
+  isTyping: 0
+  skipTyping: 0
+  waitingForPause: 0
+  waitingForResponse: 0
+  choiceMade: 0
+  textChirp: 0
+  dropTextEffect: 0
+  _dialogueInputHandler: {fileID: 0}
 --- !u!114 &1128582353063167972
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79104,7 +79172,11 @@ MonoBehaviour:
   isTyping: 0
   skipTyping: 0
   waitingForPause: 0
+  waitingForResponse: 0
+  choiceMade: 0
   textChirp: 0
+  dropTextEffect: 0
+  _dialogueInputHandler: {fileID: 0}
 --- !u!222 &1128582353312009647
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -80044,7 +80116,7 @@ MonoBehaviour:
     callback:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 1128582354355367373}
+        - m_Target: {fileID: 349054758}
           m_MethodName: ChoiceA
           m_Mode: 1
           m_Arguments:
@@ -82520,7 +82592,11 @@ MonoBehaviour:
   isTyping: 0
   skipTyping: 0
   waitingForPause: 0
+  waitingForResponse: 0
+  choiceMade: 0
   textChirp: 0
+  dropTextEffect: 1
+  _dialogueInputHandler: {fileID: 349054757}
 --- !u!224 &1128582353851261798
 RectTransform:
   m_ObjectHideFlags: 0
@@ -82552,7 +82628,6 @@ GameObject:
   - component: {fileID: 1128582353851261784}
   - component: {fileID: 1128582353851261785}
   - component: {fileID: 1128582353851261787}
-  - component: {fileID: 1128582353851261800}
   - component: {fileID: 1128582353851261801}
   - component: {fileID: 1128582353851261786}
   m_Layer: 5
@@ -82562,18 +82637,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1128582353851261800
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1128582353851261799}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 281c6d03227324c93957cf8b5eebcc12, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1128582353851261801
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82586,8 +82649,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d61b983c2641cb5449e1ad1795a02bb7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DialogueInputCanvasGroup: {fileID: 0}
-  hovering: 0
+  promptText: {fileID: 0}
+  choiceAText: {fileID: 0}
+  choiceBText: {fileID: 0}
 --- !u!1 &1128582353857923960
 GameObject:
   m_ObjectHideFlags: 0
@@ -83318,6 +83382,7 @@ GameObject:
   - component: {fileID: 1128582353914606636}
   - component: {fileID: 1128582353914606637}
   - component: {fileID: 1128582353914606639}
+  - component: {fileID: 1128582353914606638}
   m_Layer: 5
   m_Name: Text (TMP)
   m_TagString: Untagged
@@ -83422,6 +83487,31 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &1128582353914606638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1128582353914606635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 589742b73e583834895176149ee12673, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delayBeforeStart: 0
+  timeBtwChars: 0.02
+  leadingChar: 
+  leadingCharBeforeDelay: 0
+  hasStartedTyping: 0
+  isTyping: 0
+  skipTyping: 0
+  waitingForPause: 0
+  waitingForResponse: 0
+  choiceMade: 0
+  textChirp: 0
+  dropTextEffect: 0
+  _dialogueInputHandler: {fileID: 0}
 --- !u!114 &1128582353914606639
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -85415,7 +85505,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1128582354355367371}
   - component: {fileID: 1128582354355367370}
-  - component: {fileID: 1128582354355367373}
   m_Layer: 5
   m_Name: Dialogue Options
   m_TagString: Dialogue Options
@@ -85469,20 +85558,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: -14}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &1128582354355367373
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1128582354355367368}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 15f35d637b7e8a34dae41f99bc154a5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  choiceA: 0
-  choiceB: 0
 --- !u!1 &1128582354359470640
 GameObject:
   m_ObjectHideFlags: 0
@@ -85592,7 +85667,11 @@ MonoBehaviour:
   isTyping: 0
   skipTyping: 0
   waitingForPause: 0
+  waitingForResponse: 0
+  choiceMade: 0
   textChirp: 0
+  dropTextEffect: 0
+  _dialogueInputHandler: {fileID: 0}
 --- !u!82 &1128582354423705049
 AudioSource:
   m_ObjectHideFlags: 0
