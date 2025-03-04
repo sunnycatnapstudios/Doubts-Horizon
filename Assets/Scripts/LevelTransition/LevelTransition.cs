@@ -2,22 +2,23 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class LevelTransition : MonoBehaviour {
-    private string tagTarget = "Player";
+    private readonly string tagTarget = "Player";
 
-    // public Scene sceneToLoad;
     public GameObject transitionAnimator;
 
     private Animator sceneAnimation;
 
-    public Vector3 entranceDirection, exitDirection, exitLocation, endPosition;
+    public Transform targetTransform;      // A transform under the transition to target where to place the player
 
-    private GameObject Player;
-    private Transform playerTransform;
-    public Vector3 playerPosition;
-    public Vector3 refPosition;
-    public bool changedLevel, inTransition;
+    //private Vector3 exitLocation;
+    public Vector3 entranceDirection, exitDirection, exitLocation, endPosition;  // TODO eventually phase out
+
+
+    private GameObject playerObject;
+    private Player player;
 
     [Serializable]
     private struct AudioClips {
@@ -27,84 +28,52 @@ public class LevelTransition : MonoBehaviour {
 
     [SerializeField] private AudioClips audioClips;
 
-    private void OnTriggerEnter2D(Collider2D other) {
-        // if (other.CompareTag(tagTarget)&& !inTransition)
+    private IEnumerator OnTriggerEnter2D(Collider2D other) {
         if (other.CompareTag(tagTarget)) {
-            // if (CompareTag("Same Level")||CompareTag("Battle UI Level"))
-            {
-                Debug.Log(tagTarget + " has entered " + name);
-
-                Player = other.gameObject;
-                Player.GetComponent<Player>().movePoint.transform.position += entranceDirection;
-                Player.GetComponent<Player>().isPlayerInControl = true;
-                Player.GetComponent<Player>().moveSpeed = 3f;
-
-                // inTransition = true;
-                sceneAnimation.SetTrigger("Leave Scene");
-                AudioManager.Instance.PlaySound(audioClips.sfxEnterTransition);
+            if (player == null) {
+                playerObject = other.gameObject;
+                player = other.gameObject.GetComponent<Player>();
             }
-        }
-    }
 
-    private void OnTriggerExit2D(Collider2D other) {
-        if (other.CompareTag(tagTarget)) {
-            // if (CompareTag("Same Level")||CompareTag("Battle UI Level"))
-            {
-                Debug.Log(tagTarget + " has left " + name);
-                Player.GetComponent<Player>().isPlayerInControl = false;
+            player.movePoint.transform.position += entranceDirection;   // TODO move forward. Should be found within player script instead
+            player.isPlayerInControl = true;
 
-                AudioManager.Instance.PlaySound(audioClips.sfxExitTransition);
-                changedLevel = true;
-            }
-        }
-    }
+            sceneAnimation.SetTrigger("Leave Scene");
+            AudioManager.Instance.PlaySound(audioClips.sfxEnterTransition);
 
-    void ChangeLevel() {
-        // if (CompareTag("Same Level") && !inTransition)
-        // if (CompareTag("Same Level")||CompareTag("Battle UI Level"))
-        {
-            sceneAnimation.SetTrigger("Enter Scene");
+            yield return new WaitForSeconds(sceneAnimation.GetCurrentAnimatorStateInfo(0).length);
 
-            Player.GetComponent<Player>().movePoint.transform.position = exitLocation + exitDirection;
-            Player.transform.position = exitLocation;
+            // We wait for the transition to complete before moving the player and party
+            player.movePoint.transform.position = exitLocation + exitDirection;
+            playerObject.transform.position = exitLocation;
 
             int i = 0;
-            foreach (GameObject partyMember in Player.GetComponent<PartyManager>().spawnedPartyMembers) {
+            var partyMembers = playerObject.GetComponent<PartyManager>().spawnedPartyMembers;
+            foreach (GameObject partyMember in partyMembers) {
                 partyMember.transform.position = exitLocation + exitDirection;
-                Player.GetComponent<Player>().moveHist[i] = exitLocation + exitDirection;
+                player.moveHist[i] = exitLocation + exitDirection;
                 i++;
             }
 
-            Player.GetComponent<Player>().isPlayerInControl = false;
+            // Wait a second before playing the exit transition
+            yield return new WaitForSeconds(1);
 
-            changedLevel = false;
+            sceneAnimation.SetTrigger("Enter Scene");
+            AudioManager.Instance.PlaySound(audioClips.sfxExitTransition);
 
-            // inTransition = true;
+            player.isPlayerInControl = false;
         }
     }
 
     void Start() {
-        // if (sceneToLoad == null) {
-        //     Debug.Log(this.name + "has no scene to load");
-        // }
+        if (targetTransform != null) {
+            exitLocation = targetTransform.position;
+        }
+
         if (transitionAnimator == null) {
             Debug.Log(this.name + " has no animation to load");
         } else {
             sceneAnimation = transitionAnimator.GetComponent<Animator>();
-            // sceneAnimation.SetTrigger("Enter Scene");
         }
-    }
-
-    void Update() {
-        // if (CompareTag("Same Level")||CompareTag("Battle UI Level"))
-        {
-            if (changedLevel && !sceneAnimation.GetCurrentAnimatorStateInfo(0).IsName("Scene Transition In")) {
-                ChangeLevel();
-            }
-        }
-        // if (inTransition && sceneAnimation.GetCurrentAnimatorStateInfo(0).IsName("Scene Transition Empty"))
-        // {
-        //     inTransition = false;
-        // }
     }
 }
