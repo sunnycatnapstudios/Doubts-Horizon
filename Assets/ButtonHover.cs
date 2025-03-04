@@ -10,6 +10,7 @@ public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     private RectTransform shadowRect;
     private Vector2 defaultPos, targetPos;
     public Vector2 liftAmount;
+    public Color shadowColor;
     private float liftSpeed = 20f;
     private GameObject shadowObject;
 
@@ -26,15 +27,35 @@ public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     {
         shadowObject = new GameObject($"{this.name} Shadow");
         shadowObject.transform.SetParent(transform.parent, false); // Set same parent but not as child
+
         shadowRect = shadowObject.AddComponent<RectTransform>();
-        shadowRect.sizeDelta = buttonPosition.sizeDelta; // Match button size
+        // Copy all RectTransform properties
+        shadowRect.anchorMin = buttonPosition.anchorMin;
+        shadowRect.anchorMax = buttonPosition.anchorMax;
+        shadowRect.pivot = buttonPosition.pivot;
+        shadowRect.sizeDelta = buttonPosition.sizeDelta;
+        shadowRect.anchoredPosition = buttonPosition.anchoredPosition;
+        shadowRect.localScale = buttonPosition.localScale;
+        shadowRect.rotation = buttonPosition.rotation;
 
-        shadowRect.anchoredPosition = defaultPos;
-
+        // Add and configure shadow image
         Image shadowImage = shadowObject.AddComponent<Image>();
-        shadowImage.sprite = GetComponent<Image>().sprite;
-        shadowImage.color = new Color(0, 0, 0, 0.6f);
-        // shadowImage.color = Color.black;
+        Image buttonImage = GetComponent<Image>(); // Get the original button image
+        if (buttonImage != null)
+        {
+            shadowImage.sprite = buttonImage.sprite;
+            shadowImage.type = buttonImage.type;  // Handles Simple, Sliced, Tiled, and Filled images
+            shadowImage.pixelsPerUnitMultiplier = buttonImage.pixelsPerUnitMultiplier;
+            shadowImage.preserveAspect = buttonImage.preserveAspect;
+            shadowImage.fillCenter = buttonImage.fillCenter; // Important for sliced images
+
+            // Handle Fill Type (for Filled images)
+            shadowImage.fillMethod = buttonImage.fillMethod;
+            shadowImage.fillAmount = buttonImage.fillAmount;
+            shadowImage.fillClockwise = buttonImage.fillClockwise;
+            shadowImage.fillOrigin = buttonImage.fillOrigin;
+        }
+        shadowImage.color = (shadowColor == Color.clear) ? Color.black : shadowColor;
 
         shadowObject.transform.SetSiblingIndex(transform.GetSiblingIndex());
     }
