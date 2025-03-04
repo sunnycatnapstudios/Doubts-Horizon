@@ -5,8 +5,7 @@ using System.Runtime.Serialization;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Enemy : MonoBehaviour
-{
+public class Enemy : MonoBehaviour {
     GameStatsManager gameStatsManager;
     _BattleUIHandler _battleUIHandler;
 
@@ -50,7 +49,7 @@ public class Enemy : MonoBehaviour
     void EnterCombat(bool iscaught) {
         if (iscaught && !caught) {
             caught = true;
-            
+
             // StartCoroutine(CaptureScreen());
             // Time.timeScale = 0;
             _battleUIHandler.EnterCombat();
