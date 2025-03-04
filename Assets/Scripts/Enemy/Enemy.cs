@@ -69,7 +69,7 @@ public class Enemy : MonoBehaviour {
 
         GameObject screenOverlay = new GameObject("ScreenOverlay");
         combatUI.SetActive(true);
-        overworldUI.SetActive(false);
+        //         overworldUI.SetActive(false);
         screenOverlay.transform.SetParent(combatUI.transform, false);
 
         // Leave enemy stunned after battle, because it looks cool
@@ -186,23 +186,7 @@ public class Enemy : MonoBehaviour {
         Vector3 direction = target.position - transform.position;
         direction.Normalize();
 
-        if (playerDist <= detectRange || attack && !stun) {
-            // Attack Player // Will be changed later to account for pathfinding
-            if (!demotestFreeze) {
-                transform.position =
-                    Vector3.MoveTowards(transform.position, target.position, attackSpeed * Time.deltaTime);
-            }
-
-            attack = true;
-            EnterCombat(Physics2D.OverlapCircle((transform.position), caughtRange, player));
-            searchTimer = 0f;
-            detectRange = baseRange;
-            intervalCheck = .4f;
-            searching = false;
-            if (playerDist >= pursueRange) {
-                attack = false;
-            }
-        } else if (Physics2D.OverlapCircle((transform.position), .5f, projectile) || stun) // Stun Enemy
+        if (Physics2D.OverlapCircle((transform.position), .5f, projectile) || stun) // Stun Enemy
         {
             searchTimer = 0f;
             if (stunTimer <= stunTime) {
@@ -222,6 +206,22 @@ public class Enemy : MonoBehaviour {
                 stunTimer = 0f;
                 searching = true;
                 stun = false;
+            }
+        } else if (playerDist <= detectRange || attack && !stun) {
+            // Attack Player // Will be changed later to account for pathfinding
+            if (!demotestFreeze) {
+                transform.position =
+                    Vector3.MoveTowards(transform.position, target.position, attackSpeed * Time.deltaTime);
+            }
+
+            attack = true;
+            EnterCombat(Physics2D.OverlapCircle((transform.position), caughtRange, player));
+            searchTimer = 0f;
+            detectRange = baseRange;
+            intervalCheck = .4f;
+            searching = false;
+            if (playerDist >= pursueRange) {
+                attack = false;
             }
         } else if (searching) // Search for Player w Temp Increased Radius
         {

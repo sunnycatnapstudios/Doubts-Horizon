@@ -17,7 +17,7 @@ public class TypeWriter : MonoBehaviour {
     public bool hasStartedTyping = false, isTyping = false, skipTyping = false;
     public bool waitingForPause = false, waitingForResponse = false, choiceMade = false;
     public float textChirp;
-    
+
     public bool dropTextEffect = false;
     public _DialogueInputHandler _dialogueInputHandler;
 
@@ -41,10 +41,6 @@ public class TypeWriter : MonoBehaviour {
         textChirp = 0f;
 
         for (int i = 0; i < writer.Length; ++i) {
-            // if (skipTyping && !waitingForPause) {
-            //     _tmpProText.text = writer.Replace("{pause}", "").Replace("{dialoguePrompt}", "");
-            //     break;
-            // }
             if (skipTyping && !waitingForPause) {
                 _tmpProText.text = System.Text.RegularExpressions.Regex.Replace(
                     writer.Replace("{pause}", ""), 
@@ -84,21 +80,24 @@ public class TypeWriter : MonoBehaviour {
             if (writer[i] == '<') {
                 int start = i;
                 while (i < writer.Length) {
-                    ++i;
                     if (writer[i] == '>') {
                         break;
                     }
+                    // this will break if we have two openers '<' in a row
+                    ++i;
                 }
-
-                _tmpProText.text += writer.Substring(start, i - start);
-                if (i >= writer.Length) {
-                    break;
+                if (i < writer.Length) {
+                    _tmpProText.text += writer.Substring(start, i - start);
+                } else {
+                    // Didn't find a real tag
+                    i = start;
                 }
             }
 
             char c = writer[i];
             if (_tmpProText.text.Length > 0) {
                 _tmpProText.text = _tmpProText.text.Substring(0, _tmpProText.text.Length - leadingChar.Length);
+                // TODO null clip?? AudioManager.Instance.PlaySound(_sfxTyping);
             }
 
             // Apply drop effect
@@ -165,7 +164,7 @@ public class TypeWriter : MonoBehaviour {
             _tmpProText.text = "";
         }
     }
-    
+
     void ShowChoices() {
         Debug.Log($"Prompt: {dialogueChoices[0]}\nChoices: {dialogueChoices[1]}, {dialogueChoices[2]}");
         

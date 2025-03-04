@@ -47,6 +47,8 @@ TagManager:
   - PartyMembers Group
   - OverworldMenu
   - CombatMenu
+  - Followers
+  - Feed1
   layers:
   - Default
   - TransparentFX
