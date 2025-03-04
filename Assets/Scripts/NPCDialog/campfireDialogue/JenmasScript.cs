@@ -3,8 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class JenmasScript : MonoBehaviour
-{
+public class JenmasScript : MonoBehaviour {
     private DialogueInputHandler dialogueInputHandler;
     private NPCDialogueHandler npcDialogueHandler;
     public Survivor survivor;
@@ -28,17 +27,13 @@ public class JenmasScript : MonoBehaviour
                 survivor.Fed = true;
                 fedOrNot = true;
                 inventory.removeItemByName("Ration");
+                prompt.forceFinishDialogue();
                 npcDialogueHandler.dialogueLines.Add($"You have {inventory.getCountofItem("Ration")} rations left");
             } else {
                 npcDialogueHandler.dialogueLines.Add($"You dont even have any for yourself");
             }
 
             prompt.forceDialogueEnd();
-
-
-
-
-
         };
         dialogueInputHandler.AddDialogueChoice(Feedme, takeMe);
 
@@ -47,9 +42,6 @@ public class JenmasScript : MonoBehaviour
             Debug.Log("Or not callback.");
             fedOrNot = false;
             prompt.forceDialogueEnd();
-
-
-
         };
         dialogueInputHandler.AddDialogueChoice(orNotTag, orNot);
 
@@ -58,14 +50,12 @@ public class JenmasScript : MonoBehaviour
             $"<link=\"{Feedme}\"><b><#d4af37>Feed</color></b></link>.\n...\n<link=\"{orNotTag}\"><b><#a40000>Or not...</color></b></link>."
         };
         npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
-
-
     }
+
     void AfterDialogue() {
         Debug.Log("Completed dialogue.");
         if (fedOrNot) {
             npcDialogueHandler.dialogueLines = new List<string> { "thank you, im forever greatful" };
-
         } else {
             npcDialogueHandler.dialogueLines = new List<string> { "where will i find my food", "...." };
         }
