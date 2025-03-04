@@ -130,8 +130,10 @@ public class Player : MonoBehaviour
 
         currentCamSize = camMin;
 
-        // moveSprint = 8.5f;
-        // moveSneak = moveSpeed*sneakConstant;
+        // Default sprint speed if unset in inspector
+        if (moveSprint == 0f) {
+            moveSprint = 8.5f;
+        }
 
 
         // moveHist = new List<Vector3>();
