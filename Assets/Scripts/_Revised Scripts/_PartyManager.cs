@@ -93,15 +93,19 @@ public class _PartyManager : MonoBehaviour
 
     public void UpdatePartyUI()
     {
-        partySideBar.UpdateSideBar();
+        if (partySideBar != null) {
+            partySideBar.UpdateSideBar();
+        } else {
+            Debug.Log("partySideBar was null");
+        }
     }
-    
+
     public void Awake()
     {
     //     gameStatsManager = GameStatsManager.Instance;
 
         // partySideBar = GameObject.FindWithTag("PartySidebar").GetComponent<PartySideBar>();
-        
+
         // partySideBar = GameObject.GetComponent<PartySideBar>();
     }
     void Start()
@@ -111,7 +115,7 @@ public class _PartyManager : MonoBehaviour
         partyMemberTemplate = player.GetComponentInChildren<Follower>().gameObject;
 
         partySideBar = GameObject.FindWithTag("PartySideBar").GetComponent<PartySideBar>();
-        
+
         // partySideBar = GameObject.GetComponent<PartySideBar>();
     }
 
@@ -139,5 +143,5 @@ public class _PartyManager : MonoBehaviour
             }
             else {Debug.Log("Culled All Party Members");}
         }
-    } 
+    }
 }
