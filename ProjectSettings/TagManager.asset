@@ -23,7 +23,30 @@ TagManager:
   - Main Level
   - Map Bounds
   - Combat UI
+  - Stats Manager
+  - Stamina Bar
+  - EnemyUI
+  - PartyCombatUI
   - Inventory
+  - Dialogue Box
+  - UI Canvas
+  - Dialogue Options
+  - Continue Arrow
+  - Act Options
+  - Item Options
+  - Complex Enemy
+  - Simple Enemy
+  - Intro Screen
+  - CM Cam
+  - Play Button
+  - Title Card
+  - Defend Indicator
+  - Damage Numbers
+  - PartySideBar
+  - InfoButton
+  - PartyMembers Group
+  - OverworldMenu
+  - CombatMenu
   - Followers
   - Feed1
   layers:

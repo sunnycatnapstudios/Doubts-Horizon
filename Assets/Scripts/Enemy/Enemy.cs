@@ -6,29 +6,22 @@ using UnityEngine;
 using UnityEngine.UI;
 
 public class Enemy : MonoBehaviour {
+    GameStatsManager gameStatsManager;
+    _BattleUIHandler _battleUIHandler;
+
     public bool attack, stun, searching, pathReturn, caught, demotestFreeze; // Enemy States
     public float enemySpeed = 3, attackSpeed = 5; // Enemy Speeds
-    public float counter_ = 0f, stunTime = 3f, stunTimer, searchTimer, intervalCheck = .4f; // Enemy Timers
-
-    public float
-        detectRange,
-        caughtRange = 1f,
-        baseRange,
-        pursueRange,
-        wakeRange = 4.5f,
-        playerDist,
-        refX,
-        refY; // Enemy Navigation
-
-    [HideInInspector] public Vector3 startPos, pathBounds; // Enemy Positions
+    private float counter_ = 0f, stunTime = 4f, stunTimer, searchTimer, intervalCheck = .4f; // Enemy Timers
+    public float detectRange, caughtRange = 1f, baseRange, pursueRange, wakeRange = 4.5f, playerDist, refX, refY; // Enemy Navigation
+    private Vector3 startPos, pathBounds; // Enemy Positions
 
     public Transform target;
     public LayerMask projectile, player;
 
     public Vector2 pathDist;
 
-    public Animator enemyAnim;
-    public SpriteRenderer spriteState;
+    private Animator enemyAnim;
+    private SpriteRenderer spriteState;
 
     int currentTargetIndex;
 
@@ -40,6 +33,11 @@ public class Enemy : MonoBehaviour {
         spriteState = GetComponent<SpriteRenderer>();
         detectRange = baseRange;
         target = GameObject.FindGameObjectWithTag("Player").transform;
+
+        overworldUI = GameObject.FindWithTag("Overworld UI");
+
+        gameStatsManager = GameStatsManager.Instance;
+        _battleUIHandler = GameStatsManager.Instance._battleUIHandler;
     }
 
     void OnDrawGizmos() {
@@ -52,8 +50,12 @@ public class Enemy : MonoBehaviour {
         if (iscaught && !caught) {
             caught = true;
 
-            StartCoroutine(CaptureScreen());
-            Time.timeScale = 0;
+            // StartCoroutine(CaptureScreen());
+            // Time.timeScale = 0;
+            _battleUIHandler.EnterCombat();
+            stun = true;
+            stunTimer = float.NegativeInfinity;
+            enemyAnim.Play("Stun Down");
         }
     }
 
@@ -67,7 +69,7 @@ public class Enemy : MonoBehaviour {
 
         GameObject screenOverlay = new GameObject("ScreenOverlay");
         combatUI.SetActive(true);
-//         overworldUI.SetActive(false);
+        //         overworldUI.SetActive(false);
         screenOverlay.transform.SetParent(combatUI.transform, false);
 
         // Leave enemy stunned after battle, because it looks cool

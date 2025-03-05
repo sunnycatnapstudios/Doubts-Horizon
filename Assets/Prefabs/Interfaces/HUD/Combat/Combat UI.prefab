@@ -396,9 +396,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 
   profile: {fileID: 7901107717046848250}
+  playerStats:
+    Name: 
+    attack: 0
+    currentHealth: 0
+    maxHealth: 0
+    isCombatant: 0
+    isEnemy: 0
   healthbarCasing: {fileID: 7901107716691065369}
   healthBarBar: {fileID: 7901107717469626367}
   healthBarTail: {fileID: 7901107716574611733}
+  currentHealth: 0
   maxHealth: 0
   defaultImagePosition: {x: 0, y: 0, z: 0}
   initialBarPosition: {x: 0, y: 0, z: 0}
@@ -679,9 +687,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 
   profile: {fileID: 7901107716962715299}
+  playerStats:
+    Name: 
+    attack: 0
+    currentHealth: 0
+    maxHealth: 0
+    isCombatant: 0
+    isEnemy: 0
   healthbarCasing: {fileID: 7901107716686130383}
   healthBarBar: {fileID: 7901107716452140285}
   healthBarTail: {fileID: 7901107715621193604}
+  currentHealth: 0
   maxHealth: 0
   defaultImagePosition: {x: 0, y: 0, z: 0}
   initialBarPosition: {x: 0, y: 0, z: 0}
@@ -835,9 +851,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 
   profile: {fileID: 7901107716345755352}
+  playerStats:
+    Name: 
+    attack: 0
+    currentHealth: 0
+    maxHealth: 0
+    isCombatant: 0
+    isEnemy: 0
   healthbarCasing: {fileID: 7901107716731892623}
   healthBarBar: {fileID: 7901107716297402745}
   healthBarTail: {fileID: 7901107716449787865}
+  currentHealth: 0
   maxHealth: 0
   defaultImagePosition: {x: 0, y: 0, z: 0}
   initialBarPosition: {x: 0, y: 0, z: 0}
@@ -1508,7 +1532,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   turnOrderImages: []
   targetPositions: []
-  moveSpeed: 5
   currentTurnIndex: 0
   isMoving: 0
   BattleUiHandler: {fileID: 7901107716330422345}
@@ -2345,9 +2368,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 
   profile: {fileID: 7901107716477381951}
+  playerStats:
+    Name: 
+    attack: 0
+    currentHealth: 0
+    maxHealth: 0
+    isCombatant: 0
+    isEnemy: 0
   healthbarCasing: {fileID: 7901107717717708967}
   healthBarBar: {fileID: 7901107715772585243}
   healthBarTail: {fileID: 7901107717270512545}
+  currentHealth: 0
   maxHealth: 0
   defaultImagePosition: {x: 0, y: 0, z: 0}
   initialBarPosition: {x: 0, y: 0, z: 0}
