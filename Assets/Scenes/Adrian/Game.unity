@@ -779,15 +779,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc4363cca338e644ab928a0e8a0c9a9d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transitionAnimator: {fileID: 1432277911}
+  transitionAnimator: {fileID: 1128582353353614214}
+  targetTransform: {fileID: 0}
   entranceDirection: {x: 0, y: 2, z: 0}
   exitDirection: {x: 0, y: 2, z: 0}
   exitLocation: {x: -85.18, y: -15.56, z: -4}
   endPosition: {x: 0, y: 0, z: 0}
-  playerPosition: {x: 0, y: 0, z: 0}
-  refPosition: {x: 0, y: 0, z: 0}
-  changedLevel: 0
-  inTransition: 0
   audioClips:
     sfxEnterTransition: {fileID: 8300000, guid: b65ad0b7590da48d480603a1c3ea23f3,
       type: 3}
@@ -44665,7 +44662,6 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 2048
-  player: {fileID: 0}
   popUpPrefab: {fileID: 1889543800}
   interactBoxPrefab: {fileID: 253303260}
   interactBoxTextReplacement: 
@@ -57846,7 +57842,6 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 2048
-  player: {fileID: 0}
   popUpPrefab: {fileID: 1808768967}
   interactBoxPrefab: {fileID: 602514243}
   interactBoxTextReplacement: 
@@ -65819,14 +65814,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transitionAnimator: {fileID: 1432277911}
+  targetTransform: {fileID: 0}
   entranceDirection: {x: 0, y: 2, z: 0}
   exitDirection: {x: 0, y: 2, z: 0}
   exitLocation: {x: -65.25, y: -41, z: 0}
   endPosition: {x: 0, y: 0, z: 0}
-  playerPosition: {x: 0, y: 0, z: 0}
-  refPosition: {x: 0, y: 0, z: 0}
-  changedLevel: 0
-  inTransition: 0
   audioClips:
     sfxEnterTransition: {fileID: 8300000, guid: b65ad0b7590da48d480603a1c3ea23f3,
       type: 3}
@@ -74364,7 +74356,18 @@ MonoBehaviour:
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1165729692}
+        m_MethodName: SetUIVolume
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1128582352561500960
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -80311,7 +80314,18 @@ MonoBehaviour:
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1165729692}
+        m_MethodName: SetMasterVolume
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!224 &1128582353483581949
 RectTransform:
   m_ObjectHideFlags: 0
@@ -81622,7 +81636,18 @@ MonoBehaviour:
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1165729692}
+        m_MethodName: SetSFXVolume
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!224 &1128582353684245711
 RectTransform:
   m_ObjectHideFlags: 0
@@ -85624,7 +85649,18 @@ MonoBehaviour:
   m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1165729692}
+        m_MethodName: SetMusicVolume
+        m_Mode: 4
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!224 &1128582354359470643
 RectTransform:
   m_ObjectHideFlags: 0
