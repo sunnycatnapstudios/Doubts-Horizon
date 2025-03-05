@@ -74350,7 +74350,7 @@ MonoBehaviour:
   m_FillRect: {fileID: 1128582353258688249}
   m_HandleRect: {fileID: 1128582353099096761}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
   m_Value: 1
@@ -74359,7 +74359,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1165729692}
         m_MethodName: SetUIVolume
-        m_Mode: 4
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -80308,7 +80308,7 @@ MonoBehaviour:
   m_FillRect: {fileID: 1128582352575085620}
   m_HandleRect: {fileID: 1128582352977088421}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
   m_Value: 1
@@ -80317,7 +80317,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1165729692}
         m_MethodName: SetMasterVolume
-        m_Mode: 4
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -81630,7 +81630,7 @@ MonoBehaviour:
   m_FillRect: {fileID: 1128582353493098993}
   m_HandleRect: {fileID: 1128582353978293751}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
   m_Value: 1
@@ -81639,7 +81639,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1165729692}
         m_MethodName: SetSFXVolume
-        m_Mode: 4
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -85643,7 +85643,7 @@ MonoBehaviour:
   m_FillRect: {fileID: 1128582353537622878}
   m_HandleRect: {fileID: 1128582353944309370}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.0001
   m_MaxValue: 1
   m_WholeNumbers: 0
   m_Value: 1
@@ -85652,7 +85652,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1165729692}
         m_MethodName: SetMusicVolume
-        m_Mode: 4
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
