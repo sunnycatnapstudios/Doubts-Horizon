@@ -16,8 +16,8 @@ public class BFFDialogue : MonoBehaviour {
         Action takeMe = () => {
             Debug.Log("Take me callback.");
             PartyManager partyManager = GameObject.FindGameObjectWithTag("Player").GetComponent<PartyManager>();
-            _PartyManager _partyManager = GameStatsManager.Instance._partyManager;
-            _partyManager.AddToParty("MemberA");
+            //_PartyManager _partyManager = GameStatsManager.Instance._partyManager;
+            partyManager.AddToParty(survivor);
             Destroy(gameObject);
         };
         dialogueInputHandler.AddDialogueChoice(takeMeTag, takeMe);

@@ -29,7 +29,17 @@ public class PartyManager : MonoBehaviour
     public List<GameObject> spawnedPartyMembers = new List<GameObject>();
    
 
+    public List<CharacterStats> getStats() {
+        List<CharacterStats> mylist = new List<CharacterStats>();
 
+        foreach( Survivor survivor in members) {
+            mylist.Add(survivor.GetCharStats());
+
+        }
+
+        return mylist;
+
+    }
    
     void AssignAnimator(GameObject memberObject,Survivor member)
     {
@@ -142,6 +152,8 @@ public class PartyManager : MonoBehaviour
 //         AddToParty("MemberE");
         player.CurHealth = player.Health;
     }
+
+    
 
     void Update()
     {

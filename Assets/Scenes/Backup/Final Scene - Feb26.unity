@@ -77979,6 +77979,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   survivor: {fileID: 11400000, guid: 7ea66f04ca169e844a9a9805f2c6e4b0, type: 2}
+--- !u!114 &1298620157 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4560704928614595104, guid: ba38c4ca4ec13ed4f9b4b4da385b7ce2,
+    type: 3}
+  m_PrefabInstance: {fileID: 1860193109}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1642aca1da9545146b2785f113e1edb1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1315376541
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -78408,6 +78420,18 @@ PrefabInstance:
       objectReference: {fileID: 7866711809216641441}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: df773ca1892821b36ae70caa58921358, type: 3}
+--- !u!114 &1419485399 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8920071011522045586, guid: ccfc5b2903162cea5bf8daca0154eb07,
+    type: 3}
+  m_PrefabInstance: {fileID: 540170946}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8577893da9576a041b0c400fb999b302, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1427184474
 GameObject:
   m_ObjectHideFlags: 0
@@ -90837,6 +90861,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1828270039 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4560704929212909657, guid: ba38c4ca4ec13ed4f9b4b4da385b7ce2,
+    type: 3}
+  m_PrefabInstance: {fileID: 1860193109}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02a092b472cf4a14caf6bbf903178557, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1830295044 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6497700935085715808, guid: df773ca1892821b36ae70caa58921358,
@@ -91149,6 +91185,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 4560704930532117084, guid: ba38c4ca4ec13ed4f9b4b4da385b7ce2,
+        type: 3}
+      propertyPath: partyManager
+      value: 
+      objectReference: {fileID: 1419485399}
+    - target: {fileID: 4560704930532117084, guid: ba38c4ca4ec13ed4f9b4b4da385b7ce2,
+        type: 3}
+      propertyPath: _partyManager
+      value: 
+      objectReference: {fileID: 1828270039}
+    - target: {fileID: 4560704930532117084, guid: ba38c4ca4ec13ed4f9b4b4da385b7ce2,
+        type: 3}
+      propertyPath: _battleUIHandler
+      value: 
+      objectReference: {fileID: 1298620157}
+    - target: {fileID: 4560704930532117084, guid: ba38c4ca4ec13ed4f9b4b4da385b7ce2,
+        type: 3}
+      propertyPath: _dialogueHandler
+      value: 
+      objectReference: {fileID: 2082520367}
     - target: {fileID: 4560704930532117085, guid: ba38c4ca4ec13ed4f9b4b4da385b7ce2,
         type: 3}
       propertyPath: m_Name
@@ -95926,6 +95982,18 @@ Transform:
   m_Father: {fileID: 673391913}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2082520367 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4560704928814271651, guid: ba38c4ca4ec13ed4f9b4b4da385b7ce2,
+    type: 3}
+  m_PrefabInstance: {fileID: 1860193109}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e00919e34356024bb5c5de41e891eff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2082559088 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3299673889596440526, guid: ab88db3bdfe6ce91b92a44906fb297b8,
@@ -121948,13 +122016,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 
   profile: {fileID: 7251264089701365409}
-  playerStats:
-    Name: 
-    attack: 0
-    currentHealth: 0
-    maxHealth: 0
-    isCombatant: 0
-    isEnemy: 0
   healthbarCasing: {fileID: 7251264088458660665}
   healthBarBar: {fileID: 7251264090271665797}
   healthBarTail: {fileID: 7251264088901744703}
@@ -123731,13 +123792,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 
   profile: {fileID: 7251264089079438653}
-  playerStats:
-    Name: 
-    attack: 0
-    currentHealth: 0
-    maxHealth: 0
-    isCombatant: 0
-    isEnemy: 0
   healthbarCasing: {fileID: 7251264089356629841}
   healthBarBar: {fileID: 7251264089592373091}
   healthBarTail: {fileID: 7251264090423319578}
@@ -123763,13 +123817,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 
   profile: {fileID: 7251264089839349062}
-  playerStats:
-    Name: 
-    attack: 0
-    currentHealth: 0
-    maxHealth: 0
-    isCombatant: 0
-    isEnemy: 0
   healthbarCasing: {fileID: 7251264089319516177}
   healthBarBar: {fileID: 7251264089740571367}
   healthBarTail: {fileID: 7251264089591055431}
@@ -123833,13 +123880,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 
   profile: {fileID: 7251264089130111332}
-  playerStats:
-    Name: 
-    attack: 0
-    currentHealth: 0
-    maxHealth: 0
-    isCombatant: 0
-    isEnemy: 0
   healthbarCasing: {fileID: 7251264089362440583}
   healthBarBar: {fileID: 7251264088713888865}
   healthBarTail: {fileID: 7251264089464132235}

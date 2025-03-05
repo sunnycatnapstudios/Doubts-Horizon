@@ -17,6 +17,7 @@ public class _BattleUIHandler : MonoBehaviour
     private GameStatsManager gameStatsManager;
     private _PartyManager _partyManager;
     private _DialogueHandler _dialogueHandler;
+    private PartyManager partyManager;
     
     public Animator partyUIAnimator, enemyUIAnimator, enemyStatsAnimator;
     public bool actOption = false, itemOption = false, canSelect = false;
@@ -69,13 +70,14 @@ public class _BattleUIHandler : MonoBehaviour
 
     IEnumerator WaitForPartyManager()
     {
-        while (GameStatsManager.Instance == null || GameStatsManager.Instance._partyManager == null)
+        while (GameStatsManager.Instance == null || GameStatsManager.Instance.partyManager == null)
         {
             yield return null; // Wait until it's ready
         }
 
         gameStatsManager = GameStatsManager.Instance;
         _partyManager = gameStatsManager._partyManager;
+        partyManager = gameStatsManager.partyManager;
         _dialogueHandler = gameStatsManager._dialogueHandler;
         
         currentEnemies = new List<CharacterStats>(gameStatsManager.L1Enemies.Values);

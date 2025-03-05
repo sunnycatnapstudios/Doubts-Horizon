@@ -5,26 +5,27 @@ using UnityEngine.UI;
 using TMPro;
 
 [System.Serializable]
-public class CharacterStats
-{
-    public string Name;
-    public int attack, currentHealth, maxHealth;
-    public bool isCombatant, isEnemy;
-    public CharacterStats(string name, int att, int currhealth, int maxhealth, bool iscombatant, bool isenemy)
-    {
-        Name = name;
-        attack = att;
-        currentHealth = currhealth;
-        maxHealth = maxhealth;
-        isCombatant = iscombatant;
-        isEnemy = isenemy;
-    }
-}
+//public class CharacterStats
+//{
+//    public string Name;
+//    public int attack, currentHealth, maxHealth;
+//    public bool isCombatant, isEnemy;
+//    public CharacterStats(string name, int att, int currhealth, int maxhealth, bool iscombatant, bool isenemy)
+//    {
+//        Name = name;
+//        attack = att;
+//        currentHealth = currhealth;
+//        maxHealth = maxhealth;
+//        isCombatant = iscombatant;
+//        isEnemy = isenemy;
+//    }
+//}
 
 public class GameStatsManager : MonoBehaviour
 {
     public static GameStatsManager Instance { get; private set;}
     public _PartyManager _partyManager;
+    public PartyManager partyManager;
     public _BattleUIHandler _battleUIHandler;
     public _DialogueHandler _dialogueHandler;
 
@@ -56,7 +57,10 @@ public class GameStatsManager : MonoBehaviour
 
     };
     public List<CharacterStats> currentPlayerStats = new List<CharacterStats>();
-    public List<CharacterStats> currentPartyMembers = new List<CharacterStats>();
+    //
+    //
+    //public List<CharacterStats> currentPartyMembers = new List<CharacterStats>();
+    public List<CharacterStats> currentPartyMembers { get { return partyManager.getStats(); } }
     public List<GameObject> spawnedPartyMembers = new List<GameObject>();
 
     // Sprint-Related Stats
@@ -136,7 +140,7 @@ public class GameStatsManager : MonoBehaviour
         foreach (var entry in characterDict)
         {
             CharacterStats stats = entry.Value;
-            Debug.Log($"Name: {stats.Name}, Attack: {stats.attack}, HP: {stats.currentHealth}/{stats.maxHealth}, Combatant: {stats.isCombatant}, Enemy: {stats.isEnemy}");
+            //Debug.Log($"Name: {stats.Name}, Attack: {stats.attack}, HP: {stats.currentHealth}/{stats.maxHealth}, Combatant: {stats.isCombatant}, Enemy: {stats.isEnemy}");
         }
     }
 
