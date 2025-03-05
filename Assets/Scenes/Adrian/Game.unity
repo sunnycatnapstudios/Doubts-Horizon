@@ -52415,18 +52415,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1138935844}
   m_CullTransparentMesh: 0
---- !u!114 &1139728030 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 8920071011522045586, guid: ccfc5b2903162cea5bf8daca0154eb07,
-    type: 3}
-  m_PrefabInstance: {fileID: 1399120493}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8577893da9576a041b0c400fb999b302, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1145156722
 GameObject:
   m_ObjectHideFlags: 0
@@ -78105,6 +78093,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 
   profile: {fileID: 1128582352561500960}
+  playerStats:
+    Name: 
+    attack: 0
+    currentHealth: 0
+    maxHealth: 0
+    isCombatant: 0
+    isEnemy: 0
   healthbarCasing: {fileID: 1128582352619594676}
   healthBarBar: {fileID: 1128582352305817795}
   healthBarTail: {fileID: 1128582352475509466}
@@ -84240,6 +84235,7 @@ MonoBehaviour:
   ViewPortCanvasGroup: {fileID: 1128582353424359699}
   partySlotPrefab: {fileID: 1128582353118655525}
   scrollbar: {fileID: 1128582352305771679}
+  playerParty: []
   partySlots: []
 --- !u!1 &1128582353996788398
 GameObject:
@@ -86861,9 +86857,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _partyManager: {fileID: 8325421304088749271}
-  partyManager: {fileID: 1139728030}
   _battleUIHandler: {fileID: 8325421303156214600}
   _dialogueHandler: {fileID: 0}
+  currentPlayerStats: []
+  currentPartyMembers: []
   spawnedPartyMembers: []
   infSprint: 0
   staminaRecharging: 0
@@ -86901,14 +86898,24 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  battleOrder: []
   currentTurnIndex: 0
+  currentEnemies: []
   turnIndicator: {fileID: 0}
   enemyName: {fileID: 0}
   damageButtonText: {fileID: 0}
   selectedAction: 
   selectedTarget: 
+  enemyStats:
+    Name: 
+    attack: 0
+    currentHealth: 0
+    maxHealth: 0
+    isCombatant: 0
+    isEnemy: 0
   currentEnemyCurrentHealth: 0
   currentEnemyMaxHealth: 0
+  playerParty: []
   floatingText: {fileID: 0}
   defeatedInCombat: []
   endCause: 
