@@ -40201,6 +40201,11 @@ PrefabInstance:
       objectReference: {fileID: 7866711807304472647}
     - target: {fileID: 6990810145461938591, guid: ccfc5b2903162cea5bf8daca0154eb07,
         type: 3}
+      propertyPath: inventorySize
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 6990810145461938591, guid: ccfc5b2903162cea5bf8daca0154eb07,
+        type: 3}
       propertyPath: inventoryWindow
       value: 
       objectReference: {fileID: 1481933051}

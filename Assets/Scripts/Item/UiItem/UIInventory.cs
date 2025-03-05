@@ -22,7 +22,7 @@ public class UIInventory : MonoBehaviour
     [SerializeField]
     private RectTransform partyPanel;
 
-
+   
     [SerializeField]
     private RectTransform contentPanel;
 
