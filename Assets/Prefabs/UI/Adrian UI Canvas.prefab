@@ -13993,7 +13993,7 @@ GameObject:
   - component: {fileID: 2115546502825098177}
   - component: {fileID: 2115546502825098178}
   m_Layer: 5
-  m_Name: Addrian UI Canvas
+  m_Name: Adrian UI Canvas
   m_TagString: UI Canvas
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
