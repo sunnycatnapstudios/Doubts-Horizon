@@ -11,7 +11,7 @@ public class InteractPrompt : MonoBehaviour {
     private float interactRange = 1.5f;
     int interactCount = 0;
 
-    public GameObject popUpPrefab;
+    private GameObject popUpPrefab;
     private GameObject currentPopUp;
     private TMP_Text popUpText;
     private Animator popUpAnimator;
@@ -23,7 +23,7 @@ public class InteractPrompt : MonoBehaviour {
     private Animator interactBoxAnimator;
     public string interactBoxTextReplacement;
 
-    public GameObject dialogueBox;
+    private GameObject dialogueBox;
     private TMP_Text nameText, dialogueText;
     private Animator dialogueAnimator, screenPanelAnimator;
     private TypeWriter nameTypeWriter, bodyTypeWriter;
@@ -61,7 +61,7 @@ public class InteractPrompt : MonoBehaviour {
 
         // dialogueBox.SetActive(true);
         bodyTypeWriter.skipTyping = false;
-        dialogueAnimator.SetTrigger("SlideIn");
+        dialogueAnimator.Play("Dialogue Appear");
         screenPanelAnimator.SetTrigger("Darken Screen");
         bodyTypeWriter.hasStartedTyping = true;
 
@@ -90,11 +90,9 @@ public class InteractPrompt : MonoBehaviour {
 
     void CloseDialogue() {
         if (isDialogueOpen) {
-            dialogueAnimator.ResetTrigger("SlideIn");
             screenPanelAnimator.ResetTrigger("Darken Screen");
-            dialogueAnimator.Play("Dialogue Disappear");
+            dialogueAnimator.Play("Dialogue Dissapear");
             screenPanelAnimator.Play("Lighten Screen");
-            dialogueAnimator.SetTrigger("SlideOut");
             screenPanelAnimator.SetTrigger("Lighten Screen");
             StartCoroutine(DeactivateAfterDelay(0.5f));
             isDialogueOpen = false;
@@ -108,7 +106,9 @@ public class InteractPrompt : MonoBehaviour {
     }
 
     void Awake() {
+        dialogueBox = GameObject.FindGameObjectWithTag("Dialogue Box");
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        popUpPrefab = GameObject.FindGameObjectWithTag("InteractPrompt");
     }
 
     void Start() {
