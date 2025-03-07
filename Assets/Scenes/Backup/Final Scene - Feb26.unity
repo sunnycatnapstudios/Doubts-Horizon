@@ -41318,6 +41318,16 @@ PrefabInstance:
       propertyPath: m_AnchorMin.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2115546501873435136, guid: 5e9748ac24b62c7aaa3f8381d06a6814,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1860193111}
+    - target: {fileID: 2115546501873435136, guid: 5e9748ac24b62c7aaa3f8381d06a6814,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnActionButtonPressed
+      objectReference: {fileID: 0}
     - target: {fileID: 2115546502044366254, guid: 5e9748ac24b62c7aaa3f8381d06a6814,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -41347,6 +41357,16 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2115546502183345687, guid: 5e9748ac24b62c7aaa3f8381d06a6814,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1860193111}
+    - target: {fileID: 2115546502183345687, guid: 5e9748ac24b62c7aaa3f8381d06a6814,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnActionButtonPressed
       objectReference: {fileID: 0}
     - target: {fileID: 2115546502186276591, guid: 5e9748ac24b62c7aaa3f8381d06a6814,
         type: 3}
@@ -41491,7 +41511,7 @@ PrefabInstance:
     - target: {fileID: 2115546502825098179, guid: 5e9748ac24b62c7aaa3f8381d06a6814,
         type: 3}
       propertyPath: m_Name
-      value: Addrian UI Canvas
+      value: Adrian UI Canvas
       objectReference: {fileID: 0}
     - target: {fileID: 2115546502825098183, guid: 5e9748ac24b62c7aaa3f8381d06a6814,
         type: 3}
@@ -41617,6 +41637,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2115546502914225351, guid: 5e9748ac24b62c7aaa3f8381d06a6814,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2115546502914225351, guid: 5e9748ac24b62c7aaa3f8381d06a6814,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1860193111}
+    - target: {fileID: 2115546502914225351, guid: 5e9748ac24b62c7aaa3f8381d06a6814,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: OnActionButtonPressed
       objectReference: {fileID: 0}
     - target: {fileID: 2115546503011812927, guid: 5e9748ac24b62c7aaa3f8381d06a6814,
         type: 3}
