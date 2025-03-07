@@ -4655,12 +4655,18 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!1 &110457328 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8274522323263051232, guid: ba38c4ca4ec13ed4f9b4b4da385b7ce2,
+--- !u!114 &110457329 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2570329757195463051, guid: ba38c4ca4ec13ed4f9b4b4da385b7ce2,
     type: 3}
   m_PrefabInstance: {fileID: 1860193109}
   m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9fd9d75f8ffcbdb4e846bf5fdd3e0529, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &130322890
 GameObject:
   m_ObjectHideFlags: 0
@@ -40502,7 +40508,12 @@ PrefabInstance:
         type: 3}
       propertyPath: inventoryWindow
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1928095387}
+    - target: {fileID: 6990810145461938591, guid: ccfc5b2903162cea5bf8daca0154eb07,
+        type: 3}
+      propertyPath: audioClips.sfxCloseInventory
+      value: 
+      objectReference: {fileID: 8300000, guid: 4b7bcd91fb6187bbeb1682364c35469a, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ccfc5b2903162cea5bf8daca0154eb07, type: 3}
 --- !u!1 &543706377
@@ -41343,11 +41354,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 110457328}
+      objectReference: {fileID: 110457329}
     - target: {fileID: 2115546501511418553, guid: 5e9748ac24b62c7aaa3f8381d06a6814,
         type: 3}
       propertyPath: m_Delegates.Array.data[0].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: 
+      value: Open_CloseMenu
       objectReference: {fileID: 0}
     - target: {fileID: 2115546501621798846, guid: 5e9748ac24b62c7aaa3f8381d06a6814,
         type: 3}

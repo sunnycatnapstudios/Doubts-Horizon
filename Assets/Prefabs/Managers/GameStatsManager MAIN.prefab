@@ -88,7 +88,7 @@ MonoBehaviour:
   escapeChance: 0
   escapePrompt: {fileID: 0}
   audioClips:
-    battleMusic: {fileID: 8300000, guid: 32bf3b4052153f15aaae718c6ff2a8ba, type: 3}
+    battleMusic: {fileID: 8300000, guid: ba2ddd2007028223283c97b5b2f0f8a2, type: 3}
     oldAmbience: {fileID: 0}
     oldMusic: {fileID: 0}
     sfxBell: {fileID: 8300000, guid: a6bc35b0ac6c5da2b9d9c7062b2506d5, type: 3}
