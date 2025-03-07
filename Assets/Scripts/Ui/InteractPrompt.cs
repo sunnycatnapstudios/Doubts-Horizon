@@ -11,7 +11,7 @@ public class InteractPrompt : MonoBehaviour {
     private float interactRange = 1.5f;
     int interactCount = 0;
 
-    public GameObject popUpPrefab;
+    private GameObject popUpPrefab;
     private GameObject currentPopUp;
     private TMP_Text popUpText;
     private Animator popUpAnimator;
@@ -23,7 +23,7 @@ public class InteractPrompt : MonoBehaviour {
     private Animator interactBoxAnimator;
     public string interactBoxTextReplacement;
 
-    public GameObject dialogueBox;
+    private GameObject dialogueBox;
     private TMP_Text nameText, dialogueText;
     private Animator dialogueAnimator, screenPanelAnimator;
     private TypeWriter nameTypeWriter, bodyTypeWriter;
@@ -108,7 +108,9 @@ public class InteractPrompt : MonoBehaviour {
     }
 
     void Awake() {
+        dialogueBox = GameObject.FindGameObjectWithTag("Dialogue Box");
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+        popUpPrefab = GameObject.FindGameObjectWithTag("InteractPrompt");
     }
 
     void Start() {
