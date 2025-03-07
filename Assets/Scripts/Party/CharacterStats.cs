@@ -16,4 +16,11 @@ public class CharacterStats
         isCombatant = iscombatant;
         isEnemy = isenemy;
     }
+
+
+    public override string ToString() {
+
+        return $"{Name}, attack: {attack.ToString()}, health:{currentHealth.ToString()}/{maxHealth.ToString()}";
+
+    }
 }

@@ -11,7 +11,7 @@ using TMPro;
 //    public int attack, currentHealth, maxHealth;
 //    public bool isCombatant, isEnemy;
 //    public CharacterStats(string name, int att, int currhealth, int maxhealth, bool iscombatant, bool isenemy)
-//    {
+//    { 
 //        Name = name;
 //        attack = att;
 //        currentHealth = currhealth;

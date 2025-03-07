@@ -34,6 +34,7 @@ public class _BattleUIHandler : MonoBehaviour
     public CharacterStats enemyStats;
     public int currentEnemyCurrentHealth, currentEnemyMaxHealth;
     public List<CharacterStats> playerParty;
+    public List<Survivor> survivors;
 
     [System.NonSerialized]
     public CharacterStats currentDefender = null;
@@ -228,12 +229,12 @@ public class _BattleUIHandler : MonoBehaviour
         currentDefender = null;
         battleOrder.Clear();
         
-        CharacterStats player = gameStatsManager.playerStats;
+        //CharacterStats player = gameStatsManager.playerStats;
 
-        battleOrder.Add(player);
+        //battleOrder.Add(player);
 
         int slotIndex = 1;
-        foreach (var member in gameStatsManager.currentPartyMembers)
+        foreach (CharacterStats member in gameStatsManager.currentPartyMembers)
         {
             // if (member.isCombatant)
             {
@@ -252,7 +253,9 @@ public class _BattleUIHandler : MonoBehaviour
 
         enemySlot.GetComponent<EnemyHealthbar>().SetHealth(enemyStats.currentHealth);
         battleOrder.Add(enemyStats);
-        playerParty = battleOrder.FindAll(c => !c.isEnemy); // Exclude Enemy from selection
+        //playerParty = battleOrder.FindAll(c => !c.isEnemy); // Exclude Enemy from selection
+
+
         partySlotHandler.UpdateSlots();
         SetEscapePercentage();
 

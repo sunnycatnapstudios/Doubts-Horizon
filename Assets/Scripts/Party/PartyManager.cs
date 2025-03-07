@@ -7,8 +7,8 @@ public class PartyManager : MonoBehaviour
     public int partyCount;
     public GameObject partyMemberTemplate;
     private List<GameObject> partyMembers = new List<GameObject>();
-    private List<Survivor> members = new List<Survivor>();
-    public List<Survivor> Members { get { return members; } }
+    //private List<Survivor> members = new List<Survivor>();
+    //public List<Survivor> Members { get { return members; } }
     GameObject partySpawn;
     // public GameObject floatingTextPrefab;
     private PartySideBar partySideBar;
@@ -36,7 +36,7 @@ public class PartyManager : MonoBehaviour
     public List<CharacterStats> getStats() {
         List<CharacterStats> mylist = new List<CharacterStats>();
 
-        foreach( Survivor survivor in members) {
+        foreach( Survivor survivor in currentPartyMembers) {
             mylist.Add(survivor.GetCharStats());
 
         }

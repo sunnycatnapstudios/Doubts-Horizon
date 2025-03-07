@@ -68,6 +68,7 @@ public class PartySlotHandler : MonoBehaviour {
             newSlot.name = "PartySlot" + (partySlots.Count + 1);
             PartySlot slotComponent = newSlot.GetComponent<PartySlot>();
             slotCount++;
+            Debug.Log(member.ToString());
 
             if (slotComponent != null) {
                 slotComponent.Initialize(member);

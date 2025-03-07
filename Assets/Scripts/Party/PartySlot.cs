@@ -14,13 +14,13 @@ public class PartySlot : MonoBehaviour {
     public Vector3 defaultImagePosition, initialBarPosition;
     public bool _isHighlighted;
     private GameStatsManager gameStatsManager;
-    public _PartyManager _partyManager;
+    public PartyManager partyManager;
     public _BattleUIHandler _battleUIHandler;
     public TextMeshProUGUI playerHealthIndicator;
     private float fadeDuration = .5f, delayBeforeFade = 1.2f;
 
     void OnEnable() {
-        _partyManager = GameStatsManager.Instance.GetComponentInChildren<_PartyManager>();
+        partyManager = GameStatsManager.Instance.GetComponentInChildren<PartyManager>();
         _battleUIHandler = GameStatsManager.Instance.GetComponentInChildren<_BattleUIHandler>();
         defaultImagePosition = profile.transform.localPosition;
         initialBarPosition = healthbarCasing.transform.localPosition;
@@ -35,6 +35,7 @@ public class PartySlot : MonoBehaviour {
         }
 
         //playerStats = member;
+        playerStats = member.GetCharStats();
         Name = member.Name;
         SetHealth(member.currentHealth, member.maxHealth);
         profile.sprite = member.GetSprite();
@@ -162,6 +163,7 @@ public class PartySlot : MonoBehaviour {
         if (healthBarBar.fillAmount == 0) { playerHealthIndicator.text = ""; } else {
             playerHealthIndicator.text = (((int)(healthBarTail.fillAmount * 100f)).ToString() + "%");
         }
+       // Debug.Log(playerStats.ToString());
         healthBarBar.fillAmount = (float)playerStats.currentHealth / playerStats.maxHealth;
     }
 }

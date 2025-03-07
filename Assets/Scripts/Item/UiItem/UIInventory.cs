@@ -259,7 +259,7 @@ public class UIInventory : MonoBehaviour
             counter++;    
         }
         counter = 0;
-        //partyManager = GameObject.FindWithTag("Player").GetComponent<PartyManager>();
+        partyManager = GameObject.FindWithTag("Player").GetComponent<PartyManager>();
         fixPartyUIMembers(partyManager.currentPartyMembers.Count);
         //listOfMembers[0].SetdisplayItem(partyManager.getPlayer());
         //counter = 1;
