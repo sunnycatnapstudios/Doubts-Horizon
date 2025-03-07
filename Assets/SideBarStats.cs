@@ -112,7 +112,7 @@ public class SideBarStats : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
     void Update() {
         if (this.name == "Player" && gameStatsManager != null && _partyManager != null) {
-            CharacterStats member = gameStatsManager.playerStats["Player"];
+            CharacterStats member = gameStatsManager.playerStats;
             this.transform.Find("Health Bar Base").Find("Health").GetComponent<TMP_Text>().text = $"{member.currentHealth}/{member.maxHealth}";
             this.transform.Find("Health Bar Base").Find("Healthbar").GetComponent<Image>().fillAmount = (float)member.currentHealth / member.maxHealth;
         } else if (gameStatsManager != null && _partyManager != null) {

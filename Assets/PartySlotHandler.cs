@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class PartySlotHandler : MonoBehaviour {
     private GameStatsManager gameStatsManager;
-    public _PartyManager _partyManager;
+    public PartyManager _partyManager;
     public _BattleUIHandler _battleUIHandler;
 
     public HorizontalLayoutGroup horizLayoutGroup;
@@ -29,12 +29,12 @@ public class PartySlotHandler : MonoBehaviour {
         StartCoroutine(WaitForPartyManager());
     }
     IEnumerator WaitForPartyManager() {
-        while (GameStatsManager.Instance == null || GameStatsManager.Instance._partyManager == null || GameStatsManager.Instance._battleUIHandler == null) {
+        while (GameStatsManager.Instance == null || GameStatsManager.Instance.partyManager == null || GameStatsManager.Instance._battleUIHandler == null) {
             yield return null; // Wait until it's ready
         }
 
         gameStatsManager = GameStatsManager.Instance;
-        _partyManager = gameStatsManager._partyManager;
+        _partyManager = gameStatsManager.partyManager;
         _battleUIHandler = gameStatsManager._battleUIHandler;
 
         UpdateSlots();
@@ -62,7 +62,7 @@ public class PartySlotHandler : MonoBehaviour {
         slotCount = 0;
 
         // Instantiate new slots
-        foreach (CharacterStats member in playerParty) {
+        foreach (Survivor member in _partyManager.currentPartyMembers) {
             GameObject newSlot = Instantiate(partySlotPrefab, horizRectTransform.transform);
             newSlot.SetActive(true);
             newSlot.name = "PartySlot" + (partySlots.Count + 1);

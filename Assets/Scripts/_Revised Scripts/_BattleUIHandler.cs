@@ -228,7 +228,7 @@ public class _BattleUIHandler : MonoBehaviour
         currentDefender = null;
         battleOrder.Clear();
         
-        CharacterStats player = gameStatsManager.playerStats["Player"];
+        CharacterStats player = gameStatsManager.playerStats;
 
         battleOrder.Add(player);
 

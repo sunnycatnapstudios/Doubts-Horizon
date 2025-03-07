@@ -89,13 +89,13 @@ public class UIInventory : MonoBehaviour
     {
         
 
-        partyManager = GameObject.FindWithTag("Player").GetComponent<PartyManager>();
+        //partyManager = GameObject.FindWithTag("Player").GetComponent<PartyManager>();
        
-            UIPartyMember person = Instantiate(memberPrefab, Vector3.zero, Quaternion.identity);
-            person.transform.SetParent(partyPanel, false);
-            listOfMembers.Add(person);
-            person.OnItemClicked += HandlePartySelection;
-            //Debug.Log("dsfa");
+        //    UIPartyMember person = Instantiate(memberPrefab, Vector3.zero, Quaternion.identity);
+        //    person.transform.SetParent(partyPanel, false);
+        //    listOfMembers.Add(person);
+        //    person.OnItemClicked += HandlePartySelection;
+        //    //Debug.Log("dsfa");
         
     }
 
@@ -113,7 +113,7 @@ public class UIInventory : MonoBehaviour
     public void fixPartyUIMembers(int len)
       
     {
-        len += 1;
+        //len += 1;
         if (len > listOfMembers.Count)
         {
             for (int i = listOfMembers.Count; i < len; i++)
@@ -143,9 +143,7 @@ public class UIInventory : MonoBehaviour
 
     private void HandlePartySelection(UIPartyMember member)
     {
-        
-        
-           
+          
         Survivor held = member.GetMember();
         if (held != null)
         {
@@ -261,10 +259,10 @@ public class UIInventory : MonoBehaviour
             counter++;    
         }
         counter = 0;
-        partyManager = GameObject.FindWithTag("Player").GetComponent<PartyManager>();
+        //partyManager = GameObject.FindWithTag("Player").GetComponent<PartyManager>();
         fixPartyUIMembers(partyManager.currentPartyMembers.Count);
-        listOfMembers[0].SetdisplayItem(partyManager.getPlayer());
-        counter = 1;
+        //listOfMembers[0].SetdisplayItem(partyManager.getPlayer());
+        //counter = 1;
         foreach (Survivor member in partyManager.currentPartyMembers)
         {
             Debug.Log(counter);

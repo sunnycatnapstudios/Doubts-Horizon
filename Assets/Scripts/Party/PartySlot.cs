@@ -28,16 +28,17 @@ public class PartySlot : MonoBehaviour {
         playerHealthIndicator.color = new Color(playerHealthIndicator.color.r, playerHealthIndicator.color.g, playerHealthIndicator.color.b, 0f);
     }
 
-    public void Initialize(CharacterStats member) {
+    public void Initialize(Survivor member) {
         if (member == null) {
             Debug.LogError("null member");
             return;
         }
 
-        playerStats = member;
+        //playerStats = member;
         Name = member.Name;
         SetHealth(member.currentHealth, member.maxHealth);
-        profile.sprite = _partyManager.characterProfiles.Find(image => image.name == member.Name);
+        profile.sprite = member.GetSprite();
+
     }
 
     public void SelectTarget() {

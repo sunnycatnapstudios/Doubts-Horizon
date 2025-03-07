@@ -27,6 +27,8 @@ public class Survivor : ScriptableObject
     public bool IsCombatant { get { return isCombatant; } }
     public bool Fed { get { return charstats.isfed; } set { charstats.isfed = value; } }
     public int CurHealth { get { return charstats.currentHealth; } set { charstats.currentHealth = value; } }
+    public int currentHealth { get { return charstats.currentHealth; } set { charstats.currentHealth = value; } }
+    public int maxHealth { get { return charstats.maxHealth; } set { charstats.maxHealth = value; } }
     private CharacterStats charstats;
 
 

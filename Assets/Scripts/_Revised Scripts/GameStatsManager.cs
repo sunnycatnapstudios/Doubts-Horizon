@@ -30,10 +30,14 @@ public class GameStatsManager : MonoBehaviour
     public _DialogueHandler _dialogueHandler;
 
     // Combat-Related Stats
-    public Dictionary<string, CharacterStats> playerStats = new Dictionary<string, CharacterStats>
-    {
-        { "Player", new CharacterStats("Player", 45, 150, 150, true, false)}
-    };
+    //public Dictionary<string, CharacterStats> playerStats = new Dictionary<string, CharacterStats>
+    //{
+    //    { "Player", new CharacterStats("Player", 45, 150, 150, true, false)}
+    //};
+    public Survivor player;
+
+    public CharacterStats playerStats { get { return partyManager.getPlayer().GetCharStats(); } }
+    
     public Dictionary<string, CharacterStats> allPartyMembers = new Dictionary<string, CharacterStats>
     {
         { "MemberA", new CharacterStats("MemberA", 35, 100, 100, true, false)},
@@ -61,6 +65,7 @@ public class GameStatsManager : MonoBehaviour
     //
     //public List<CharacterStats> currentPartyMembers = new List<CharacterStats>();
     public List<CharacterStats> currentPartyMembers { get { return partyManager.getStats(); } }
+    public List<Survivor> currentSurvivors { get { return partyManager.currentPartyMembers; } }
     public List<GameObject> spawnedPartyMembers = new List<GameObject>();
 
     // Sprint-Related Stats
@@ -163,7 +168,7 @@ public class GameStatsManager : MonoBehaviour
 
         staminaBar = GameObject.FindGameObjectWithTag("Stamina Bar").GetComponent<Image>();
 
-        currentPlayerStats.Add (playerStats["Player"]);
+        currentPlayerStats.Add (playerStats);
     }
     public void Start()
     {
