@@ -49,6 +49,8 @@ TagManager:
   - CombatMenu
   - Followers
   - Feed1
+  - Menu
+  - InteractPrompt
   layers:
   - Default
   - TransparentFX
