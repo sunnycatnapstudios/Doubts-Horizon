@@ -61,7 +61,7 @@ public class InteractPrompt : MonoBehaviour {
 
         // dialogueBox.SetActive(true);
         bodyTypeWriter.skipTyping = false;
-        dialogueAnimator.SetTrigger("SlideIn");
+        dialogueAnimator.Play("Dialogue Appear");
         screenPanelAnimator.SetTrigger("Darken Screen");
         bodyTypeWriter.hasStartedTyping = true;
 
@@ -90,11 +90,9 @@ public class InteractPrompt : MonoBehaviour {
 
     void CloseDialogue() {
         if (isDialogueOpen) {
-            dialogueAnimator.ResetTrigger("SlideIn");
             screenPanelAnimator.ResetTrigger("Darken Screen");
-            dialogueAnimator.Play("Dialogue Disappear");
+            dialogueAnimator.Play("Dialogue Dissapear");
             screenPanelAnimator.Play("Lighten Screen");
-            dialogueAnimator.SetTrigger("SlideOut");
             screenPanelAnimator.SetTrigger("Lighten Screen");
             StartCoroutine(DeactivateAfterDelay(0.5f));
             isDialogueOpen = false;
