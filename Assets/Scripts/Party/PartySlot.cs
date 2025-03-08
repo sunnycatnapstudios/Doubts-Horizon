@@ -18,6 +18,7 @@ public class PartySlot : MonoBehaviour {
     public _BattleUIHandler _battleUIHandler;
     public TextMeshProUGUI playerHealthIndicator;
     private float fadeDuration = .5f, delayBeforeFade = 1.2f;
+    public bool isCharacter = true;
 
     void OnEnable() {
         partyManager = GameStatsManager.Instance.GetComponentInChildren<PartyManager>();
@@ -163,7 +164,9 @@ public class PartySlot : MonoBehaviour {
         if (healthBarBar.fillAmount == 0) { playerHealthIndicator.text = ""; } else {
             playerHealthIndicator.text = (((int)(healthBarTail.fillAmount * 100f)).ToString() + "%");
         }
-       // Debug.Log(playerStats.ToString());
-        healthBarBar.fillAmount = (float)playerStats.currentHealth / playerStats.maxHealth;
+        // Debug.Log(playerStats.ToString());
+        if (isCharacter) {
+            healthBarBar.fillAmount = (float)playerStats.currentHealth / playerStats.maxHealth;
+        }
     }
 }

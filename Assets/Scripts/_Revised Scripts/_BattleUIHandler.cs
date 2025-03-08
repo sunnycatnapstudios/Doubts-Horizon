@@ -253,6 +253,7 @@ public class _BattleUIHandler : MonoBehaviour
 
         enemySlot.GetComponent<EnemyHealthbar>().SetHealth(enemyStats.currentHealth);
         battleOrder.Add(enemyStats);
+        survivors = partyManager.currentPartyMembers;
         //playerParty = battleOrder.FindAll(c => !c.isEnemy); // Exclude Enemy from selection
 
 

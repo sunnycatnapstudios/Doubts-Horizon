@@ -17,6 +17,7 @@ public class PartySlotHandler : MonoBehaviour {
 
     public List<CharacterStats> playerParty = new List<CharacterStats>();
     public List<PartySlot> partySlots = new List<PartySlot>();
+    public List<Survivor> survivors = new List<Survivor>();
 
     private Vector2 baseRectSize = new Vector2(430, 130);
     private Vector2 baseRectPosition = new Vector2(-215, 65);
@@ -50,7 +51,7 @@ public class PartySlotHandler : MonoBehaviour {
     }
 
     public void UpdateSlots() {
-        playerParty = _battleUIHandler.playerParty;
+        survivors = _battleUIHandler.survivors ;
         Debug.Log($"{playerParty.Count}");
 
         // Destroy old slots
@@ -68,7 +69,7 @@ public class PartySlotHandler : MonoBehaviour {
             newSlot.name = "PartySlot" + (partySlots.Count + 1);
             PartySlot slotComponent = newSlot.GetComponent<PartySlot>();
             slotCount++;
-            Debug.Log(member.ToString());
+            Debug.Log("anderler"+member.ToString());
 
             if (slotComponent != null) {
                 slotComponent.Initialize(member);
@@ -82,7 +83,7 @@ public class PartySlotHandler : MonoBehaviour {
                 newSlot.name = "FillerSlot" + (currentSlots + 1);
                 PartySlot slotComponent = newSlot.GetComponent<PartySlot>();
                 slotCount++;
-
+                slotComponent.isCharacter = false;
                 // Filler slots don't need to initialize CharacterStats
                 partySlots.Add(slotComponent);
             }
