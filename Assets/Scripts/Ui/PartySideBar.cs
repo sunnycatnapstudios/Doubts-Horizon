@@ -11,12 +11,13 @@ public class PartySideBar : MonoBehaviour {
 
     private GameStatsManager gameStatsManager;
     private _PartyManager _partyManager;
+    private PartyManager partyManager;
 
     public void UpdateSideBar() {
         foreach (var slot in sideBarSlots) { Destroy(slot); }
         sideBarSlots.Clear();
 
-        foreach (var member in gameStatsManager.currentPartyMembers) {
+        foreach (var member in gameStatsManager.currentSurvivors) {
             // if (!member.isCombatant) {continue;}
 
             GameObject newSideBarProfile = Instantiate(profilePrefab, transform);
@@ -24,6 +25,7 @@ public class PartySideBar : MonoBehaviour {
             newSideBarProfile.transform.SetSiblingIndex(0);
 
             Sprite profilePic = _partyManager.characterProfiles.Find(profile => profile.name == member.Name);
+            profilePic = member.GetSprite();
             if (profilePic != null) {
                 newSideBarProfile.GetComponent<Image>().sprite = profilePic;
             } else { Debug.Log($"No matching profilePic found for {member.Name}. Check if the Sprite is properly named"); }
@@ -48,17 +50,17 @@ public class PartySideBar : MonoBehaviour {
         }
 
         gameStatsManager = GameStatsManager.Instance;
-        _partyManager = gameStatsManager._partyManager;
+        //_partyManager = gameStatsManager._partyManager;
     }
 
     void Awake() {
         // gameStatsManager = GameStatsManager.Instance;
         // _partyManager = GameStatsManager.Instance._partyManager;
-        StartCoroutine(WaitForPartyManager());
+        //StartCoroutine(WaitForPartyManager());
     }
 
     void Start() {
-        // UpdateSideBar();
+        UpdateSideBar();
     }
 
     // Update is called once per frame

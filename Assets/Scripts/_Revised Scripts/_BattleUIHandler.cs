@@ -17,6 +17,7 @@ public class _BattleUIHandler : MonoBehaviour
     private GameStatsManager gameStatsManager;
     private _PartyManager _partyManager;
     private _DialogueHandler _dialogueHandler;
+    private PartyManager partyManager;
     
     public Animator partyUIAnimator, enemyUIAnimator, enemyStatsAnimator;
     public bool actOption = false, itemOption = false, canSelect = false;
@@ -33,6 +34,7 @@ public class _BattleUIHandler : MonoBehaviour
     public CharacterStats enemyStats;
     public int currentEnemyCurrentHealth, currentEnemyMaxHealth;
     public List<CharacterStats> playerParty;
+    public List<Survivor> survivors;
 
     [System.NonSerialized]
     public CharacterStats currentDefender = null;
@@ -69,13 +71,14 @@ public class _BattleUIHandler : MonoBehaviour
 
     IEnumerator WaitForPartyManager()
     {
-        while (GameStatsManager.Instance == null || GameStatsManager.Instance._partyManager == null)
+        while (GameStatsManager.Instance == null || GameStatsManager.Instance.partyManager == null)
         {
             yield return null; // Wait until it's ready
         }
 
         gameStatsManager = GameStatsManager.Instance;
         _partyManager = gameStatsManager._partyManager;
+        partyManager = gameStatsManager.partyManager;
         _dialogueHandler = gameStatsManager._dialogueHandler;
         
         currentEnemies = new List<CharacterStats>(gameStatsManager.L1Enemies.Values);
@@ -226,12 +229,12 @@ public class _BattleUIHandler : MonoBehaviour
         currentDefender = null;
         battleOrder.Clear();
         
-        CharacterStats player = gameStatsManager.playerStats["Player"];
+        //CharacterStats player = gameStatsManager.playerStats;
 
-        battleOrder.Add(player);
+        //battleOrder.Add(player);
 
         int slotIndex = 1;
-        foreach (var member in gameStatsManager.currentPartyMembers)
+        foreach (CharacterStats member in gameStatsManager.currentPartyMembers)
         {
             // if (member.isCombatant)
             {
@@ -250,7 +253,11 @@ public class _BattleUIHandler : MonoBehaviour
 
         enemySlot.GetComponent<EnemyHealthbar>().SetHealth(enemyStats.currentHealth);
         battleOrder.Add(enemyStats);
-        playerParty = battleOrder.FindAll(c => !c.isEnemy); // Exclude Enemy from selection
+        survivors = partyManager.currentPartyMembers;
+        //playerParty = battleOrder.FindAll(c => !c.isEnemy); // Exclude Enemy from selection
+        playerParty = partyManager.getStats();
+
+
         partySlotHandler.UpdateSlots();
         SetEscapePercentage();
 
@@ -744,6 +751,9 @@ public class _BattleUIHandler : MonoBehaviour
                     defeatedInCombat.Add(currentDefender.Name);
                     battleOrder.Remove(currentDefender);
                     currentDefender = null;
+
+
+                    
                 }
             }
             else // No defender, target takes full damage
@@ -756,14 +766,15 @@ public class _BattleUIHandler : MonoBehaviour
 
                 foreach (PartySlot mem in partySlotHandler.partySlots)
                 {
-                    if (mem.playerStats.Name == target.Name)
-                    {
-                        mem.ShowHealthChange();
-                        ShowFloatingText(enemyDamage, Color.red, mem.transform.position, false);
-                        StartCoroutine(mem.JutterHealthBar(0.2f, 10f));
+                    if (mem.isCharacter) {
+                        if (mem.playerStats.Name == target.Name) {
+                            mem.ShowHealthChange();
+                            ShowFloatingText(enemyDamage, Color.red, mem.transform.position, false);
+                            StartCoroutine(mem.JutterHealthBar(0.2f, 10f));
+                        }
+                    }
                     }
                 }
-            }
 
             // Check if target is defeated
             if (target.currentHealth <= 0)
@@ -771,6 +782,7 @@ public class _BattleUIHandler : MonoBehaviour
                 Debug.Log($"{target.Name} has been defeated!");
                 defeatedInCombat.Add(target.Name);
                 battleOrder.Remove(target);
+                partyManager.removeFromPartyByName(target.Name);
             }
 
             // Reset defender at the end of the turn
