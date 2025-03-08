@@ -52,6 +52,7 @@ TagManager:
   - Menu
   - InteractPrompt
   - Bullet
+  - SmallDialogueBox
   layers:
   - Default
   - TransparentFX
