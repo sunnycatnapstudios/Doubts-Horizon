@@ -68,6 +68,12 @@ MonoBehaviour:
   emptySprite: {fileID: 1298929119012585908, guid: 3c5d6026a8f21a64ba574e8199c856d1,
     type: 3}
   bulletCount: 3
+  reloadCooldown: 2
+  isReloading: 0
+  reloadSpeed: 0.1
+  audioClips:
+    sfxDrawSlingshot: {fileID: 8300000, guid: 9752ad916d59e0f42821d542ab2db384, type: 3}
+    sfxBulletShot: {fileID: 8300000, guid: f5085303ae9459b0ba53ff46607de5bb, type: 3}
 --- !u!212 &5426384123864954690
 SpriteRenderer:
   m_ObjectHideFlags: 0
