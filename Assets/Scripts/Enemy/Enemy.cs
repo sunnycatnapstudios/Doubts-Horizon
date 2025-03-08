@@ -9,10 +9,20 @@ public class Enemy : MonoBehaviour {
     GameStatsManager gameStatsManager;
     _BattleUIHandler _battleUIHandler;
 
-    public bool attack, stun, searching, pathReturn, caught, demotestFreeze; // Enemy States
+    public bool attack, stun, hitByBullet, searching, pathReturn, caught, demotestFreeze; // Enemy States
     public float enemySpeed = 3, attackSpeed = 5; // Enemy Speeds
     private float counter_ = 0f, stunTime = 4f, stunTimer, searchTimer, intervalCheck = .4f; // Enemy Timers
-    public float detectRange, caughtRange = 1f, baseRange, pursueRange, wakeRange = 4.5f, playerDist, refX, refY; // Enemy Navigation
+
+    public float
+        detectRange,
+        caughtRange = 1f,
+        baseRange,
+        pursueRange,
+        wakeRange = 4.5f,
+        playerDist,
+        refX,
+        refY; // Enemy Navigation
+
     private Vector3 startPos, pathBounds; // Enemy Positions
 
     public Transform target;
@@ -176,6 +186,15 @@ public class Enemy : MonoBehaviour {
         }
     }
 
+    private void OnTriggerEnter2D(Collider2D other) {
+        if (other.CompareTag("Player")) {
+            // if (playerDist <= detectRange || attack && !stun) {
+            //
+            // }
+        } else if (other.CompareTag("Bullet")) {
+            hitByBullet = true;
+        }
+    }
 
     void Update() {
         if (caught) return;
@@ -186,8 +205,9 @@ public class Enemy : MonoBehaviour {
         Vector3 direction = target.position - transform.position;
         direction.Normalize();
 
-        if (Physics2D.OverlapCircle((transform.position), .5f, projectile) || stun) // Stun Enemy
+        if (hitByBullet || stun) // Stun Enemy
         {
+            hitByBullet = false;
             searchTimer = 0f;
             if (stunTimer <= stunTime) {
                 stunTimer += Time.deltaTime;
