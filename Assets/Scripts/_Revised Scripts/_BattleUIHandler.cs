@@ -17,7 +17,7 @@ public class _BattleUIHandler : MonoBehaviour
     private GameStatsManager gameStatsManager;
     private _PartyManager _partyManager;
     private _DialogueHandler _dialogueHandler;
-    
+
     public Animator partyUIAnimator, enemyUIAnimator, enemyStatsAnimator;
     public bool actOption = false, itemOption = false, canSelect = false;
     public GameObject overworldUI, combatUI;
@@ -33,6 +33,7 @@ public class _BattleUIHandler : MonoBehaviour
     public CharacterStats enemyStats;
     public int currentEnemyCurrentHealth, currentEnemyMaxHealth;
     public List<CharacterStats> playerParty;
+    public Vector3 playerPosition;
 
     [System.NonSerialized]
     public CharacterStats currentDefender = null;
@@ -77,7 +78,7 @@ public class _BattleUIHandler : MonoBehaviour
         gameStatsManager = GameStatsManager.Instance;
         _partyManager = gameStatsManager._partyManager;
         _dialogueHandler = gameStatsManager._dialogueHandler;
-        
+
         currentEnemies = new List<CharacterStats>(gameStatsManager.L1Enemies.Values);
     }
     void Start()
@@ -115,8 +116,10 @@ public class _BattleUIHandler : MonoBehaviour
                 floatingTextPrefab = obj;
             } if (obj.GetComponent<BattleTransition>() != null) {
                 battleTransition = obj.GetComponent<BattleTransition>();
+            } if (obj.CompareTag("Player")) {
+                playerPosition = obj.GetComponent<Transform>().position;
             }
-            
+
             // if (combatUI != null && overworldUI != null && enemySlot != null) {break;}
         }
 
@@ -130,7 +133,7 @@ public class _BattleUIHandler : MonoBehaviour
         foreach (GameObject go in Resources.FindObjectsOfTypeAll(typeof(GameObject)) as GameObject[])
         {
 #if UNITY_EDITOR
-            if (!UnityEditor.EditorUtility.IsPersistent(go.transform.root.gameObject) 
+            if (!UnityEditor.EditorUtility.IsPersistent(go.transform.root.gameObject)
                 && !(go.hideFlags == HideFlags.NotEditable || go.hideFlags == HideFlags.HideAndDontSave))
 #endif
             objectsInScene.Add(go);
@@ -158,7 +161,7 @@ public class _BattleUIHandler : MonoBehaviour
         Texture2D screenTexture = ScreenCapture.CaptureScreenshotAsTexture();
 
         GameObject screenOverlay = new GameObject("ScreenOverlay");
-        
+
         combatUI.SetActive(true);
         overworldUI.SetActive(false);
         Canvas.ForceUpdateCanvases();
@@ -174,13 +177,17 @@ public class _BattleUIHandler : MonoBehaviour
         overlayRect.anchorMin = Vector2.zero;
         overlayRect.anchorMax = Vector2.one;
         overlayRect.pivot = new Vector2(0.5f, 0.5f);
-        
+
         // Start the animation
         StartCoroutine(ZoomInAnimation(screenOverlay, overlayImage));
     }
     IEnumerator ZoomInAnimation(GameObject overlay, RawImage overlayImage)
     {
         RectTransform rect = overlay.GetComponent<RectTransform>();
+
+        // Move the camera as close to the player as the boundary allow
+        // TODO smarter solution than estimating at most 3/4 of the screen could be displaced? Find a way to check if we're walking near the map bound?
+        // rect.position = new Vector3(rect.position.x + rect.position.x/playerPosition.x, rect.position.y - rect.position.y, rect.position.z);
 
         float initialScale = .8f;
         // Start with slightly zoomed out
@@ -192,9 +199,9 @@ public class _BattleUIHandler : MonoBehaviour
 
         float duration = 1.5f;  // Animation duration
         float time = 0f;
-        
+
         Color startColor = overlayImage.color, targetColor = new Color(0, 0, 0, 0);  // Starting Color, Fully dark and transparent
-        
+
         while (time < duration)
         {
             time += Time.unscaledDeltaTime;
@@ -225,7 +232,7 @@ public class _BattleUIHandler : MonoBehaviour
         defendIndicator.anchoredPosition = new Vector2(-2000, 48);
         currentDefender = null;
         battleOrder.Clear();
-        
+
         CharacterStats player = gameStatsManager.playerStats["Player"];
 
         battleOrder.Add(player);
@@ -255,8 +262,8 @@ public class _BattleUIHandler : MonoBehaviour
         SetEscapePercentage();
 
         battleOrder = ShuffleList(battleOrder);
-        
-       
+
+
 
         foreach (var Char in battleOrder)
         {
@@ -456,7 +463,7 @@ public class _BattleUIHandler : MonoBehaviour
 
         indicator.localScale = endScale;
         indicator.anchoredPosition = endPos;
-        
+
         defendIndicator.GetComponent<DefendIndicator>().inAnimation = false;
     }
 
@@ -520,16 +527,16 @@ public class _BattleUIHandler : MonoBehaviour
         {
             elapsed += Time.unscaledDeltaTime;
             float t = elapsed / expandDuration;
-            
+
             defendIndicator.sizeDelta = Vector3.Lerp(originalScale, alteredScale, t);
-            
+
             Color color = defendIndicator.GetComponent<Image>().color;
             color.a = Mathf.Lerp(1f, 0f, t);
             defendIndicator.GetComponent<Image>().color = color;
-            
+
             yield return null;
         }
-        
+
         defendIndicator.SetParent(partyUIAnimator.transform, false);
         defendIndicator.SetSiblingIndex(0);
         defendIndicator.anchoredPosition = new Vector2(-2000, 48);
@@ -569,7 +576,7 @@ public class _BattleUIHandler : MonoBehaviour
                 // If the action is changed mid-selection, restart decision phase
                 if (selectedAction == "Attack" || selectedAction == "Defend")
                 {
-                    
+
                     partySlotHandler.ViewPortCanvasGroup.blocksRaycasts = true;
                     Debug.Log("Action switched");
                     if (selectedAction == "Attack") break;  // Go back to the start of the loop
@@ -606,7 +613,7 @@ public class _BattleUIHandler : MonoBehaviour
                     selectedTarget = player.Name;
                     break;
                 }
-                else 
+                else
                 {
                     // StartCoroutine(ShakeDefendIndicator());
                     Debug.Log("There's already someone defending :(");
@@ -709,7 +716,7 @@ public class _BattleUIHandler : MonoBehaviour
                 // Apply damage
                 currentDefender.currentHealth -= defenderDamage;
                 target.currentHealth -= targetDamage;
-                
+
                 partySlotHandler.MoveToActivePlayer(currentDefender, true);
 
                 Debug.Log($"{enemy.Name} attacks {target.Name}, but is blocked by {currentDefender.Name}!" +
@@ -800,7 +807,7 @@ public class _BattleUIHandler : MonoBehaviour
     void ShowFloatingText(int damage, Color color, Vector3 targetTransform, bool ishealing)
     {
         if (combatUI == null) return;
-        
+
         Vector3 spawnPosition = targetTransform + new Vector3(0, 60f, 0);
         floatingText = Instantiate(floatingTextPrefab, spawnPosition, Quaternion.identity, GameObject.FindGameObjectWithTag("Combat UI").transform);
         floatingText.SetActive(true);
@@ -968,7 +975,7 @@ public class _BattleUIHandler : MonoBehaviour
         // }
         // escapeChance = (int)(35+(((totalMaxHealth-totalCurrentHealth)/totalMaxHealth)*65));
         roll = Random.Range(0, 100);
-        
+
         Debug.Log($"Chance of escape: {escapeChance}%");
 
         if (roll<= escapeChance)
