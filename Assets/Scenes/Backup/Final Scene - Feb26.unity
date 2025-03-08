@@ -39935,7 +39935,7 @@ PrefabInstance:
         type: 3}
       propertyPath: interactBoxPrefab
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 1551236032}
     - target: {fileID: 3299673889596440561, guid: ab88db3bdfe6ce91b92a44906fb297b8,
         type: 3}
       propertyPath: NPCDialogueHandler
@@ -41130,12 +41130,12 @@ PrefabInstance:
     - target: {fileID: 1365270177835023463, guid: 5e9748ac24b62c7aaa3f8381d06a6814,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.05102539
+      value: 0.9500122
       objectReference: {fileID: 0}
     - target: {fileID: 1365270177835023463, guid: 5e9748ac24b62c7aaa3f8381d06a6814,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -0.23699951
+      value: 2.0700073
       objectReference: {fileID: 0}
     - target: {fileID: 2115546501004404052, guid: 5e9748ac24b62c7aaa3f8381d06a6814,
         type: 3}
@@ -43480,6 +43480,7 @@ MonoBehaviour:
   objects:
   - {fileID: 2082559088}
   - {fileID: 1279383441}
+  - {fileID: 1931766682}
   positionSpawn: {x: 140, y: 4, z: 0}
 --- !u!224 &738415355
 RectTransform:
