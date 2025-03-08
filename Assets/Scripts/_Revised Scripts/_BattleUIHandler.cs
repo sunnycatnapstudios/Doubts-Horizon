@@ -255,6 +255,7 @@ public class _BattleUIHandler : MonoBehaviour
         battleOrder.Add(enemyStats);
         survivors = partyManager.currentPartyMembers;
         //playerParty = battleOrder.FindAll(c => !c.isEnemy); // Exclude Enemy from selection
+        playerParty = partyManager.getStats();
 
 
         partySlotHandler.UpdateSlots();
@@ -762,14 +763,15 @@ public class _BattleUIHandler : MonoBehaviour
 
                 foreach (PartySlot mem in partySlotHandler.partySlots)
                 {
-                    if (mem.playerStats.Name == target.Name)
-                    {
-                        mem.ShowHealthChange();
-                        ShowFloatingText(enemyDamage, Color.red, mem.transform.position, false);
-                        StartCoroutine(mem.JutterHealthBar(0.2f, 10f));
+                    if (mem.isCharacter) {
+                        if (mem.playerStats.Name == target.Name) {
+                            mem.ShowHealthChange();
+                            ShowFloatingText(enemyDamage, Color.red, mem.transform.position, false);
+                            StartCoroutine(mem.JutterHealthBar(0.2f, 10f));
+                        }
+                    }
                     }
                 }
-            }
 
             // Check if target is defeated
             if (target.currentHealth <= 0)

@@ -50,7 +50,7 @@ public class PartySideBar : MonoBehaviour {
         }
 
         gameStatsManager = GameStatsManager.Instance;
-        _partyManager = gameStatsManager._partyManager;
+        //_partyManager = gameStatsManager._partyManager;
     }
 
     void Awake() {
