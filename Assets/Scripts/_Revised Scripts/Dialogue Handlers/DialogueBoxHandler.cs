@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,16 +7,9 @@ using UnityEngine.UI;
 public class DialogueBoxHandler : MonoBehaviour {
     public List<string> dialogueContents = new List<string>();
     public int currentLineIndex = 0;
+    [HideInInspector] public Action afterDialogue;
     public Sprite npcProfile;
     public bool lastLineDisplayed = false, hasChoice;
-
-    void Start() {
-        if (this.CompareTag("NPC")) {
-
-        } else if (this.CompareTag("Interactable")) {
-
-        }
-    }
 
     public string GetCurrentDialogueLine() {
         if (dialogueContents.Count == 0) {
@@ -31,6 +25,19 @@ public class DialogueBoxHandler : MonoBehaviour {
         }
 
         return currentLine;
+    }
+
+    void Start() {
+        if (this.CompareTag("NPC")) {
+
+        } else if (this.CompareTag("Interactable")) {
+
+        }
+    }
+
+    public void ResetDialogue() {
+        currentLineIndex = 0;
+        lastLineDisplayed = false;
     }
 
     public bool CanClose() {
