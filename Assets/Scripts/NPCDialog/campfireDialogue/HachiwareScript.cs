@@ -15,7 +15,7 @@ public class HachiwareScript : MonoBehaviour {
     void Start() {
         dialogueInputHandler = GameObject.FindGameObjectWithTag("Dialogue Text").GetComponent<DialogueInputHandler>();
         npcDialogueHandler = GetComponent<NPCDialogueHandler>();
-        prompt = GameObject.FindGameObjectWithTag("InteractPrompt").GetComponent<InteractPrompt>();
+        prompt = GetComponent<InteractPrompt>();
         inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
 
         string Feedme = "feed hachi";
