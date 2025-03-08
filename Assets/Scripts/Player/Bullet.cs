@@ -97,15 +97,12 @@ public class Bullet : MonoBehaviour {
         }
 
         if (shoot) {
-            if (Physics2D.OverlapCircle(transform.position, .2f, enemy)) {
-                ResetProjectile();
-            } else {
-                transform.position += DIR * Time.deltaTime * speed;
+            transform.position += DIR * (Time.deltaTime * speed);
 
-                if (Vector3.Distance(transform.position, refCheck) >= maxDistance) {
-                    ResetProjectile();
-                }
+            if (Vector3.Distance(transform.position, refCheck) >= maxDistance) {
+                ResetProjectile();
             }
+
         } else {
             if (Player.faceRight) {
                 transform.position = Vector3.right * .8f + target.position;
@@ -127,5 +124,10 @@ public class Bullet : MonoBehaviour {
                 DIR = Vector3.down;
             }
         }
+    }
+
+    // Reset the projectile upon collision
+    private void OnTriggerEnter2D(Collider2D other) {
+        ResetProjectile();
     }
 }

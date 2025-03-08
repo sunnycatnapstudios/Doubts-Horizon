@@ -51,6 +51,7 @@ TagManager:
   - Feed1
   - Menu
   - InteractPrompt
+  - Bullet
   layers:
   - Default
   - TransparentFX
