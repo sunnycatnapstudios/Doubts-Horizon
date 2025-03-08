@@ -210,7 +210,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 29614064}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 15.63, y: 5.38, z: 0}
+  m_LocalPosition: {x: 17, y: 5.38, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 350803256}
@@ -39049,7 +39049,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 350803255}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.75, y: -0.46, z: 0}
+  m_LocalPosition: {x: -140, y: -50, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 29614065}
@@ -41127,6 +41127,16 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1365270177835023463, guid: 5e9748ac24b62c7aaa3f8381d06a6814,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.05102539
+      objectReference: {fileID: 0}
+    - target: {fileID: 1365270177835023463, guid: 5e9748ac24b62c7aaa3f8381d06a6814,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -0.23699951
+      objectReference: {fileID: 0}
     - target: {fileID: 2115546501004404052, guid: 5e9748ac24b62c7aaa3f8381d06a6814,
         type: 3}
       propertyPath: m_OnValueChanged.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -41616,6 +41626,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Adrian UI Canvas
+      objectReference: {fileID: 0}
+    - target: {fileID: 2115546502825098179, guid: 5e9748ac24b62c7aaa3f8381d06a6814,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2115546502825098183, guid: 5e9748ac24b62c7aaa3f8381d06a6814,
         type: 3}
@@ -42665,7 +42680,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1031766180}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!19719996 &720747259
 TilemapCollider2D:
@@ -43357,7 +43372,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   transitionAnimator: {fileID: 550907500}
-  targetTransform: {fileID: 0}
+  targetTransform: {fileID: 770094370}
   entranceDirection: {x: 0, y: 0, z: 0}
   exitDirection: {x: 0, y: 0, z: 0}
   exitLocation: {x: 0, y: 0, z: 0}
@@ -43537,6 +43552,36 @@ MonoBehaviour:
   audioClips:
     sfxOnInteract: {fileID: 0}
     sfxTypewriter: {fileID: 0}
+--- !u!1 &770094369
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 770094370}
+  m_Layer: 0
+  m_Name: Fireplace Exit
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &770094370
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 770094369}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2, y: 4, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1031766180}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &771855557
 GameObject:
   m_ObjectHideFlags: 0
@@ -72437,7 +72482,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1031766180}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!483693784 &875448211
 TilemapRenderer:
@@ -75008,6 +75053,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 770094370}
   - {fileID: 875448210}
   - {fileID: 720747258}
   m_Father: {fileID: 1694115405}
