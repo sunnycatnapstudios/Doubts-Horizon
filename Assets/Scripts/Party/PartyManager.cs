@@ -61,6 +61,7 @@ public class PartyManager : MonoBehaviour
         if (survivor != null) {
             currentPartyMembers.Remove(survivor);
         }
+        UpdatePartyCount();
 
     }
     public Survivor getPlayer()
