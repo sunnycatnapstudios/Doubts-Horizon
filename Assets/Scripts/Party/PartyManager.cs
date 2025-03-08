@@ -55,6 +55,14 @@ public class PartyManager : MonoBehaviour
 
            
     }
+
+    public void removeFromPartyByName(string name) {
+        Survivor survivor  = currentPartyMembers.Find(x => x.Name == name);
+        if (survivor != null) {
+            currentPartyMembers.Remove(survivor);
+        }
+
+    }
     public Survivor getPlayer()
     {
         return player;

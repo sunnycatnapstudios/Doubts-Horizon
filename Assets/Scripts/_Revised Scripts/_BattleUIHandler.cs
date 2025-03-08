@@ -751,6 +751,9 @@ public class _BattleUIHandler : MonoBehaviour
                     defeatedInCombat.Add(currentDefender.Name);
                     battleOrder.Remove(currentDefender);
                     currentDefender = null;
+
+
+                    
                 }
             }
             else // No defender, target takes full damage
@@ -779,6 +782,7 @@ public class _BattleUIHandler : MonoBehaviour
                 Debug.Log($"{target.Name} has been defeated!");
                 defeatedInCombat.Add(target.Name);
                 battleOrder.Remove(target);
+                partyManager.removeFromPartyByName(target.Name);
             }
 
             // Reset defender at the end of the turn

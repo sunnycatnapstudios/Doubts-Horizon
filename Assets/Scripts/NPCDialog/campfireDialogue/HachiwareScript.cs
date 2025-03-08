@@ -27,13 +27,17 @@ public class HachiwareScript : MonoBehaviour {
                 survivor.Fed = true;
                 fedOrNot = true;
                 inventory.removeItemByName("Ration");
+                npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
                 prompt.forceFinishDialogue();
                 npcDialogueHandler.dialogueLines.Add($"You have {inventory.getCountofItem("Ration")} rations left");
+                prompt.forceDialogueEnd();
             } else {
                 npcDialogueHandler.dialogueLines.Add($"You dont even have any for yourself");
+                npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
+                prompt.forceDialogueEnd();
             }
 
-            prompt.forceDialogueEnd();
+            //prompt.forceDialogueEnd();
         };
         dialogueInputHandler.AddDialogueChoice(Feedme, takeMe);
 
@@ -41,6 +45,7 @@ public class HachiwareScript : MonoBehaviour {
         Action orNot = () => {
             Debug.Log("Or not callback.");
             fedOrNot = false;
+            npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
             prompt.forceDialogueEnd();
         };
         dialogueInputHandler.AddDialogueChoice(orNotTag, orNot);
@@ -49,7 +54,7 @@ public class HachiwareScript : MonoBehaviour {
             "Im very hungry please feed me",
             $"<link=\"{Feedme}\"><b><#d4af37>Feed</color></b></link>.\n...\n<link=\"{orNotTag}\"><b><#a40000>Or not...</color></b></link>."
         };
-        npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
+        //npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
     }
 
     void AfterDialogue() {
