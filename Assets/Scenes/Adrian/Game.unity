@@ -57686,6 +57686,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ccfc5b2903162cea5bf8daca0154eb07, type: 3}
+--- !u!114 &1399120494 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8920071011522045586, guid: ccfc5b2903162cea5bf8daca0154eb07,
+    type: 3}
+  m_PrefabInstance: {fileID: 1399120493}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8577893da9576a041b0c400fb999b302, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1404759005 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3299673889596440563, guid: ab88db3bdfe6ce91b92a44906fb297b8,
@@ -86847,7 +86859,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _partyManager: {fileID: 8325421304088749271}
-  partyManager: {fileID: 0}
+  partyManager: {fileID: 1399120494}
   _battleUIHandler: {fileID: 8325421303156214600}
   _dialogueHandler: {fileID: 0}
   player: {fileID: 0}
