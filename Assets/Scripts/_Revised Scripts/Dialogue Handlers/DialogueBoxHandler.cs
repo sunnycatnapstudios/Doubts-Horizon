@@ -11,6 +11,16 @@ public class DialogueBoxHandler : MonoBehaviour {
     public Sprite npcProfile;
     public bool lastLineDisplayed = false, hasChoice;
 
+    // Have both to ease compatibility, should remove one
+    public string GetNextLine() {
+        Debug.Log("GetNextLine is deprecated, use GetCurrentDialogueLine, it is subtlely different.");
+        if (currentLineIndex < dialogueContents.Count) {
+            return dialogueContents[currentLineIndex++];
+        } else {
+            return null; // No more lines
+        }
+    }
+
     public string GetCurrentDialogueLine() {
         if (dialogueContents.Count == 0) {
             return "";

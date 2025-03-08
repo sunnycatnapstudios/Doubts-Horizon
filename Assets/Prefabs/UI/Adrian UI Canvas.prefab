@@ -7333,8 +7333,8 @@ MonoBehaviour:
   ViewPortCanvasGroup: {fileID: 2115546501278967945}
   partySlotPrefab: {fileID: 2115546502582959551}
   scrollbar: {fileID: 2115546502340959493}
-  playerParty: []
   partySlots: []
+  survivors: []
 --- !u!1 &2115546501857483654
 GameObject:
   m_ObjectHideFlags: 0
@@ -12024,13 +12024,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: 
   profile: {fileID: 2115546502060079802}
-  playerStats:
-    Name: 
-    attack: 0
-    currentHealth: 0
-    maxHealth: 0
-    isCombatant: 0
-    isEnemy: 0
   healthbarCasing: {fileID: 2115546502083766830}
   healthBarBar: {fileID: 2115546502340870489}
   healthBarTail: {fileID: 2115546502481599296}
@@ -12039,9 +12032,10 @@ MonoBehaviour:
   defaultImagePosition: {x: 0, y: 0, z: 0}
   initialBarPosition: {x: 0, y: 0, z: 0}
   _isHighlighted: 0
-  _partyManager: {fileID: 0}
+  partyManager: {fileID: 0}
   _battleUIHandler: {fileID: 0}
   playerHealthIndicator: {fileID: 2115546502756512870}
+  isCharacter: 1
 --- !u!1 &2115546502596168540
 GameObject:
   m_ObjectHideFlags: 0
@@ -15651,6 +15645,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Small Dialogue Box
+      objectReference: {fileID: 0}
+    - target: {fileID: 1967722894350683128, guid: 7f4db9ccac2dc2c4f9f5989036a87960,
+        type: 3}
+      propertyPath: m_TagString
+      value: SmallDialogueBox
       objectReference: {fileID: 0}
     - target: {fileID: 1967722894350683129, guid: 7f4db9ccac2dc2c4f9f5989036a87960,
         type: 3}

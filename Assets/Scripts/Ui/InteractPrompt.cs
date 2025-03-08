@@ -32,7 +32,7 @@ public class InteractPrompt : MonoBehaviour {
 
     public bool isDialogueOpen = false, dialogueFinished = false;
 
-    public NPCDialogueHandler npcDialogueHandler;
+    public DialogueBoxHandler npcDialogueHandler;
 
     [Serializable]
     private struct AudioClips {
@@ -129,7 +129,7 @@ public class InteractPrompt : MonoBehaviour {
             dialogueAnimator = dialogueBox.GetComponent<Animator>();
             dialogueAnimator.Play("Dialogue Hidden");
             // dialogueBox.SetActive(false);
-            npcDialogueHandler = GetComponent<NPCDialogueHandler>();
+            npcDialogueHandler = GetComponent<DialogueBoxHandler>();
         }
         // if (CompareTag("Interactable")) {
         //     Debug.Log("YEEEEEEEEEEEAAAAAAAAAAAAAAAAAAAAAAAAAHHHHHHHHH");
