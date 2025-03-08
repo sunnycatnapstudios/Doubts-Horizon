@@ -23797,7 +23797,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0.010204077, y: 0.010204077, z: 0}
   m_MaxChunkCount: 16
@@ -32500,7 +32500,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0.010204077, y: 0.010204077, z: 0}
   m_MaxChunkCount: 16
@@ -43893,7 +43893,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0.010204077, y: 0.010204077, z: 0}
   m_MaxChunkCount: 16
@@ -77059,6 +77059,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attack: 0
   stun: 0
+  hitByBullet: 0
   searching: 0
   pathReturn: 0
   caught: 0
@@ -79562,7 +79563,7 @@ TilemapRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -1
   m_ChunkSize: {x: 32, y: 32, z: 32}
   m_ChunkCullingBounds: {x: 0.010204077, y: 0.010204077, z: 0}
   m_MaxChunkCount: 16
@@ -118735,6 +118736,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attack: 0
   stun: 0
+  hitByBullet: 0
   searching: 0
   pathReturn: 0
   caught: 0
