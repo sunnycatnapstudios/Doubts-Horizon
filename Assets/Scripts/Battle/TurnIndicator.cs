@@ -16,12 +16,14 @@ public class TurnIndicator : MonoBehaviour {
     private _PartyManager _partyManager;
     private _BattleUIHandler _battleUIHandler;
     public GameObject turnImagePrefab;
+    private PartyManager partyManager;
     // Sprite characterSprite;
 
     void Start() {
         gameStatsManager = GameStatsManager.Instance;
         _partyManager = GameStatsManager.Instance.GetComponentInChildren<_PartyManager>();
         _battleUIHandler = GameStatsManager.Instance.GetComponentInChildren<_BattleUIHandler>();
+        partyManager = gameStatsManager.partyManager;
     }
     void OnEnable() {
         // StartCoroutine(GetPrefab());
@@ -48,16 +50,27 @@ public class TurnIndicator : MonoBehaviour {
             newImageObj.name = "Turn Image" + (i + 1); newImageObj.SetActive(true);
             Image newImage = newImageObj.transform.Find("Profile").GetComponent<Image>();
 
-            Sprite characterSprite = _partyManager.characterProfiles.Find(sprite => sprite.name == _battleUIHandler.battleOrder[i].Name);
+            //Sprite characterSprite = _partyManager.characterProfiles.Find(sprite => sprite.name == _battleUIHandler.battleOrder[i].Name);
+            if (!_battleUIHandler.battleOrder[i].isEnemy) {
+
+
+            }
+            Debug.Log(_battleUIHandler.battleOrder[i].Name);
+           
 
             newImageObj.transform.localPosition = targetPositions[i]; // Set position
             turnOrderImages.Add(newImage.gameObject.transform.parent.GetComponent<Image>());
 
-            if (characterSprite != null) { turnOrderImages[i].transform.Find("Profile").GetComponent<Image>().sprite = characterSprite; }
+           
             if (_battleUIHandler.battleOrder[i].isEnemy) {
                 foreach (var profilePic in _partyManager.characterProfiles) {
                     if (profilePic.name == "Enemy") { turnOrderImages[i].transform.Find("Profile").GetComponent<Image>().sprite = profilePic; }
                 }
+            } else {
+                Sprite characterSprite = partyManager.getSurvivorByName(_battleUIHandler.battleOrder[i].Name).GetSprite();
+                if (characterSprite != null) { turnOrderImages[i].transform.Find("Profile").GetComponent<Image>().sprite = characterSprite; }
+
+
             }
         }
         StartCoroutine(UpdateTurnOrderPosition());
