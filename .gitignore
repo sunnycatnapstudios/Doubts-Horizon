@@ -80,3 +80,4 @@ crashlytics-build.properties
 .*.swp
 .*.swo
 Session.vim*
+tags*

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3299673889596440565}
   - component: {fileID: 3299673889596440560}
   - component: {fileID: 3299673889596440527}
+  - component: {fileID: 7420370439019667107}
   m_Layer: 12
   m_Name: NPC
   m_TagString: NPC
@@ -101,15 +102,12 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 2048
-  popUpPrefab: {fileID: 5665048404440187164, guid: 7eeee5a54ca28c54e825d2b0f42c421b,
-    type: 3}
   interactBoxPrefab: {fileID: 0}
   interactBoxTextReplacement: 
-  dialogueBox: {fileID: 0}
   characterProfile: {fileID: 21300000, guid: 233e090b78912f445af3f602a407830f, type: 3}
   isDialogueOpen: 0
   dialogueFinished: 0
-  npcDialogueHandler: {fileID: 3299673889596440564}
+  npcDialogueHandler: {fileID: 0}
   audioClips:
     sfxOnInteract: {fileID: 8300000, guid: 6cd56f21cb2f650af8f57f98c9dfab0f, type: 3}
     sfxTypewriter: {fileID: 8300000, guid: fd1eeaf7caafabcbe945f14fc1db6eb0, type: 3}
@@ -191,3 +189,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!114 &7420370439019667107
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3299673889596440526}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 432508fb7384d964bb879e74b3d189d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueContents: []
+  currentLineIndex: 0
+  npcProfile: {fileID: 21300000, guid: 233e090b78912f445af3f602a407830f, type: 3}
+  lastLineDisplayed: 0
+  hasChoice: 0
