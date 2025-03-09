@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class DamselDialogue : MonoBehaviour
 {
-    private NPCDialogueHandler NPCDialogueHandler;
+    private DialogueBoxHandler NPCDialogueHandler;
     private InteractPrompt InteractPrompt;
     public List<string> dialogueLines;
     private List<string> introLines, funnyRetort;
@@ -14,7 +14,7 @@ public class DamselDialogue : MonoBehaviour
 
     void Start ()
     {
-        NPCDialogueHandler = GetComponent<NPCDialogueHandler>();
+        NPCDialogueHandler = GetComponent<DialogueBoxHandler>();
         InteractPrompt = GetComponent<InteractPrompt>();
         
         introLines = new List<string>
@@ -23,7 +23,7 @@ public class DamselDialogue : MonoBehaviour
             "My hero <3"
         };
         dialogueLines = introLines;
-        NPCDialogueHandler.dialogueLines = dialogueLines;
+        NPCDialogueHandler.dialogueContents = dialogueLines;
         NPCDialogueHandler.afterDialogue = new Action(AfterDialogue);
     }
     void Update ()
