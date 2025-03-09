@@ -63,6 +63,7 @@ public class PartyManager : MonoBehaviour
         }
         UpdatePartyCount();
 
+
     }
     public Survivor getPlayer()
     {
@@ -89,7 +90,7 @@ public class PartyManager : MonoBehaviour
 
             partyCount = currentPartyMembers.Count;
         }
-
+        partySideBar.UpdateSideBar();
         Debug.Log($"Current Party Count: {currentPartyMembers.Count}");
     }
 
@@ -168,6 +169,7 @@ public class PartyManager : MonoBehaviour
 //         AddToParty("MemberE");
         player.CurHealth = player.Health;
         currentPartyMembers.Add(player);
+        partySideBar = GameObject.FindGameObjectWithTag("PartySideBar").GetComponent<PartySideBar>();
         
     }
 
