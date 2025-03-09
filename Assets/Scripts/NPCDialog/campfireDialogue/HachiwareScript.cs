@@ -8,14 +8,12 @@ public class HachiwareScript : MonoBehaviour {
     private DialogueBoxHandler npcDialogueHandler;
     public Survivor survivor;
     private bool fedOrNot;
-    private InteractPrompt prompt;
     private Inventory inventory;
 
 
     void Start() {
         dialogueInputHandler = GameObject.FindGameObjectWithTag("Dialogue Text").GetComponent<DialogueInputHandler>();
         npcDialogueHandler = GetComponent<DialogueBoxHandler>();
-        prompt = GetComponent<InteractPrompt>();
         inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
 
         string Feedme = "feed hachi";
@@ -28,16 +26,12 @@ public class HachiwareScript : MonoBehaviour {
                 fedOrNot = true;
                 inventory.removeItemByName("Ration");
                 npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
-                prompt.forceFinishDialogue();
                 npcDialogueHandler.dialogueContents.Add($"You have {inventory.getCountofItem("Ration")} rations left");
-                prompt.forceDialogueEnd();
             } else {
                 npcDialogueHandler.dialogueContents.Add($"You dont even have any for yourself");
                 npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
-                prompt.forceDialogueEnd();
             }
-
-            //prompt.forceDialogueEnd();
+            GameStatsManager.Instance._dialogueHandler.UpdateDialogueBox();
         };
         dialogueInputHandler.AddDialogueChoice(Feedme, takeMe);
 
@@ -46,7 +40,7 @@ public class HachiwareScript : MonoBehaviour {
             Debug.Log("Or not callback.");
             fedOrNot = false;
             npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
-            prompt.forceDialogueEnd();
+            GameStatsManager.Instance._dialogueHandler.CloseDialogueBox();
         };
         dialogueInputHandler.AddDialogueChoice(orNotTag, orNot);
 
@@ -54,7 +48,6 @@ public class HachiwareScript : MonoBehaviour {
             "Im very hungry please feed me",
             $"<link=\"{Feedme}\"><b><#d4af37>Feed</color></b></link>.\n...\n<link=\"{orNotTag}\"><b><#a40000>Or not...</color></b></link>."
         };
-        //npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
     }
 
     void AfterDialogue() {

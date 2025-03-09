@@ -211,6 +211,11 @@ public class _DialogueHandler : MonoBehaviour
         dialogueAnimator.Play("Dialogue Dissapear");
 
         player.GetComponent<Player>().isPlayerInControl = false;
+
+        if (dialogueBoxHandler.afterDialogue != null) {
+            dialogueBoxHandler.afterDialogue();
+            dialogueBoxHandler.afterDialogue = null;
+        }
     }
     
     // void ShowChoice()

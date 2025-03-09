@@ -8,14 +8,12 @@ public class JenmasScript : MonoBehaviour {
     private DialogueBoxHandler npcDialogueHandler;
     public Survivor survivor;
     private bool fedOrNot;
-    private InteractPrompt prompt;
     private Inventory inventory;
 
 
     void Start() {
         dialogueInputHandler = GameObject.FindGameObjectWithTag("Dialogue Text").GetComponent<DialogueInputHandler>();
         npcDialogueHandler = GetComponent<DialogueBoxHandler>();
-        prompt = GetComponent<InteractPrompt>();
         inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
 
         string Feedme = "feed jenmas";
@@ -27,13 +25,13 @@ public class JenmasScript : MonoBehaviour {
                 survivor.Fed = true;
                 fedOrNot = true;
                 inventory.removeItemByName("Ration");
-                prompt.forceFinishDialogue();
+                npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
                 npcDialogueHandler.dialogueContents.Add($"You have {inventory.getCountofItem("Ration")} rations left");
             } else {
                 npcDialogueHandler.dialogueContents.Add($"You dont even have any for yourself");
+                npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
             }
-
-            prompt.forceDialogueEnd();
+            GameStatsManager.Instance._dialogueHandler.UpdateDialogueBox();
         };
         dialogueInputHandler.AddDialogueChoice(Feedme, takeMe);
 
@@ -41,7 +39,8 @@ public class JenmasScript : MonoBehaviour {
         Action orNot = () => {
             Debug.Log("Or not callback.");
             fedOrNot = false;
-            prompt.forceDialogueEnd();
+            npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
+            GameStatsManager.Instance._dialogueHandler.CloseDialogueBox();
         };
         dialogueInputHandler.AddDialogueChoice(orNotTag, orNot);
 
