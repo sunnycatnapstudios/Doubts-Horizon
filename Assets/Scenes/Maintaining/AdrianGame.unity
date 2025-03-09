@@ -76796,6 +76796,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Small Dialogue Box
       objectReference: {fileID: 0}
+    - target: {fileID: 1967722894350683128, guid: 7f4db9ccac2dc2c4f9f5989036a87960,
+        type: 3}
+      propertyPath: m_TagString
+      value: SmallDialogueBox
+      objectReference: {fileID: 0}
     - target: {fileID: 1967722894350683129, guid: 7f4db9ccac2dc2c4f9f5989036a87960,
         type: 3}
       propertyPath: m_Pivot.x
