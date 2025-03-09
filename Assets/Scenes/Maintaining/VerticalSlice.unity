@@ -41129,7 +41129,7 @@ PrefabInstance:
     - target: {fileID: 1365270177835023463, guid: 5e9748ac24b62c7aaa3f8381d06a6814,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.9500122
+      value: 0.9499512
       objectReference: {fileID: 0}
     - target: {fileID: 1365270177835023463, guid: 5e9748ac24b62c7aaa3f8381d06a6814,
         type: 3}
@@ -77400,7 +77400,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueContents: []
   currentLineIndex: 0
-  npcProfile: {fileID: 0}
+  npcProfile: {fileID: 21300000, guid: 233e090b78912f445af3f602a407830f, type: 3}
   lastLineDisplayed: 0
   hasChoice: 0
 --- !u!1001 &1315376541
@@ -91172,7 +91172,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueContents: []
   currentLineIndex: 0
-  npcProfile: {fileID: 0}
+  npcProfile: {fileID: 21300000, guid: 233e090b78912f445af3f602a407830f, type: 3}
   lastLineDisplayed: 0
   hasChoice: 0
 --- !u!1 &1942145809
