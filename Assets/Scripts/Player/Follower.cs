@@ -31,7 +31,7 @@ public class Follower : MonoBehaviour {
 
         // Handles Party Movement and Placement
         // partyIndex = Mathf.Abs(partyManager.partyCount-order);
-        partyIndex = Mathf.Abs(partyManager.partyCount - order-1);//minus one because player now in count i belieev
+        partyIndex = Mathf.Abs(partyManager.partyCount - order - 1);//minus one because player now in count i belieev
 
         if (partyIndex >= 0 && partyIndex < Player.moveHist.Count) { newPos = Player.moveHist[partyIndex]; } else { newPos = transform.position; }
 

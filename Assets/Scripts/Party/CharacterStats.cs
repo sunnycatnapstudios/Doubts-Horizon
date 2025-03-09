@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterStats
-{
+public class CharacterStats {
 
     public string Name;
     public int attack, currentHealth, maxHealth;

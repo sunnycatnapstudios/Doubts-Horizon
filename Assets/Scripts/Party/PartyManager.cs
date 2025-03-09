@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PartyManager : MonoBehaviour
-{
+public class PartyManager : MonoBehaviour {
     public int partyCount;
     public GameObject partyMemberTemplate;
     private List<GameObject> partyMembers = new List<GameObject>();
@@ -31,12 +30,12 @@ public class PartyManager : MonoBehaviour
 
 
     public List<GameObject> spawnedPartyMembers = new List<GameObject>();
-   
+
 
     public List<CharacterStats> getStats() {
         List<CharacterStats> mylist = new List<CharacterStats>();
 
-        foreach( Survivor survivor in currentPartyMembers) {
+        foreach (Survivor survivor in currentPartyMembers) {
             mylist.Add(survivor.GetCharStats());
 
         }
@@ -44,45 +43,41 @@ public class PartyManager : MonoBehaviour
         return mylist;
 
     }
-   
-    void AssignAnimator(GameObject memberObject,Survivor member)
-    {
+
+    void AssignAnimator(GameObject memberObject, Survivor member) {
         Animator anim = memberObject.GetComponent<Animator>();
 
-        
-           
+
+
         anim.runtimeAnimatorController = member.Animcontroller;
 
-           
+
     }
 
     public void removeFromPartyByName(string name) {
-        Survivor survivor  = currentPartyMembers.Find(x => x.Name == name);
+        Survivor survivor = currentPartyMembers.Find(x => x.Name == name);
         if (survivor != null) {
             currentPartyMembers.Remove(survivor);
         }
         UpdatePartyCount();
 
     }
-    public Survivor getPlayer()
-    {
+    public Survivor getPlayer() {
         return player;
     }
 
-    void UpdatePartyCount()
-    {
+    void UpdatePartyCount() {
         //Refresh Onscreen Party when there is a change
-        foreach (var obj in spawnedPartyMembers) {Destroy(obj);}
+        foreach (var obj in spawnedPartyMembers) { Destroy(obj); }
         spawnedPartyMembers.Clear();
 
         // Spawn GameObjects for each current party member
         //starts at 1 to ignoire player
-        for (int i = 1; i < currentPartyMembers.Count; i++)
-        {
+        for (int i = 1; i < currentPartyMembers.Count; i++) {
             GameObject newPartyObject = Instantiate(partyMemberTemplate);
 
             newPartyObject.name = currentPartyMembers[i].Name;
-            newPartyObject.GetComponent<Follower>().order = i+1;
+            newPartyObject.GetComponent<Follower>().order = i + 1;
             AssignAnimator(newPartyObject, currentPartyMembers[i]);
 
             spawnedPartyMembers.Add(newPartyObject);
@@ -93,49 +88,38 @@ public class PartyManager : MonoBehaviour
         Debug.Log($"Current Party Count: {currentPartyMembers.Count}");
     }
 
-    public void AddToParty(Survivor member)
-    {
-        if (!currentPartyMembers.Contains(member))
-        {
+    public void AddToParty(Survivor member) {
+        if (!currentPartyMembers.Contains(member)) {
             member.CurHealth = member.Health;
             currentPartyMembers.Add(member);
             Debug.Log($"{member.GetName()} has joined the party!");
             UpdatePartyCount();
-        }
-        else
-        {
+        } else {
             Debug.Log($"{member.GetName()} is already in the party or doesn't exist.");
         }
         //partySideBar = GameObject.FindGameObjectWithTag("PartySideBar").GetComponent<PartySideBar>();
         //partySideBar.UpdateSideBar();
     }
 
-    public void RemoveFromParty(Survivor member)
-    {
-        
-        if (currentPartyMembers.Contains(member))
-        {
+    public void RemoveFromParty(Survivor member) {
+
+        if (currentPartyMembers.Contains(member)) {
             currentPartyMembers.Remove(member);
             Debug.Log($"{member.GetName()} has been removed from the party.");
             UpdatePartyCount();
-        }
-        else
-        {
+        } else {
             Debug.Log($"{member.GetName()} is not in the party.");
         }
     }
 
-    public void TakeDamage(Survivor member, int damage)
-    {
-       
-        if (member != null)
-        {
-            member.DecHealth( damage);
+    public void TakeDamage(Survivor member, int damage) {
+
+        if (member != null) {
+            member.DecHealth(damage);
             Debug.Log($"{member.Name} took {damage} damage!");
 
 
-            if (member.CurHealth <= 0)
-            {
+            if (member.CurHealth <= 0) {
                 member.CurHealth = 0;
                 Debug.Log($"{member.Name} has been defeated!");
                 RemoveFromParty(member); //should have a death funciton later
@@ -156,26 +140,24 @@ public class PartyManager : MonoBehaviour
     //     }
     // }
 
-    void Start()
-    {
+    void Start() {
         //partyMemberList = new List<PartyMember>(allPartyMembers.Values);
         //currentPlayer.Add(playerStats["Player"]);
-        
-//         AddToParty("MemberA");
-//         AddToParty("MemberB");
-//         AddToParty("MemberC");
-//         AddToParty("MemberD");
-//         AddToParty("MemberE");
+
+        //         AddToParty("MemberA");
+        //         AddToParty("MemberB");
+        //         AddToParty("MemberC");
+        //         AddToParty("MemberD");
+        //         AddToParty("MemberE");
         player.CurHealth = player.Health;
         currentPartyMembers.Add(player);
-        
+
     }
 
-    
 
-    void Update()
-    {
-        
+
+    void Update() {
+
         //if (false && Input.GetKeyDown(KeyCode.P)) {
         //    //if (currentPartyMembers.Count<allPartyMembers.Count)
         //    {
@@ -199,14 +181,11 @@ public class PartyManager : MonoBehaviour
         //    }
         //}
         if (false && Input.GetKeyDown(KeyCode.O)) {
-            if (currentPartyMembers.Count>0)
-            {
+            if (currentPartyMembers.Count > 0) {
                 // Debug.Log("Removed PartyMember");
-                
-                RemoveFromParty(currentPartyMembers[Random.Range(0, currentPartyMembers.Count-1)]);
-            }
-            else
-            {
+
+                RemoveFromParty(currentPartyMembers[Random.Range(0, currentPartyMembers.Count - 1)]);
+            } else {
                 Debug.Log("Culled All Party Members");
             }
         }

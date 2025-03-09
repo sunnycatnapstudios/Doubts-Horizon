@@ -3,14 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 [CreateAssetMenu]
 
-public class Survivor : ScriptableObject
-{
+public class Survivor : ScriptableObject {
     [SerializeField]
     private string name;
 
     public string Name { get { return name; } }
     [SerializeField]
-    private  int damage;
+    private int damage;
 
     public int Damage { get { return damage; } }
     [SerializeField]
@@ -36,17 +35,15 @@ public class Survivor : ScriptableObject
     [SerializeField]
     public RuntimeAnimatorController Animcontroller;
 
-    public string GetName()
-    {
+    public string GetName() {
         return name;
     }
-    public int GetHealth()
-    {
+    public int GetHealth() {
         return health;
     }
     public void OnEnable() {
         Debug.Log("does this ever run");
-        charstats  = new CharacterStats(Name, damage, health, health,isCombatant,false);
+        charstats = new CharacterStats(Name, damage, health, health, isCombatant, false);
 
 
     }
@@ -56,12 +53,10 @@ public class Survivor : ScriptableObject
 
     }
 
-    public void AddHealth(int health)
-    {
+    public void AddHealth(int health) {
         charstats.currentHealth += health;
     }
-    public void DecHealth(int health)
-    {
+    public void DecHealth(int health) {
         charstats.currentHealth -= health;
     }
     public Sprite Sprite;
