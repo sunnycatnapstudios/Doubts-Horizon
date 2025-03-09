@@ -17,18 +17,19 @@ public class PartySideBar : MonoBehaviour {
         foreach (var slot in sideBarSlots) { Destroy(slot); }
         sideBarSlots.Clear();
 
-        foreach (var member in gameStatsManager.currentSurvivors) {
-            // if (!member.isCombatant) {continue;}
+        foreach (Survivor member in gameStatsManager.currentSurvivors) {
+            if (member.Name == "maincharacter") {continue;}
 
             GameObject newSideBarProfile = Instantiate(profilePrefab, transform);
             newSideBarProfile.SetActive(true);
             newSideBarProfile.transform.SetSiblingIndex(0);
 
-            Sprite profilePic = _partyManager.characterProfiles.Find(profile => profile.name == member.Name);
-            profilePic = member.GetSprite();
+            Sprite profilePic = member.GetSprite();
+            //profilePic = member.GetSprite();
             if (profilePic != null) {
                 newSideBarProfile.GetComponent<Image>().sprite = profilePic;
             } else { Debug.Log($"No matching profilePic found for {member.Name}. Check if the Sprite is properly named"); }
+            Debug.Log(member.ToString());
 
             newSideBarProfile.GetComponent<Image>().rectTransform.sizeDelta = new Vector2(35, 35);
 
@@ -45,7 +46,7 @@ public class PartySideBar : MonoBehaviour {
     }
 
     IEnumerator WaitForPartyManager() {
-        while (GameStatsManager.Instance == null || GameStatsManager.Instance._partyManager == null) {
+        while (GameStatsManager.Instance == null) {
             yield return null; // Wait until it's ready
         }
 
@@ -54,7 +55,7 @@ public class PartySideBar : MonoBehaviour {
     }
 
     void Awake() {
-        // gameStatsManager = GameStatsManager.Instance;
+         gameStatsManager = GameStatsManager.Instance;
         // _partyManager = GameStatsManager.Instance._partyManager;
         //StartCoroutine(WaitForPartyManager());
     }

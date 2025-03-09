@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class SideBarStats : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler {
     private GameStatsManager gameStatsManager;
     private _PartyManager _partyManager;
+    private PartyManager partymanager;
 
     public RectTransform imageRectTransform, healthBarTransform, memberNameTransform;
     private Vector2 defaultSize = new Vector2(35, 35), expandedSize = new Vector2(40, 40);
@@ -24,6 +25,7 @@ public class SideBarStats : MonoBehaviour, IPointerEnterHandler, IPointerExitHan
 
         gameStatsManager = GameStatsManager.Instance;
         _partyManager = gameStatsManager._partyManager;
+        partymanager = gameStatsManager.partyManager;
     }
 
     public void OnPointerEnter(PointerEventData eventData) {
