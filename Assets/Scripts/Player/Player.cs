@@ -137,7 +137,7 @@ public class Player : MonoBehaviour {
         Vector3 endRef = transform.position;
         isMoving = startRef != endRef;
 
-        isSneaking = Input.GetMouseButton(1);
+        isSneaking = false; // stick on on web build for me? Input.GetMouseButton(1);
         isSprinting = Input.GetKey(KeyCode.LeftShift) && GameStatsManager.Instance.CanSprint() && !isSneaking;
         GameStatsManager.Instance.isCurrentlySprinting = isSprinting && isMoving;
 
