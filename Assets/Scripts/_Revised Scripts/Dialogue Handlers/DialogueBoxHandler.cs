@@ -26,6 +26,10 @@ public class DialogueBoxHandler : MonoBehaviour {
             return "";
         }
 
+        if (currentLineIndex >= dialogueContents.Count) {
+            return dialogueContents[dialogueContents.Count - 1];
+        }
+
         string currentLine = dialogueContents[currentLineIndex];
 
         if (currentLineIndex < dialogueContents.Count - 1) {

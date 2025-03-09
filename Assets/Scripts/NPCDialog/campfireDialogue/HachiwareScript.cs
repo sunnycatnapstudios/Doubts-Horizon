@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class HachiwareScript : MonoBehaviour {
     private DialogueInputHandler dialogueInputHandler;
-    private NPCDialogueHandler npcDialogueHandler;
+    private DialogueBoxHandler npcDialogueHandler;
     public Survivor survivor;
     private bool fedOrNot;
     private InteractPrompt prompt;
@@ -14,7 +14,7 @@ public class HachiwareScript : MonoBehaviour {
 
     void Start() {
         dialogueInputHandler = GameObject.FindGameObjectWithTag("Dialogue Text").GetComponent<DialogueInputHandler>();
-        npcDialogueHandler = GetComponent<NPCDialogueHandler>();
+        npcDialogueHandler = GetComponent<DialogueBoxHandler>();
         prompt = GetComponent<InteractPrompt>();
         inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
 
@@ -29,10 +29,10 @@ public class HachiwareScript : MonoBehaviour {
                 inventory.removeItemByName("Ration");
                 npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
                 prompt.forceFinishDialogue();
-                npcDialogueHandler.dialogueLines.Add($"You have {inventory.getCountofItem("Ration")} rations left");
+                npcDialogueHandler.dialogueContents.Add($"You have {inventory.getCountofItem("Ration")} rations left");
                 prompt.forceDialogueEnd();
             } else {
-                npcDialogueHandler.dialogueLines.Add($"You dont even have any for yourself");
+                npcDialogueHandler.dialogueContents.Add($"You dont even have any for yourself");
                 npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
                 prompt.forceDialogueEnd();
             }
@@ -50,7 +50,7 @@ public class HachiwareScript : MonoBehaviour {
         };
         dialogueInputHandler.AddDialogueChoice(orNotTag, orNot);
 
-        npcDialogueHandler.dialogueLines = new List<string> {
+        npcDialogueHandler.dialogueContents = new List<string> {
             "Im very hungry please feed me",
             $"<link=\"{Feedme}\"><b><#d4af37>Feed</color></b></link>.\n...\n<link=\"{orNotTag}\"><b><#a40000>Or not...</color></b></link>."
         };
@@ -60,10 +60,10 @@ public class HachiwareScript : MonoBehaviour {
     void AfterDialogue() {
         Debug.Log("Completed dialogue.");
         if (fedOrNot) {
-            npcDialogueHandler.dialogueLines = new List<string>
+            npcDialogueHandler.dialogueContents = new List<string>
                 { "thank you for saving me mister", "im forever in your debt!" };
         } else {
-            npcDialogueHandler.dialogueLines = new List<string> { "oh ok....", "i guess i see how it is...." };
+            npcDialogueHandler.dialogueContents = new List<string> { "oh ok....", "i guess i see how it is...." };
         }
     }
 }

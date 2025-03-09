@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class joinerCopy : MonoBehaviour {
     private DialogueInputHandler dialogueInputHandler;
-    private NPCDialogueHandler npcDialogueHandler;
+    private DialogueBoxHandler npcDialogueHandler;
     public Survivor survivor;
 
     void Start() {
         dialogueInputHandler = GameObject.FindGameObjectWithTag("Dialogue Text").GetComponent<DialogueInputHandler>();
-        npcDialogueHandler = GetComponent<NPCDialogueHandler>();
+        npcDialogueHandler = GetComponent<DialogueBoxHandler>();
 
         string takeMeTag = "mewo me";
         Action takeMe = () => {
@@ -28,7 +28,7 @@ public class joinerCopy : MonoBehaviour {
         };
         dialogueInputHandler.AddDialogueChoice(orNotTag, orNot);
 
-        npcDialogueHandler.dialogueLines = new List<string> {
+        npcDialogueHandler.dialogueContents = new List<string> {
             "It's dangerous to go alone!",
             $"<link=\"{takeMeTag}\"><b><#d4af37>Take me</color></b></link>.\n...\n<link=\"{orNotTag}\"><b><#a40000>Or not...</color></b></link>."
         };

@@ -4,16 +4,16 @@ using UnityEngine;
 
 public class InteractPillarCDialogue : MonoBehaviour
 {
-    private NPCDialogueHandler NPCDialogueHandler;
+    private DialogueBoxHandler NPCDialogueHandler;
     private InteractPrompt InteractPrompt;
     public List<string> dialogueLines;
     private List<string> introLines, funnyRetort;
 
-    void Start ()
+    void Awake()
     {
-        NPCDialogueHandler = GetComponent<NPCDialogueHandler>();
+        NPCDialogueHandler = GetComponent<DialogueBoxHandler>();
         InteractPrompt = GetComponent<InteractPrompt>();
-        
+
         introLines = new List<string>
         {
             "Testng 1, 2\nTesting 1, 2...",
@@ -32,6 +32,6 @@ public class InteractPillarCDialogue : MonoBehaviour
     {
         if (InteractPrompt.dialogueFinished) {dialogueLines = funnyRetort;}
 
-        NPCDialogueHandler.dialogueLines = dialogueLines;
+        NPCDialogueHandler.dialogueContents = dialogueLines;
     }
 }

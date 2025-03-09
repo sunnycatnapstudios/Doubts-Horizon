@@ -5,12 +5,12 @@ using UnityEngine;
 
 public class OrphanDialogue : MonoBehaviour {
     private DialogueInputHandler dialogueInputHandler;
-    private NPCDialogueHandler npcDialogueHandler;
+    private DialogueBoxHandler npcDialogueHandler;
     public Survivor survivor;
 
     void Start() {
         dialogueInputHandler = GameObject.FindGameObjectWithTag("Dialogue Text").GetComponent<DialogueInputHandler>();
-        npcDialogueHandler = GetComponent<NPCDialogueHandler>();
+        npcDialogueHandler = GetComponent<DialogueBoxHandler>();
 
         string takeMeTag = "Take orphan";
         Action takeMe = () => {
@@ -21,7 +21,7 @@ public class OrphanDialogue : MonoBehaviour {
         };
         dialogueInputHandler.AddDialogueChoice(takeMeTag, takeMe);
 
-        npcDialogueHandler.dialogueLines = new List<string> {
+        npcDialogueHandler.dialogueContents = new List<string> {
             "Mommy?!",
             "... *sobs*",
             "I can't find my mommy.",

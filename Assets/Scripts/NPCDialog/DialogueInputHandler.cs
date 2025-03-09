@@ -8,7 +8,7 @@ using UnityEngine.EventSystems;
 
 public class DialogueInputHandler : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler {
     private Dictionary<string, Action> dialogueChoices;
-    private NPCDialogueHandler npcDialogueHandler;
+    private DialogueBoxHandler npcDialogueHandler;
     private TMP_Text dialogueText;
     private bool hovering;
     private string curLinkID;
@@ -22,7 +22,7 @@ public class DialogueInputHandler : MonoBehaviour, IPointerEnterHandler, IPointe
     void Awake() {
         dialogueChoices = new Dictionary<string, Action>();
         dialogueText = GetComponent<TMP_Text>();
-        npcDialogueHandler = GetComponent<NPCDialogueHandler>();
+        npcDialogueHandler = GetComponent<DialogueBoxHandler>();
     }
 
     void LateUpdate() {
