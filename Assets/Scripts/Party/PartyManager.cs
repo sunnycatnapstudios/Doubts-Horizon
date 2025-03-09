@@ -173,6 +173,11 @@ public class PartyManager : MonoBehaviour
         
     }
 
+    public Survivor getSurvivorByName(string name) {
+        return currentPartyMembers.Find(x => x.Name == name);
+
+    }
+
     
 
     void Update()
