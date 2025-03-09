@@ -43528,30 +43528,6 @@ MonoBehaviour:
   onInteract:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &763038230
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 763038224}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a557ccc2c46205f4898c2a80c4478cc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 0
-  interactBoxPrefab: {fileID: 0}
-  interactBoxTextReplacement: 
-  characterProfile: {fileID: 0}
-  isDialogueOpen: 0
-  dialogueFinished: 0
-  npcDialogueHandler: {fileID: 0}
-  audioClips:
-    sfxOnInteract: {fileID: 0}
-    sfxTypewriter: {fileID: 0}
 --- !u!1 &770094369
 GameObject:
   m_ObjectHideFlags: 0
@@ -77246,7 +77222,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1279383442}
   - component: {fileID: 1279383448}
-  - component: {fileID: 1279383447}
   - component: {fileID: 1279383446}
   - component: {fileID: 1279383445}
   - component: {fileID: 1279383444}
@@ -77348,30 +77323,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueLines:
   - beans
---- !u!114 &1279383447
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1279383441}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a557ccc2c46205f4898c2a80c4478cc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 2048
-  interactBoxPrefab: {fileID: 0}
-  interactBoxTextReplacement: 
-  characterProfile: {fileID: 21300000, guid: 233e090b78912f445af3f602a407830f, type: 3}
-  isDialogueOpen: 0
-  dialogueFinished: 0
-  npcDialogueHandler: {fileID: 0}
-  audioClips:
-    sfxOnInteract: {fileID: 8300000, guid: fd1eeaf7caafabcbe945f14fc1db6eb0, type: 3}
-    sfxTypewriter: {fileID: 0}
 --- !u!212 &1279383448
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -91043,7 +90994,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1931766683}
   - component: {fileID: 1931766690}
-  - component: {fileID: 1931766689}
   - component: {fileID: 1931766688}
   - component: {fileID: 1931766687}
   - component: {fileID: 1931766686}
@@ -91158,30 +91108,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueLines:
   - beans
---- !u!114 &1931766689
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1931766682}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a557ccc2c46205f4898c2a80c4478cc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 2048
-  interactBoxPrefab: {fileID: 0}
-  interactBoxTextReplacement: 
-  characterProfile: {fileID: 21300000, guid: 233e090b78912f445af3f602a407830f, type: 3}
-  isDialogueOpen: 0
-  dialogueFinished: 0
-  npcDialogueHandler: {fileID: 0}
-  audioClips:
-    sfxOnInteract: {fileID: 8300000, guid: fd1eeaf7caafabcbe945f14fc1db6eb0, type: 3}
-    sfxTypewriter: {fileID: 0}
 --- !u!212 &1931766690
 SpriteRenderer:
   m_ObjectHideFlags: 0
