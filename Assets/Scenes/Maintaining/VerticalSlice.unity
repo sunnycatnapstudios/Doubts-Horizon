@@ -77252,6 +77252,7 @@ GameObject:
   - component: {fileID: 1279383444}
   - component: {fileID: 1279383449}
   - component: {fileID: 1279383443}
+  - component: {fileID: 1279383450}
   m_Layer: 12
   m_Name: Jenmas
   m_TagString: NPC
@@ -77367,7 +77368,7 @@ MonoBehaviour:
   characterProfile: {fileID: 21300000, guid: 233e090b78912f445af3f602a407830f, type: 3}
   isDialogueOpen: 0
   dialogueFinished: 0
-  npcDialogueHandler: {fileID: 3299673890537269104}
+  npcDialogueHandler: {fileID: 0}
   audioClips:
     sfxOnInteract: {fileID: 8300000, guid: fd1eeaf7caafabcbe945f14fc1db6eb0, type: 3}
     sfxTypewriter: {fileID: 0}
@@ -77434,6 +77435,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   survivor: {fileID: 11400000, guid: 7ea66f04ca169e844a9a9805f2c6e4b0, type: 2}
+--- !u!114 &1279383450
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1279383441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 432508fb7384d964bb879e74b3d189d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueContents: []
+  currentLineIndex: 0
+  npcProfile: {fileID: 0}
+  lastLineDisplayed: 0
+  hasChoice: 0
 --- !u!1001 &1315376541
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -91031,6 +91049,7 @@ GameObject:
   - component: {fileID: 1931766686}
   - component: {fileID: 1931766685}
   - component: {fileID: 1931766684}
+  - component: {fileID: 1931766691}
   m_Layer: 12
   m_Name: newGuy
   m_TagString: NPC
@@ -91159,7 +91178,7 @@ MonoBehaviour:
   characterProfile: {fileID: 21300000, guid: 233e090b78912f445af3f602a407830f, type: 3}
   isDialogueOpen: 0
   dialogueFinished: 0
-  npcDialogueHandler: {fileID: 3299673890537269104}
+  npcDialogueHandler: {fileID: 0}
   audioClips:
     sfxOnInteract: {fileID: 8300000, guid: fd1eeaf7caafabcbe945f14fc1db6eb0, type: 3}
     sfxTypewriter: {fileID: 0}
@@ -91213,6 +91232,23 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1931766691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1931766682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 432508fb7384d964bb879e74b3d189d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueContents: []
+  currentLineIndex: 0
+  npcProfile: {fileID: 0}
+  lastLineDisplayed: 0
+  hasChoice: 0
 --- !u!1 &1942145809
 GameObject:
   m_ObjectHideFlags: 0
@@ -118000,6 +118036,7 @@ GameObject:
   - component: {fileID: 3299673890537269108}
   - component: {fileID: 3299673890537269067}
   - component: {fileID: 242331999}
+  - component: {fileID: 3299673890537269068}
   m_Layer: 12
   m_Name: Joiner
   m_TagString: NPC
@@ -118028,6 +118065,23 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!114 &3299673890537269068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3299673890537269066}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 432508fb7384d964bb879e74b3d189d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueContents: []
+  currentLineIndex: 0
+  npcProfile: {fileID: 0}
+  lastLineDisplayed: 0
+  hasChoice: 0
 --- !u!114 &3299673890537269104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -118337,6 +118391,7 @@ GameObject:
   - component: {fileID: 3299673890677685204}
   - component: {fileID: 3299673890677685201}
   - component: {fileID: 3299673890677685230}
+  - component: {fileID: 3299673890677685232}
   m_Layer: 12
   m_Name: Interact Pillar
   m_TagString: NPC
@@ -118344,6 +118399,23 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &3299673890677685232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3299673890677685231}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 432508fb7384d964bb879e74b3d189d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueContents: []
+  currentLineIndex: 0
+  npcProfile: {fileID: 0}
+  lastLineDisplayed: 0
+  hasChoice: 0
 --- !u!4 &6497700933233143832
 Transform:
   m_ObjectHideFlags: 0
