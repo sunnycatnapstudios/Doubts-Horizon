@@ -4,8 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIInventory : MonoBehaviour
-{
+public class UIInventory : MonoBehaviour {
     // Start is called before the first frame update
 
     [SerializeField]
@@ -29,13 +28,13 @@ public class UIInventory : MonoBehaviour
     [SerializeField]
     private UIDescription descriptionUI;
 
-    List<UIItem> listOfItems= new List<UIItem>();
+    List<UIItem> listOfItems = new List<UIItem>();
     List<UIPartyMember> listOfMembers = new List<UIPartyMember>();
     private PartyManager partyManager;
 
     private Item selectedItem;
     private Survivor selectedMember;
-    
+
     private Item usingItem;
     private Player player;
 
@@ -53,26 +52,23 @@ public class UIInventory : MonoBehaviour
         item,
         member
     }
-    void Start()
-    {
+    void Start() {
         player = GameObject.FindWithTag("Player").GetComponent<Player>();
         partyManager = GameObject.FindWithTag("Player").GetComponent<PartyManager>();
 
         Debug.Log(partyManager);
     }
     public void InitializeInventory(int inventorySlotsAmount) {
-        for (int i = 0; i < inventorySlotsAmount; i++)
-        {
-            UIItem item = Instantiate(itemPrefab,Vector3.zero, Quaternion.identity);
+        for (int i = 0; i < inventorySlotsAmount; i++) {
+            UIItem item = Instantiate(itemPrefab, Vector3.zero, Quaternion.identity);
             item.transform.SetParent(contentPanel, false);
             listOfItems.Add(item);
             item.OnItemClick += HandleItemSelection;
-            
+
         }
-    
+
     }
-    private void Awake()
-    {
+    private void Awake() {
         Hide();
         descriptionUI.ResetDescription();
         useButton.onClick.AddListener(OnButtonClick);
@@ -84,23 +80,21 @@ public class UIInventory : MonoBehaviour
 
 
     }
-    
-    public void InitializeParty()
-    {
-        
+
+    public void InitializeParty() {
+
 
         //partyManager = GameObject.FindWithTag("Player").GetComponent<PartyManager>();
-       
+
         //    UIPartyMember person = Instantiate(memberPrefab, Vector3.zero, Quaternion.identity);
         //    person.transform.SetParent(partyPanel, false);
         //    listOfMembers.Add(person);
         //    person.OnItemClicked += HandlePartySelection;
         //    //Debug.Log("dsfa");
-        
+
     }
 
-    public void AddPartyMember()
-    {
+    public void AddPartyMember() {
         UIPartyMember person = Instantiate(memberPrefab, Vector3.zero, Quaternion.identity);
         person.transform.SetParent(partyPanel, false);
         // person.transform.localScale = Vector3.one;
@@ -110,14 +104,10 @@ public class UIInventory : MonoBehaviour
 
     }
 
-    public void fixPartyUIMembers(int len)
-      
-    {
+    public void fixPartyUIMembers(int len) {
         //len += 1;
-        if (len > listOfMembers.Count)
-        {
-            for (int i = listOfMembers.Count; i < len; i++)
-            {
+        if (len > listOfMembers.Count) {
+            for (int i = listOfMembers.Count; i < len; i++) {
                 UIPartyMember person = Instantiate(memberPrefab, Vector3.zero, Quaternion.identity);
                 person.transform.SetParent(partyPanel, false);
                 // person.transform.localScale = Vector3.one;
@@ -141,13 +131,11 @@ public class UIInventory : MonoBehaviour
 
 
 
-    private void HandlePartySelection(UIPartyMember member)
-    {
-          
+    private void HandlePartySelection(UIPartyMember member) {
+
         Survivor held = member.GetMember();
-        if (held != null)
-        {
-            descriptionUI.SetDescription(held.GetName(), held.CurHealth.ToString()+"/"+held.GetHealth().ToString());
+        if (held != null) {
+            descriptionUI.SetDescription(held.GetName(), held.CurHealth.ToString() + "/" + held.GetHealth().ToString());
             ClearSelected();
             member.Selected();
             Debug.Log("here????");
@@ -156,7 +144,7 @@ public class UIInventory : MonoBehaviour
                 buttonText.text = "use " + usingItem.GetName() + " on " + selectedMember.GetName();
                 _uIPartyMember = member;
             } else if (!held.UnKickable) {
-                
+
 
                 useButton.gameObject.SetActive(true);
                 buttonText.text = "kick" + held.GetName();
@@ -166,18 +154,16 @@ public class UIInventory : MonoBehaviour
                 member.Selected();
             }
         }
-        
 
-        
+
+
     }
 
-    private void HandleItemSelection(UIItem item)
-    {
-       
-           
-            Item held = item.getItem();
-        if (held != null)
-        {
+    private void HandleItemSelection(UIItem item) {
+
+
+        Item held = item.getItem();
+        if (held != null) {
 
             descriptionUI.SetDescription(held.GetName(), held.GetDesc());
             ClearSelected();
@@ -191,9 +177,9 @@ public class UIInventory : MonoBehaviour
 
             }
 
-            
+
         }
-        
+
     }
     private void OnButtonClick() {
 
@@ -244,27 +230,25 @@ public class UIInventory : MonoBehaviour
 
     public void DisplayItem() { }
 
-    public void Show(Dictionary<string, Slot> inventory)
-    {
+    public void Show(Dictionary<string, Slot> inventory) {
         Debug.Log("showing");
         clearUIInventory();
         useButton.gameObject.SetActive(false);
         gameObject.SetActive(true);
         descriptionUI.ResetDescription();
         int counter = 0;
-        foreach(Slot Slot in inventory.Values) {
-            listOfItems[counter].SetdisplayItem(Slot.GetItem(),Slot.getCount());
+        foreach (Slot Slot in inventory.Values) {
+            listOfItems[counter].SetdisplayItem(Slot.GetItem(), Slot.getCount());
 
             Debug.Log(Slot.ToString());
-            counter++;    
+            counter++;
         }
         counter = 0;
         partyManager = GameObject.FindWithTag("Player").GetComponent<PartyManager>();
         fixPartyUIMembers(partyManager.currentPartyMembers.Count);
         //listOfMembers[0].SetdisplayItem(partyManager.getPlayer());
         //counter = 1;
-        foreach (Survivor member in partyManager.currentPartyMembers)
-        {
+        foreach (Survivor member in partyManager.currentPartyMembers) {
             Debug.Log(counter);
             Debug.Log(listOfMembers.Count);
             listOfMembers[counter].SetdisplayItem(member);
@@ -272,14 +256,11 @@ public class UIInventory : MonoBehaviour
         }
 
     }
-    public void ClearSelected()
-    {
-        foreach(UIItem item in listOfItems)
-        {
+    public void ClearSelected() {
+        foreach (UIItem item in listOfItems) {
             item.Deselect();
         }
-        foreach(UIPartyMember member in listOfMembers)
-        {
+        foreach (UIPartyMember member in listOfMembers) {
             member.Deselect();
         }
         selectedMember = null;
@@ -288,8 +269,7 @@ public class UIInventory : MonoBehaviour
 
     }
 
-    public void Hide()
-    {
+    public void Hide() {
         gameObject.SetActive(false);
         ClearSelected();
     }

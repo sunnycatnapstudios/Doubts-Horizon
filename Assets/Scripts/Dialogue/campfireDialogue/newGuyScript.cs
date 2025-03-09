@@ -3,22 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HachiwareScript : MonoBehaviour {
+public class newGuyScript : MonoBehaviour {
     private DialogueInputHandler dialogueInputHandler;
     private DialogueBoxHandler npcDialogueHandler;
     public Survivor survivor;
     private bool fedOrNot;
-    private InteractPrompt prompt;
     private Inventory inventory;
 
 
     void Start() {
         dialogueInputHandler = GameObject.FindGameObjectWithTag("Dialogue Text").GetComponent<DialogueInputHandler>();
         npcDialogueHandler = GetComponent<DialogueBoxHandler>();
-        prompt = GetComponent<InteractPrompt>();
         inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
 
-        string Feedme = "feed hachi";
+        string Feedme = "feed newguy";
         Action takeMe = () => {
             Debug.Log("Take me callback.");
             PartyManager partyManager = GameObject.FindGameObjectWithTag("Player").GetComponent<PartyManager>();
@@ -28,42 +26,37 @@ public class HachiwareScript : MonoBehaviour {
                 fedOrNot = true;
                 inventory.removeItemByName("Ration");
                 npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
-                prompt.forceFinishDialogue();
                 npcDialogueHandler.dialogueContents.Add($"You have {inventory.getCountofItem("Ration")} rations left");
-                prompt.forceDialogueEnd();
             } else {
                 npcDialogueHandler.dialogueContents.Add($"You dont even have any for yourself");
                 npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
-                prompt.forceDialogueEnd();
             }
-
-            //prompt.forceDialogueEnd();
+            GameStatsManager.Instance._dialogueHandler.UpdateDialogueBox();
         };
         dialogueInputHandler.AddDialogueChoice(Feedme, takeMe);
 
-        string orNotTag = "do not feed hachi";
+        string orNotTag = "do not feed newguy";
         Action orNot = () => {
             Debug.Log("Or not callback.");
             fedOrNot = false;
             npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
-            prompt.forceDialogueEnd();
+            GameStatsManager.Instance._dialogueHandler.CloseDialogueBox();
         };
         dialogueInputHandler.AddDialogueChoice(orNotTag, orNot);
 
         npcDialogueHandler.dialogueContents = new List<string> {
-            "Im very hungry please feed me",
+            "please, if you have any to share",
             $"<link=\"{Feedme}\"><b><#d4af37>Feed</color></b></link>.\n...\n<link=\"{orNotTag}\"><b><#a40000>Or not...</color></b></link>."
         };
-        //npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
+        npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
     }
 
     void AfterDialogue() {
         Debug.Log("Completed dialogue.");
         if (fedOrNot) {
-            npcDialogueHandler.dialogueContents = new List<string>
-                { "thank you for saving me mister", "im forever in your debt!" };
+            npcDialogueHandler.dialogueContents = new List<string> { "i love beef jerky" };
         } else {
-            npcDialogueHandler.dialogueContents = new List<string> { "oh ok....", "i guess i see how it is...." };
+            npcDialogueHandler.dialogueContents = new List<string> { "i guess this is it hubh", "well" };
         }
     }
 }

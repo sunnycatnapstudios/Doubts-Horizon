@@ -2,15 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InteractPillarCDialogue : MonoBehaviour
-{
+public class InteractPillarCDialogue : MonoBehaviour {
     private DialogueBoxHandler NPCDialogueHandler;
     private InteractPrompt InteractPrompt;
     public List<string> dialogueLines;
     private List<string> introLines, funnyRetort;
 
-    void Awake()
-    {
+    void Awake() {
         NPCDialogueHandler = GetComponent<DialogueBoxHandler>();
         InteractPrompt = GetComponent<InteractPrompt>();
 
@@ -28,9 +26,8 @@ public class InteractPillarCDialogue : MonoBehaviour
         };
         dialogueLines = introLines;
     }
-    void Update ()
-    {
-        if (InteractPrompt.dialogueFinished) {dialogueLines = funnyRetort;}
+    void Update() {
+        if (InteractPrompt.dialogueFinished) { dialogueLines = funnyRetort; }
 
         NPCDialogueHandler.dialogueContents = dialogueLines;
     }
