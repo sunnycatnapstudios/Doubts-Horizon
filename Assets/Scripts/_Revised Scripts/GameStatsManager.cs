@@ -5,34 +5,39 @@ using UnityEngine.UI;
 using TMPro;
 
 [System.Serializable]
-public class CharacterStats
-{
-    public string Name;
-    public int attack, currentHealth, maxHealth;
-    public bool isCombatant, isEnemy;
-    public CharacterStats(string name, int att, int currhealth, int maxhealth, bool iscombatant, bool isenemy)
-    {
-        Name = name;
-        attack = att;
-        currentHealth = currhealth;
-        maxHealth = maxhealth;
-        isCombatant = iscombatant;
-        isEnemy = isenemy;
-    }
-}
+//public class CharacterStats
+//{
+//    public string Name;
+//    public int attack, currentHealth, maxHealth;
+//    public bool isCombatant, isEnemy;
+//    public CharacterStats(string name, int att, int currhealth, int maxhealth, bool iscombatant, bool isenemy)
+//    { 
+//        Name = name;
+//        attack = att;
+//        currentHealth = currhealth;
+//        maxHealth = maxhealth;
+//        isCombatant = iscombatant;
+//        isEnemy = isenemy;
+//    }
+//}
 
 public class GameStatsManager : MonoBehaviour
 {
     public static GameStatsManager Instance { get; private set;}
     public _PartyManager _partyManager;
+    public PartyManager partyManager;
     public _BattleUIHandler _battleUIHandler;
     public _DialogueHandler _dialogueHandler;
 
     // Combat-Related Stats
-    public Dictionary<string, CharacterStats> playerStats = new Dictionary<string, CharacterStats>
-    {
-        { "Player", new CharacterStats("Player", 45, 150, 150, true, false)}
-    };
+    //public Dictionary<string, CharacterStats> playerStats = new Dictionary<string, CharacterStats>
+    //{
+    //    { "Player", new CharacterStats("Player", 45, 150, 150, true, false)}
+    //};
+    public Survivor player;
+
+    public CharacterStats playerStats { get { return partyManager.getPlayer().GetCharStats(); } }
+    
     public Dictionary<string, CharacterStats> allPartyMembers = new Dictionary<string, CharacterStats>
     {
         { "MemberA", new CharacterStats("MemberA", 35, 100, 100, true, false)},
@@ -56,7 +61,11 @@ public class GameStatsManager : MonoBehaviour
 
     };
     public List<CharacterStats> currentPlayerStats = new List<CharacterStats>();
-    public List<CharacterStats> currentPartyMembers = new List<CharacterStats>();
+    //
+    //
+    //public List<CharacterStats> currentPartyMembers = new List<CharacterStats>();
+    public List<CharacterStats> currentPartyMembers { get { return partyManager.getStats(); } }
+    public List<Survivor> currentSurvivors { get { return partyManager.currentPartyMembers; } }
     public List<GameObject> spawnedPartyMembers = new List<GameObject>();
 
     // Sprint-Related Stats
@@ -136,7 +145,7 @@ public class GameStatsManager : MonoBehaviour
         foreach (var entry in characterDict)
         {
             CharacterStats stats = entry.Value;
-            Debug.Log($"Name: {stats.Name}, Attack: {stats.attack}, HP: {stats.currentHealth}/{stats.maxHealth}, Combatant: {stats.isCombatant}, Enemy: {stats.isEnemy}");
+            //Debug.Log($"Name: {stats.Name}, Attack: {stats.attack}, HP: {stats.currentHealth}/{stats.maxHealth}, Combatant: {stats.isCombatant}, Enemy: {stats.isEnemy}");
         }
     }
 
@@ -159,7 +168,7 @@ public class GameStatsManager : MonoBehaviour
 
         staminaBar = GameObject.FindGameObjectWithTag("Stamina Bar").GetComponent<Image>();
 
-        currentPlayerStats.Add (playerStats["Player"]);
+        currentPlayerStats.Add (playerStats);
     }
     public void Start()
     {

@@ -37,7 +37,7 @@ public class Player : MonoBehaviour {
     public Vector2 playerInput;
 
     private PartyManager partyManager;
-    private _PartyManager _partyManager;
+    //private _PartyManager _partyManager;
     public Bullet bullet;
 
     public bool isPlayerInControl;
@@ -70,7 +70,7 @@ public class Player : MonoBehaviour {
     }
 
     void UpdateMoveHist() {
-        if (moveHist.Count < _partyManager.partyCount &&
+        if (moveHist.Count < partyManager.partyCount &&
             movePoint.position == pointRef) {
             Vector3 spawnPos = GetValidSpawnPosition();
             moveHist.Add(spawnPos);
@@ -78,7 +78,7 @@ public class Player : MonoBehaviour {
 
         if (movePoint.position != pointRef) { moveHist.Add(pointRef); }
 
-        if (moveHist.Count > _partyManager.partyCount) { moveHist.RemoveAt(0); }
+        if (moveHist.Count > partyManager.partyCount) { moveHist.RemoveAt(0); }
     }
     Vector3 GetValidSpawnPosition() {
         Vector3[] possibleOffsets = new Vector3[]
@@ -114,7 +114,7 @@ public class Player : MonoBehaviour {
         inventory = GetComponent<Inventory>();
         partyManager = GetComponent<PartyManager>();
 
-        _partyManager = GameStatsManager.Instance._partyManager;
+        //_partyManager = GameStatsManager.Instance._partyManager;
 
         movePoint.parent = null;
         moveConstant = moveSpeed;

@@ -10,6 +10,7 @@ public class Follower : MonoBehaviour {
     public Vector3 currentPos, newPos;
     public SpriteRenderer spriteState;
     public Animator partyAnim;
+    private PartyManager partyManager;
 
     void Awake() {
         Player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
@@ -19,7 +20,8 @@ public class Follower : MonoBehaviour {
 
         spriteState = GetComponent<SpriteRenderer>();
         partyAnim = GetComponent<Animator>();
-        _partyManager = GameStatsManager.Instance._partyManager;
+        //_partyManager = GameStatsManager.Instance._partyManager;
+        partyManager = GameStatsManager.Instance.partyManager;
 
     }
 
@@ -29,7 +31,7 @@ public class Follower : MonoBehaviour {
 
         // Handles Party Movement and Placement
         // partyIndex = Mathf.Abs(partyManager.partyCount-order);
-        partyIndex = Mathf.Abs(_partyManager.partyCount - order);
+        partyIndex = Mathf.Abs(partyManager.partyCount - order - 1);//minus one because player now in count i belieev
 
         if (partyIndex >= 0 && partyIndex < Player.moveHist.Count) { newPos = Player.moveHist[partyIndex]; } else { newPos = transform.position; }
 
