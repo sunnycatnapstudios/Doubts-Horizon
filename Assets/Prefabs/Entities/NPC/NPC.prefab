@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3299673889596440563}
   - component: {fileID: 3299673889596440562}
-  - component: {fileID: 3299673889596440561}
   - component: {fileID: 3299673889596440564}
   - component: {fileID: 3299673889596440565}
   - component: {fileID: 3299673889596440560}
@@ -87,30 +86,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3299673889596440561
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3299673889596440526}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a557ccc2c46205f4898c2a80c4478cc5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 2048
-  interactBoxPrefab: {fileID: 0}
-  interactBoxTextReplacement: 
-  characterProfile: {fileID: 21300000, guid: 233e090b78912f445af3f602a407830f, type: 3}
-  isDialogueOpen: 0
-  dialogueFinished: 0
-  npcDialogueHandler: {fileID: 0}
-  audioClips:
-    sfxOnInteract: {fileID: 8300000, guid: 6cd56f21cb2f650af8f57f98c9dfab0f, type: 3}
-    sfxTypewriter: {fileID: 8300000, guid: fd1eeaf7caafabcbe945f14fc1db6eb0, type: 3}
 --- !u!114 &3299673889596440564
 MonoBehaviour:
   m_ObjectHideFlags: 0
