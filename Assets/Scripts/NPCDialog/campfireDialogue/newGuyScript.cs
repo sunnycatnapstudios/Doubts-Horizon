@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class newGuyScript : MonoBehaviour {
     private DialogueInputHandler dialogueInputHandler;
-    private NPCDialogueHandler npcDialogueHandler;
+    private DialogueBoxHandler npcDialogueHandler;
     public Survivor survivor;
     private bool fedOrNot;
     private InteractPrompt prompt;
@@ -14,7 +14,7 @@ public class newGuyScript : MonoBehaviour {
 
     void Start() {
         dialogueInputHandler = GameObject.FindGameObjectWithTag("Dialogue Text").GetComponent<DialogueInputHandler>();
-        npcDialogueHandler = GetComponent<NPCDialogueHandler>();
+        npcDialogueHandler = GetComponent<DialogueBoxHandler>();
         prompt = GetComponent<InteractPrompt>();
         inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
 
@@ -28,9 +28,9 @@ public class newGuyScript : MonoBehaviour {
                 fedOrNot = true;
                 inventory.removeItemByName("Ration");
                 prompt.forceFinishDialogue();
-                npcDialogueHandler.dialogueLines.Add($"You have {inventory.getCountofItem("Ration")} rations left");
+                npcDialogueHandler.dialogueContents.Add($"You have {inventory.getCountofItem("Ration")} rations left");
             } else {
-                npcDialogueHandler.dialogueLines.Add($"You dont even have any for yourself");
+                npcDialogueHandler.dialogueContents.Add($"You dont even have any for yourself");
             }
 
             prompt.forceDialogueEnd();
@@ -45,7 +45,7 @@ public class newGuyScript : MonoBehaviour {
         };
         dialogueInputHandler.AddDialogueChoice(orNotTag, orNot);
 
-        npcDialogueHandler.dialogueLines = new List<string> {
+        npcDialogueHandler.dialogueContents = new List<string> {
             "please, if you have any to share",
             $"<link=\"{Feedme}\"><b><#d4af37>Feed</color></b></link>.\n...\n<link=\"{orNotTag}\"><b><#a40000>Or not...</color></b></link>."
         };
@@ -55,9 +55,9 @@ public class newGuyScript : MonoBehaviour {
     void AfterDialogue() {
         Debug.Log("Completed dialogue.");
         if (fedOrNot) {
-            npcDialogueHandler.dialogueLines = new List<string> { "i love beef jerky" };
+            npcDialogueHandler.dialogueContents = new List<string> { "i love beef jerky" };
         } else {
-            npcDialogueHandler.dialogueLines = new List<string> { "i guess this is it hubh", "well" };
+            npcDialogueHandler.dialogueContents = new List<string> { "i guess this is it hubh", "well" };
         }
     }
 }

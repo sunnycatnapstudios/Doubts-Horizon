@@ -63,6 +63,9 @@ public class _DialogueHandler : MonoBehaviour
         _dialogueInputHandler = dialogueBox.GetComponentInChildren<_DialogueInputHandler>();
 
         // dialogueOptions.SetActive(false);
+
+        interactPromptPrefab = GameObject.FindWithTag("InteractPrompt");
+        smallDialogueBox = GameObject.FindWithTag("SmallDialogueBox");
     }
 
     void Start()

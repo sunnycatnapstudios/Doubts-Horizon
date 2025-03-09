@@ -7,10 +7,11 @@ public class PartyManager : MonoBehaviour
     public int partyCount;
     public GameObject partyMemberTemplate;
     private List<GameObject> partyMembers = new List<GameObject>();
-    private List<Survivor> members = new List<Survivor>();
-    public List<Survivor> Members { get { return members; } }
+    //private List<Survivor> members = new List<Survivor>();
+    //public List<Survivor> Members { get { return members; } }
     GameObject partySpawn;
     // public GameObject floatingTextPrefab;
+    private PartySideBar partySideBar;
 
 
     public Survivor player;
@@ -25,11 +26,24 @@ public class PartyManager : MonoBehaviour
     public List<RuntimeAnimatorController> partyAnimControllers = new List<RuntimeAnimatorController>();
 
     public List<Survivor> currentPartyMembers = new List<Survivor>();
-   
+
+    //public List<Survivor> currentPartyMembersWithoutPlayer = new List<Survivor>();   //hallmark of no futuresight
+
+
     public List<GameObject> spawnedPartyMembers = new List<GameObject>();
    
 
+    public List<CharacterStats> getStats() {
+        List<CharacterStats> mylist = new List<CharacterStats>();
 
+        foreach( Survivor survivor in currentPartyMembers) {
+            mylist.Add(survivor.GetCharStats());
+
+        }
+
+        return mylist;
+
+    }
    
     void AssignAnimator(GameObject memberObject,Survivor member)
     {
@@ -40,6 +54,16 @@ public class PartyManager : MonoBehaviour
         anim.runtimeAnimatorController = member.Animcontroller;
 
            
+    }
+
+    public void removeFromPartyByName(string name) {
+        Survivor survivor  = currentPartyMembers.Find(x => x.Name == name);
+        if (survivor != null) {
+            currentPartyMembers.Remove(survivor);
+        }
+        UpdatePartyCount();
+
+
     }
     public Survivor getPlayer()
     {
@@ -53,7 +77,8 @@ public class PartyManager : MonoBehaviour
         spawnedPartyMembers.Clear();
 
         // Spawn GameObjects for each current party member
-        for (int i = 0; i < currentPartyMembers.Count; i++)
+        //starts at 1 to ignoire player
+        for (int i = 1; i < currentPartyMembers.Count; i++)
         {
             GameObject newPartyObject = Instantiate(partyMemberTemplate);
 
@@ -65,7 +90,7 @@ public class PartyManager : MonoBehaviour
 
             partyCount = currentPartyMembers.Count;
         }
-
+        partySideBar.UpdateSideBar();
         Debug.Log($"Current Party Count: {currentPartyMembers.Count}");
     }
 
@@ -82,6 +107,8 @@ public class PartyManager : MonoBehaviour
         {
             Debug.Log($"{member.GetName()} is already in the party or doesn't exist.");
         }
+        //partySideBar = GameObject.FindGameObjectWithTag("PartySideBar").GetComponent<PartySideBar>();
+        //partySideBar.UpdateSideBar();
     }
 
     public void RemoveFromParty(Survivor member)
@@ -141,10 +168,21 @@ public class PartyManager : MonoBehaviour
 //         AddToParty("MemberD");
 //         AddToParty("MemberE");
         player.CurHealth = player.Health;
+        currentPartyMembers.Add(player);
+        partySideBar = GameObject.FindGameObjectWithTag("PartySideBar").GetComponent<PartySideBar>();
+        
     }
+
+    public Survivor getSurvivorByName(string name) {
+        return currentPartyMembers.Find(x => x.Name == name);
+
+    }
+
+    
 
     void Update()
     {
+        
         //if (false && Input.GetKeyDown(KeyCode.P)) {
         //    //if (currentPartyMembers.Count<allPartyMembers.Count)
         //    {
