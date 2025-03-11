@@ -16,7 +16,6 @@ public class PartySideBar : MonoBehaviour {
     public void UpdateSideBar() {
         foreach (var slot in sideBarSlots) { Destroy(slot); }
         sideBarSlots.Clear();
-        Debug.LogWarning(gameStatsManager);
         foreach (Survivor member in gameStatsManager.currentSurvivors) {
             if (member.Name == "maincharacter") {continue;}
 
