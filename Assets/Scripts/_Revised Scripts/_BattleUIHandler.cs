@@ -727,16 +727,17 @@ public class _BattleUIHandler : MonoBehaviour
 
                 foreach (PartySlot mem in partySlotHandler.partySlots)
                 {
-                    if (mem.playerStats.Name == currentDefender.Name)
-                    {
-                        mem.ShowHealthChange();
-                        ShowFloatingText(defenderDamage, Color.blue, mem.transform.position, false);
-                        StartCoroutine(mem.JutterHealthBar(0.2f, 10f));
+                    if (mem.isCharacter) {
+                        if (mem.playerStats.Name == currentDefender.Name) {
+                            mem.ShowHealthChange();
+                            ShowFloatingText(defenderDamage, Color.blue, mem.transform.position, false);
+                            StartCoroutine(mem.JutterHealthBar(0.2f, 10f));
+                        }
                     }
                 }
                 foreach (PartySlot mem in partySlotHandler.partySlots)
                 {
-                    if (mem.playerStats.Name == target.Name)
+                    if (mem.isCharacter && mem.playerStats.Name == target.Name)
                     {
                         mem.ShowHealthChange();
                         ShowFloatingText(targetDamage, Color.red, mem.transform.position, false);
