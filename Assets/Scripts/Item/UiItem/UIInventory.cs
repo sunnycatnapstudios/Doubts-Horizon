@@ -232,6 +232,7 @@ public class UIInventory : MonoBehaviour {
 
     public void Show(Dictionary<string, Slot> inventory) {
         Debug.Log("showing");
+        ClearSelected();
         clearUIInventory();
         useButton.gameObject.SetActive(false);
         gameObject.SetActive(true);
