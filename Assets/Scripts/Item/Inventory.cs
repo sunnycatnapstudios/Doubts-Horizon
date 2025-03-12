@@ -17,6 +17,8 @@ public class Inventory : MonoBehaviour {
     public Survivor test1;
     public Survivor test2;
 
+    public int inventorySize;
+
     [Serializable]
     private struct AudioClips {
         // TODO add other sounds when needed
@@ -30,7 +32,7 @@ public class Inventory : MonoBehaviour {
         //inventoryWindow = GameObject.FindWithTag("Inventory").GetComponentInChildren<UIInventory>();
         inventory = new Dictionary<string, Slot>();
         itemsInRange = new List<GameObject>();
-        inventoryWindow.InitializeInventory(14);
+        inventoryWindow.InitializeInventory(inventorySize);
         if (test1 != null) {
             survivors.Add(test1.GetName(), test1);
         }

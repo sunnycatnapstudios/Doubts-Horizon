@@ -153,9 +153,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 0
-    m_Right: 0
-    m_Top: 0
+    m_Left: 20
+    m_Right: 20
+    m_Top: 20
     m_Bottom: 0
   m_ChildAlignment: 1
   m_Spacing: 0
@@ -421,6 +421,23 @@ PrefabInstance:
       propertyPath: m_ChildControlHeight
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8221589817346422400, guid: 9e627e3316249c30389e1f5c9bddcd0c,
+        type: 3}
+      propertyPath: m_margin.w
+      value: -37.50226
+      objectReference: {fileID: 0}
+    - target: {fileID: 8221589817346422400, guid: 9e627e3316249c30389e1f5c9bddcd0c,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: fdba8fd8df2f1cd4c8289de29904b0bc,
+        type: 2}
+    - target: {fileID: 8221589817346422400, guid: 9e627e3316249c30389e1f5c9bddcd0c,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -2215207900893454660, guid: fdba8fd8df2f1cd4c8289de29904b0bc,
+        type: 2}
     - target: {fileID: 8221589817346422401, guid: 9e627e3316249c30389e1f5c9bddcd0c,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -716,6 +733,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8221589817837534675, guid: 9e627e3316249c30389e1f5c9bddcd0c,
+        type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: fdba8fd8df2f1cd4c8289de29904b0bc,
+        type: 2}
+    - target: {fileID: 8221589817837534675, guid: 9e627e3316249c30389e1f5c9bddcd0c,
+        type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: -2215207900893454660, guid: fdba8fd8df2f1cd4c8289de29904b0bc,
+        type: 2}
     - target: {fileID: 8221589818758704214, guid: 9e627e3316249c30389e1f5c9bddcd0c,
         type: 3}
       propertyPath: m_PreferredWidth
@@ -789,12 +818,12 @@ PrefabInstance:
     - target: {fileID: 8221589818996382681, guid: 9e627e3316249c30389e1f5c9bddcd0c,
         type: 3}
       propertyPath: m_FlexibleHeight
-      value: 300
+      value: 250
       objectReference: {fileID: 0}
     - target: {fileID: 8221589818996382681, guid: 9e627e3316249c30389e1f5c9bddcd0c,
         type: 3}
       propertyPath: m_PreferredHeight
-      value: -1
+      value: 250
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9e627e3316249c30389e1f5c9bddcd0c, type: 3}
