@@ -16,7 +16,6 @@ public class PartySideBar : MonoBehaviour {
     public void UpdateSideBar() {
         foreach (var slot in sideBarSlots) { Destroy(slot); }
         sideBarSlots.Clear();
-
         foreach (Survivor member in gameStatsManager.currentSurvivors) {
             if (member.Name == "maincharacter") {continue;}
 
@@ -55,12 +54,13 @@ public class PartySideBar : MonoBehaviour {
     }
 
     void Awake() {
-         gameStatsManager = GameStatsManager.Instance;
+         // gameStatsManager = GameStatsManager.Instance;
         // _partyManager = GameStatsManager.Instance._partyManager;
         //StartCoroutine(WaitForPartyManager());
     }
 
     void Start() {
+        gameStatsManager = GameStatsManager.Instance;
         UpdateSideBar();
     }
 

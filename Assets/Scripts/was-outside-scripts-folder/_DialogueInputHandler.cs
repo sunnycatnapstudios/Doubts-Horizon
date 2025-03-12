@@ -18,9 +18,12 @@ public class _DialogueInputHandler : MonoBehaviour {
         dialogueHandler = FindObjectOfType<_DialogueHandler>();
 
         DialogueInputCanvasGroup = GetComponent<CanvasGroup>();
-        DialogueInputCanvasGroup.alpha = 0f;
-        // DialogueInputCanvasGroup.interactable
-        DialogueInputCanvasGroup.blocksRaycasts = false;
+
+        if (DialogueInputCanvasGroup != null) {
+            DialogueInputCanvasGroup.alpha = 0f;
+            // DialogueInputCanvasGroup.interactable
+            DialogueInputCanvasGroup.blocksRaycasts = false;
+        }
     }
     public void ShowChoices(string prompt, string choiceA, string choiceB) {
         DialogueInputCanvasGroup.alpha = 1f; DialogueInputCanvasGroup.blocksRaycasts = true;

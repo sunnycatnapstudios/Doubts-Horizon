@@ -150,7 +150,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6497700935085715812}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -21.5, y: 5.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 6497700933747359315}
@@ -171,17 +171,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   attack: 0
   stun: 0
+  hitByBullet: 0
   searching: 0
   pathReturn: 0
   caught: 0
   demotestFreeze: 0
   enemySpeed: 2
   attackSpeed: 3.5
-  counter_: 0
-  stunTime: 4
-  stunTimer: 0
-  searchTimer: 0
-  intervalCheck: 0.4
   detectRange: 4
   caughtRange: 1
   baseRange: 4
@@ -190,8 +186,6 @@ MonoBehaviour:
   playerDist: 0
   refX: 0
   refY: 0
-  startPos: {x: 0, y: 0, z: 0}
-  pathBounds: {x: 0, y: 0, z: 0}
   target: {fileID: 0}
   projectile:
     serializedVersion: 2
@@ -200,8 +194,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 2048
   pathDist: {x: 2, y: 3}
-  enemyAnim: {fileID: 0}
-  spriteState: {fileID: 0}
   overworldUI: {fileID: 0}
   combatUI: {fileID: 0}
 --- !u!212 &6497700935085715811
