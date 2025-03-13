@@ -10,12 +10,12 @@ public class _DialogueHandler : MonoBehaviour
 {
     private float detectionRadius = 1.2f;
     public GameObject currentNPC, newNPC;
-    private GameObject player, dialogueBox, currentInteractPrompt, currentSmallDialogueBox, dialogueOptions;
+    private GameObject player, dialogueBox, currentInteractPrompt, currentSmallDialogueBox, dialogueOptions, continueArrow;
     public GameObject interactPromptPrefab, smallDialogueBox;
     public LayerMask NPCLayer;
 
     private TextMeshProUGUI dialogueText, dialogueName, smallDialogueText;
-    private Image dialogueProfile, continueArrow;
+    private Image dialogueProfile;
     private Animator dialogueAnimator, darkScreenAnimator;
     private bool isDialogueActive = false;
 
@@ -70,7 +70,7 @@ public class _DialogueHandler : MonoBehaviour
 
     void Start()
     {
-        continueArrow = GameObject.FindWithTag("Continue Arrow").GetComponent<Image>();
+        continueArrow = GameObject.FindWithTag("Continue Arrow");
     }
 
     void Update()
@@ -108,9 +108,7 @@ public class _DialogueHandler : MonoBehaviour
 
         dialogueProfile.sprite = dialogueBoxHandler.npcProfile;
 
-        Color color = continueArrow.color;
-        color.a = (typeWriter.isTyping&&!typeWriter.waitingForPause) ? 0 : 1f;
-        continueArrow.color = color;
+        continueArrow.SetActive(!typeWriter.isTyping || typeWriter.waitingForPause);
 
         // If there's no prompt, instantiate one
         if (currentInteractPrompt == null)
