@@ -24,7 +24,10 @@ public class Survivor : ScriptableObject {
 
     [SerializeField] private bool isCombatant;
 
+    [SerializeField] public InventoryDialogues inventoryDialogues;
+
     [SerializeField] private bool unKickable;
+    private bool Hungry = false;
 
     public bool UnKickable {
         get { return unKickable; }
@@ -94,5 +97,20 @@ public class Survivor : ScriptableObject {
 
     public override string ToString() {
         return $"{name}: hp:{charstats.currentHealth}/{health} dmg:{damage}";
+    }
+
+
+    public string GetInventoryDialogue() {
+        if (currentHealth < maxHealth * 0.5 && Hungry) {
+            return inventoryDialogues.LowHealthAndLowHunger();
+        } else if (currentHealth < maxHealth * 0.5) {
+            return inventoryDialogues.LowHealthDialogue();
+
+        } else if (Hungry) {
+            return inventoryDialogues.LowHungerDialogue();
+        } else {
+            return inventoryDialogues.NormalDialogue();
+        }
+
     }
 }
