@@ -16,6 +16,8 @@ MonoBehaviour:
   damage: 32
   health: 4343
   isCombatant: 1
+  inventoryDialogues: {fileID: 8850573105260575154, guid: 97ee79cdb3d35bc44bfcd125382fc182,
+    type: 3}
   unKickable: 1
   Animcontroller: {fileID: 9100000, guid: 9b454cd6a9bc678428b46c5d51ed0f67, type: 2}
   Sprite: {fileID: 7848933253139272174, guid: d068f37a9b8556241a344075120966b1, type: 3}

@@ -10,16 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 37bebb4f9bbe1904896366df90c723ce, type: 3}
-  m_Name: Jenmas
+  m_Name: New Survivor
   m_EditorClassIdentifier: 
-  name: jenams
-  damage: 43
-  health: 334
-  isCombatant: 1
-  inventoryDialogues: {fileID: 8850573105260575154, guid: 97ee79cdb3d35bc44bfcd125382fc182,
-    type: 3}
+  name: 
+  damage: 0
+  health: 0
+  isCombatant: 0
+  inventoryDialogues: {fileID: 0}
   unKickable: 0
-  Animcontroller: {fileID: 9100000, guid: 4114f537b7ab6d04b9e5a76a756ae683, type: 2}
-  Sprite: {fileID: 9059487470431131927, guid: ab2fb4d632829cc428952cc52fd902c8, type: 3}
+  Animcontroller: {fileID: 0}
+  Sprite: {fileID: 0}
   walkingSprite: {fileID: 0}
   GetWalkingSprite: {fileID: 0}
