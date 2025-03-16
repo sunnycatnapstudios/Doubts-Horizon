@@ -113,7 +113,7 @@ public class TypeWriter : MonoBehaviour {
 
             if (textChirp >= 0.2f) {
                 textChirp = 0f;
-                AudioManager.Instance.PlaySound(_sfxTyping);
+                // TODO AudioManager.Instance.PlaySound(_sfxTyping);
             }
 
             yield return new WaitForSeconds(timeBtwChars);
