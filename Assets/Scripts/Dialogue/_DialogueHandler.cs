@@ -211,8 +211,9 @@ public class _DialogueHandler : MonoBehaviour {
         player.GetComponent<Player>().isPlayerInControl = false;
 
         if (dialogueBoxHandler.afterDialogue != null) {
-            dialogueBoxHandler.afterDialogue();
+            var toCall = dialogueBoxHandler.afterDialogue;
             dialogueBoxHandler.afterDialogue = null;
+            toCall();
         }
     }
 
