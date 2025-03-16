@@ -24,7 +24,7 @@ public class TypeWriter : MonoBehaviour {
 
     private AudioClip _sfxTyping;
 
-    public void SetSfxTyping(AudioClip clip) {
+    public void SetSfxTypingClip(AudioClip clip) {
         _sfxTyping = clip;
     }
 
@@ -97,7 +97,6 @@ public class TypeWriter : MonoBehaviour {
             char c = writer[i];
             if (_tmpProText.text.Length > 0) {
                 _tmpProText.text = _tmpProText.text.Substring(0, _tmpProText.text.Length - leadingChar.Length);
-                // TODO null clip?? AudioManager.Instance.PlaySound(_sfxTyping);
             }
 
             // Apply drop effect

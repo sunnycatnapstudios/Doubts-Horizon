@@ -8,9 +8,17 @@ public class BFFDialogue : MonoBehaviour {
     private DialogueBoxHandler npcDialogueHandler;
     public Survivor survivor;
 
+    [Serializable]
+    private struct AudioClips {
+        public AudioClip sfxTalkingBlip;
+    }
+
+    [SerializeField] private AudioClips audioClips;
+
     void Start() {
         dialogueInputHandler = GameObject.FindGameObjectWithTag("Dialogue Text").GetComponent<DialogueInputHandler>();
         npcDialogueHandler = GetComponent<DialogueBoxHandler>();
+        npcDialogueHandler.SetSfxTalkingClip(audioClips.sfxTalkingBlip);
 
         string takeMeTag = "Take me bff";
         Action takeMe = () => {
@@ -30,10 +38,11 @@ public class BFFDialogue : MonoBehaviour {
 
         npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
     }
+
     void Update() {
     }
+
     void AfterDialogue() {
         Debug.Log("Completed dialogue.");
     }
 }
-

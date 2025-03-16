@@ -8,9 +8,17 @@ public class joinerCopy : MonoBehaviour {
     private DialogueBoxHandler npcDialogueHandler;
     public Survivor survivor;
 
+    [Serializable]
+    private struct AudioClips {
+        public AudioClip sfxTalkingBlip;
+    }
+
+    [SerializeField] private AudioClips audioClips;
+
     void Start() {
         dialogueInputHandler = GameObject.FindGameObjectWithTag("Dialogue Text").GetComponent<DialogueInputHandler>();
         npcDialogueHandler = GetComponent<DialogueBoxHandler>();
+        npcDialogueHandler.SetSfxTalkingClip(audioClips.sfxTalkingBlip);
 
         string takeMeTag = "mewo me";
         Action takeMe = () => {
@@ -35,10 +43,11 @@ public class joinerCopy : MonoBehaviour {
 
         npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
     }
+
     void Update() {
     }
+
     void AfterDialogue() {
         Debug.Log("Completed dialogue.");
     }
 }
-

@@ -11,6 +11,10 @@ public class DialogueBoxHandler : MonoBehaviour {
     public Sprite npcProfile;
     public bool lastLineDisplayed = false, hasChoice;
 
+    private AudioClip _sfxTalkingClip;    // Should be assigned in a dialog script
+    public void SetSfxTalkingClip(AudioClip clip){_sfxTalkingClip = clip;}
+    public AudioClip SfxTalkingClip { get { return _sfxTalkingClip; } }
+
     // Have both to ease compatibility, should remove one
     public string GetNextLine() {
         Debug.Log("GetNextLine is deprecated, use GetCurrentDialogueLine, it is subtlely different.");
