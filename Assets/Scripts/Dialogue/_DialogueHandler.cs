@@ -90,7 +90,7 @@ public class _DialogueHandler : MonoBehaviour {
             }
 
             currentNPC = null;
-//             CloseDialogueBox();
+            //             CloseDialogueBox();
             return;
         }
 
@@ -101,7 +101,7 @@ public class _DialogueHandler : MonoBehaviour {
             }
 
             currentNPC = null;
-//             CloseDialogueBox();
+            //             CloseDialogueBox();
             if (isDialogueActive) return;
         }
 
