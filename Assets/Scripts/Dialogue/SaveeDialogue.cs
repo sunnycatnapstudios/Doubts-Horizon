@@ -7,10 +7,16 @@ public class SaveeDialogue : MonoBehaviour {
     private DialogueInputHandler dialogueInputHandler;
     private DialogueBoxHandler npcDialogueHandler;
     public Survivor survivor;
+    [Serializable]
+    private struct AudioClips {
+        public AudioClip sfxTalkingBlip;
+    }
 
+    [SerializeField] private AudioClips audioClips;
     void Start() {
         dialogueInputHandler = GameObject.FindGameObjectWithTag("Dialogue Text").GetComponent<DialogueInputHandler>();
         npcDialogueHandler = GetComponent<DialogueBoxHandler>();
+        npcDialogueHandler.SetSfxTalkingClip(audioClips.sfxTalkingBlip);
 
         string takeMeTag = "Take me savee";
         Action takeMe = () => {

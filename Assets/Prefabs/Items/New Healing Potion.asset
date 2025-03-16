@@ -15,3 +15,4 @@ MonoBehaviour:
   _healingPotion: {fileID: 308638609959419940, guid: 6731cb7877789e44fbe1c9a4e0b546da,
     type: 3}
   Sprite: {fileID: 21300000, guid: ea8d1d18a7cb1d04c9a99fba20d21aa0, type: 3}
+  sfxPickup: {fileID: 8300000, guid: c6f38b1cf169e1d79972fd231dbba484, type: 3}

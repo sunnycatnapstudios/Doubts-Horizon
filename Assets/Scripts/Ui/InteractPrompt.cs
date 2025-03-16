@@ -57,8 +57,6 @@ public class InteractPrompt : MonoBehaviour {
     // }
 
     void OpenDialogue(string text) {
-        AudioManager.Instance.PlayUiSound(audioClips.sfxTypewriter);    // TODO temp solution
-
         // dialogueBox.SetActive(true);
         bodyTypeWriter.skipTyping = false;
         dialogueAnimator.Play("Dialogue Appear");
@@ -66,6 +64,7 @@ public class InteractPrompt : MonoBehaviour {
         bodyTypeWriter.hasStartedTyping = true;
 
         if (bodyTypeWriter != null) {
+            bodyTypeWriter.SetSfxTypingClip(audioClips.sfxTypewriter);  // Set the talking blip when typewriting
             bodyTypeWriter.StartTypewriter(text);
         } else {
             dialogueText.text = text;
@@ -76,8 +75,6 @@ public class InteractPrompt : MonoBehaviour {
     }
 
     void UpdateDialogue(string text) {
-        AudioManager.Instance.PlayUiSound(audioClips.sfxTypewriter);        // TODO temp solution
-
         bodyTypeWriter.skipTyping = false;
         bodyTypeWriter.hasStartedTyping = true;
         if (bodyTypeWriter != null) {
@@ -122,7 +119,6 @@ public class InteractPrompt : MonoBehaviour {
 
             // nameTypeWriter = nameText.GetComponent<TypeWriter>();
             bodyTypeWriter = dialogueText.GetComponent<TypeWriter>();
-            bodyTypeWriter.SetSfxTyping(audioClips.sfxTypewriter);  // TODO NO LONGERS WORKS?
 
             screenPanelAnimator = GameObject.FindGameObjectWithTag("Dark Screen").GetComponent<Animator>();
             screenPanelAnimator.Play("Blank");

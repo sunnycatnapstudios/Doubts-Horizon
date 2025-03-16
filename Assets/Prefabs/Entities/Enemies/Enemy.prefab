@@ -196,6 +196,12 @@ MonoBehaviour:
   pathDist: {x: 2, y: 3}
   overworldUI: {fileID: 0}
   combatUI: {fileID: 0}
+  audioClips:
+    sfxOnHitByBullet: {fileID: 8300000, guid: af1d731a1d0c403d686b188aa4bde715, type: 3}
+    sfxMonsterSounds:
+    - {fileID: 0}
+    - {fileID: 0}
+    - {fileID: 0}
 --- !u!212 &6497700935085715811
 SpriteRenderer:
   m_ObjectHideFlags: 0
