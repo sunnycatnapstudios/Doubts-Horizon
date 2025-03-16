@@ -77,10 +77,12 @@ public class _DialogueHandler : MonoBehaviour {
         continueArrow = GameObject.FindWithTag("Continue Arrow");
     }
 
-    void Update() {
+    GameObject GetNearbyNpc() {
         Collider2D npcCollider = Physics2D.OverlapCircle(player.transform.position, detectionRadius, NPCLayer);
-        newNPC = npcCollider ? npcCollider.gameObject : null;
+        return npcCollider ? npcCollider.gameObject : null;
+    }
 
+    void SetCurrentNpc(GameObject newNPC) {
         if (newNPC == null) {
             if (currentInteractPrompt != null) {
                 Destroy(currentInteractPrompt);
@@ -88,7 +90,7 @@ public class _DialogueHandler : MonoBehaviour {
             }
 
             currentNPC = null;
-            CloseDialogueBox();
+//             CloseDialogueBox();
             return;
         }
 
@@ -99,7 +101,7 @@ public class _DialogueHandler : MonoBehaviour {
             }
 
             currentNPC = null;
-            CloseDialogueBox();
+//             CloseDialogueBox();
             if (isDialogueActive) return;
         }
 
@@ -111,6 +113,26 @@ public class _DialogueHandler : MonoBehaviour {
         }
 
         dialogueProfile.sprite = dialogueBoxHandler.npcProfile;
+    }
+
+    public void OpenDialogueWith(GameObject dialogueSource) {
+        SetCurrentNpc(dialogueSource);
+        OpenDialogueBox();
+    }
+
+    void Update() {
+        SetCurrentNpc(GetNearbyNpc());
+
+        if (Input.GetKeyDown(KeyCode.E)) {
+            if (isDialogueActive) {
+                UpdateDialogueBox();
+                return;
+            }
+        }
+
+        if (currentNPC == null) {
+            return;
+        }
 
         continueArrow.SetActive(!typeWriter.isTyping || typeWriter.waitingForPause);
 
@@ -160,11 +182,6 @@ public class _DialogueHandler : MonoBehaviour {
     }
 
     public void OpenDialogueBox() {
-        if (isDialogueActive) {
-            UpdateDialogueBox();
-            return;
-        }
-
         isDialogueActive = true;
         dialogueBoxHandler.currentLineIndex = 0;
         dialogueBoxHandler.lastLineDisplayed = false;
