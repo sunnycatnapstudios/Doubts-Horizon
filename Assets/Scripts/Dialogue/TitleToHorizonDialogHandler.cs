@@ -29,13 +29,11 @@ public class TitleToHorizonDialogHandler : MonoBehaviour {
         continueArrow = GameObject.FindWithTag("Continue Arrow");
 
         typeWriter = GameObject.FindWithTag("Dialogue Text").GetComponent<TypeWriter>();
-        typeWriter.SetSfxTypingClip(sfxTypingClip);
     }
 
     public void StartDialogue() {
         continueArrow.SetActive(true);
         StartCoroutine(AnimateMovingEBox());
-        typeWriter.SetSfxTypingClip(sfxTypingClip);
 
         isDialogueActive = true;
     }
@@ -84,7 +82,8 @@ public class TitleToHorizonDialogHandler : MonoBehaviour {
 
         isDialogueActive = false;
 
-        // Transition to Horizon Scene
+        // End the intro, Transition to Horizon Scene
+        AudioManager.Instance.CrossFadeAmbienceToZero(1);
         SceneManager.LoadScene("Horizon");
     }
 

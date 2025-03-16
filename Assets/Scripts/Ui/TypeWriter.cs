@@ -39,6 +39,7 @@ public class TypeWriter : MonoBehaviour {
         _tmpProText.text = leadingCharBeforeDelay ? leadingChar : "";
         yield return new WaitForSeconds(delayBeforeStart);
         textChirp = 0f;
+        AudioManager.Instance.PlaySound(_sfxTyping);
 
         for (int i = 0; i < writer.Length; ++i) {
             if (skipTyping && !waitingForPause) {
@@ -56,10 +57,12 @@ public class TypeWriter : MonoBehaviour {
                     if (Input.GetKeyDown(KeyCode.E)) break; // Wait for player input
                     yield return null;
                 }
+
                 i += 6;
                 waitingForPause = false;
                 continue;
             }
+
             if (writer.Substring(i).StartsWith("{dialoguePrompt:")) {
                 waitingForResponse = true;
                 int endIdx = writer.IndexOf("}", i);
@@ -69,9 +72,11 @@ public class TypeWriter : MonoBehaviour {
                     ShowChoices();
                     i = endIdx;
                 }
+
                 while (!choiceMade) {
                     yield return null;
                 }
+
                 waitingForResponse = false;
                 continue;
             }
@@ -83,9 +88,11 @@ public class TypeWriter : MonoBehaviour {
                     if (writer[i] == '>') {
                         break;
                     }
+
                     // this will break if we have two openers '<' in a row
                     ++i;
                 }
+
                 if (i < writer.Length) {
                     _tmpProText.text += writer.Substring(start, i - start);
                 } else {
@@ -113,7 +120,7 @@ public class TypeWriter : MonoBehaviour {
 
             if (textChirp >= 0.2f) {
                 textChirp = 0f;
-                // TODO AudioManager.Instance.PlaySound(_sfxTyping);
+                AudioManager.Instance.PlaySound(_sfxTyping);
             }
 
             yield return new WaitForSeconds(timeBtwChars);
@@ -127,12 +134,14 @@ public class TypeWriter : MonoBehaviour {
         skipTyping = false;
         waitingForPause = false;
     }
+
     IEnumerator AnimateDrop(int charIndex) {
         TMP_TextInfo textInfo = _tmpProText.textInfo;
         float elapsedTime = 0f;
         float dropDistance = -5f; // How far down the letter starts
 
-        while (elapsedTime < 0.1f) { // Duration of drop animation
+        while (elapsedTime < 0.1f) {
+            // Duration of drop animation
             elapsedTime += Time.deltaTime;
             float offset = Mathf.Lerp(dropDistance, 0, elapsedTime / 0.1f); // Smooth drop
 
@@ -173,6 +182,7 @@ public class TypeWriter : MonoBehaviour {
             Debug.Log("Input Handler not reached, not assigned, or not setup");
         }
     }
+
     void Update() {
         if (Input.GetKeyDown(KeyCode.E) && isTyping && _tmpProText.text.Length > 3 && !waitingForPause) {
             skipTyping = true;
