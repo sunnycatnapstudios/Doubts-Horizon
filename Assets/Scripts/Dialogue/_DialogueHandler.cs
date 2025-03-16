@@ -202,6 +202,8 @@ public class _DialogueHandler : MonoBehaviour {
             return;
         }
 
+        Debug.Log("in CloseDialogueBox");
+
         isDialogueActive = false;
         darkScreenAnimator.Play("Lighten Screen");
         dialogueAnimator.Play("Dialogue Dissapear");

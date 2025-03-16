@@ -29,14 +29,10 @@ public class InteractPillarCDialogue : MonoBehaviour {
         funnyRetort = new List<string> {
             "What?\nNever seen a talking pile of rocks before?"
         };
-        dialogueLines = introLines;
-    }
-
-    void Update() {
-        if (npcDialogueHandler.lastLineDisplayed) {
-            dialogueLines = funnyRetort;
-        }
-
-        npcDialogueHandler.dialogueContents = dialogueLines;
+        npcDialogueHandler.dialogueContents = introLines;
+        npcDialogueHandler.afterDialogue = new Action(() => {
+            npcDialogueHandler.dialogueContents = funnyRetort;
+            npcDialogueHandler.ResetDialogue();
+        });
     }
 }
