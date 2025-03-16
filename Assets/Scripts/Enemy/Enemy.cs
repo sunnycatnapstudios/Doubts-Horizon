@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = System.Random;
 
 public class Enemy : MonoBehaviour {
     GameStatsManager gameStatsManager;
@@ -36,6 +37,16 @@ public class Enemy : MonoBehaviour {
     int currentTargetIndex;
 
     public GameObject overworldUI, combatUI;
+
+    [Serializable]
+    private struct AudioClips {
+        public AudioClip sfxOnHitByBullet;
+        public List<AudioClip> sfxMonsterSounds;    // List of monster sounds to cycle through
+    }
+
+    [SerializeField] private AudioClips audioClips;
+    public float monsterSoundInterval = 8f;
+    private float monsterSoundIntervalCounter = 0f;
 
     void Start() {
         startPos = transform.position;
@@ -193,6 +204,16 @@ public class Enemy : MonoBehaviour {
             // }
         } else if (other.CompareTag("Bullet")) {
             hitByBullet = true;
+            AudioManager.Instance.PlaySound(audioClips.sfxOnHitByBullet);
+        }
+    }
+
+    //play a random monster sound
+    private void PlayMonsterSound() {
+        if (audioClips.sfxMonsterSounds.Count > 0) {
+            int randomClipIndex = UnityEngine.Random.Range(0,audioClips.sfxMonsterSounds.Count);
+            AudioClip randomSound = audioClips.sfxMonsterSounds[randomClipIndex];
+            AudioManager.Instance.PlaySound(randomSound);
         }
     }
 
@@ -201,6 +222,13 @@ public class Enemy : MonoBehaviour {
         playerDist = Vector3.Distance(target.position, transform.position);
         refX = transform.position.x;
         refY = transform.position.y;
+
+        // Very simple logic to occasionally play monster sound
+        monsterSoundIntervalCounter += Time.deltaTime;
+        if (monsterSoundIntervalCounter > monsterSoundInterval) {
+            PlayMonsterSound();
+            monsterSoundIntervalCounter -= monsterSoundInterval;
+        }
 
         Vector3 direction = target.position - transform.position;
         direction.Normalize();
