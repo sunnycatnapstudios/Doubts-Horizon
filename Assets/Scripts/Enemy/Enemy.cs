@@ -196,77 +196,88 @@ public class Enemy : MonoBehaviour {
         }
     }
 
- void Update() {
-    if (caught) return;
-    
-    playerDist = Vector3.Distance(target.position, transform.position);
-    refX = transform.position.x;
-    refY = transform.position.y;
+    void Update() {
+        if (caught) return;
+        playerDist = Vector3.Distance(target.position, transform.position);
+        refX = transform.position.x;
+        refY = transform.position.y;
 
-    Vector3 direction = (target.position - transform.position).normalized;
-    
-    RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, 1.0f, LayerMask.GetMask("Obstacles"));
+        Vector3 direction = target.position - transform.position;
+        direction.Normalize();
 
-    if (hit.collider != null) {
-        // Obstacle detected, back off slightly
-        transform.position = Vector3.MoveTowards(transform.position, transform.position - direction, enemySpeed * Time.deltaTime);
-    } else if (hitByBullet || stun) {
-        // Stun Logic
-        hitByBullet = false;
-        searchTimer = 0f;
-        if (stunTimer <= stunTime) {
-            stunTimer += Time.deltaTime;
-            stun = true;
-            detectRange = 0f;
-            enemyAnim.Play("Stun Down");
-        } else {
-            detectRange = wakeRange;
-            stunTimer = 0f;
-            searching = true;
-            stun = false;
-        }
-    } else if (playerDist <= detectRange || attack && !stun) {
-        // Move towards player if no obstacle detected
-        if (!demotestFreeze) {
-            transform.position = Vector3.MoveTowards(transform.position, target.position, attackSpeed * Time.deltaTime);
-        }
-        attack = true;
-        EnterCombat(Physics2D.OverlapCircle(transform.position, caughtRange, player));
-        searchTimer = 0f;
-        detectRange = baseRange;
-        intervalCheck = .4f;
-        searching = false;
-        if (playerDist >= pursueRange) {
-            attack = false;
-        }
-    } else if (searching) {
-        enemyAnim.Play("Enem Left");
-        if (searchTimer <= 2.1f) {
-            searchTimer += Time.deltaTime;
-            if (searchTimer >= intervalCheck) {
-                spriteState.flipX = !spriteState.flipX;
-                intervalCheck += .4f;
+        if (hitByBullet || stun) // Stun Enemy
+        {
+            hitByBullet = false;
+            searchTimer = 0f;
+            if (stunTimer <= stunTime) {
+                stunTimer += Time.deltaTime;
+                stun = true;
+            } else {
+                stun = false;
             }
-        } else {
-            enemyAnim.Play("Enem Down");
+
+            if (stunTimer <= stunTime) {
+                stun = true;
+                stunTimer += Time.deltaTime;
+                detectRange = 0f;
+                enemyAnim.Play("Stun Down");
+            } else {
+                detectRange = wakeRange;
+                stunTimer = 0f;
+                searching = true;
+                stun = false;
+            }
+        } else if (playerDist <= detectRange || attack && !stun) {
+            // Attack Player // Will be changed later to account for pathfinding
+            if (!demotestFreeze) {
+                transform.position =
+                    Vector3.MoveTowards(transform.position, target.position, attackSpeed * Time.deltaTime);
+            }
+
+            attack = true;
+            EnterCombat(Physics2D.OverlapCircle((transform.position), caughtRange, player));
             searchTimer = 0f;
             detectRange = baseRange;
             intervalCheck = .4f;
             searching = false;
+            if (playerDist >= pursueRange) {
+                attack = false;
+            }
+        } else if (searching) // Search for Player w Temp Increased Radius
+        {
+            enemyAnim.Play("Enem Left");
+            if (searchTimer <= 2.1f) {
+                searchTimer += Time.deltaTime;
+                if (searchTimer >= intervalCheck) {
+                    spriteState.flipX = !spriteState.flipX;
+                    intervalCheck += .4f;
+                }
+            } else {
+                enemyAnim.Play("Enem Down");
+                searchTimer = 0f;
+                detectRange = baseRange;
+                intervalCheck = .4f;
+                searching = false;
+            }
+        } else if (!demotestFreeze) {
+            EnemyPatrol();
+        } // Enemy Idle Movement Path
+
+        if (Mathf.Abs(transform.position.x - refX) > Mathf.Abs(transform.position.y - refY) && !stun && !searching) {
+            if (transform.position.x - refX > 0) {
+                spriteState.flipX = true;
+            } else {
+                spriteState.flipX = false;
+            }
+
+            enemyAnim.Play("Enem Left");
+        } else if (Mathf.Abs(transform.position.x - refX) <= Mathf.Abs(transform.position.y - refY) && !stun &&
+                   !searching) {
+            if (transform.position.y - refY > 0) {
+                enemyAnim.Play("Enem Up");
+            } else {
+                enemyAnim.Play("Enem Down");
+            }
         }
-    } else if (!demotestFreeze) {
-        EnemyPatrol();
     }
-
-    // Enemy Movement Animation
-    if (Mathf.Abs(transform.position.x - refX) > Mathf.Abs(transform.position.y - refY) && !stun && !searching) {
-        spriteState.flipX = transform.position.x - refX > 0;
-        enemyAnim.Play("Enem Left");
-    } else if (Mathf.Abs(transform.position.x - refX) <= Mathf.Abs(transform.position.y - refY) && !stun && !searching) {
-        enemyAnim.Play(transform.position.y - refY > 0 ? "Enem Up" : "Enem Down");
-    }
-}
-
-        
-    
 }
