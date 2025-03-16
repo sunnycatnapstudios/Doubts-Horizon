@@ -19,10 +19,9 @@ public class TitleToHorizon : MonoBehaviour {
         } else {
             isClicked = true;
         }
+
         // Fade the canvas to black
         StartCoroutine(FadeOutToBlack());
-
-        // After fade to black, begin type writer
     }
 
     private IEnumerator FadeOutToBlack() {
@@ -38,12 +37,15 @@ public class TitleToHorizon : MonoBehaviour {
         // Show Dialog after fade out
         textHandler.StartDialogue();
     }
+
     public void Awake() {
         blackFaderImage = blackFader.GetComponent<RawImage>();
         textHandler = GetComponent<TitleToHorizonDialogHandler>();
     }
 
-    public void Start() {
-            // TODO tetsing
+    public void Update() {
+        if (Input.GetKey(KeyCode.E)) {
+            OnStartButtonClicked();
+        }
     }
 }

@@ -9,41 +9,45 @@ using UnityEngine.SceneManagement;
 public class TitleToHorizonDialogHandler : MonoBehaviour {
     private GameObject continueArrow; // To display
 
-    private TextMeshProUGUI smallDialogueText;
     private bool isDialogueActive = false;
 
     private TypeWriter typeWriter;
 
-    public AudioClip sfxTypingClip;
+    [SerializeField] public AudioClip sfxTypingClip;
 
     private List<string> dialogueContents = new List<string> {
-        "Thank you so much for saving me from that beast!",
-        "My hero <3"
+        "....",
+        "...........",
+        "I hear something...",
+        ".. .. ..",
+        "Where am I?"
     };
 
-    public int currentLineIndex = 0;
+    private int currentLineIndex = 0;
+
     void Awake() {
         continueArrow = GameObject.FindWithTag("Continue Arrow");
 
         typeWriter = GameObject.FindWithTag("Dialogue Text").GetComponent<TypeWriter>();
         typeWriter.SetSfxTypingClip(sfxTypingClip);
-
-        smallDialogueText = GameObject.FindWithTag("Dialogue Text").GetComponent<TextMeshProUGUI>();
     }
 
     public void StartDialogue() {
-        //continueArrow.SetActive(!typeWriter.isTyping || typeWriter.waitingForPause);
+        continueArrow.SetActive(true);
+        StartCoroutine(AnimateMovingEBox());
         typeWriter.SetSfxTypingClip(sfxTypingClip);
+
         isDialogueActive = true;
     }
 
     public void Update() {
         // Once dialog has begun, start updating text
-        if ((Input.GetKey(KeyCode.E) || Input.GetKey(KeyCode.KeypadEnter) || Input.GetMouseButton(0)) && !typeWriter.isTyping) {
+        if ((Input.GetKey(KeyCode.E) || Input.GetMouseButtonDown(0)) && !typeWriter.isTyping && isDialogueActive) {
             if (isDialogueActive) {
                 UpdateDialogueBox();
                 return;
             }
+
             UpdateTypewriter();
         }
     }
@@ -82,5 +86,25 @@ public class TitleToHorizonDialogHandler : MonoBehaviour {
 
         // Transition to Horizon Scene
         SceneManager.LoadScene("Horizon");
+    }
+
+    private IEnumerator AnimateMovingEBox() {
+        Vector3 startPos = continueArrow.transform.position;
+        Vector3 target = new Vector3(6.6f, -5f, continueArrow.transform.position.z);
+        float duration = 1.0f; // Animation duration in seconds
+        float elapsedTime = 0;
+
+        while (elapsedTime < duration) {
+            float t = elapsedTime / duration; // Calculate percentage complete (0 to 1)
+
+            t = Mathf.SmoothStep(0, 1, t); // Add easing for smoother animation
+
+            // Lerp between start and target positions
+            continueArrow.transform.position = Vector3.Lerp(startPos, target, t);
+
+            elapsedTime += Time.deltaTime; // Increment time
+
+            yield return null;
+        }
     }
 }

@@ -362,7 +362,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -2.0474496, y: -1.39}
+  m_AnchoredPosition: {x: -2, y: 8}
   m_SizeDelta: {x: 30, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &835679984
@@ -461,7 +461,7 @@ MonoBehaviour:
   m_VertexBufferAutoSizeReduction: 1
   m_useMaxVisibleDescender: 1
   m_pageToDisplay: 1
-  m_margin: {x: 0, y: 0, z: 0, w: 0}
+  m_margin: {x: 0, y: 20.314175, z: 0, w: 0}
   m_isUsingLegacyAnimationComponent: 0
   m_isVolumetricText: 0
   m_hasFontAssetChanged: 0
@@ -765,7 +765,7 @@ RectTransform:
   m_GameObject: {fileID: 1171890538}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 6.2707596}
-  m_LocalScale: {x: 0.64, y: 0.64, z: 0}
+  m_LocalScale: {x: 0.02, y: 0.02, z: 0}
   m_Children:
   - {fileID: 2147479761}
   m_Father: {fileID: 1844281791}
@@ -773,7 +773,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 63.015137, y: -7.956993}
+  m_AnchoredPosition: {x: -0.1, y: -4.5}
   m_SizeDelta: {x: 50, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!95 &1171890540
@@ -784,7 +784,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1171890538}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 667ce7df26facca47865c0e10889acc3, type: 2}
   m_CullingMode: 0
@@ -1021,8 +1021,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ef89fe14edec2bf895a4375581ce31e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sfxTypingClip: {fileID: 0}
-  currentLineIndex: 0
+  sfxTypingClip: {fileID: 8300000, guid: 28c78a651100df1cea783ae402a74437, type: 3}
 --- !u!1 &1807557738
 GameObject:
   m_ObjectHideFlags: 0
@@ -1269,8 +1268,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ef89fe14edec2bf895a4375581ce31e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sfxTypingClip: {fileID: 8300000, guid: fd1eeaf7caafabcbe945f14fc1db6eb0, type: 3}
-  currentLineIndex: 0
+  sfxTypingClip: {fileID: 8300000, guid: 759a90d9b4ed271cabc12ad52f7516dd, type: 3}
 --- !u!1 &1895447742
 GameObject:
   m_ObjectHideFlags: 0
@@ -1320,7 +1318,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 76c392e42b5098c458856cdf6ecaaaa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_FirstSelected: {fileID: 1807557738}
+  m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
 --- !u!4 &1895447745
