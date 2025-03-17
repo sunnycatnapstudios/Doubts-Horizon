@@ -88,8 +88,16 @@ public class TitleToHorizonDialogHandler : MonoBehaviour {
     }
 
     private IEnumerator AnimateMovingEBox() {
+        // Get canvas object
+        Canvas canvas = continueArrow.transform.root.GetComponentInChildren<Canvas>();
+        RectTransform canvasRect = canvas.GetComponent<RectTransform>();
+
+        // Get bottom right corner of canvas
+        Vector3[] corners = new Vector3[4];
+        canvasRect.GetWorldCorners(corners);
+        Vector3 target = corners[3] + new Vector3(-1f, 1f, 0);    // Corner target + padding
+
         Vector3 startPos = continueArrow.transform.position;
-        Vector3 target = new Vector3(6.6f, -5f, continueArrow.transform.position.z);
         float duration = 1.0f; // Animation duration in seconds
         float elapsedTime = 0;
 

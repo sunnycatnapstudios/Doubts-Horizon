@@ -30,6 +30,7 @@ public class TitleToHorizon : MonoBehaviour {
 
         // Set the arrow above the fade for cool effect (Yes the order in hierarchy is very important)
         GameObject continueArrow = GameObject.FindWithTag("Continue Arrow");
+        continueArrow.transform.SetParent(continueArrow.transform.parent.parent);
         continueArrow.transform.SetSiblingIndex(continueArrow.transform.GetSiblingIndex() + 1);
 
         // Reset fader to transparent before fade
