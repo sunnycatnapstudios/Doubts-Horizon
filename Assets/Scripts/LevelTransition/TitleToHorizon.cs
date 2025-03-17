@@ -8,28 +8,33 @@ using UnityEngine.UI;
 public class TitleToHorizon : MonoBehaviour {
     private Coroutine fadeCoroutine; // Used to end fade in early
 
-    public bool isClicked = true; // Ensure no spam clicking
+    public bool isClicked = false; // Ensure no spam clicking
     public GameObject blackFader;
     RawImage blackFaderImage;
 
     public TitleToHorizonDialogHandler textHandler;
 
     public AudioClip musicIntro;
+    public AudioClip sfxButtonClick;
 
     // Trigger on button click
     public void OnStartButtonClicked() {
         // Prevent multiple clicks from happening
         if (isClicked) {
             return;
-        } else {
-            isClicked = true;
         }
 
+        // Don't allow multiple retriggers
+        isClicked = true;
+        AudioManager.Instance.PlaySound(sfxButtonClick);
+
+        Debug.Log("start");
         // Stop the fade in coroutine
         StopCoroutine(fadeCoroutine);
 
         // Set the arrow above the fade for cool effect (Yes the order in hierarchy is very important)
         GameObject continueArrow = GameObject.FindWithTag("Continue Arrow");
+        continueArrow.transform.SetParent(continueArrow.transform.parent.parent);
         continueArrow.transform.SetSiblingIndex(continueArrow.transform.GetSiblingIndex() + 1);
 
         // Reset fader to transparent before fade
@@ -75,11 +80,14 @@ public class TitleToHorizon : MonoBehaviour {
         blackFaderImage = blackFader.GetComponent<RawImage>();
         textHandler = GetComponent<TitleToHorizonDialogHandler>();
         fadeCoroutine = StartCoroutine(FadeInFromBlack());
+    }
+
+    public void Start() {
         AudioManager.Instance.CrossFadeAmbienceSound(musicIntro, 3, 1, 0);
     }
 
     public void Update() {
-        if (Input.GetKey(KeyCode.E)) {
+        if (Input.GetKeyDown(KeyCode.E)) {
             OnStartButtonClicked();
         }
     }
