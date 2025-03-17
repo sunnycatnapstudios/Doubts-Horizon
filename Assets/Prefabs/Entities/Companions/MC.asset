@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37bebb4f9bbe1904896366df90c723ce, type: 3}
   m_Name: MC
   m_EditorClassIdentifier: 
-  name: maincharacter
+  name: Me
   damage: 32
-  health: 4343
+  health: 100
   isCombatant: 1
-  DialogueHolder: {fileID: 6280847223381848415, guid: 97ee79cdb3d35bc44bfcd125382fc182,
+  inventoryDialogues: {fileID: -381307989238394630, guid: d861617506f94ac4287d6cf758f76951,
     type: 3}
   OverworldSprite: {fileID: 0}
   unKickable: 1

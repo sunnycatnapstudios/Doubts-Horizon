@@ -24,7 +24,7 @@ public class Survivor : ScriptableObject {
 
     [SerializeField] private bool isCombatant;
 
-    [SerializeField] public GameObject DialogueHolder;
+    [SerializeField] public InventoryDialogues inventoryDialogues;
 
     [SerializeField] public Sprite OverworldSprite;
 
@@ -101,14 +101,12 @@ public class Survivor : ScriptableObject {
         return $"{name}: hp:{charstats.currentHealth}/{health} dmg:{damage}";
     }
 
-    public GameObject getDialogueHolder() {
-        return DialogueHolder;
-    }
+    
 
 
     public string GetInventoryDialogue() {
 
-        InventoryDialogues inventoryDialogues = DialogueHolder.GetComponent<InventoryDialogues>();
+       
         if (currentHealth < maxHealth * 0.5 && Hungry) {
             return inventoryDialogues.LowHealthAndLowHunger();
         } else if (currentHealth < maxHealth * 0.5) {
