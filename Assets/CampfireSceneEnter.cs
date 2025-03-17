@@ -15,6 +15,9 @@ public class CampfireSceneEnter : MonoBehaviour
         partyManager = statsManager.partyManager;
         foreach (Survivor survivor in partyManager.currentPartyMembers) {
 
+
+
+
         }
 
 
