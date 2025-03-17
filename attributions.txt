@@ -1,3 +1,33 @@
 Key sprite: https://opengameart.org/content/key-icons
 Door icon: https://opengameart.org/content/rpgmaker-style-doors
 tent icon: https://opengameart.org/content/tent-3
+
+# Audio
+## Sample Packs (various online soureces):
+"Dungeon Synth Free Samples Pack" by Erang -- https://erang.bandcamp.com/album/dungeon-synth-free-samples-pack -- no license
+"Static Kit" by Dustyroom -- http://dustyroom.com -- licensed under CC BY 4.0
+"Casual Game Sound - One Shot SFX Pack" by Dustyroom -- http://dustyroom.com -- licensed under CC0
+"RPG sounds" by Kenney Vleugels -- www.kenney.nl -- licensed under CC0
+
+## OpenGameArt.org:
+"Foot walking step sounds on stone, water, snow, wood and dirt" by Jute -- https://opengameart.org/content/foot-walking-step-sounds-on-stone-water-snow-wood-and-dirt -- licensed under GPL 3.0
+"Different steps on wood, stone, leaves, gravel and mud" by TinyWorlds -- https://opengameart.org/content/different-steps-on-wood-stone-leaves-gravel-and-mud -- licensed under CC0
+"35 Wooden Cracks/Hits/Destructions" by Independent.nu -- https://opengameart.org/content/35-wooden-crackshitsdestructions -- licensed under CC0
+
+## Freesound.org:
+temple bell 001.wav by tec_studio -- https://freesound.org/s/668646/ -- License: Creative Commons 0
+Sacred Bell at Byodo-In Temple 1 by Filmscore -- https://freesound.org/s/516051/ -- License: Attribution 4.0
+Happy Bird Singing by se2001 -- https://freesound.org/s/511094/ -- License: Creative Commons 0
+Happy Bird Chirp by se2001 -- https://freesound.org/s/510314/ -- License: Creative Commons 0
+tree_creak_02.wav by Department64 -- https://freesound.org/s/95260/ -- License: Creative Commons 0
+tree-leaves-rustling.aif by Spleencast -- https://freesound.org/s/87289/ -- License: Attribution NonCommercial 3.0
+door wood heavy antique castle dungeon lock unlock turn key open close latch echo +bg voices.wav by kyles -- https://freesound.org/s/407305/ -- License: Creative Commons 0
+open close old dungeon door in castle by Garuda1982 -- https://freesound.org/s/652321/ -- License: Attribution 4.0
+Dungeon_Lock_2.wav by bennynz -- https://freesound.org/s/580442/ -- License: Creative Commons 0
+Unlocking Security Door.wav by digifishmusic -- https://freesound.org/s/43707/ -- License: Attribution 4.0
+inside the well.wav by offthesky -- https://freesound.org/s/31990/ -- License: Attribution 4.0
+Campfire_1.wav by zmb94 -- https://freesound.org/s/74963/ -- License: Sampling+
+Fire1.1.1.aif by pushtobreak -- https://freesound.org/s/16794/ -- License: Attribution NonCommercial 4.0
+41_nightlife_chikangawa.WAV by LukeIRL -- https://freesound.org/s/176028/ -- License: Attribution 4.0
+LogsOnLogs.wav by acclivity -- https://freesound.org/s/31784/ -- License: Attribution NonCommercial 4.0
+Night crickets by Vrymaa -- https://freesound.org/s/734642/ -- License: Creative Commons 0

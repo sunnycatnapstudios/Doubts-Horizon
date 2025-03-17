@@ -99,6 +99,10 @@ public class DoubleAudioSource : MonoBehaviour {
         do {
             float elapsed = Time.unscaledTime - startTime;
 
+            if (duration <= 0) {
+                duration = 0.1f; // For Lerp function
+            }
+
             sourceToFade.volume = Mathf.Clamp01(Mathf.Lerp(startVolume, endVolume, elapsed / duration));
 
             // If "close enough" to target goal, stop the fade

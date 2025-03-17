@@ -1,16 +1,22 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using System.Linq;
 
-public class _DialogueHandler : MonoBehaviour
-{
+public class _DialogueHandler : MonoBehaviour {
     private float detectionRadius = 1.2f;
     public GameObject currentNPC, newNPC;
-    private GameObject player, dialogueBox, currentInteractPrompt, currentSmallDialogueBox, dialogueOptions, continueArrow;
+
+    private GameObject player,
+        dialogueBox,
+        currentInteractPrompt,
+        currentSmallDialogueBox,
+        dialogueOptions,
+        continueArrow;
+
     public GameObject interactPromptPrefab, smallDialogueBox;
     public LayerMask NPCLayer;
 
@@ -27,8 +33,7 @@ public class _DialogueHandler : MonoBehaviour
     private List<string> currentDialogue;
 
 
-    void Awake()
-    {
+    void Awake() {
         GameObject UICanvas = GameObject.FindWithTag("UI Canvas");
 
         player = GameObject.FindWithTag("Player");
@@ -68,51 +73,71 @@ public class _DialogueHandler : MonoBehaviour
         smallDialogueBox = GameObject.FindWithTag("SmallDialogueBox");
     }
 
-    void Start()
-    {
+    void Start() {
         continueArrow = GameObject.FindWithTag("Continue Arrow");
     }
 
-    void Update()
-    {
+    GameObject GetNearbyNpc() {
         Collider2D npcCollider = Physics2D.OverlapCircle(player.transform.position, detectionRadius, NPCLayer);
-        newNPC = npcCollider ? npcCollider.gameObject : null;
+        return npcCollider ? npcCollider.gameObject : null;
+    }
 
-        if (newNPC == null)
-        {
-            if (currentInteractPrompt != null)
-            {
+    void SetCurrentNpc(GameObject newNPC) {
+        if (newNPC == null) {
+            if (currentInteractPrompt != null) {
                 Destroy(currentInteractPrompt);
                 currentInteractPrompt = null;
             }
+
             currentNPC = null;
-            CloseDialogueBox();
+            //             CloseDialogueBox();
             return;
         }
-        if (currentNPC != newNPC)
-        {
-            if (currentInteractPrompt != null)
-            {
+
+        if (currentNPC != newNPC) {
+            if (currentInteractPrompt != null) {
                 Destroy(currentInteractPrompt);
                 currentInteractPrompt = null;
             }
+
             currentNPC = null;
-            CloseDialogueBox();
+            //             CloseDialogueBox();
             if (isDialogueActive) return;
         }
 
         // Assign new NPC
         currentNPC = newNPC;
         dialogueBoxHandler = currentNPC.GetComponent<DialogueBoxHandler>();
-        if (dialogueBoxHandler == null) {return;}
+        if (dialogueBoxHandler == null) {
+            return;
+        }
 
         dialogueProfile.sprite = dialogueBoxHandler.npcProfile;
+    }
+
+    public void OpenDialogueWith(GameObject dialogueSource) {
+        SetCurrentNpc(dialogueSource);
+        OpenDialogueBox();
+    }
+
+    void Update() {
+        SetCurrentNpc(GetNearbyNpc());
+
+        if (Input.GetKeyDown(KeyCode.E)) {
+            if (isDialogueActive) {
+                UpdateDialogueBox();
+                return;
+            }
+        }
+
+        if (currentNPC == null) {
+            return;
+        }
 
         continueArrow.SetActive(!typeWriter.isTyping || typeWriter.waitingForPause);
 
         // If there's no prompt, instantiate one
-        if (currentInteractPrompt == null)
-        {
+        if (currentInteractPrompt == null) {
             currentInteractPrompt = Instantiate(
                 interactPromptPrefab,
                 Camera.main.WorldToScreenPoint(currentNPC.transform.position + Vector3.up * 1.5f),
@@ -120,52 +145,43 @@ public class _DialogueHandler : MonoBehaviour
                 GameObject.FindGameObjectWithTag("Overworld UI").transform
             );
             currentInteractPrompt.transform.SetSiblingIndex(0);
-        }
-        else
-        {
-            currentInteractPrompt.transform.position = Camera.main.WorldToScreenPoint(currentNPC.transform.position + Vector3.up * 1.5f);
+        } else {
+            currentInteractPrompt.transform.position =
+                Camera.main.WorldToScreenPoint(currentNPC.transform.position + Vector3.up * 1.5f);
         }
 
         // Handle interaction
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            if (currentNPC.CompareTag("Interactable"))
-            {
-                if (currentSmallDialogueBox == null)
-                {
+        if (Input.GetKeyDown(KeyCode.E)) {
+            if (currentNPC.CompareTag("Interactable")) {
+                if (currentSmallDialogueBox == null) {
                     currentSmallDialogueBox = Instantiate(
                         smallDialogueBox,
                         Camera.main.WorldToScreenPoint(currentNPC.transform.position + Vector3.up * 1.7f),
                         Quaternion.identity,
                         GameObject.FindGameObjectWithTag("Overworld UI").transform);
-                        
+
                     currentSmallDialogueBox.transform.SetParent(currentInteractPrompt.transform);
 
                     smallDialogueText = currentSmallDialogueBox.GetComponentInChildren<TextMeshProUGUI>();
                     dialogueBoxHandler.currentLineIndex = 0;
                 }
+
                 smallDialogueText.text = dialogueBoxHandler.GetCurrentDialogueLine();
-            }
-            else if (currentNPC.CompareTag("NPC"))
-            {
+            } else if (currentNPC.CompareTag("NPC")) {
                 OpenDialogueBox();
             }
         }
     }
 
-    void UpdateTypewriter()
-    {
+    void UpdateTypewriter() {
+        // Set talking sfx to current clip set in dialogBoxHandler, which is determined by attached NPC dialog script
+        typeWriter.SetSfxTypingClip(dialogueBoxHandler.SfxTalkingClip);
         typeWriter.StartTypewriter(dialogueBoxHandler.GetCurrentDialogueLine());
         typeWriter.skipTyping = false;
         typeWriter.hasStartedTyping = true;
     }
-    public void OpenDialogueBox()
-    {
-        if (isDialogueActive) {
-            UpdateDialogueBox();
-            return;
-        }
 
+    public void OpenDialogueBox() {
         isDialogueActive = true;
         dialogueBoxHandler.currentLineIndex = 0;
         dialogueBoxHandler.lastLineDisplayed = false;
@@ -179,10 +195,9 @@ public class _DialogueHandler : MonoBehaviour
         // if (dialogueBoxHandler.hasChoice) {ShowChoice();}
         UpdateTypewriter();
     }
-    public void UpdateDialogueBox()
-    {
-        if (typeWriter.isTyping)
-        {
+
+    public void UpdateDialogueBox() {
+        if (typeWriter.isTyping) {
             if (typeWriter.waitingForPause) {
                 typeWriter.waitingForPause = false;
                 return;
@@ -190,9 +205,7 @@ public class _DialogueHandler : MonoBehaviour
                 typeWriter.skipTyping = true;
                 return;
             }
-        }
-        else if (dialogueBoxHandler.CanClose())
-        {
+        } else if (dialogueBoxHandler.CanClose()) {
             CloseDialogueBox();
             return;
         }
@@ -200,9 +213,13 @@ public class _DialogueHandler : MonoBehaviour
         // if (dialogueBoxHandler.hasChoice) {ShowChoice();}
         UpdateTypewriter();
     }
-    public void CloseDialogueBox()
-    {
-        if (!isDialogueActive) {return;}
+
+    public void CloseDialogueBox() {
+        if (!isDialogueActive) {
+            return;
+        }
+
+        Debug.Log("in CloseDialogueBox");
 
         isDialogueActive = false;
         darkScreenAnimator.Play("Lighten Screen");
@@ -211,11 +228,12 @@ public class _DialogueHandler : MonoBehaviour
         player.GetComponent<Player>().isPlayerInControl = false;
 
         if (dialogueBoxHandler.afterDialogue != null) {
-            dialogueBoxHandler.afterDialogue();
+            var toCall = dialogueBoxHandler.afterDialogue;
             dialogueBoxHandler.afterDialogue = null;
+            toCall();
         }
     }
-    
+
     // void ShowChoice()
     // {
     //     dialogueOptions.SetActive(true);

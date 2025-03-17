@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 using UnityEngine;
 using UnityEngine.UI;
+using Random = System.Random;
 
 public class Enemy : MonoBehaviour {
     GameStatsManager gameStatsManager;
@@ -37,6 +38,16 @@ public class Enemy : MonoBehaviour {
 
     public GameObject overworldUI, combatUI;
 
+    [Serializable]
+    private struct AudioClips {
+        public AudioClip sfxOnHitByBullet;
+        public List<AudioClip> sfxMonsterSounds; // List of monster sounds to cycle through
+    }
+
+    [SerializeField] private AudioClips audioClips;
+    public float monsterSoundInterval = 8f;
+    private float monsterSoundIntervalCounter = 0f;
+
     void Start() {
         startPos = transform.position;
         enemyAnim = GetComponent<Animator>();
@@ -67,76 +78,6 @@ public class Enemy : MonoBehaviour {
             stunTimer = float.NegativeInfinity;
             enemyAnim.Play("Stun Down");
         }
-    }
-
-    public IEnumerator CaptureScreen() {
-        yield return new WaitForEndOfFrame();
-        yield return null;
-
-        Camera.main.Render();
-
-        Texture2D screenTexture = ScreenCapture.CaptureScreenshotAsTexture();
-
-        GameObject screenOverlay = new GameObject("ScreenOverlay");
-        combatUI.SetActive(true);
-        //         overworldUI.SetActive(false);
-        screenOverlay.transform.SetParent(combatUI.transform, false);
-
-        // Leave enemy stunned after battle, because it looks cool
-        stun = true;
-        stunTimer = float.NegativeInfinity;
-        enemyAnim.Play("Stun Down");
-
-        RawImage overlayImage = screenOverlay.AddComponent<RawImage>();
-        overlayImage.texture = screenTexture;
-
-        RectTransform overlayRect = screenOverlay.GetComponent<RectTransform>();
-        overlayRect.sizeDelta = new Vector2(Screen.width, Screen.height);
-        overlayRect.anchorMin = Vector2.zero;
-        overlayRect.anchorMax = Vector2.one;
-        overlayRect.pivot = new Vector2(0.5f, 0.5f);
-
-        // Start the animation
-        StartCoroutine(ZoomInAnimation(screenOverlay, overlayImage));
-    }
-
-    IEnumerator ZoomInAnimation(GameObject overlay, RawImage overlayImage) {
-        RectTransform rect = overlay.GetComponent<RectTransform>();
-
-        // Start with slightly zoomed out
-        float initialScale = .8f;
-        rect.localScale = new Vector3(initialScale, initialScale, 1f);
-
-        // Wait for a short delay
-        yield return new WaitForSecondsRealtime(0.8f);
-
-        float duration = 1.5f; // Animation duration
-        float time = 0f;
-
-        Color startColor = overlayImage.color;
-        Color targetColor = new Color(0, 0, 0, 0); // Fully dark and transparent
-
-        while (time < duration) {
-            time += Time.unscaledDeltaTime;
-            float t = time / duration; // Normalize time (0 to 1)
-
-            // Zoom in effect
-            float scale = Mathf.Lerp(initialScale, 2.5f, t);
-            rect.localScale = new Vector3(scale, scale, 1f);
-
-            // Rotation effect
-            float rotation = Mathf.Lerp(0f, 30f, t);
-            rect.rotation = Quaternion.Euler(0, 0, rotation);
-
-            // Darkening & Opacity fade-out
-            overlayImage.color = Color.Lerp(startColor, targetColor, t);
-
-            yield return null;
-        }
-
-        // Destroy object after animation completes
-        Destroy(overlay);
-        // caught = false;
     }
 
     void EnemyPatrol() {
@@ -193,6 +134,16 @@ public class Enemy : MonoBehaviour {
             // }
         } else if (other.CompareTag("Bullet")) {
             hitByBullet = true;
+            AudioManager.Instance.PlaySound(audioClips.sfxOnHitByBullet);
+        }
+    }
+
+    //play a random monster sound
+    private void PlayMonsterSound() {
+        if (audioClips.sfxMonsterSounds.Count > 0) {
+            int randomClipIndex = UnityEngine.Random.Range(0, audioClips.sfxMonsterSounds.Count);
+            AudioClip randomSound = audioClips.sfxMonsterSounds[randomClipIndex];
+            AudioManager.Instance.PlaySound(randomSound);
         }
     }
 
@@ -201,6 +152,13 @@ public class Enemy : MonoBehaviour {
         playerDist = Vector3.Distance(target.position, transform.position);
         refX = transform.position.x;
         refY = transform.position.y;
+
+        // Very simple logic to occasionally play monster sound
+        monsterSoundIntervalCounter += Time.deltaTime;
+        if (monsterSoundIntervalCounter > monsterSoundInterval) {
+            PlayMonsterSound();
+            monsterSoundIntervalCounter -= monsterSoundInterval;
+        }
 
         Vector3 direction = target.position - transform.position;
         direction.Normalize();
