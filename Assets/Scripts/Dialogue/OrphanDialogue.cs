@@ -26,6 +26,7 @@ public class OrphanDialogue : MonoBehaviour {
             PartyManager partyManager = GameObject.FindGameObjectWithTag("Player").GetComponent<PartyManager>();
             partyManager.AddToParty(survivor);
             Destroy(gameObject);
+            GameStatsManager.Instance._dialogueHandler.CloseDialogueBox();
         };
         dialogueInputHandler.AddDialogueChoice(takeMeTag, takeMe);
 

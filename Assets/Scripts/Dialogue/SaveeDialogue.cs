@@ -24,6 +24,7 @@ public class SaveeDialogue : MonoBehaviour {
             PartyManager partyManager = GameObject.FindGameObjectWithTag("Player").GetComponent<PartyManager>();
             partyManager.AddToParty(survivor);
             Destroy(gameObject);
+            GameStatsManager.Instance._dialogueHandler.CloseDialogueBox();
         };
         dialogueInputHandler.AddDialogueChoice(takeMeTag, takeMe);
 
@@ -31,6 +32,7 @@ public class SaveeDialogue : MonoBehaviour {
         Action orNot = () => {
             Debug.Log("Or not callback.");
             Destroy(gameObject);
+            GameStatsManager.Instance._dialogueHandler.CloseDialogueBox();
         };
         dialogueInputHandler.AddDialogueChoice(orNotTag, orNot);
 

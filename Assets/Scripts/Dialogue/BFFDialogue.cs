@@ -27,6 +27,7 @@ public class BFFDialogue : MonoBehaviour {
             //_PartyManager _partyManager = GameStatsManager.Instance._partyManager;
             partyManager.AddToParty(survivor);
             Destroy(gameObject);
+            GameStatsManager.Instance._dialogueHandler.CloseDialogueBox();
         };
         dialogueInputHandler.AddDialogueChoice(takeMeTag, takeMe);
 
