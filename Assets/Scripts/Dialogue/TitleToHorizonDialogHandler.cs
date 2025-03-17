@@ -40,7 +40,7 @@ public class TitleToHorizonDialogHandler : MonoBehaviour {
 
     public void Update() {
         // Once dialog has begun, start updating text
-        if ((Input.GetKey(KeyCode.E) || Input.GetMouseButtonDown(0)) && !typeWriter.isTyping && isDialogueActive) {
+        if ((Input.GetKeyDown(KeyCode.E) || Input.GetMouseButtonDown(0)) && !typeWriter.isTyping && isDialogueActive) {
             if (isDialogueActive) {
                 UpdateDialogueBox();
                 return;

@@ -1054,6 +1054,7 @@ MonoBehaviour:
   blackFader: {fileID: 1814347705}
   textHandler: {fileID: 1794199919}
   musicIntro: {fileID: 8300000, guid: c8215fa874db9aaf9b1dd3f944556b80, type: 3}
+  sfxButtonClick: {fileID: 8300000, guid: 81a93b2ed86f6cd288ed4aa160ed756d, type: 3}
 --- !u!4 &1794199916
 Transform:
   m_ObjectHideFlags: 0
