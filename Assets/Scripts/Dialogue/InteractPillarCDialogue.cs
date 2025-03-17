@@ -4,8 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class InteractPillarCDialogue : MonoBehaviour {
-    private DialogueBoxHandler NPCDialogueHandler;
-    private InteractPrompt InteractPrompt;
+    private DialogueBoxHandler npcDialogueHandler;
     public List<string> dialogueLines;
     private List<string> introLines, funnyRetort;
 
@@ -17,9 +16,8 @@ public class InteractPillarCDialogue : MonoBehaviour {
     [SerializeField] private AudioClips audioClips;
 
     void Awake() {
-        NPCDialogueHandler = GetComponent<DialogueBoxHandler>();
-        InteractPrompt = GetComponent<InteractPrompt>();
-        NPCDialogueHandler.SetSfxTalkingClip(audioClips.sfxTalkingBlip);
+        npcDialogueHandler = GetComponent<DialogueBoxHandler>();
+        npcDialogueHandler.SetSfxTalkingClip(audioClips.sfxTalkingBlip);
 
         introLines = new List<string> {
             "Testng 1, 2\nTesting 1, 2...",
@@ -31,14 +29,10 @@ public class InteractPillarCDialogue : MonoBehaviour {
         funnyRetort = new List<string> {
             "What?\nNever seen a talking pile of rocks before?"
         };
-        dialogueLines = introLines;
-    }
-
-    void Update() {
-        if (InteractPrompt.dialogueFinished) {
-            dialogueLines = funnyRetort;
-        }
-
-        NPCDialogueHandler.dialogueContents = dialogueLines;
+        npcDialogueHandler.dialogueContents = introLines;
+        npcDialogueHandler.afterDialogue = new Action(() => {
+            npcDialogueHandler.dialogueContents = funnyRetort;
+            npcDialogueHandler.ResetDialogue();
+        });
     }
 }

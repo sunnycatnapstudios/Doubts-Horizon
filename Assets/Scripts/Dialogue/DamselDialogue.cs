@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class DamselDialogue : MonoBehaviour {
     private DialogueBoxHandler NPCDialogueHandler;
-    private InteractPrompt InteractPrompt;
     public List<string> dialogueLines;
     private List<string> introLines, funnyRetort;
 
@@ -21,7 +20,6 @@ public class DamselDialogue : MonoBehaviour {
 
     void Start() {
         NPCDialogueHandler = GetComponent<DialogueBoxHandler>();
-        InteractPrompt = GetComponent<InteractPrompt>();
         NPCDialogueHandler.SetSfxTalkingClip(audioClips.sfxTalkingBlip);
 
         introLines = new List<string> {
@@ -42,7 +40,7 @@ public class DamselDialogue : MonoBehaviour {
         partyManager.AddToParty(Survivor);
         Inventory inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
 
-
         Destroy(gameObject);
+        GameStatsManager.Instance._dialogueHandler.CloseDialogueBox();
     }
 }

@@ -199,8 +199,13 @@ public class Player : MonoBehaviour {
             UpdateMoveHist();
         }
         if (!walkAudi.isPlaying && walkAudiCount <= 0 && isMoving) {
-            walkAudi.Play(); walkAudiCount += 1; walkAudi.Play();
-        } else if (!isMoving) { walkAudi.Stop(); walkAudiCount = 0; }
+            walkAudi.Play();
+            walkAudiCount += 1;
+            walkAudi.Play();
+        } else if (!isMoving) {
+            walkAudi.Stop();
+            walkAudiCount = 0;
+        }
     }
 
     bool isTraversable(Vector2 pos) {

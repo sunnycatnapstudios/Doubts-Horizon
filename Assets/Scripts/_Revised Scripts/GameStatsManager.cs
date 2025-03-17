@@ -177,5 +177,14 @@ public class GameStatsManager : MonoBehaviour
     public void Update()
     {
         staminaBar.fillAmount = currStamina/maxStamina;
+
+        // Test dialogue without NPC
+        // You need a game object with
+        // 1. DialogueBoxHandler
+        // 2. NPCDialogueHandler
+        // 3. A dialogue Script
+        if (Input.GetKeyDown(KeyCode.T)) {
+            _dialogueHandler.OpenDialogueWith(GameObject.Find("TestDialogue"));
+        }
     }
 }
