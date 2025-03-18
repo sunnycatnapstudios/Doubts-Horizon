@@ -18,7 +18,9 @@ MonoBehaviour:
   isCombatant: 1
   inventoryDialogues: {fileID: 8850573105260575154, guid: 97ee79cdb3d35bc44bfcd125382fc182,
     type: 3}
+  OverworldSprite: {fileID: 0}
   unKickable: 0
+  enteringFireDialogue: I NEED A NAP
   Animcontroller: {fileID: 9100000, guid: 4114f537b7ab6d04b9e5a76a756ae683, type: 2}
   Sprite: {fileID: 9059487470431131927, guid: ab2fb4d632829cc428952cc52fd902c8, type: 3}
   walkingSprite: {fileID: 0}

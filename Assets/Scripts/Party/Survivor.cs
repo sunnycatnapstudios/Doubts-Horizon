@@ -59,6 +59,8 @@ public class Survivor : ScriptableObject {
         set { charstats.maxHealth = value; }
     }
 
+    public string enteringFireDialogue;
+
     private CharacterStats charstats;
 
 
