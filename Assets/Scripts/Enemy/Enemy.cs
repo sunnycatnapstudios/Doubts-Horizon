@@ -70,6 +70,7 @@ public class Enemy : MonoBehaviour {
     void EnterCombat(bool iscaught) {
         if (iscaught && !caught) {
             caught = true;
+            _battleUIHandler.curEnemy = gameObject;
             _battleUIHandler.EnterCombat();
 
             // Enemy "killed"

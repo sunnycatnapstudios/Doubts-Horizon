@@ -39,6 +39,7 @@ public class _BattleUIHandler : MonoBehaviour
     [System.NonSerialized]
     public CharacterStats currentDefender = null;
     public GameObject floatingText;
+    public GameObject curEnemy = null;
 
     private int healAmount;
     public List<string> defeatedInCombat = new List<string>();
@@ -837,7 +838,7 @@ public class _BattleUIHandler : MonoBehaviour
 
     private bool CheckForBattleEnd() {
         if (escapeSuccessful) {
-            endCause = "Win";
+            endCause = "Escape";
             return true;
         }
 
@@ -859,6 +860,8 @@ public class _BattleUIHandler : MonoBehaviour
 
     // Called when the battle should end. Use to transition back to overworld
     private void EndEncounter(string reason) {
+        Debug.Log($"EndEncounter({reason})");
+
         // Clean up
         if (partyUIAnimator != null) {
             partyUIAnimator.ResetTrigger("Open");
@@ -888,6 +891,9 @@ public class _BattleUIHandler : MonoBehaviour
 
             battleInProgress = false;
             Time.timeScale = 1;
+        }
+        if (reason == "Escape") {
+            Destroy(curEnemy);
         } else if (reason == "Lose") {
             Debug.Log("Game Over");
             AudioManager.Instance.CrossFadeMusicToZero(0.5f, 0f);
@@ -1023,15 +1029,11 @@ public class _BattleUIHandler : MonoBehaviour
 
         Debug.Log($"Chance of escape: {escapeChance}%");
 
-        if (roll<= escapeChance)
-        {
+        if (roll<= escapeChance) {
             Debug.Log($"Wow, rolled a {roll}, you made it!!!");
-            endCause = "Win";
             endTurn = true;
             escapeSuccessful = true;
-        }
-        else
-        {
+        } else {
             Debug.Log($"Oof, rolled a {roll}, didn't make it lol");
             SkipTurns();
         }
