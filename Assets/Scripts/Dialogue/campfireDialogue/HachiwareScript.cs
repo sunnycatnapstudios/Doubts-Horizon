@@ -30,6 +30,8 @@ public class HachiwareScript : MonoBehaviour {
                 statsManager.interactedWithCampfireNPC();
                 statsManager.updateBedStatus();
                 npcDialogueHandler.dialogueContents.Add($"You have {inventory.getCountofItem("Ration")} rations left");
+                npcDialogueHandler.lastLineDisplayed = false;
+                npcDialogueHandler.currentLineIndex += 1;
                 npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
                 
             } else {
@@ -39,7 +41,7 @@ public class HachiwareScript : MonoBehaviour {
                
                 npcDialogueHandler.dialogueContents.Add($"You dont even have any for yourself");
                 npcDialogueHandler.lastLineDisplayed = false;
-                npcDialogueHandler.currentLineIndex +=1;
+                npcDialogueHandler.currentLineIndex += 1;
                 npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
             }
             GameStatsManager.Instance._dialogueHandler.UpdateDialogueBox();
@@ -53,7 +55,11 @@ public class HachiwareScript : MonoBehaviour {
             npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
             statsManager.interactedWithCampfireNPC();
             statsManager.updateBedStatus();
-            GameStatsManager.Instance._dialogueHandler.CloseDialogueBox();
+            npcDialogueHandler.dialogueContents.Add("oh ok....");
+            npcDialogueHandler.dialogueContents.Add("i guess i see how it is....");
+            npcDialogueHandler.lastLineDisplayed = false;
+            npcDialogueHandler.currentLineIndex += 1;
+            GameStatsManager.Instance._dialogueHandler.UpdateDialogueBox();
         };
         dialogueInputHandler.AddDialogueChoice(orNotTag, orNot);
 
