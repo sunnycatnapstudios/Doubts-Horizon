@@ -409,8 +409,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   left: {fileID: 1365270177835023460}
   right: {fileID: 1365270177225363753}
+  text: {fileID: 0}
+  buttonText: {fileID: 0}
   black: {fileID: 0}
+  button: {fileID: 0}
   _start: 0
+  fadeSpeed: 0.5
 --- !u!225 &1365270178737116265
 CanvasGroup:
   m_ObjectHideFlags: 0
@@ -420,8 +424,8 @@ CanvasGroup:
   m_GameObject: {fileID: 1365270178737116267}
   m_Enabled: 1
   m_Alpha: 1
-  m_Interactable: 0
-  m_BlocksRaycasts: 0
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
   m_IgnoreParentGroups: 0
 --- !u!114 &1365270178737116271
 MonoBehaviour:
@@ -1136,7 +1140,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &6633515694914453771
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1171,7 +1175,7 @@ GameObject:
   - component: {fileID: 3094182812400621226}
   - component: {fileID: 2228481532229988175}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: DeathButtonText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2187,6 +2191,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2115546502825098183}
     m_Modifications:
+    - target: {fileID: 639772560814349397, guid: 2c91fd78c8bd94749ba7e8180dd49d56,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7901107716330422353, guid: 2c91fd78c8bd94749ba7e8180dd49d56,
         type: 3}
       propertyPath: m_Name

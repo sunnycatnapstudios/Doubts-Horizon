@@ -39,10 +39,20 @@ public class AudioManager : MonoBehaviour {
         musicDoubleSource.SetMixerGroup(musicGroup);
     }
 
+    public void RestartToDefault() {
+        // Reset every source to default state
+        SetMasterVolume(0);
+        JustStopAmbienceSound();
+        JustStopMusicSound();
+
+        audioSource.Stop();
+        uiAudioSource.Stop();
+    }
+
     // TODO add more options later
     // Set the master volume of all sounds
     public void SetMasterVolume(float volume) {
-        mixer.SetFloat("MasterVolume", volume);
+        mixer.SetFloat("masterVolume", volume);
     }
     // TODO add more options later
 

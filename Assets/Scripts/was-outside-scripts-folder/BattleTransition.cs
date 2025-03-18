@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class BattleTransition : MonoBehaviour {
     public Image left, right;
 
+    private Transform deathTransform;
     public TextMeshProUGUI text, buttonText;
     public Image black, button;
 
@@ -18,12 +19,13 @@ public class BattleTransition : MonoBehaviour {
         right = this.transform.Find("Right").GetComponent<Image>();
 
         // Behold, the most jank method of fading in a death animation
-        Transform deathTransform = this.transform.Find("Death");
+        deathTransform = this.transform.Find("Death");
         black = deathTransform.Find("Black").GetComponent<Image>();
         text = deathTransform.Find("Died Text").GetComponent<TextMeshProUGUI>();
-        buttonText = deathTransform.Find("Button").GetComponent<TextMeshProUGUI>();
+        buttonText = deathTransform.Find("Button").Find("DeathButtonText").GetComponent<TextMeshProUGUI>();
         button = deathTransform.Find("Button").GetComponent<Image>();
 
+        Debug.Log(button + black.ToString());
         left.fillAmount = right.fillAmount = 0;
 
         left.fillOrigin = (int)Image.OriginHorizontal.Left;
@@ -76,6 +78,7 @@ public class BattleTransition : MonoBehaviour {
     }
 
     public void HadDied() {
+        deathTransform.gameObject.SetActive(true);
         _start = false;
         StartCoroutine(HadDiedAnim());
     }
@@ -89,6 +92,7 @@ public class BattleTransition : MonoBehaviour {
 
             newColor = new Color(text.color.r, text.color.g, text.color.b, fadeAmount);
             text.color = newColor;
+            buttonText.color = newColor;
 
             newColor = new Color(button.color.r, button.color.g, button.color.b,
                 fadeAmount);

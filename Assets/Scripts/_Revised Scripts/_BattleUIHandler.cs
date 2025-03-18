@@ -386,11 +386,14 @@ public class _BattleUIHandler : MonoBehaviour
             // Check if the battle is over
             if (CheckForBattleEnd())
             {
-                Debug.Log("Battle has ended!");
-                yield return new WaitForSecondsRealtime(1.5f);
-                battleTransition.LeaveBattle();
-                battleTransition.HadDied();   //todo
-                yield return new WaitForSecondsRealtime(.5f);
+                if (endCause == "Natural") {
+                    yield return new WaitForSecondsRealtime(1.5f);
+                    battleTransition.LeaveBattle();
+                    yield return new WaitForSecondsRealtime(.5f);
+                } else if (endCause == "Lose") {
+                    yield return new WaitForSecondsRealtime(.5f);
+                    battleTransition.HadDied();
+                }
 
                 EndEncounter(endCause);
                 battleInProgress = false;
@@ -879,12 +882,16 @@ public class _BattleUIHandler : MonoBehaviour
 
             battleInProgress = false;
             Time.timeScale = 1;
-        } else if (reason == "Lose") {
-            // TODO Play the death animation, load title screen
-            Debug.Log("Reached here");
-            //SceneManager.UnloadSceneAsync("Horizon");
-            //SceneManager.LoadScene("Title");
         }
+    }
+
+    // Used in death button. Reset current scene, restart at title screen
+    public void ReturnToTitle() {
+        // Reset current scene
+        Debug.Log("Returning to the title");
+        Time.timeScale = 1;
+        AudioManager.Instance.RestartToDefault();
+        SceneManager.LoadScene("Title", LoadSceneMode.Single);
     }
 
     public void OnActionButtonPressed(string action)

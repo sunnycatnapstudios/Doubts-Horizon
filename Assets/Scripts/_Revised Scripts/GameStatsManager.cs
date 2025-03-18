@@ -11,7 +11,7 @@ using TMPro;
 //    public int attack, currentHealth, maxHealth;
 //    public bool isCombatant, isEnemy;
 //    public CharacterStats(string name, int att, int currhealth, int maxhealth, bool iscombatant, bool isenemy)
-//    { 
+//    {
 //        Name = name;
 //        attack = att;
 //        currentHealth = currhealth;
@@ -37,7 +37,7 @@ public class GameStatsManager : MonoBehaviour
     public Survivor player;
 
     public CharacterStats playerStats { get { return partyManager.getPlayer().GetCharStats(); } }
-    
+
     public Dictionary<string, CharacterStats> allPartyMembers = new Dictionary<string, CharacterStats>
     {
         { "MemberA", new CharacterStats("MemberA", 35, 100, 100, true, false)},
@@ -54,7 +54,7 @@ public class GameStatsManager : MonoBehaviour
     };
     public Dictionary<string, CharacterStats> L2AEnemies = new Dictionary<string, CharacterStats>
     {
-        
+
     };
     public Dictionary<string, CharacterStats> L2BEnemies = new Dictionary<string, CharacterStats>
     {
@@ -155,9 +155,9 @@ public class GameStatsManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
-        else {Destroy(gameObject);}
+        else if (Instance != this) {Destroy(gameObject);}
+        //DontDestroyOnLoad(gameObject);    Don't need this while in title screen
 
         currStamina = maxStamina;
         sprintLocked = false;
@@ -172,7 +172,7 @@ public class GameStatsManager : MonoBehaviour
     }
     public void Start()
     {
-        
+
     }
     public void Update()
     {
