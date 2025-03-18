@@ -887,6 +887,9 @@ public class _BattleUIHandler : MonoBehaviour
 
         selectedAction = action;
         Debug.Log("Current Action: " + selectedAction);
+        partyUIAnimator.SetTrigger("Close");
+        actOption = false;
+        itemOption = false;
     }
 
     public void Act()
