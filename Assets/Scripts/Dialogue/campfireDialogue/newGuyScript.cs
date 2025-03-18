@@ -29,8 +29,11 @@ public class newGuyScript : MonoBehaviour {
                 inventory.removeItemByName("Ration");
                 statsManager.interactedWithCampfireNPC();
                 statsManager.updateBedStatus();
-                npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
+                npcDialogueHandler.lastLineDisplayed = false;
+                npcDialogueHandler.currentLineIndex += 1;
                 npcDialogueHandler.dialogueContents.Add($"You have {inventory.getCountofItem("Ration")} rations left");
+                npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
+                
             } else {
                 statsManager.interactedWithCampfireNPC();
                 statsManager.updateBedStatus();
@@ -49,6 +52,8 @@ public class newGuyScript : MonoBehaviour {
             statsManager.interactedWithCampfireNPC();
             statsManager.updateBedStatus();
             fedOrNot = false;
+            npcDialogueHandler.lastLineDisplayed = false;
+            npcDialogueHandler.currentLineIndex += 1;
             npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
             GameStatsManager.Instance._dialogueHandler.CloseDialogueBox();
         };
