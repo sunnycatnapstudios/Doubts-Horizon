@@ -9,12 +9,14 @@ public class newGuyScript : MonoBehaviour {
     public Survivor survivor;
     private bool fedOrNot;
     private Inventory inventory;
+    private GameStatsManager statsManager;
 
 
     void Start() {
         dialogueInputHandler = GameObject.FindGameObjectWithTag("Dialogue Text").GetComponent<DialogueInputHandler>();
         npcDialogueHandler = GetComponent<DialogueBoxHandler>();
         inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
+        statsManager = GameStatsManager.Instance;
 
         string Feedme = "feed newguy";
         Action takeMe = () => {
@@ -25,10 +27,16 @@ public class newGuyScript : MonoBehaviour {
                 survivor.Fed = true;
                 fedOrNot = true;
                 inventory.removeItemByName("Ration");
+                statsManager.interactedWithCampfireNPC();
+                statsManager.updateBedStatus();
                 npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
                 npcDialogueHandler.dialogueContents.Add($"You have {inventory.getCountofItem("Ration")} rations left");
             } else {
+                statsManager.interactedWithCampfireNPC();
+                statsManager.updateBedStatus();
                 npcDialogueHandler.dialogueContents.Add($"You dont even have any for yourself");
+                npcDialogueHandler.lastLineDisplayed = false;
+                npcDialogueHandler.currentLineIndex += 1;
                 npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
             }
             GameStatsManager.Instance._dialogueHandler.UpdateDialogueBox();
@@ -38,6 +46,8 @@ public class newGuyScript : MonoBehaviour {
         string orNotTag = "do not feed newguy";
         Action orNot = () => {
             Debug.Log("Or not callback.");
+            statsManager.interactedWithCampfireNPC();
+            statsManager.updateBedStatus();
             fedOrNot = false;
             npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
             GameStatsManager.Instance._dialogueHandler.CloseDialogueBox();

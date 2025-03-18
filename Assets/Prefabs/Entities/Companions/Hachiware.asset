@@ -20,7 +20,7 @@ MonoBehaviour:
     type: 3}
   OverworldSprite: {fileID: 0}
   unKickable: 0
-  enteringFireDialogue: Foul Tarnished, Emboldened by the flame
+  enteringFireDialogue: Foul Tarnished, Emboldened by the flame of ambition
   Animcontroller: {fileID: 9100000, guid: ffcf3fd7ed2c1024ab6b6aad59d0e314, type: 2}
   Sprite: {fileID: 7598356176507770372, guid: d068f37a9b8556241a344075120966b1, type: 3}
   walkingSprite: {fileID: 0}
