@@ -982,6 +982,8 @@ public class _BattleUIHandler : MonoBehaviour
         //     }
         // }
         // escapeChance = (int)(35+(((totalMaxHealth-totalCurrentHealth)/totalMaxHealth)*65));
+    }
+    public void TryEscape() {
         roll = Random.Range(0, 100);
 
         Debug.Log($"Chance of escape: {escapeChance}%");
@@ -995,6 +997,7 @@ public class _BattleUIHandler : MonoBehaviour
         else
         {
             Debug.Log($"Oof, rolled a {roll}, didn't make it lol");
+            escapePrompt.ClosePrompt();
             SkipTurns();
         }
         // Reset confirmation state after execution
