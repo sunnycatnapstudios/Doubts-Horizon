@@ -33,8 +33,10 @@ public class HachiwareScript : MonoBehaviour {
                 npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
                 
             } else {
+                
                 statsManager.interactedWithCampfireNPC();
                 statsManager.updateBedStatus();
+                npcDialogueHandler.lastLineDisplayed = false;
                 npcDialogueHandler.dialogueContents.Add($"You dont even have any for yourself");
                 npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
             }
