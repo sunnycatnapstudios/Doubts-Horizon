@@ -83,7 +83,7 @@ public class TitleToHorizon : MonoBehaviour {
     }
 
     public void Start() {
-        AudioManager.Instance.CrossFadeAmbienceSound(musicIntro, 3, 1, 0);
+        AudioManager.Instance.CrossFadeMusicSound(musicIntro, 3, 1, 0);
     }
 
     public void Update() {

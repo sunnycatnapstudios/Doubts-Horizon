@@ -14,6 +14,7 @@ public class TitleToHorizonDialogHandler : MonoBehaviour {
     private TypeWriter typeWriter;
 
     [SerializeField] public AudioClip sfxTypingClip;
+    [SerializeField] public AudioClip ambienceIntroWind;
 
     private List<string> dialogueContents = new List<string> {
         "....",
@@ -83,7 +84,8 @@ public class TitleToHorizonDialogHandler : MonoBehaviour {
         isDialogueActive = false;
 
         // End the intro, Transition to Horizon Scene
-        AudioManager.Instance.CrossFadeAmbienceToZero(1);
+        AudioManager.Instance.CrossFadeAmbienceSound(ambienceIntroWind, 1f);
+        AudioManager.Instance.CrossFadeMusicToZero(1);
         SceneManager.LoadScene("Horizon");
     }
 
