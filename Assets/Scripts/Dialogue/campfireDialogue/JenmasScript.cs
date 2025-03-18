@@ -34,9 +34,10 @@ public class JenmasScript : MonoBehaviour {
             } else {
                 statsManager.interactedWithCampfireNPC();
                 statsManager.updateBedStatus();
+
+                npcDialogueHandler.dialogueContents.Add($"You dont even have any for yourself");
                 npcDialogueHandler.lastLineDisplayed = false;
                 npcDialogueHandler.currentLineIndex += 1;
-                npcDialogueHandler.dialogueContents.Add($"You dont even have any for yourself");
                 npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
             }
             GameStatsManager.Instance._dialogueHandler.UpdateDialogueBox();
