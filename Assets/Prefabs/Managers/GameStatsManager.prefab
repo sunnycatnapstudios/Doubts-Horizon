@@ -82,6 +82,7 @@ MonoBehaviour:
     battleMusic: {fileID: 8300000, guid: ba2ddd2007028223283c97b5b2f0f8a2, type: 3}
     oldAmbience: {fileID: 0}
     oldMusic: {fileID: 0}
+    battlePlayerDied: {fileID: 8300000, guid: 743bf65e797e0d254894ba715ba2f5ec, type: 3}
     sfxBell: {fileID: 8300000, guid: a6bc35b0ac6c5da2b9d9c7062b2506d5, type: 3}
     uiSelected: {fileID: 8300000, guid: b4039f555a91f4e238eac4e0df62d358, type: 3}
     uiUnselected: {fileID: 8300000, guid: e8dfa48a4940222b688da4e87608586e, type: 3}
@@ -251,7 +252,7 @@ GameObject:
   - component: {fileID: 4560704930532117087}
   - component: {fileID: 4560704930532117084}
   m_Layer: 0
-  m_Name: GameStatsManager MAIN
+  m_Name: GameStatsManager
   m_TagString: Stats Manager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

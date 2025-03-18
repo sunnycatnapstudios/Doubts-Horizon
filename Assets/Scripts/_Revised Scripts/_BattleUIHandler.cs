@@ -57,6 +57,7 @@ public class _BattleUIHandler : MonoBehaviour
         public AudioClip battleMusic;
         [HideInInspector] public AudioClip oldAmbience;      // Use to swap back to old scene
         [HideInInspector] public AudioClip oldMusic;         // Use to swap back to old scene
+        public AudioClip battlePlayerDied;
         public AudioClip sfxBell;
         public AudioClip uiSelected;
         public AudioClip uiUnselected;
@@ -882,6 +883,10 @@ public class _BattleUIHandler : MonoBehaviour
 
             battleInProgress = false;
             Time.timeScale = 1;
+        } else if (reason == "Lose") {
+            AudioManager.Instance.CrossFadeMusicToZero(0.5f, 0f);
+            AudioManager.Instance.PlaySound(audioClips.battlePlayerDied);
+
         }
     }
 
