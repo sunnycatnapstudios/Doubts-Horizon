@@ -830,54 +830,59 @@ public class _BattleUIHandler : MonoBehaviour
     }
 
 
-    private bool CheckForBattleEnd()
-    {
+    private bool CheckForBattleEnd() {
+        if (escapeSuccessful) {
+            endCause = "Win";
+            return true;
+        }
+
         bool playersAlive = battleOrder.Exists(c => !c.isEnemy);
+        if (!playersAlive) {
+            endCause = "Lose";
+            return true;
+        }
+
         bool enemiesAlive = battleOrder.Exists(c => c.isEnemy);
+        if (!enemiesAlive) {
+            EnemyDefeated(enemyStats.Name);
+            endCause = "Win";
+            return true;
+        }
 
-        if (!enemiesAlive) EnemyDefeated(enemyStats.Name);
-        endCause = playersAlive? "Natural": "Lose";
-
-        return !playersAlive || !enemiesAlive || escapeSuccessful;
+        return false;
     }
 
     // Called when the battle should end. Use to transition back to overworld
-    private void EndEncounter(string reason)
-    {
-        if (reason == "Natural")
-        {
-            if (partyUIAnimator != null)
-            {
-                partyUIAnimator.ResetTrigger("Open");
-                partyUIAnimator.ResetTrigger("Close");
-                partyUIAnimator.ResetTrigger("Reset");
-
-                if (itemOption||actOption) {
-                    partyUIAnimator.SetTrigger("Close");
-                    actOption = itemOption = false;
-                }
+    private void EndEncounter(string reason) {
+        // Clean up
+        if (partyUIAnimator != null) {
+            partyUIAnimator.ResetTrigger("Open");
+            partyUIAnimator.ResetTrigger("Close");
+            partyUIAnimator.ResetTrigger("Reset");
+            if (itemOption || actOption) {
+                partyUIAnimator.SetTrigger("Close");
+                actOption = itemOption = false;
             }
-            if (floatingText != null)
-            {
-                Destroy(floatingText);
-            }
+        }
+        if (floatingText != null) {
+            Destroy(floatingText);
+        }
+        actOptionBList.SetActive(actOption);
+        itemOptionBList.SetActive(itemOption);
+        turnIndicator.ClearTurnIndicators();
 
-            actOptionBList.SetActive(actOption);
-            itemOptionBList.SetActive(itemOption);
+        // Restart stuff
+        overworldUI.SetActive(true);
+        combatUI.SetActive(false);
+        Canvas.ForceUpdateCanvases();
+        // Switch back to original sounds
+        AudioManager.Instance.CrossFadeAmbienceSound(audioClips.oldAmbience, 1f, 1f, 1f);
+        AudioManager.Instance.CrossFadeMusicSound(audioClips.oldMusic, 1f, 1f, 1f);
 
-            overworldUI.SetActive(true);
-            combatUI.SetActive(false);
-            Canvas.ForceUpdateCanvases();
+        battleInProgress = false;
+        Time.timeScale = 1;
 
-            turnIndicator.ClearTurnIndicators();
-
-            // Switch back to original sounds
-            AudioManager.Instance.CrossFadeAmbienceSound(audioClips.oldAmbience, 1f, 1f, 1f);
-            AudioManager.Instance.CrossFadeMusicSound(audioClips.oldMusic, 1f, 1f, 1f);
-
-            battleInProgress = false;
-            Time.timeScale = 1;
-        } else if (reason == "Lose") {
+        if (reason == "Lose") {
             Debug.Log("Game Over");
             SceneManager.LoadScene("Title");
         }
@@ -1005,7 +1010,7 @@ public class _BattleUIHandler : MonoBehaviour
         if (roll<= escapeChance)
         {
             Debug.Log($"Wow, rolled a {roll}, you made it!!!");
-            endCause = "Natural";
+            endCause = "Win";
             endTurn = true;
             escapeSuccessful = true;
         }
