@@ -36,6 +36,8 @@ public class GameStatsManager : MonoBehaviour
     //};
     public Survivor player;
 
+    public int CampfireNPCInteractedWith = 0;
+
     public CharacterStats playerStats { get { return partyManager.getPlayer().GetCharStats(); } }
 
     public Dictionary<string, CharacterStats> allPartyMembers = new Dictionary<string, CharacterStats>
@@ -52,6 +54,10 @@ public class GameStatsManager : MonoBehaviour
         { "Gregor", new CharacterStats("Gregor", 16, 180, 180, true, true)},
         { "Cuboid", new CharacterStats("Cuboid", 15, 150, 150, true, true)}
     };
+
+    public List<CampfireExitDialogue> allBeds = new List<CampfireExitDialogue>();
+
+
     public Dictionary<string, CharacterStats> L2AEnemies = new Dictionary<string, CharacterStats>
     {
 
@@ -185,6 +191,45 @@ public class GameStatsManager : MonoBehaviour
         // 3. A dialogue Script
         if (Input.GetKeyDown(KeyCode.T)) {
             _dialogueHandler.OpenDialogueWith(GameObject.Find("TestDialogue"));
+        }
+    }
+    public void resetNpcCounter() {
+        CampfireNPCInteractedWith = 0;    }
+    public void interactedWithCampfireNPC() {
+        CampfireNPCInteractedWith++;
+    }
+    public void updateBedStatus() {
+        //call every beggining of feed and after every fed i think
+
+        //bool highlightBed = true;
+        //foreach (Survivor survivor in partyManager.currentPartyMembers) {
+        //    if (!survivor.Fed) {
+        //        highlightBed = false;
+        //    }
+
+        //}
+        //Inventory inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
+        //if (!inventory.hasItemByName("Ration")) {
+        //    highlightBed = true;
+
+        //}
+
+        bool highlightBed = false;
+        if (CampfireNPCInteractedWith == partyManager.currentPartyMembers.Count-1) {
+            highlightBed = true;
+        }
+
+        if (highlightBed) {
+            foreach (CampfireExitDialogue bed in allBeds) {
+                bed.highlightBedSprite();
+
+            }
+        } else{
+            foreach (CampfireExitDialogue bed in allBeds) {
+                bed.deselectBedSprite();
+
+
+            }
         }
     }
 }
