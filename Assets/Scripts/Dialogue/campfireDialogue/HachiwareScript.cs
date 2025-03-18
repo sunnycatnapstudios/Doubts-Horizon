@@ -9,12 +9,14 @@ public class HachiwareScript : MonoBehaviour {
     public Survivor survivor;
     private bool fedOrNot;
     private Inventory inventory;
+    private GameStatsManager statsManager;
 
 
     void Start() {
         dialogueInputHandler = GameObject.FindGameObjectWithTag("Dialogue Text").GetComponent<DialogueInputHandler>();
         npcDialogueHandler = GetComponent<DialogueBoxHandler>();
         inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
+        statsManager = GameStatsManager.Instance;
 
         string Feedme = "feed hachi";
         Action takeMe = () => {
@@ -25,10 +27,21 @@ public class HachiwareScript : MonoBehaviour {
                 survivor.Fed = true;
                 fedOrNot = true;
                 inventory.removeItemByName("Ration");
-                npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
+                statsManager.interactedWithCampfireNPC();
+                statsManager.updateBedStatus();
                 npcDialogueHandler.dialogueContents.Add($"You have {inventory.getCountofItem("Ration")} rations left");
+                npcDialogueHandler.lastLineDisplayed = false;
+                npcDialogueHandler.currentLineIndex += 1;
+                npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
+                
             } else {
+                
+                statsManager.interactedWithCampfireNPC();
+                statsManager.updateBedStatus();
+               
                 npcDialogueHandler.dialogueContents.Add($"You dont even have any for yourself");
+                npcDialogueHandler.lastLineDisplayed = false;
+                npcDialogueHandler.currentLineIndex += 1;
                 npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
             }
             GameStatsManager.Instance._dialogueHandler.UpdateDialogueBox();
@@ -40,7 +53,13 @@ public class HachiwareScript : MonoBehaviour {
             Debug.Log("Or not callback.");
             fedOrNot = false;
             npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
-            GameStatsManager.Instance._dialogueHandler.CloseDialogueBox();
+            statsManager.interactedWithCampfireNPC();
+            statsManager.updateBedStatus();
+            npcDialogueHandler.dialogueContents.Add("oh ok....");
+            npcDialogueHandler.dialogueContents.Add("i guess i see how it is....");
+            npcDialogueHandler.lastLineDisplayed = false;
+            npcDialogueHandler.currentLineIndex += 1;
+            GameStatsManager.Instance._dialogueHandler.UpdateDialogueBox();
         };
         dialogueInputHandler.AddDialogueChoice(orNotTag, orNot);
 

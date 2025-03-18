@@ -26,7 +26,7 @@ public class _BattleUIHandler : MonoBehaviour
     public List<GameObject> partySlots = new List<GameObject>();
     public List<CharacterStats> battleOrder = new List<CharacterStats>();
     public int currentTurnIndex = 0;
-    private bool battleInProgress = false;
+    private bool battleInProgress = false, escapeSuccessful = false;
     public List<CharacterStats> currentEnemies = new List<CharacterStats>();
     public TurnIndicator turnIndicator;
     public TextMeshProUGUI enemyName, damageButtonText;
@@ -692,6 +692,11 @@ public class _BattleUIHandler : MonoBehaviour
     private IEnumerator EnemyTurn(CharacterStats enemy)
     {
         Debug.Log($"Enemy's Turn: {enemy.Name}");
+
+        partyUIAnimator.SetTrigger("Close");
+        actOption = false;
+        itemOption = false;
+
         yield return new WaitForSecondsRealtime(1f);
 
         if (playerParty.Count > 0)
@@ -833,7 +838,7 @@ public class _BattleUIHandler : MonoBehaviour
         if (!enemiesAlive) EnemyDefeated(enemyStats.Name);
         endCause = playersAlive? "Natural": "Lose";
 
-        return !playersAlive || !enemiesAlive;
+        return !playersAlive || !enemiesAlive || escapeSuccessful;
         // return false;
     }
 
@@ -887,11 +892,14 @@ public class _BattleUIHandler : MonoBehaviour
 
         selectedAction = action;
         Debug.Log("Current Action: " + selectedAction);
+        partyUIAnimator.SetTrigger("Close");
+        actOption = false;
+        itemOption = false;
     }
 
     public void Act()
     {
-        if (partyUIAnimator != null)
+        if (partyUIAnimator != null && !battleOrder[currentTurnIndex].isEnemy)
         {
             partyUIAnimator.ResetTrigger("Open");
             partyUIAnimator.ResetTrigger("Close");
@@ -918,7 +926,7 @@ public class _BattleUIHandler : MonoBehaviour
     }
     public void Item()
     {
-        if (partyUIAnimator != null)
+        if (partyUIAnimator != null && !battleOrder[currentTurnIndex].isEnemy)
         {
             partyUIAnimator.ResetTrigger("Open");
             partyUIAnimator.ResetTrigger("Close");
@@ -947,6 +955,10 @@ public class _BattleUIHandler : MonoBehaviour
     private float escapeTimer = 0f,  escapeTimeout = 2f; // Time window for second press
     public void Escape()
     {
+        if (battleOrder[currentTurnIndex].isEnemy) {
+            return;
+        }
+
         escapePrompt.OpenPrompt();
         if (!escapePressedOnce)
         {
@@ -982,6 +994,8 @@ public class _BattleUIHandler : MonoBehaviour
         //     }
         // }
         // escapeChance = (int)(35+(((totalMaxHealth-totalCurrentHealth)/totalMaxHealth)*65));
+    }
+    public void TryEscape() {
         roll = Random.Range(0, 100);
 
         Debug.Log($"Chance of escape: {escapeChance}%");
@@ -990,7 +1004,8 @@ public class _BattleUIHandler : MonoBehaviour
         {
             Debug.Log($"Wow, rolled a {roll}, you made it!!!");
             endCause = "Natural";
-            EndEncounter(endCause);
+            endTurn = true;
+            escapeSuccessful = true;
         }
         else
         {
@@ -999,6 +1014,9 @@ public class _BattleUIHandler : MonoBehaviour
         }
         // Reset confirmation state after execution
         escapePressedOnce = false;
+
+        escapePrompt.ClosePrompt();
+        selectedAction = "Escape"; // Not used other than it is not null.
     }
     void SkipTurns()
     {
