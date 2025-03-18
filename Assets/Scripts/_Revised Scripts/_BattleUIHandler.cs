@@ -26,7 +26,7 @@ public class _BattleUIHandler : MonoBehaviour
     public List<GameObject> partySlots = new List<GameObject>();
     public List<CharacterStats> battleOrder = new List<CharacterStats>();
     public int currentTurnIndex = 0;
-    private bool battleInProgress = false;
+    private bool battleInProgress = false, escapeSuccessful = false;
     public List<CharacterStats> currentEnemies = new List<CharacterStats>();
     public TurnIndicator turnIndicator;
     public TextMeshProUGUI enemyName, damageButtonText;
@@ -833,7 +833,7 @@ public class _BattleUIHandler : MonoBehaviour
         if (!enemiesAlive) EnemyDefeated(enemyStats.Name);
         endCause = playersAlive? "Natural": "Lose";
 
-        return !playersAlive || !enemiesAlive;
+        return !playersAlive || !enemiesAlive || escapeSuccessful;
         // return false;
     }
 
@@ -992,16 +992,19 @@ public class _BattleUIHandler : MonoBehaviour
         {
             Debug.Log($"Wow, rolled a {roll}, you made it!!!");
             endCause = "Natural";
-            EndEncounter(endCause);
+            endTurn = true;
+            escapeSuccessful = true;
         }
         else
         {
             Debug.Log($"Oof, rolled a {roll}, didn't make it lol");
-            escapePrompt.ClosePrompt();
             SkipTurns();
         }
         // Reset confirmation state after execution
         escapePressedOnce = false;
+
+        escapePrompt.ClosePrompt();
+        selectedAction = "Escape"; // Not used other than it is not null.
     }
     void SkipTurns()
     {
