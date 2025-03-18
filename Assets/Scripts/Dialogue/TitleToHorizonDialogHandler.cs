@@ -84,7 +84,7 @@ public class TitleToHorizonDialogHandler : MonoBehaviour {
 
         // End the intro, Transition to Horizon Scene
         AudioManager.Instance.CrossFadeAmbienceToZero(1);
-        SceneManager.LoadScene("Horizon");
+        SceneManager.LoadScene("Horizon", LoadSceneMode.Single);
     }
 
     private IEnumerator AnimateMovingEBox() {
