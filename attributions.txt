@@ -1,5 +1,6 @@
 Key sprite: https://opengameart.org/content/key-icons
 Door icon: https://opengameart.org/content/rpgmaker-style-doors
+tent icon: https://opengameart.org/content/tent-3
 
 # Audio
 ## Sample Packs (various online soureces):

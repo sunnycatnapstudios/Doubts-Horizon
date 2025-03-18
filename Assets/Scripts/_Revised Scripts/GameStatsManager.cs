@@ -11,7 +11,7 @@ using TMPro;
 //    public int attack, currentHealth, maxHealth;
 //    public bool isCombatant, isEnemy;
 //    public CharacterStats(string name, int att, int currhealth, int maxhealth, bool iscombatant, bool isenemy)
-//    { 
+//    {
 //        Name = name;
 //        attack = att;
 //        currentHealth = currhealth;
@@ -36,8 +36,10 @@ public class GameStatsManager : MonoBehaviour
     //};
     public Survivor player;
 
+    public int CampfireNPCInteractedWith = 0;
+
     public CharacterStats playerStats { get { return partyManager.getPlayer().GetCharStats(); } }
-    
+
     public Dictionary<string, CharacterStats> allPartyMembers = new Dictionary<string, CharacterStats>
     {
         { "MemberA", new CharacterStats("MemberA", 35, 100, 100, true, false)},
@@ -52,9 +54,13 @@ public class GameStatsManager : MonoBehaviour
         { "Gregor", new CharacterStats("Gregor", 16, 180, 180, true, true)},
         { "Cuboid", new CharacterStats("Cuboid", 15, 150, 150, true, true)}
     };
+
+    public List<CampfireExitDialogue> allBeds = new List<CampfireExitDialogue>();
+
+
     public Dictionary<string, CharacterStats> L2AEnemies = new Dictionary<string, CharacterStats>
     {
-        
+
     };
     public Dictionary<string, CharacterStats> L2BEnemies = new Dictionary<string, CharacterStats>
     {
@@ -155,9 +161,9 @@ public class GameStatsManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
-        else {Destroy(gameObject);}
+        else if (Instance != this) {Destroy(gameObject);}
+        //DontDestroyOnLoad(gameObject);    Don't need this while in title screen
 
         currStamina = maxStamina;
         sprintLocked = false;
@@ -172,7 +178,7 @@ public class GameStatsManager : MonoBehaviour
     }
     public void Start()
     {
-        
+
     }
     public void Update()
     {
@@ -185,6 +191,45 @@ public class GameStatsManager : MonoBehaviour
         // 3. A dialogue Script
         if (Input.GetKeyDown(KeyCode.T)) {
             _dialogueHandler.OpenDialogueWith(GameObject.Find("TestDialogue"));
+        }
+    }
+    public void resetNpcCounter() {
+        CampfireNPCInteractedWith = 0;    }
+    public void interactedWithCampfireNPC() {
+        CampfireNPCInteractedWith++;
+    }
+    public void updateBedStatus() {
+        //call every beggining of feed and after every fed i think
+
+        //bool highlightBed = true;
+        //foreach (Survivor survivor in partyManager.currentPartyMembers) {
+        //    if (!survivor.Fed) {
+        //        highlightBed = false;
+        //    }
+
+        //}
+        //Inventory inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
+        //if (!inventory.hasItemByName("Ration")) {
+        //    highlightBed = true;
+
+        //}
+
+        bool highlightBed = false;
+        if (CampfireNPCInteractedWith == partyManager.currentPartyMembers.Count-1) {
+            highlightBed = true;
+        }
+
+        if (highlightBed) {
+            foreach (CampfireExitDialogue bed in allBeds) {
+                bed.highlightBedSprite();
+
+            }
+        } else{
+            foreach (CampfireExitDialogue bed in allBeds) {
+                bed.deselectBedSprite();
+
+
+            }
         }
     }
 }

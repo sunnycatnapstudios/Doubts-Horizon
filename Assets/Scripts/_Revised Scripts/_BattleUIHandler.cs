@@ -57,6 +57,7 @@ public class _BattleUIHandler : MonoBehaviour
         public AudioClip battleMusic;
         [HideInInspector] public AudioClip oldAmbience;      // Use to swap back to old scene
         [HideInInspector] public AudioClip oldMusic;         // Use to swap back to old scene
+        public AudioClip battlePlayerDied;
         public AudioClip sfxBell;
         public AudioClip uiSelected;
         public AudioClip uiUnselected;
@@ -386,10 +387,14 @@ public class _BattleUIHandler : MonoBehaviour
             // Check if the battle is over
             if (CheckForBattleEnd())
             {
-                Debug.Log("Battle has ended!");
-                yield return new WaitForSecondsRealtime(1.5f);
-                battleTransition.LeaveBattle();
-                yield return new WaitForSecondsRealtime(.5f);
+                if (endCause == "Win" || endCause == "Escape") {
+                    yield return new WaitForSecondsRealtime(1.5f);
+                    battleTransition.LeaveBattle();
+                    yield return new WaitForSecondsRealtime(.5f);
+                } else if (endCause == "Lose") {
+                    yield return new WaitForSecondsRealtime(.5f);
+                    battleTransition.HadDied();
+                }
 
                 EndEncounter(endCause);
                 battleInProgress = false;
@@ -871,21 +876,32 @@ public class _BattleUIHandler : MonoBehaviour
         itemOptionBList.SetActive(itemOption);
         turnIndicator.ClearTurnIndicators();
 
-        // Restart stuff
-        overworldUI.SetActive(true);
-        combatUI.SetActive(false);
-        Canvas.ForceUpdateCanvases();
-        // Switch back to original sounds
-        AudioManager.Instance.CrossFadeAmbienceSound(audioClips.oldAmbience, 1f, 1f, 1f);
-        AudioManager.Instance.CrossFadeMusicSound(audioClips.oldMusic, 1f, 1f, 1f);
 
-        battleInProgress = false;
-        Time.timeScale = 1;
+        if (reason == "Win" || reason == "Escape") {
+            // Restart stuff
+            overworldUI.SetActive(true);
+            combatUI.SetActive(false);
+            Canvas.ForceUpdateCanvases();
+            // Switch back to original sounds
+            AudioManager.Instance.CrossFadeAmbienceSound(audioClips.oldAmbience, 1f, 1f, 1f);
+            AudioManager.Instance.CrossFadeMusicSound(audioClips.oldMusic, 1f, 1f, 1f);
 
-        if (reason == "Lose") {
+            battleInProgress = false;
+            Time.timeScale = 1;
+        } else if (reason == "Lose") {
             Debug.Log("Game Over");
-            SceneManager.LoadScene("Title");
+            AudioManager.Instance.CrossFadeMusicToZero(0.5f, 0f);
+            AudioManager.Instance.PlaySound(audioClips.battlePlayerDied);
         }
+    }
+
+    // Used in death button. Reset current scene, restart at title screen
+    public void ReturnToTitle() {
+        // Reset current scene
+        Debug.Log("Returning to the title");
+        Time.timeScale = 1;
+        AudioManager.Instance.RestartToDefault();
+        SceneManager.LoadScene("Title", LoadSceneMode.Single);
     }
 
     public void OnActionButtonPressed(string action)

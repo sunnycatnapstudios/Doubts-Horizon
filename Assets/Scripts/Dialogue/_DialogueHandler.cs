@@ -31,6 +31,7 @@ public class _DialogueHandler : MonoBehaviour {
 
     private List<string> positiveAnswer, negativeAnswer;
     private List<string> currentDialogue;
+    public bool isCloseable = true;
 
 
     void Awake() {
@@ -116,6 +117,7 @@ public class _DialogueHandler : MonoBehaviour {
     }
 
     public void OpenDialogueWith(GameObject dialogueSource) {
+
         SetCurrentNpc(dialogueSource);
         OpenDialogueBox();
     }
@@ -188,6 +190,7 @@ public class _DialogueHandler : MonoBehaviour {
 
         dialogueName.text = currentNPC.name;
         dialogueAnimator.Play("Dialogue Appear");
+        
         darkScreenAnimator.Play("Darken Screen");
 
         player.GetComponent<Player>().isPlayerInControl = true;
@@ -220,10 +223,14 @@ public class _DialogueHandler : MonoBehaviour {
         }
 
         Debug.Log("in CloseDialogueBox");
-
         isDialogueActive = false;
-        darkScreenAnimator.Play("Lighten Screen");
-        dialogueAnimator.Play("Dialogue Dissapear");
+
+
+        if (isCloseable) {
+            
+            darkScreenAnimator.Play("Lighten Screen");
+            dialogueAnimator.Play("Dialogue Dissapear");
+        }
 
         player.GetComponent<Player>().isPlayerInControl = false;
 

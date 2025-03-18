@@ -25,15 +25,27 @@ public class fireplace : MonoBehaviour
     }
 
     // Update is called once per frame
-    private void OnTriggerEnter2D(Collider2D other) {
-        
-        SpawnMembers();
-       followers = GameObject.FindGameObjectsWithTag("Followers");
-        foreach (GameObject follower in followers) {
-            //follower.SetActive(false);
-            follower.GetComponent<SpriteRenderer>().enabled = false;
+    private IEnumerator OnTriggerEnter2D(Collider2D other) {
 
+
+        if (other.GetComponentInParent<Player>() != null) {
+            GameStatsManager.Instance.resetNpcCounter();
+            GameStatsManager.Instance.updateBedStatus();
+        
+        
+            SpawnMembers();
+            followers = GameObject.FindGameObjectsWithTag("Followers");
+            foreach (GameObject follower in followers) {
+                //follower.SetActive(false);
+                follower.GetComponent<SpriteRenderer>().enabled = false;
+
+            }
+
+
+            yield return new WaitForSeconds(2);
+            gameObject.SetActive(false);
         }
+        
     }
 
     private void SpawnMembers() {

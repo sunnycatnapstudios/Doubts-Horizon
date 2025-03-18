@@ -79,11 +79,11 @@ public class TitleToHorizon : MonoBehaviour {
     public void Awake() {
         blackFaderImage = blackFader.GetComponent<RawImage>();
         textHandler = GetComponent<TitleToHorizonDialogHandler>();
-        fadeCoroutine = StartCoroutine(FadeInFromBlack());
     }
 
     public void Start() {
-        AudioManager.Instance.CrossFadeAmbienceSound(musicIntro, 3, 1, 0);
+        AudioManager.Instance.CrossFadeAmbienceSound(musicIntro, 3, 1, 1f);
+        fadeCoroutine = StartCoroutine(FadeInFromBlack());
     }
 
     public void Update() {
