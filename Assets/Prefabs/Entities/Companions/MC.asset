@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: MC
   m_EditorClassIdentifier: 
   name: maincharacter
-  damage: 32
-  health: 4343
+  damage: 1
+  health: 5
   isCombatant: 1
   unKickable: 1
   Animcontroller: {fileID: 9100000, guid: 9b454cd6a9bc678428b46c5d51ed0f67, type: 2}
