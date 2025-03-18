@@ -9,12 +9,14 @@ public class HachiwareScript : MonoBehaviour {
     public Survivor survivor;
     private bool fedOrNot;
     private Inventory inventory;
+    private GameStatsManager statsManager;
 
 
     void Start() {
         dialogueInputHandler = GameObject.FindGameObjectWithTag("Dialogue Text").GetComponent<DialogueInputHandler>();
         npcDialogueHandler = GetComponent<DialogueBoxHandler>();
         inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
+        statsManager = GameStatsManager.Instance;
 
         string Feedme = "feed hachi";
         Action takeMe = () => {
@@ -25,9 +27,14 @@ public class HachiwareScript : MonoBehaviour {
                 survivor.Fed = true;
                 fedOrNot = true;
                 inventory.removeItemByName("Ration");
-                npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
+                statsManager.interactedWithCampfireNPC();
+                statsManager.updateBedStatus();
                 npcDialogueHandler.dialogueContents.Add($"You have {inventory.getCountofItem("Ration")} rations left");
+                npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
+                
             } else {
+                statsManager.interactedWithCampfireNPC();
+                statsManager.updateBedStatus();
                 npcDialogueHandler.dialogueContents.Add($"You dont even have any for yourself");
                 npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
             }
@@ -40,6 +47,8 @@ public class HachiwareScript : MonoBehaviour {
             Debug.Log("Or not callback.");
             fedOrNot = false;
             npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
+            statsManager.interactedWithCampfireNPC();
+            statsManager.updateBedStatus();
             GameStatsManager.Instance._dialogueHandler.CloseDialogueBox();
         };
         dialogueInputHandler.AddDialogueChoice(orNotTag, orNot);
