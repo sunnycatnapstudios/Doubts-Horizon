@@ -1915,7 +1915,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 525067837465486674}
-          m_MethodName: ShowRoulette
+          m_MethodName: TryEscape
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
