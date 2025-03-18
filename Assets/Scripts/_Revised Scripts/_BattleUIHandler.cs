@@ -39,6 +39,8 @@ public class _BattleUIHandler : MonoBehaviour
     [System.NonSerialized]
     public CharacterStats currentDefender = null;
     public GameObject floatingText;
+    public GameObject curEnemy = null;
+    private TMP_Text battleExplanation = null;
 
     private int healAmount;
     public List<string> defeatedInCombat = new List<string>();
@@ -100,6 +102,7 @@ public class _BattleUIHandler : MonoBehaviour
                 partySlotHandler = combatUI.GetComponentInChildren<PartySlotHandler>();
                 defendStatusIcon = combatUI.GetComponentInChildren<DefendStatusIcon>();
                 escapePrompt = combatUI.GetComponentInChildren<EscapePrompt>();
+                battleExplanation = partySlotHandler.GetComponentInChildren<TMP_Text>();
             } if (obj.CompareTag("EnemyUI")) {
                 enemySlot = obj;
                 enemyStatsAnimator = obj.GetComponent<Animator>();
@@ -387,7 +390,7 @@ public class _BattleUIHandler : MonoBehaviour
             // Check if the battle is over
             if (CheckForBattleEnd())
             {
-                if (endCause == "Natural") {
+                if (endCause == "Win" || endCause == "Escape") {
                     yield return new WaitForSecondsRealtime(1.5f);
                     battleTransition.LeaveBattle();
                     yield return new WaitForSecondsRealtime(.5f);
@@ -550,9 +553,9 @@ public class _BattleUIHandler : MonoBehaviour
         defendIndicator.GetComponent<DefendIndicator>().isAssigned = false;
     }
 
-    private IEnumerator PlayerTurn(CharacterStats player)
-    {
+    private IEnumerator PlayerTurn(CharacterStats player) {
         Debug.Log($"{player.Name}'s turn. Choose an action!");
+        battleExplanation.text = "Choose an action!";
         partySlotHandler.MoveToActivePlayer(player, false);
         partySlotHandler.ViewPortCanvasGroup.blocksRaycasts = true;
 
@@ -572,6 +575,7 @@ public class _BattleUIHandler : MonoBehaviour
             if (selectedAction == "Heal") {
                 partySlotHandler.ViewPortCanvasGroup.blocksRaycasts = false;
                 canSelect = true;
+                battleExplanation.text = "Select a survivor to heal.";
             }
 
             while (selectedTarget == null)
@@ -694,9 +698,9 @@ public class _BattleUIHandler : MonoBehaviour
         yield return new WaitForSecondsRealtime(.6f);
     }
 
-    private IEnumerator EnemyTurn(CharacterStats enemy)
-    {
+    private IEnumerator EnemyTurn(CharacterStats enemy) {
         Debug.Log($"Enemy's Turn: {enemy.Name}");
+        battleExplanation.text = "Enemy turn.";
 
         partyUIAnimator.SetTrigger("Close");
         actOption = false;
@@ -835,58 +839,71 @@ public class _BattleUIHandler : MonoBehaviour
     }
 
 
-    private bool CheckForBattleEnd()
-    {
+    private bool CheckForBattleEnd() {
+        if (escapeSuccessful) {
+            endCause = "Escape";
+            return true;
+        }
+
         bool playersAlive = battleOrder.Exists(c => !c.isEnemy);
+        if (!playersAlive) {
+            endCause = "Lose";
+            return true;
+        }
+
         bool enemiesAlive = battleOrder.Exists(c => c.isEnemy);
+        if (!enemiesAlive) {
+            EnemyDefeated(enemyStats.Name);
+            endCause = "Win";
+            return true;
+        }
 
-        if (!enemiesAlive) EnemyDefeated(enemyStats.Name);
-        endCause = playersAlive? "Natural": "Lose";
-
-        return !playersAlive || !enemiesAlive || escapeSuccessful;
-        // return false;
+        return false;
     }
 
     // Called when the battle should end. Use to transition back to overworld
-    private void EndEncounter(string reason)
-    {
-        if (reason == "Natural")
-        {
-            if (partyUIAnimator != null)
-            {
-                partyUIAnimator.ResetTrigger("Open");
-                partyUIAnimator.ResetTrigger("Close");
-                partyUIAnimator.ResetTrigger("Reset");
+    private void EndEncounter(string reason) {
+        Debug.Log($"EndEncounter({reason})");
 
-                if (itemOption||actOption) {
-                    partyUIAnimator.SetTrigger("Close");
-                    actOption = itemOption = false;
-                }
+        // Clean up
+        if (partyUIAnimator != null) {
+            partyUIAnimator.ResetTrigger("Open");
+            partyUIAnimator.ResetTrigger("Close");
+            partyUIAnimator.ResetTrigger("Reset");
+            if (itemOption || actOption) {
+                partyUIAnimator.SetTrigger("Close");
+                actOption = itemOption = false;
             }
-            if (floatingText != null)
-            {
-                Destroy(floatingText);
-            }
+        }
+        if (floatingText != null) {
+            Destroy(floatingText);
+        }
+        actOptionBList.SetActive(actOption);
+        itemOptionBList.SetActive(itemOption);
+        turnIndicator.ClearTurnIndicators();
 
-            actOptionBList.SetActive(actOption);
-            itemOptionBList.SetActive(itemOption);
 
+        if (reason == "Win" || reason == "Escape") {
+            // Restart stuff
             overworldUI.SetActive(true);
             combatUI.SetActive(false);
             Canvas.ForceUpdateCanvases();
-
-            turnIndicator.ClearTurnIndicators();
-
             // Switch back to original sounds
             AudioManager.Instance.CrossFadeAmbienceSound(audioClips.oldAmbience, 1f, 1f, 1f);
             AudioManager.Instance.CrossFadeMusicSound(audioClips.oldMusic, 1f, 1f, 1f);
 
             battleInProgress = false;
             Time.timeScale = 1;
+        }
+        if (reason == "Win") {
+            battleExplanation.text = "You did it!";
+        } if (reason == "Escape") {
+            Destroy(curEnemy);
         } else if (reason == "Lose") {
+            Debug.Log("Game Over");
+            battleExplanation.text = "Uh oh...";
             AudioManager.Instance.CrossFadeMusicToZero(0.5f, 0f);
             AudioManager.Instance.PlaySound(audioClips.battlePlayerDied);
-
         }
     }
 
@@ -899,8 +916,7 @@ public class _BattleUIHandler : MonoBehaviour
         SceneManager.LoadScene("Title", LoadSceneMode.Single);
     }
 
-    public void OnActionButtonPressed(string action)
-    {
+    public void OnActionButtonPressed(string action) {
         AudioManager.Instance.PlayUiSound(audioClips.uiSelected);
 
         if (selectedAction == "Heal" || selectedAction == "Defend"){
@@ -915,10 +931,10 @@ public class _BattleUIHandler : MonoBehaviour
         itemOption = false;
     }
 
-    public void Act()
-    {
-        if (partyUIAnimator != null && !battleOrder[currentTurnIndex].isEnemy)
-        {
+    public void Act() {
+        if (battleOrder[currentTurnIndex].isEnemy) {
+            battleExplanation.text = "It is not your turn.";
+        } else if (partyUIAnimator != null) {
             partyUIAnimator.ResetTrigger("Open");
             partyUIAnimator.ResetTrigger("Close");
             partyUIAnimator.ResetTrigger("Reset");
@@ -942,10 +958,10 @@ public class _BattleUIHandler : MonoBehaviour
 
         AudioManager.Instance.PlayUiSound(audioClips.uiDrawer);
     }
-    public void Item()
-    {
-        if (partyUIAnimator != null && !battleOrder[currentTurnIndex].isEnemy)
-        {
+    public void Item() {
+        if (battleOrder[currentTurnIndex].isEnemy) {
+            battleExplanation.text = "It is not your turn.";
+        } if (partyUIAnimator != null) {
             partyUIAnimator.ResetTrigger("Open");
             partyUIAnimator.ResetTrigger("Close");
             partyUIAnimator.ResetTrigger("Reset");
@@ -971,9 +987,10 @@ public class _BattleUIHandler : MonoBehaviour
     }
     private bool escapePressedOnce = false;
     private float escapeTimer = 0f,  escapeTimeout = 2f; // Time window for second press
-    public void Escape()
-    {
+    public void Escape() {
         if (battleOrder[currentTurnIndex].isEnemy) {
+            battleExplanation.text = "It is not your turn.";
+            AudioManager.Instance.PlayUiSound(audioClips.uiDrawer);
             return;
         }
 
@@ -1018,23 +1035,21 @@ public class _BattleUIHandler : MonoBehaviour
 
         Debug.Log($"Chance of escape: {escapeChance}%");
 
-        if (roll<= escapeChance)
-        {
+        if (roll<= escapeChance) {
             Debug.Log($"Wow, rolled a {roll}, you made it!!!");
-            endCause = "Natural";
             endTurn = true;
             escapeSuccessful = true;
-        }
-        else
-        {
+            battleExplanation.text = "You got away!";
+        } else {
             Debug.Log($"Oof, rolled a {roll}, didn't make it lol");
             SkipTurns();
+            battleExplanation.text = "Couldn't get away :(";
         }
         // Reset confirmation state after execution
         escapePressedOnce = false;
 
         escapePrompt.ClosePrompt();
-        selectedAction = "Escape"; // Not used other than it is not null.
+        selectedAction = "Escape";
     }
     void SkipTurns()
     {

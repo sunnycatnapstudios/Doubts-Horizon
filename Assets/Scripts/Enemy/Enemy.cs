@@ -70,10 +70,10 @@ public class Enemy : MonoBehaviour {
     void EnterCombat(bool iscaught) {
         if (iscaught && !caught) {
             caught = true;
-
-            // StartCoroutine(CaptureScreen());
-            // Time.timeScale = 0;
+            _battleUIHandler.curEnemy = gameObject;
             _battleUIHandler.EnterCombat();
+
+            // Enemy "killed"
             stun = true;
             stunTimer = float.NegativeInfinity;
             enemyAnim.Play("Stun Down");
