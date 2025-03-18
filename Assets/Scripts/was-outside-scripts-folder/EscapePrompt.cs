@@ -54,6 +54,9 @@ public class EscapePrompt : MonoBehaviour {
 
         escapePercentage.text = $"{targetValue}%";
     }
+    public void TryEscape() {
+        _battleUIHandler.TryEscape();
+    }
     public void ClosePrompt() {
         escapePrompt.Play("Close");
 
