@@ -692,6 +692,11 @@ public class _BattleUIHandler : MonoBehaviour
     private IEnumerator EnemyTurn(CharacterStats enemy)
     {
         Debug.Log($"Enemy's Turn: {enemy.Name}");
+
+        partyUIAnimator.SetTrigger("Close");
+        actOption = false;
+        itemOption = false;
+
         yield return new WaitForSecondsRealtime(1f);
 
         if (playerParty.Count > 0)
@@ -894,7 +899,7 @@ public class _BattleUIHandler : MonoBehaviour
 
     public void Act()
     {
-        if (partyUIAnimator != null)
+        if (partyUIAnimator != null && !battleOrder[currentTurnIndex].isEnemy)
         {
             partyUIAnimator.ResetTrigger("Open");
             partyUIAnimator.ResetTrigger("Close");
@@ -921,7 +926,7 @@ public class _BattleUIHandler : MonoBehaviour
     }
     public void Item()
     {
-        if (partyUIAnimator != null)
+        if (partyUIAnimator != null && !battleOrder[currentTurnIndex].isEnemy)
         {
             partyUIAnimator.ResetTrigger("Open");
             partyUIAnimator.ResetTrigger("Close");
@@ -950,6 +955,10 @@ public class _BattleUIHandler : MonoBehaviour
     private float escapeTimer = 0f,  escapeTimeout = 2f; // Time window for second press
     public void Escape()
     {
+        if (battleOrder[currentTurnIndex].isEnemy) {
+            return;
+        }
+
         escapePrompt.OpenPrompt();
         if (!escapePressedOnce)
         {
