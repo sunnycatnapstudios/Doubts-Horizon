@@ -389,6 +389,7 @@ public class _BattleUIHandler : MonoBehaviour
                 Debug.Log("Battle has ended!");
                 yield return new WaitForSecondsRealtime(1.5f);
                 battleTransition.LeaveBattle();
+                battleTransition.HadDied();   //todo
                 yield return new WaitForSecondsRealtime(.5f);
 
                 EndEncounter(endCause);
@@ -878,6 +879,11 @@ public class _BattleUIHandler : MonoBehaviour
 
             battleInProgress = false;
             Time.timeScale = 1;
+        } else if (reason == "Lose") {
+            // TODO Play the death animation, load title screen
+            Debug.Log("Reached here");
+            //SceneManager.UnloadSceneAsync("Horizon");
+            //SceneManager.LoadScene("Title");
         }
     }
 
