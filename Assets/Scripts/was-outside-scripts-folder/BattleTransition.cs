@@ -25,7 +25,6 @@ public class BattleTransition : MonoBehaviour {
         buttonText = deathTransform.Find("Button").Find("DeathButtonText").GetComponent<TextMeshProUGUI>();
         button = deathTransform.Find("Button").GetComponent<Image>();
 
-        Debug.Log(button + black.ToString());
         left.fillAmount = right.fillAmount = 0;
 
         left.fillOrigin = (int)Image.OriginHorizontal.Left;
