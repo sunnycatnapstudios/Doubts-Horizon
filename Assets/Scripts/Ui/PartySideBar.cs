@@ -17,7 +17,7 @@ public class PartySideBar : MonoBehaviour {
         foreach (var slot in sideBarSlots) { Destroy(slot); }
         sideBarSlots.Clear();
         foreach (Survivor member in gameStatsManager.currentSurvivors) {
-            if (member.Name == "maincharacter") {continue;}
+            if (member.Name == "Me") {continue;}
 
             GameObject newSideBarProfile = Instantiate(profilePrefab, transform);
             newSideBarProfile.SetActive(true);
