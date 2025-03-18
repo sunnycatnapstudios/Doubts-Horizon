@@ -839,7 +839,6 @@ public class _BattleUIHandler : MonoBehaviour
         endCause = playersAlive? "Natural": "Lose";
 
         return !playersAlive || !enemiesAlive || escapeSuccessful;
-        // return false;
     }
 
     // Called when the battle should end. Use to transition back to overworld
@@ -878,6 +877,9 @@ public class _BattleUIHandler : MonoBehaviour
 
             battleInProgress = false;
             Time.timeScale = 1;
+        } else if (reason == "Lose") {
+            Debug.Log("Game Over");
+            SceneManager.LoadScene("Title");
         }
     }
 
