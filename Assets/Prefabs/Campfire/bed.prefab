@@ -101,7 +101,7 @@ MonoBehaviour:
   highlightSprite: {fileID: 0}
   normalSprite: {fileID: 0}
   audioClips:
-    sfxTalkingBlip: {fileID: 8300000, guid: fd1eeaf7caafabcbe945f14fc1db6eb0, type: 3}
+    sfxTalkingBlip: {fileID: 8300000, guid: 28c78a651100df1cea783ae402a74437, type: 3}
 --- !u!114 &3975173022313475548
 MonoBehaviour:
   m_ObjectHideFlags: 0
