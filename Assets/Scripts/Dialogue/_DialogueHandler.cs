@@ -21,7 +21,7 @@ public class _DialogueHandler : MonoBehaviour {
     public LayerMask NPCLayer;
 
     private TextMeshProUGUI dialogueText, dialogueName, smallDialogueText;
-    private Image dialogueProfile;
+    public Image dialogueProfile;
     private Animator dialogueAnimator, darkScreenAnimator;
     private bool isDialogueActive = false;
 

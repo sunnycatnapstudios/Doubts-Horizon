@@ -27,7 +27,7 @@ public class IntroCamfireDialogue : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         manager = GameObject.FindGameObjectWithTag("Player").GetComponent<PartyManager>();
 
-       
+        npcDialogueHandler.beforeDialogue = new Action(BeforeDialogue);
         npcDialogueHandler.SetSfxTalkingClip(audioClips.sfxTalkingBlip);
 
         npcDialogueHandler.dialogueContents = new List<string> {
@@ -40,7 +40,12 @@ public class IntroCamfireDialogue : MonoBehaviour
         npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
     }
 
+    void BeforeDialogue() {
+        GameStatsManager.Instance._dialogueHandler.dialogueProfile.sprite = manager.currentPartyMembers[manager.currentPartyMembers.Count - 1].Sprite;
 
+        Debug.Log(manager.currentPartyMembers[manager.currentPartyMembers.Count - 1].ToString());
+
+    }
 
     void AfterDialogue() {
       gameObject.SetActive(false);
