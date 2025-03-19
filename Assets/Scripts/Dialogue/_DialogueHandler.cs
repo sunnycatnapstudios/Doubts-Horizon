@@ -20,7 +20,8 @@ public class _DialogueHandler : MonoBehaviour {
     public GameObject interactPromptPrefab, smallDialogueBox;
     public LayerMask NPCLayer;
 
-    private TextMeshProUGUI dialogueText, dialogueName, smallDialogueText;
+    [System.NonSerialized]
+    public TextMeshProUGUI dialogueText, dialogueName, smallDialogueText;
     public Image dialogueProfile;
     private Animator dialogueAnimator, darkScreenAnimator;
     private bool isDialogueActive = false;
