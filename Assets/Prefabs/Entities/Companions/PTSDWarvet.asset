@@ -10,18 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 37bebb4f9bbe1904896366df90c723ce, type: 3}
-  m_Name: Hachiware
+  m_Name: PTSDWarvet
   m_EditorClassIdentifier: 
-  name: HACHIWAREE
-  damage: 12
-  health: 32
+  name: Harvey
+  damage: 20
+  health: 50
   isCombatant: 1
-  inventoryDialogues: {fileID: 8850573105260575154, guid: 97ee79cdb3d35bc44bfcd125382fc182,
+  inventoryDialogues: {fileID: -1496039249989309894, guid: 3059dc3cb6cf75e44a8ff00d1bb7dd44,
     type: 3}
-  OverworldSprite: {fileID: 21300000, guid: 23b12652556d59c489d63abb394c772d, type: 3}
+  OverworldSprite: {fileID: 21300000, guid: 3639b4320d1f4484699e3a419cdb5e0a, type: 3}
   unKickable: 0
-  enteringFireDialogue: Foul Tarnished, Emboldened by the flame of ambition
-  Animcontroller: {fileID: 9100000, guid: ffcf3fd7ed2c1024ab6b6aad59d0e314, type: 2}
-  Sprite: {fileID: 21300000, guid: 23b12652556d59c489d63abb394c772d, type: 3}
+  enteringFireDialogue: 
+  Animcontroller: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 3639b4320d1f4484699e3a419cdb5e0a, type: 3}
   walkingSprite: {fileID: 0}
   GetWalkingSprite: {fileID: 0}

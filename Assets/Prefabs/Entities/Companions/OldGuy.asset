@@ -10,14 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 37bebb4f9bbe1904896366df90c723ce, type: 3}
-  m_Name: newguy
+  m_Name: OldGuy
   m_EditorClassIdentifier: 
-  name: Hanson
-  damage: 324
-  health: 234
-  isCombatant: 0
+  name: Old Man Dean
+  damage: 10
+  health: 32
+  isCombatant: 1
+  inventoryDialogues: {fileID: 6894140492303392861, guid: 7c50e87acb1109048966bedb87e4d2e7,
+    type: 3}
+  OverworldSprite: {fileID: 21300000, guid: dda27ad77a20fc44e98c26a311d50163, type: 3}
   unKickable: 0
-  Animcontroller: {fileID: 9100000, guid: 4114f537b7ab6d04b9e5a76a756ae683, type: 2}
-  Sprite: {fileID: 7285113142106033975, guid: d068f37a9b8556241a344075120966b1, type: 3}
+  enteringFireDialogue: 
+  Animcontroller: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: dda27ad77a20fc44e98c26a311d50163, type: 3}
   walkingSprite: {fileID: 0}
   GetWalkingSprite: {fileID: 0}

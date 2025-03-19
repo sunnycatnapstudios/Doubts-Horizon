@@ -12,13 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37bebb4f9bbe1904896366df90c723ce, type: 3}
   m_Name: Orphan
   m_EditorClassIdentifier: 
-  name: 
-  damage: 0
-  health: 0
-  isCombatant: 0
-  inventoryDialogues: {fileID: 0}
+  name: Anime Girl Jane
+  damage: 35
+  health: 35
+  isCombatant: 1
+  inventoryDialogues: {fileID: -381307989238394630, guid: d861617506f94ac4287d6cf758f76951,
+    type: 3}
+  OverworldSprite: {fileID: 21300000, guid: 262c6511cc6969048bd27f37bff103df, type: 3}
   unKickable: 0
+  enteringFireDialogue: Im famished, I could use some rest
   Animcontroller: {fileID: 0}
-  Sprite: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: 262c6511cc6969048bd27f37bff103df, type: 3}
   walkingSprite: {fileID: 0}
   GetWalkingSprite: {fileID: 0}
