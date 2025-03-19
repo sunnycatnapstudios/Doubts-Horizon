@@ -65,7 +65,7 @@ public class IntroOrphanDialogue : MonoBehaviour
         dialogueInputHandler.AddDialogueChoice(orNotTag, orNot);
 
         npcDialogueHandler.dialogueContents = new List<string> {
-            "","Im really weak right now",
+            "I... I haven't eaten in so long... Please, do you have anything?",
             $"<link=\"{Feedme}\"><b><#d4af37>Feed</color></b></link>.\n...\n<link=\"{orNotTag}\"><b><#a40000>Or not...</color></b></link>."
         };
     }
@@ -74,7 +74,7 @@ public class IntroOrphanDialogue : MonoBehaviour
         Debug.Log("Completed dialogue.");
         if (fedOrNot) {
             npcDialogueHandler.dialogueContents = new List<string>
-                { "Thanks!", "I knew I could trust you!" };
+                { "Thank you so much I dont think I would have made it!", "Times are so rough out here though,","What is there to do next?" };
         } else {
             npcDialogueHandler.dialogueContents = new List<string> { "Fine", "I didnt need any anyway","You should have left me in that fire" };
         }
