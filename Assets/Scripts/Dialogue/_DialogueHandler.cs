@@ -190,6 +190,8 @@ public class _DialogueHandler : MonoBehaviour {
     }
 
     public void OpenDialogueBox() {
+        dialogueName.text = currentNPC ? currentNPC.name : "???";
+
         if (dialogueBoxHandler.beforeDialogue != null) {
             Debug.Log("Calling beforeDialogue");
             var toCall = dialogueBoxHandler.beforeDialogue;
@@ -201,7 +203,6 @@ public class _DialogueHandler : MonoBehaviour {
         dialogueBoxHandler.currentLineIndex = 0;
         dialogueBoxHandler.lastLineDisplayed = false;
 
-        dialogueName.text = currentNPC ? currentNPC.name : "???";
         dialogueAnimator.Play("Dialogue Appear");
 
         darkScreenAnimator.Play("Darken Screen");
