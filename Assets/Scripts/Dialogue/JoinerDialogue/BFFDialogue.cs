@@ -36,9 +36,6 @@ public class BFFDialogue : MonoBehaviour {
 
         npcDialogueHandler.dialogueContents = new List<string> {
             $"Quick! <link=\"{takeMeTag}\"><b><#d4af37>Grab my arm!</color></b></link>"
-//             "Oh good, you're okay",
-//             "Quick! This place is gonna blow!",
-//             "You're gonna have to pull one of us out first.."
         };
 
         npcDialogueHandler.afterDialogue = new Action(() => {

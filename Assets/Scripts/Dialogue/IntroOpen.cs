@@ -10,8 +10,6 @@ public class IntroOpen : MonoBehaviour {
     private Player player;
 
     private PartyManager manager;
-    public RandomSurvivorCampfireScript afterDialogue;
-    
    
     [Serializable]
     private struct AudioClips {
@@ -39,8 +37,7 @@ public class IntroOpen : MonoBehaviour {
     }
 
     void AfterDialogue() {
-        GameStatsManager.Instance._dialogueHandler.isCloseable = false;
-        GameStatsManager.Instance._dialogueHandler.OpenDialogueWith(afterDialogue.gameObject);
+//         GameStatsManager.Instance._dialogueHandler.OpenDialogueWith(/*something*/);
         GameStatsManager.Instance._dialogueHandler.isCloseable = true;
     }
 }

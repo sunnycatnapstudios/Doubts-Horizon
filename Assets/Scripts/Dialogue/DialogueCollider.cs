@@ -20,8 +20,6 @@ public class DialogueCollider : MonoBehaviour {
                 player = other.gameObject.GetComponent<Player>();
             }
             Debug.Log("Hit Dialogue Collider.");
-            gameObject.GetComponent<DialogueBoxHandler>().npcProfile = manager.player.Sprite;
-            GameStatsManager.Instance._dialogueHandler.isCloseable = false;
             GameStatsManager.Instance._dialogueHandler.OpenDialogueWith(gameObject);
             gameObject.GetComponent<Collider2D>().enabled = false;
         }
