@@ -28,7 +28,7 @@ public class CampfireExitDialogue : MonoBehaviour {
 
         npcDialogueHandler.SetSfxTalkingClip(audioClips.sfxTalkingBlip);
 
-        string takeMeTag = "endingDialogue";
+        string takeMeTag = "endingDialogue"+gameObject.GetHashCode().ToString();
         Action takeMe = () => {
             Debug.Log("Take me callback.");
             Transform transform = GameObject.FindGameObjectWithTag("Player").transform;

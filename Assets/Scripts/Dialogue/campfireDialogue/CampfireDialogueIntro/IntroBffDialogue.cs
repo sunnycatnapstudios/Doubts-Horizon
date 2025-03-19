@@ -43,7 +43,7 @@ public class IntroBffDialogue : MonoBehaviour
                 npcDialogueHandler.dialogueContents.Add($"You dont even have any for yourself");
                 npcDialogueHandler.lastLineDisplayed = false;
                 npcDialogueHandler.currentLineIndex += 1;
-                npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
+                //npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
             }
             GameStatsManager.Instance._dialogueHandler.UpdateDialogueBox();
         };
