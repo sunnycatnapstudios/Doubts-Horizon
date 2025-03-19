@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OldManDialogue : MonoBehaviour {
+public class FishyJoeDialogue : MonoBehaviour {
     private DialogueInputHandler dialogueInputHandler;
     private DialogueBoxHandler npcDialogueHandler;
     public Survivor survivor;
@@ -32,11 +32,11 @@ public class OldManDialogue : MonoBehaviour {
         };
         dialogueInputHandler.AddDialogueChoice(takeMeTag, takeMe);
         npcDialogueHandler.dialogueContents = new List<string> {
-            $"EYY I am an old man"
+            $"Eyyy I am a fish",
         };
 
         npcDialogueHandler.afterDialogue = new Action(() => {
-            Debug.Log("Completed Old Man dialogue.");
+            Debug.Log("Completed Fishy Joe dialogue.");
         });
     }
 }
