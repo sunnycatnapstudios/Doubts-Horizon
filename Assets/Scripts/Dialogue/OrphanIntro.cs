@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IntroOpen : MonoBehaviour {
+public class OrphanIntro : MonoBehaviour {
     private readonly string tagTarget = "Player";
     private DialogueInputHandler dialogueInputHandler;
     private DialogueBoxHandler npcDialogueHandler;
@@ -28,10 +28,7 @@ public class IntroOpen : MonoBehaviour {
         npcDialogueHandler.SetSfxTalkingClip(audioClips.sfxTalkingBlip);
 
         npcDialogueHandler.dialogueContents = new List<string> {
-            "Oh good, you're okay",
-            "*Cough*",
-            "Quick! This place is gonna blow!",
-            "You're gonna have to pull one of us out first.."
+            "OWWWWW! It hurts so bad!"
         };
 
         npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
