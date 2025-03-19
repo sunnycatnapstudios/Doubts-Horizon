@@ -37,6 +37,7 @@ public class RandomSurvivorCampfireScript : MonoBehaviour
     void AfterDialogue() {
         player.movePoint.transform.position = player.movePoint.transform.position +movement;
         player.transform.position +=movement;
+        GameStatsManager.Instance._dialogueHandler.isCloseable = true;
     }
 
 

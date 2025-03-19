@@ -20,8 +20,9 @@ public class _DialogueHandler : MonoBehaviour {
     public GameObject interactPromptPrefab, smallDialogueBox;
     public LayerMask NPCLayer;
 
-    private TextMeshProUGUI dialogueText, dialogueName, smallDialogueText;
-    private Image dialogueProfile;
+    [System.NonSerialized]
+    public TextMeshProUGUI dialogueText, dialogueName, smallDialogueText;
+    public Image dialogueProfile;
     private Animator dialogueAnimator, darkScreenAnimator;
     private bool isDialogueActive = false;
 
@@ -103,7 +104,13 @@ public class _DialogueHandler : MonoBehaviour {
 
             currentNPC = null;
             //             CloseDialogueBox();
-            if (isDialogueActive) return;
+// returning early here will screw up where we want to set a new npc for doing two dialogues in a row
+// I moved the statement `isDialogueActive = false` inside of CloseDialogueBox inside the isCloseable loop
+// and it caused this to be an issue.
+//             if (isDialogueActive) {
+//                 Debug.Log("return early");
+//                 return;
+//             }
         }
 
         // Assign new NPC
@@ -117,7 +124,7 @@ public class _DialogueHandler : MonoBehaviour {
     }
 
     public void OpenDialogueWith(GameObject dialogueSource) {
-
+        Debug.Log($"OpenDialogueWith {dialogueSource.name}");
         SetCurrentNpc(dialogueSource);
         OpenDialogueBox();
     }
@@ -184,13 +191,21 @@ public class _DialogueHandler : MonoBehaviour {
     }
 
     public void OpenDialogueBox() {
+        dialogueName.text = currentNPC ? currentNPC.name : "???";
+
+        if (dialogueBoxHandler.beforeDialogue != null) {
+            Debug.Log("Calling beforeDialogue");
+            var toCall = dialogueBoxHandler.beforeDialogue;
+            dialogueBoxHandler.beforeDialogue = null;
+            toCall();
+        }
+
         isDialogueActive = true;
         dialogueBoxHandler.currentLineIndex = 0;
         dialogueBoxHandler.lastLineDisplayed = false;
 
-        dialogueName.text = currentNPC.name;
         dialogueAnimator.Play("Dialogue Appear");
-        
+
         darkScreenAnimator.Play("Darken Screen");
 
         player.GetComponent<Player>().isPlayerInControl = true;
@@ -223,21 +238,20 @@ public class _DialogueHandler : MonoBehaviour {
         }
 
         Debug.Log("in CloseDialogueBox");
-        isDialogueActive = false;
-
-
-        if (isCloseable) {
-            
-            darkScreenAnimator.Play("Lighten Screen");
-            dialogueAnimator.Play("Dialogue Dissapear");
-        }
-
-        player.GetComponent<Player>().isPlayerInControl = false;
 
         if (dialogueBoxHandler.afterDialogue != null) {
+            Debug.Log("Calling afterDialogue");
             var toCall = dialogueBoxHandler.afterDialogue;
             dialogueBoxHandler.afterDialogue = null;
             toCall();
+        }
+
+        if (isCloseable) {
+            Debug.Log("isCloseable");
+            isDialogueActive = false;
+            darkScreenAnimator.Play("Lighten Screen");
+            dialogueAnimator.Play("Dialogue Dissapear");
+            player.GetComponent<Player>().isPlayerInControl = false;
         }
     }
 

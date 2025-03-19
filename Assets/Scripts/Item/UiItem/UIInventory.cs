@@ -189,9 +189,9 @@ public class UIInventory : MonoBehaviour {
 
                 if (usingItem == null && selectedMember == null) {
                     usingItem = selectedItem;
-                    buttonText.text = "use " + usingItem.GetName() + " on Who?";
+                    buttonText.text = "use on Who?";
                 } else if (usingItem != null && selectedMember != null) {
-                    buttonText.text = "using " + usingItem.GetName() + " on " + selectedMember.GetName();
+                    buttonText.text = "using on " + selectedMember.GetName();
                     //use item
 
                     UsableInInventory thisItem = usingItem as UsableInInventory;

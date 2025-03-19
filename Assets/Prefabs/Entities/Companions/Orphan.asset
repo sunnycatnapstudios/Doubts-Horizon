@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37bebb4f9bbe1904896366df90c723ce, type: 3}
   m_Name: Orphan
   m_EditorClassIdentifier: 
-  name: Anime Girl Jane
+  name: Orphan
   damage: 35
   health: 35
   isCombatant: 1
@@ -21,7 +21,7 @@ MonoBehaviour:
   OverworldSprite: {fileID: 21300000, guid: 262c6511cc6969048bd27f37bff103df, type: 3}
   unKickable: 0
   enteringFireDialogue: Im famished, I could use some rest
-  Animcontroller: {fileID: 0}
+  Animcontroller: {fileID: 9100000, guid: aaaa51a8411537f48a46456d39ee57b4, type: 2}
   Sprite: {fileID: 21300000, guid: 262c6511cc6969048bd27f37bff103df, type: 3}
   walkingSprite: {fileID: 0}
   GetWalkingSprite: {fileID: 0}

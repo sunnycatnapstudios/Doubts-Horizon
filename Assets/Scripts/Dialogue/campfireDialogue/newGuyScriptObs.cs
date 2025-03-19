@@ -71,7 +71,7 @@ public class newGuyScript : MonoBehaviour {
         if (fedOrNot) {
             npcDialogueHandler.dialogueContents = new List<string> { "i love beef jerky" };
         } else {
-            npcDialogueHandler.dialogueContents = new List<string> { "i guess this is it hubh", "well" };
+            npcDialogueHandler.dialogueContents = new List<string> { "i guess this is it huh", "well" };
         }
     }
 }

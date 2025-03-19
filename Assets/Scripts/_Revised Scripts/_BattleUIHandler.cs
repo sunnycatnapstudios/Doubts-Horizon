@@ -148,7 +148,7 @@ public class _BattleUIHandler : MonoBehaviour
 
     public void EnterCombat()
     {
-        _dialogueHandler.CloseDialogueBox();
+//         _dialogueHandler.CloseDialogueBox();
         AudioManager.Instance.PlayUiSound(audioClips.sfxBell);
         AudioManager.Instance.CrossFadeAmbienceToZero(1f);
         AudioManager.Instance.CrossFadeMusicSound(audioClips.battleMusic, 2f, 1f, 1f);
@@ -685,7 +685,7 @@ public class _BattleUIHandler : MonoBehaviour
             if (currentEnemyCurrentHealth <= 0)
             {
                 Debug.Log($"{enemyStats.Name} has been defeated!");
-                endCause = "Lose";
+                endCause = "Win";
                 battleOrder.Remove(enemyStats);
             }
         }
@@ -808,6 +808,8 @@ public class _BattleUIHandler : MonoBehaviour
             EnemyIsAttacking(enemyStats.Name);
         }
         yield return new WaitForSecondsRealtime(.6f);
+
+        
     }
 
     public void ReceiveTargetSelection(string targetName)
@@ -842,11 +844,17 @@ public class _BattleUIHandler : MonoBehaviour
     private bool CheckForBattleEnd() {
         if (escapeSuccessful) {
             endCause = "Escape";
+            escapeSuccessful = false;
             return true;
         }
 
         bool playersAlive = battleOrder.Exists(c => !c.isEnemy);
         if (!playersAlive) {
+            endCause = "Lose";
+            return true;
+        }
+
+        if (!battleOrder.Exists(c => c.Name == "Me")) {
             endCause = "Lose";
             return true;
         }
@@ -896,7 +904,10 @@ public class _BattleUIHandler : MonoBehaviour
             Time.timeScale = 1;
         }
         if (reason == "Win") {
-            battleExplanation.text = "You did it!";
+            
+            String item  = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().GrabRandomItem();
+            Debug.Log(item);
+            battleExplanation.text = "You did it! You gain one "+item;
         } if (reason == "Escape") {
             Destroy(curEnemy);
         } else if (reason == "Lose") {
@@ -905,6 +916,8 @@ public class _BattleUIHandler : MonoBehaviour
             AudioManager.Instance.CrossFadeMusicToZero(0.5f, 0f);
             AudioManager.Instance.PlaySound(audioClips.battlePlayerDied);
         }
+
+//         GameObject.FindWithTag("Player").GetComponent<Player>().isPlayerInControl = false;
     }
 
     // Used in death button. Reset current scene, restart at title screen
@@ -1043,6 +1056,7 @@ public class _BattleUIHandler : MonoBehaviour
         } else {
             Debug.Log($"Oof, rolled a {roll}, didn't make it lol");
             SkipTurns();
+            escapeSuccessful = false;
             battleExplanation.text = "Couldn't get away :(";
         }
         // Reset confirmation state after execution

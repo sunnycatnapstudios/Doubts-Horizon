@@ -20,7 +20,7 @@ public class BFFDialogue : MonoBehaviour {
         npcDialogueHandler = GetComponent<DialogueBoxHandler>();
         npcDialogueHandler.SetSfxTalkingClip(audioClips.sfxTalkingBlip);
 
-        string takeMeTag = "Take me bff";
+        string takeMeTag = "Take me bffs";
         Action takeMe = () => {
             Debug.Log("Take me callback.");
             GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
@@ -28,17 +28,11 @@ public class BFFDialogue : MonoBehaviour {
             PartyManager partyManager = player.GetComponent<PartyManager>();
             partyManager.AddToParty(survivor);
             Destroy(gameObject);
-            GameStatsManager.Instance._dialogueHandler.CloseDialogueBox();
-            GameObject transition = GameObject.Find("Intro^City1");
-            player.movePoint.transform.position = player.transform.position = transition.transform.position + new Vector3(-13, 10);
+            GameStatsManager.Instance._dialogueHandler.OpenDialogueWith(GameObject.Find("Explosion"));
         };
         dialogueInputHandler.AddDialogueChoice(takeMeTag, takeMe);
-
         npcDialogueHandler.dialogueContents = new List<string> {
-            $"Quick! <link=\"{takeMeTag}\"><b><#d4af37>Grab my arm!</color></b></link>"
-//             "Oh good, you're okay",
-//             "Quick! This place is gonna blow!",
-//             "You're gonna have to pull one of us out first.."
+            $"Quick! <link=\"{takeMeTag}\"><b><#d4af37>Grab my arm!</color></b></link>(Click the highlighted text)"
         };
 
         npcDialogueHandler.afterDialogue = new Action(() => {

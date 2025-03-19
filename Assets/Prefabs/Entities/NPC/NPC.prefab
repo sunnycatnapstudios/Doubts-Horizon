@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 3299673889596440563}
   - component: {fileID: 3299673889596440562}
-  - component: {fileID: 3299673889596440564}
   - component: {fileID: 3299673889596440565}
   - component: {fileID: 3299673889596440560}
   - component: {fileID: 3299673889596440527}
@@ -86,24 +85,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3299673889596440564
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3299673889596440526}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b84d6d12fca4df40bad1c3c1be94f1e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dialogueLines:
-  - Blorp
-  - Eggs
-  - EFJDNFJNUIEOANKFJNNVUIR
-  - feaASMmrkmsakdfm
-  - fniuwejifkmkjrnvbwoifc
 --- !u!114 &3299673889596440565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -117,6 +98,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialogueLines: []
+  audioClips:
+    sfxTalkingBlip: {fileID: 0}
 --- !u!61 &3299673889596440560
 BoxCollider2D:
   m_ObjectHideFlags: 0

@@ -18,7 +18,7 @@ public class HachiwareScript : MonoBehaviour {
         inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
         statsManager = GameStatsManager.Instance;
 
-        string Feedme = "feed hachi";
+        string Feedme = "feed hachi" + gameObject.GetHashCode().ToString();
         Action takeMe = () => {
             Debug.Log("Take me callback.");
             PartyManager partyManager = GameObject.FindGameObjectWithTag("Player").GetComponent<PartyManager>();
@@ -48,7 +48,7 @@ public class HachiwareScript : MonoBehaviour {
         };
         dialogueInputHandler.AddDialogueChoice(Feedme, takeMe);
 
-        string orNotTag = "do not feed hachi";
+        string orNotTag = "do not feed hachi" + gameObject.GetHashCode().ToString();
         Action orNot = () => {
             Debug.Log("Or not callback.");
             fedOrNot = false;

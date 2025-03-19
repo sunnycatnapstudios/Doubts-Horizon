@@ -73,6 +73,8 @@ public class Enemy : MonoBehaviour {
             _battleUIHandler.curEnemy = gameObject;
             _battleUIHandler.EnterCombat();
 
+            GameStatsManager.Instance._dialogueHandler.CloseDialogueBox();
+
             // Enemy "killed"
             stun = true;
             stunTimer = float.NegativeInfinity;
