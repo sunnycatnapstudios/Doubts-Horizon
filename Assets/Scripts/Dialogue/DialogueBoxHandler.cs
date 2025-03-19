@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class DialogueBoxHandler : MonoBehaviour {
     public List<string> dialogueContents = new List<string>();
     public int currentLineIndex = 0;
-    [HideInInspector] public Action afterDialogue;
+    [HideInInspector] public Action afterDialogue, beforeDialogue;
     public Sprite npcProfile;
     public bool lastLineDisplayed = false, hasChoice;
 
