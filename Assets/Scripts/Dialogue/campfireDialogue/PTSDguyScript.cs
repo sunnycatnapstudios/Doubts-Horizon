@@ -60,11 +60,10 @@ public class PTSDguyScript : MonoBehaviour {
 
         npcDialogueHandler.dialogueContents = new List<string> {
             "The sound... The smell... It's all still there... I can't... I just need something to eat, just a little...",
-            $"<link=\"{Feedme}\"><b><#d4af37>Feed</color></b></link>...",
-            $"<link=\"{orNotTag}\"><b><#a40000>Or not...</color></b></link>."
+             $"<link=\"{Feedme}\"><b><color=#d4af37>Feed</color></b></link>.\n...\n<link=\"{orNotTag}\"><b><color=#a40000>Or not...</color></b></link>."
         };
 
-        npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
+       // npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
     }
 
     void AfterDialogue() {

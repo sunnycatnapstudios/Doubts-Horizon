@@ -66,11 +66,10 @@ public class OrphanCampfireScript : MonoBehaviour {
 
         npcDialogueHandler.dialogueContents = new List<string> {
             "I... I haven't eaten in so long... Please, do you have anything?",
-            $"<link=\"{Feedme}\"><b><color=#d4af37>Feed</color></b></link>",
-            $"<link=\"{orNotTag}\"><b><color=#a40000>Or not...</color></b></link>"
+             $"<link=\"{Feedme}\"><b><color=#d4af37>Feed</color></b></link>.\n...\n<link=\"{orNotTag}\"><b><color=#a40000>Or not...</color></b></link>."
         };
 
-        npcDialogueHandler.afterDialogue = AfterDialogue;
+        //npcDialogueHandler.afterDialogue = AfterDialogue;
     }
 
     void AfterDialogue() {

@@ -59,11 +59,9 @@ public class OldManScript : MonoBehaviour {
 
         npcDialogueHandler.dialogueContents = new List<string> {
             "Please, I haven't eaten in days...",
-            $"<link=\"{feedMe}\"><b><#d4af37>Feed</color></b></link>.",
-            "...",
-            $"<link=\"{orNotTag}\"><b><#a40000>Or not...</color></b></link>."
+             $"<link=\"{feedMe}\"><b><color=#d4af37>Feed</color></b></link>.\n...\n<link=\"{orNotTag}\"><b><color=#a40000>Or not...</color></b></link>."
         };
-        npcDialogueHandler.afterDialogue = AfterDialogue;
+        //npcDialogueHandler.afterDialogue = AfterDialogue;
     }
 
     void AfterDialogue() {
