@@ -148,7 +148,7 @@ public class _BattleUIHandler : MonoBehaviour
 
     public void EnterCombat()
     {
-        _dialogueHandler.CloseDialogueBox();
+//         _dialogueHandler.CloseDialogueBox();
         AudioManager.Instance.PlayUiSound(audioClips.sfxBell);
         AudioManager.Instance.CrossFadeAmbienceToZero(1f);
         AudioManager.Instance.CrossFadeMusicSound(audioClips.battleMusic, 2f, 1f, 1f);
@@ -685,7 +685,7 @@ public class _BattleUIHandler : MonoBehaviour
             if (currentEnemyCurrentHealth <= 0)
             {
                 Debug.Log($"{enemyStats.Name} has been defeated!");
-                endCause = "Lose";
+                endCause = "Win";
                 battleOrder.Remove(enemyStats);
             }
         }
@@ -853,6 +853,11 @@ public class _BattleUIHandler : MonoBehaviour
             return true;
         }
 
+        if (!battleOrder.Exists(c => c.Name == "Me")) {
+            endCause = "Lose";
+            return true;
+        }
+
         bool enemiesAlive = battleOrder.Exists(c => c.isEnemy);
         if (!enemiesAlive) {
             EnemyDefeated(enemyStats.Name);
@@ -911,7 +916,7 @@ public class _BattleUIHandler : MonoBehaviour
             AudioManager.Instance.PlaySound(audioClips.battlePlayerDied);
         }
 
-        GameObject.FindWithTag("Player").GetComponent<Player>().isPlayerInControl = false;
+//         GameObject.FindWithTag("Player").GetComponent<Player>().isPlayerInControl = false;
     }
 
     // Used in death button. Reset current scene, restart at title screen
