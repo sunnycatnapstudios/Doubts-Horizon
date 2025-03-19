@@ -41,7 +41,7 @@ public class IntroOrphanDialogue : MonoBehaviour
                 statsManager.interactedWithCampfireNPC();
                 statsManager.updateBedStatus();
 
-                npcDialogueHandler.dialogueContents.Add($"You dont even have any for yourself");
+                npcDialogueHandler.dialogueContents.Add($"Its just over there hurry!");
                 npcDialogueHandler.lastLineDisplayed = false;
                 npcDialogueHandler.currentLineIndex += 1;
                 //npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
