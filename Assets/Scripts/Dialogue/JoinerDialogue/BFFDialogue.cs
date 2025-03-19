@@ -28,9 +28,7 @@ public class BFFDialogue : MonoBehaviour {
             PartyManager partyManager = player.GetComponent<PartyManager>();
             partyManager.AddToParty(survivor);
             Destroy(gameObject);
-            GameStatsManager.Instance._dialogueHandler.CloseDialogueBox();
-            GameObject transition = GameObject.Find("Intro^City1");
-            player.movePoint.transform.position = player.transform.position = transition.transform.position + new Vector3(-13, 10);
+            GameStatsManager.Instance._dialogueHandler.OpenDialogueWith(GameObject.Find("Explosion"));
         };
         dialogueInputHandler.AddDialogueChoice(takeMeTag, takeMe);
         npcDialogueHandler.dialogueContents = new List<string> {
