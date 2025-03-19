@@ -45,8 +45,6 @@ public class CampfireSceneEnter : MonoBehaviour
 
         
         GameStatsManager.Instance._dialogueHandler.isCloseable = false;
-
-
         GameStatsManager.Instance._dialogueHandler.OpenDialogueWith(afterDialogue.gameObject);
         GameStatsManager.Instance._dialogueHandler.isCloseable = true;
     }

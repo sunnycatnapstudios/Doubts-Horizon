@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37bebb4f9bbe1904896366df90c723ce, type: 3}
+  m_Name: OldGuy
+  m_EditorClassIdentifier: 
+  name: Old Man Dean
+  damage: 10
+  health: 32
+  isCombatant: 1
+  inventoryDialogues: {fileID: 6894140492303392861, guid: 7c50e87acb1109048966bedb87e4d2e7,
+    type: 3}
+  OverworldSprite: {fileID: 21300000, guid: dda27ad77a20fc44e98c26a311d50163, type: 3}
+  unKickable: 0
+  enteringFireDialogue: 
+  Animcontroller: {fileID: 0}
+  Sprite: {fileID: 21300000, guid: dda27ad77a20fc44e98c26a311d50163, type: 3}
+  walkingSprite: {fileID: 0}
+  GetWalkingSprite: {fileID: 0}

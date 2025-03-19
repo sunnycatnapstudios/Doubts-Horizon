@@ -21,7 +21,8 @@ public class TitleToHorizonDialogHandler : MonoBehaviour {
         "...........",
         "I hear something...",
         ".. .. ..",
-        "Where am I?"
+        "Where am I?",
+        "BOOM"
     };
 
     private int currentLineIndex = 0;
