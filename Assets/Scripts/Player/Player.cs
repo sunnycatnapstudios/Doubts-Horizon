@@ -26,6 +26,7 @@ public class Player : MonoBehaviour {
     public ParticleSystem partiSystem;
 
     public CinemachineVirtualCamera vcam;
+    public PolygonCollider2D cameraCollider;
     public float camMax, camMin, currentCamSize;
     public bool isZooming, canControlCam = true;
 
@@ -43,8 +44,6 @@ public class Player : MonoBehaviour {
     public bool isPlayerInControl;
     public bool isSneaking, isSprinting;
 
-    public Transform pauseMenu;
-    private bool isPaused = false;
 
     void ViewMap(bool cancontrolcam) {
         isZooming = Input.GetKey(KeyCode.Q);
@@ -58,14 +57,6 @@ public class Player : MonoBehaviour {
 
             if (!isZooming) currentCamSize -= Input.mouseScrollDelta.y * .4f;
             // currentCamSize = Mathf.Clamp(currentCamSize, 4f, 6f);
-        }
-    }
-
-    void OpenPauseMenu(bool cancontrolcam) {
-        if (cancontrolcam && Input.GetKeyDown(KeyCode.Escape)) {
-            isPaused = !isPaused;
-            Time.timeScale = isPaused ? 0 : 1;
-            pauseMenu.gameObject.SetActive(isPaused);
         }
     }
 
@@ -214,6 +205,11 @@ public class Player : MonoBehaviour {
         }
         if (Physics2D.OverlapCircleAll(pos, .2f, NPC).Any(c => !c.isTrigger)) {
             return false;
+        }
+
+        // Check if position is inside the camera polygon
+        if (cameraCollider) {
+            return cameraCollider.OverlapPoint(pos);
         }
         return true;
     }

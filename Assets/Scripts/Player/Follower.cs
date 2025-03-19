@@ -38,7 +38,27 @@ public class Follower : MonoBehaviour {
         followSpeed = Player.moveSpeed;
         if (order != 0) { transform.position = Vector3.MoveTowards(transform.position, newPos, followSpeed * Time.deltaTime); }
 
-        if (transform.position.x - refX > 0) { spriteState.flipX = true; } else if (transform.position.x - refX < 0) { spriteState.flipX = false; }
+        //Debug.Log(partyAnim.name);
+        if(partyAnim.name == "LockSmith Bass") {
+
+
+            if (Mathf.Abs(transform.position.x - refX) > Mathf.Abs(transform.position.y - refY)&& transform.position.x - refX > 0) {
+               
+                partyAnim.Play("PartyRight");
+            } else if (transform.position.y - refY > 0) {
+                partyAnim.Play("PartyUp");
+            } else if (transform.position.y - refY < 0) {
+                partyAnim.Play("PartyDown");
+            } else if (Mathf.Abs(transform.position.x - refX) > Mathf.Abs(transform.position.y - refY) && transform.position.x - refX < 0){
+                partyAnim.Play("PartyLeft");
+
+            }
+            return;
+        }
+        if (transform.position.x - refX > 0) { spriteState.flipX = true; }
+
+
+        else if (transform.position.x - refX < 0) { spriteState.flipX = false; }
 
         if (Mathf.Abs(transform.position.x - refX) > Mathf.Abs(transform.position.y - refY)) {
             partyAnim.Play("PartyLeft");
