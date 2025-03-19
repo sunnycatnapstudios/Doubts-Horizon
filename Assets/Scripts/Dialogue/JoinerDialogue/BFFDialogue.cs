@@ -32,7 +32,7 @@ public class BFFDialogue : MonoBehaviour {
         };
         dialogueInputHandler.AddDialogueChoice(takeMeTag, takeMe);
         npcDialogueHandler.dialogueContents = new List<string> {
-            $"Quick! <link=\"{takeMeTag}\"><b><#d4af37>Grab my arm!</color></b></link>"
+            $"Quick! <link=\"{takeMeTag}\"><b><#d4af37>Grab my arm!</color></b></link>(Click the highlighted text)"
         };
 
         npcDialogueHandler.afterDialogue = new Action(() => {

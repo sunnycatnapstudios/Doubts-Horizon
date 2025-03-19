@@ -33,7 +33,10 @@ public class OldManJoinDialogue : MonoBehaviour {
         npcDialogueHandler.dialogueContents = new List<string> {
             "Hah, thought I'd seen my last sunrise..",
             "This world ain't what it used to be, kid..",
-            $"<link=\"{takeMeTag}\"><b><#d4af37>Come along</color></b></link>, maybe we can still make something of it."
+            "Even the sanctuary...",
+            "monsters get the best of us all.",
+            "If you continue be weary.",
+            $"But <link=\"{takeMeTag}\"><b><#d4af37>Come along</color></b></link>, maybe we can still make something of it."
         };
 
         npcDialogueHandler.afterDialogue = new Action(AfterDialogue);

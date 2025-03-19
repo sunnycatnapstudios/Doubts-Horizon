@@ -33,7 +33,8 @@ public class IntroCampfireExitDialogue : MonoBehaviour
         npcDialogueHandler.dialogueContents = new List<string> {
             "It's getting late, we can camp out here for the night",
             "I can't believed the building collapsed",
-            "those poor other people, we were the only ones that made it out of the group :(",
+            "The elders, they used to speak of a sanctuary far north, where any could find salviation",
+            "but those poor other people cant anymore, we were the only ones that made it out of the group :(",
 
         };
 
@@ -42,6 +43,7 @@ public class IntroCampfireExitDialogue : MonoBehaviour
 
     void BeforeDialogue() {
         GameStatsManager.Instance._dialogueHandler.dialogueProfile.sprite = manager.currentPartyMembers[manager.currentPartyMembers.Count - 1].Sprite;
+        GameStatsManager.Instance._dialogueHandler.dialogueName.text = manager.currentPartyMembers[manager.currentPartyMembers.Count - 1].name;
 
         Debug.Log(manager.currentPartyMembers[manager.currentPartyMembers.Count - 1].ToString());
         string name = manager.currentPartyMembers[manager.currentPartyMembers.Count - 1].Name == "Best Friend" ? "little Orphan Olivia" : "Best Friend Fred";

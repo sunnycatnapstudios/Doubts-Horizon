@@ -33,7 +33,7 @@ public class OrphanDialogue : MonoBehaviour {
         dialogueInputHandler.AddDialogueChoice(takeMeTag, takeMe);
 
         npcDialogueHandler.dialogueContents = new List<string> {
-            $"WAAH! <link=\"{takeMeTag}\"><b><#d4af37>Get it off!</color></b></link>"
+            $"WAAH! <link=\"{takeMeTag}\"><b><#d4af37>Get it off!</color></b></link>(Click the highlighted text)"
         };
 
         npcDialogueHandler.afterDialogue = new Action(() => {
