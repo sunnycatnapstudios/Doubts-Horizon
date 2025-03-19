@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class VeteranDialogue : MonoBehaviour {
+public class OldMan : MonoBehaviour {
     private DialogueInputHandler dialogueInputHandler;
     private DialogueBoxHandler npcDialogueHandler;
     public Survivor survivor;
@@ -20,7 +20,7 @@ public class VeteranDialogue : MonoBehaviour {
         npcDialogueHandler = GetComponent<DialogueBoxHandler>();
         npcDialogueHandler.SetSfxTalkingClip(audioClips.sfxTalkingBlip);
 
-        string takeMeTag = "Take me vet";
+        string takeMeTag = "Take me bff";
         Action takeMe = () => {
             Debug.Log("Take me callback.");
             GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
@@ -28,26 +28,15 @@ public class VeteranDialogue : MonoBehaviour {
             PartyManager partyManager = player.GetComponent<PartyManager>();
             partyManager.AddToParty(survivor);
             Destroy(gameObject);
+            GameStatsManager.Instance._dialogueHandler.OpenDialogueWith(GameObject.Find("Explosion"));
         };
         dialogueInputHandler.AddDialogueChoice(takeMeTag, takeMe);
-        string orNotTag = "Or not vet";
-        Action orNot = () => {
-            Debug.Log("Or not callback.");
-            Destroy(gameObject);
-            GameStatsManager.Instance._dialogueHandler.CloseDialogueBox();
-        };
-        dialogueInputHandler.AddDialogueChoice(orNotTag, orNot);
         npcDialogueHandler.dialogueContents = new List<string> {
-            "What are you kids doing out here all alone? It's dangerous!",
-            "Careful! There's on of 'em monsters ahead.",
-            "Look at them soulless eyes...",
-            "You can use your sling shot (RMB) to stun it, but it won't stay down for long.",
-            $"I could help you along your way.. all I ask is you share some of your supplies.",
-            $"What do you say? Are you <link=\"{takeMeTag}\"><b><#d4af37>with me</color></b></link>? Or are you against that thing all <link=\"{orNotTag}\"><b><#a40000>by yourself</color></b></link>?"
+            $"Quick! <link=\"{takeMeTag}\"><b><#d4af37>Grab my arm!</color></b></link>"
         };
 
         npcDialogueHandler.afterDialogue = new Action(() => {
-            Debug.Log("Completed Veteran dialogue.");
+            Debug.Log("Completed Old Man dialogue.");
         });
     }
 }

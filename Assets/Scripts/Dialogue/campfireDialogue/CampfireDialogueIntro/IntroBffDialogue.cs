@@ -11,6 +11,7 @@ public class IntroBffDialogue : MonoBehaviour
     private bool fedOrNot;
     private Inventory inventory;
     private GameStatsManager statsManager;
+    public GameObject loreDialogueCollider; // INSPECTOR
 
 
     void Start() {
@@ -78,5 +79,6 @@ public class IntroBffDialogue : MonoBehaviour
         } else {
             npcDialogueHandler.dialogueContents = new List<string> { "well", "im sure i can manage" };
         }
+        loreDialogueCollider.SetActive(true);
     }
 }

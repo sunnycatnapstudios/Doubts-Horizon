@@ -11,6 +11,7 @@ public class IntroOrphanDialogue : MonoBehaviour
     private bool fedOrNot;
     private Inventory inventory;
     private GameStatsManager statsManager;
+    public GameObject loreDialogueCollider; // INSPECTOR
 
 
     void Start() {
@@ -78,5 +79,6 @@ public class IntroOrphanDialogue : MonoBehaviour
         } else {
             npcDialogueHandler.dialogueContents = new List<string> { "Fine", "I didnt need any anyway","You should have left me in that fire" };
         }
+        loreDialogueCollider.SetActive(true);
     }
 }
