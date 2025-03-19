@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37bebb4f9bbe1904896366df90c723ce, type: 3}
   m_Name: Orphan
   m_EditorClassIdentifier: 
-  name: Anime Girl Jane
+  name: Orphan
   damage: 35
   health: 35
   isCombatant: 1

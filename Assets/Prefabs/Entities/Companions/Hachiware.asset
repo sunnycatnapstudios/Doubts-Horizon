@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37bebb4f9bbe1904896366df90c723ce, type: 3}
   m_Name: Hachiware
   m_EditorClassIdentifier: 
-  name: HACHIWAREE
+  name: Best Friend
   damage: 12
   health: 32
   isCombatant: 1
