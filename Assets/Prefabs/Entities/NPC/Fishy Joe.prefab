@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 382155461125610944}
   - component: {fileID: 382155461125611007}
   - component: {fileID: 5655685705453239443}
-  - component: {fileID: 2581830982238829772}
+  - component: {fileID: 8479518815474075588}
   m_Layer: 12
   m_Name: Fishy Joe
   m_TagString: NPC
@@ -150,7 +150,7 @@ MonoBehaviour:
   npcProfile: {fileID: 21300000, guid: a1339f90199208d4e9daed82fe8c464e, type: 3}
   lastLineDisplayed: 0
   hasChoice: 0
---- !u!114 &2581830982238829772
+--- !u!114 &8479518815474075588
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -159,9 +159,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 382155461125611006}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0ab645d455fdb8c34820577ce8c87b56, type: 3}
+  m_Script: {fileID: 11500000, guid: eacc9dd6f80b0f840a8e8f3042af94f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  survivor: {fileID: 11400000, guid: 7ecaae23b37d6054cac0f0c2f943a337, type: 2}
+  survivor: {fileID: 0}
   audioClips:
     sfxTalkingBlip: {fileID: 0}
