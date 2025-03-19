@@ -13,7 +13,7 @@ public class Survivor : ScriptableObject {
     [SerializeField] private int damage;
 
     public int Damage {
-        get { return damage; }
+        get { return charstats.attack; }
     }
 
     [SerializeField] private int health;
@@ -88,6 +88,9 @@ public class Survivor : ScriptableObject {
 
     public void DecHealth(int health) {
         charstats.currentHealth -= health;
+    }
+    public void AddDamage(int Damage) {
+        charstats.attack += Damage;
     }
 
     public Sprite Sprite;
