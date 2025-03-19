@@ -176,6 +176,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3064798d61db1856480a8f8fce0243ea, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  survivor: {fileID: 11400000, guid: 7ea66f04ca169e844a9a9805f2c6e4b0, type: 2}
+  survivor: {fileID: 11400000, guid: 2956e1ecd3ee99a40a4bcccb2b26ca69, type: 2}
   audioClips:
     sfxTalkingBlip: {fileID: 8300000, guid: 6a45d166cfd29cf4c99410d1625a4cd4, type: 3}

@@ -23,27 +23,25 @@ public class OrphanDialogue : MonoBehaviour {
         string takeMeTag = "Take orphan";
         Action takeMe = () => {
             Debug.Log("Take me callback.");
-            PartyManager partyManager = GameObject.FindGameObjectWithTag("Player").GetComponent<PartyManager>();
+            GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+            Player player = playerObj.GetComponent<Player>();
+            PartyManager partyManager = player.GetComponent<PartyManager>();
             partyManager.AddToParty(survivor);
             Destroy(gameObject);
             GameStatsManager.Instance._dialogueHandler.CloseDialogueBox();
+            GameObject transition = GameObject.Find("Intro^City1");
+            player.movePoint.transform.position = player.transform.position = transition.transform.position + new Vector3(-13, 10);
         };
         dialogueInputHandler.AddDialogueChoice(takeMeTag, takeMe);
 
         npcDialogueHandler.dialogueContents = new List<string> {
-            "Mommy?!",
-            "... *sobs*",
-            "I can't find my mommy.",
-            $"Can you <link=\"{takeMeTag}\"><b><#d4af37>help me</color></b></link>"
+            $"WAAH! <link=\"{takeMeTag}\"><b><#d4af37>Get it off!</color></b></link>"
+//             "OWWW it hurts!!",
         };
 
-        npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
+        npcDialogueHandler.afterDialogue = new Action(() => {
+            Debug.Log("Completed Orphan Dialogue.");
+        });
     }
 
-    void Update() {
-    }
-
-    void AfterDialogue() {
-        Debug.Log("Completed dialogue.");
-    }
 }
