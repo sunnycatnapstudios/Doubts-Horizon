@@ -808,6 +808,8 @@ public class _BattleUIHandler : MonoBehaviour
             EnemyIsAttacking(enemyStats.Name);
         }
         yield return new WaitForSecondsRealtime(.6f);
+
+        
     }
 
     public void ReceiveTargetSelection(string targetName)
@@ -896,7 +898,10 @@ public class _BattleUIHandler : MonoBehaviour
             Time.timeScale = 1;
         }
         if (reason == "Win") {
-            battleExplanation.text = "You did it!";
+            
+            String item  = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().GrabRandomItem();
+            Debug.Log(item);
+            battleExplanation.text = "You did it! You gain one "+item;
         } if (reason == "Escape") {
             Destroy(curEnemy);
         } else if (reason == "Lose") {

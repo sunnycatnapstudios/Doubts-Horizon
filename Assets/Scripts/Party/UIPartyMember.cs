@@ -76,7 +76,7 @@ public class UIPartyMember : MonoBehaviour
         this.image.gameObject.SetActive(true);
         this.image.sprite = member.GetSprite();
         nameText.text = member.GetName();
-        description.text = member.Fed.ToString();
+        description.text = "ATK:"+member.Damage.ToString();
         
        
         this.member = member;

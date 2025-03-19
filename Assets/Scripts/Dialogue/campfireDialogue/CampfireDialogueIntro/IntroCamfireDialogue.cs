@@ -41,6 +41,7 @@ public class IntroCamfireDialogue : MonoBehaviour
 
     void BeforeDialogue() {
         GameStatsManager.Instance._dialogueHandler.dialogueProfile.sprite = manager.currentPartyMembers[manager.currentPartyMembers.Count - 1].Sprite;
+        GameStatsManager.Instance._dialogueHandler.dialogueName.text = manager.currentPartyMembers[manager.currentPartyMembers.Count - 1].Name;
 
         Debug.Log(manager.currentPartyMembers[manager.currentPartyMembers.Count - 1].ToString());
 
