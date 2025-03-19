@@ -10,8 +10,8 @@ public class AudioTransition : MonoBehaviour {
     public float crossVolume = 1; // Should just be left as 1
 
     // Choose this to cross mute the audio. false by default
-    public bool crossMuteMusic = false;
-    public bool crossMuteAmbience = false;
+    [SerializeField] public bool crossMuteMusic;
+    [SerializeField] public bool crossMuteAmbience;
 
     // next clips to cross-fade. Make sure to disable the mute option beforehand
     [Serializable]
@@ -36,9 +36,9 @@ public class AudioTransition : MonoBehaviour {
             return;
         }
 
-        Debug.Log("AudioTransition");
-        if (audioClips.nextMusicClip != null) {
+        if (audioClips.nextMusicClip != null || crossMuteMusic) {
             if (crossMuteMusic) {
+                Debug.Log("Test111");
                 AudioManager.Instance.CrossFadeMusicToZero(crossfadeDuration, delayBeforeStart);
             } else {
                 Debug.Log("Fading");
@@ -47,9 +47,9 @@ public class AudioTransition : MonoBehaviour {
             }
         }
 
-        if (audioClips.nextAmbientClip != null) {
+        if (audioClips.nextAmbientClip != null || crossMuteAmbience) {
             if (crossMuteAmbience) {
-                AudioManager.Instance.CrossFadeMusicToZero(crossfadeDuration, delayBeforeStart);
+                AudioManager.Instance.CrossFadeAmbienceToZero(crossfadeDuration, delayBeforeStart);
             } else {
                 AudioManager.Instance.CrossFadeAmbienceSound(audioClips.nextAmbientClip, crossfadeDuration, crossVolume,
                     delayBeforeStart);

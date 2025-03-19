@@ -249,8 +249,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   transitionAnimator: {fileID: 0}
   targetTransform: {fileID: 0}
-  entranceDirection: {x: 0, y: 2, z: 0}
-  exitDirection: {x: 0, y: 2, z: 0}
+  entranceDirection: {x: 0, y: 0, z: 0}
+  exitDirection: {x: 0, y: 0, z: 0}
   exitLocation: {x: 0, y: 0, z: 0}
   endPosition: {x: 0, y: 0, z: 0}
   audioClips:

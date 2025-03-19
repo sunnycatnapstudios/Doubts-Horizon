@@ -14,6 +14,7 @@ public class TitleToHorizonDialogHandler : MonoBehaviour {
     private TypeWriter typeWriter;
 
     [SerializeField] public AudioClip sfxTypingClip;
+    [SerializeField] public AudioClip ambienceIntroWind;
 
     private List<string> dialogueContents = new List<string> {
         "....",
