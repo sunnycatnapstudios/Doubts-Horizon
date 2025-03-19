@@ -159,15 +159,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 014a27c53c143e244bf6d530cc699ddb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  infSprint: 0
   anim: {fileID: 210012170400930958}
   spritestate: {fileID: 0}
   inventory: {fileID: 0}
-  moveSpeed: 5
   movementInputDelay: 0.1
+  moveSpeed: 5
   moveConstant: 0
-  sprintConstant: 1.7
-  sneakConstant: 0.5
   moveSprint: 0
   moveSneak: 0
   movePoint: {fileID: 210012169932314104}
@@ -184,21 +181,21 @@ MonoBehaviour:
   vcam: {fileID: 0}
   camMax: 10
   camMin: 6
+  currentCamSize: 0
   isZooming: 0
-  currStamina: 0
-  maxStamina: 100
-  sprintCost: 35
-  staminaBar: {fileID: 0}
-  recharging: 0
+  canControlCam: 1
   isMoving: 0
   faceLeft: 0
   faceRight: 0
   faceUp: 0
   faceDown: 1
-  moveInput: {x: 0, y: 0}
   lastInput: {x: 0, y: 0}
   playerInput: {x: 0, y: 0}
+  bullet: {fileID: 0}
   isPlayerInControl: 0
+  isSneaking: 0
+  isSprinting: 0
+  pauseMenu: {fileID: 0}
 --- !u!50 &8129783758635369271
 Rigidbody2D:
   serializedVersion: 4
@@ -397,8 +394,9 @@ MonoBehaviour:
   inventoryWindow: {fileID: 0}
   test1: {fileID: 0}
   test2: {fileID: 0}
+  inventorySize: 10
   audioClips:
-    sfxPickup: {fileID: 8300000, guid: e8b7b2590daa6e259861371f15be7165, type: 3}
+    sfxCloseInventory: {fileID: 0}
 --- !u!1001 &1545461077899872922
 PrefabInstance:
   m_ObjectHideFlags: 0
