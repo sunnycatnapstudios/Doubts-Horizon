@@ -11,7 +11,7 @@ public class healingPotion : Item,UsableInInventory
 
 
     public override string GetDesc() {
-        return "red 50";
+        return "heals a teamate";
 
     }
     public override string GetFlavour() {
