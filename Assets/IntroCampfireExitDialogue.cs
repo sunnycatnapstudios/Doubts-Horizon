@@ -44,7 +44,7 @@ public class IntroCampfireExitDialogue : MonoBehaviour
         GameStatsManager.Instance._dialogueHandler.dialogueProfile.sprite = manager.currentPartyMembers[manager.currentPartyMembers.Count - 1].Sprite;
 
         Debug.Log(manager.currentPartyMembers[manager.currentPartyMembers.Count - 1].ToString());
-        string name = manager.currentPartyMembers[manager.currentPartyMembers.Count - 1].Name;
+        string name = manager.currentPartyMembers[manager.currentPartyMembers.Count - 1].Name == "Best Friend" ? "little Orphan Olivia" : "Best Friend Fred";
         npcDialogueHandler.dialogueContents.Add($"I cant believe we saw {name} di...*sobs*");
 
     }
