@@ -844,6 +844,7 @@ public class _BattleUIHandler : MonoBehaviour
     private bool CheckForBattleEnd() {
         if (escapeSuccessful) {
             endCause = "Escape";
+            escapeSuccessful = false;
             return true;
         }
 
@@ -1055,6 +1056,7 @@ public class _BattleUIHandler : MonoBehaviour
         } else {
             Debug.Log($"Oof, rolled a {roll}, didn't make it lol");
             SkipTurns();
+            escapeSuccessful = false;
             battleExplanation.text = "Couldn't get away :(";
         }
         // Reset confirmation state after execution
