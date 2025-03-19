@@ -42,6 +42,8 @@ public class VeteranDialogue : MonoBehaviour {
             "Careful! There's on of 'em monsters ahead.",
             "Look at them soulless eyes...",
             "You can use your sling shot (RMB) to stun it, but it won't stay down for long.",
+            "And sometimes, if you beat them they drop loot!",
+            "just remember to check by pressing (I)",
             $"I could help you along your way.. all I ask is you share some of your supplies.",
             $"What do you say? Are you <link=\"{takeMeTag}\"><b><#d4af37>with me</color></b></link>? Or are you against that thing all <link=\"{orNotTag}\"><b><#a40000>by yourself</color></b></link>?"
         };
