@@ -12,6 +12,7 @@ public class Inventory : MonoBehaviour {
     public UIInventory inventoryWindow;
     private Item selected;
     private int timer = 0;
+    public List<Item> items;
 
     Dictionary<string, Survivor> survivors = new Dictionary<string, Survivor>();
     public Survivor test1;
@@ -125,6 +126,9 @@ public class Inventory : MonoBehaviour {
             }
 
             timer = 30;
+        } else if (Input.GetKeyDown(KeyCode.L)) {
+            GrabRandomItem();
+
         }
 
         if (timer > 0) {
@@ -140,5 +144,16 @@ public class Inventory : MonoBehaviour {
 
             // Print the entire list to the console.
         }
+    }
+
+
+    public string GrabRandomItem() {
+        int rand = UnityEngine.Random.Range(0, items.Count);
+        if(items.Count == 0) 
+            { return "non"; }
+        addItem(items[rand]);
+        Debug.Log(items[rand]);
+
+        return items[rand].GetName();
     }
 }
