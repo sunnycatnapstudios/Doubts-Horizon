@@ -17,7 +17,7 @@ public class FishManScript : MonoBehaviour {
         inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
         statsManager = GameStatsManager.Instance;
 
-        string Feedme = "feed fishman";
+        string Feedme = "feed fishman" + gameObject.GetHashCode().ToString();
         Action takeMe = () => {
             Debug.Log("Blub blub, thanks!");
             PartyManager partyManager = GameObject.FindGameObjectWithTag("Player").GetComponent<PartyManager>();
@@ -45,7 +45,7 @@ public class FishManScript : MonoBehaviour {
         };
         dialogueInputHandler.AddDialogueChoice(Feedme, takeMe);
 
-        string orNotTag = "do not feed fishman";
+        string orNotTag = "do not feed fishman" + gameObject.GetHashCode().ToString();
         Action orNot = () => {
             Debug.Log("Blub... guess I'll stay hungry.");
             statsManager.interactedWithCampfireNPC();

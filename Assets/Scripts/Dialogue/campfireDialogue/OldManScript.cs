@@ -17,7 +17,7 @@ public class OldManScript : MonoBehaviour {
         inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
         statsManager = GameStatsManager.Instance;
 
-        string feedMe = "feed oldguy";
+        string feedMe = "feed oldguy" + gameObject.GetHashCode().ToString();
         Action takeMe = () => {
             Debug.Log("Take me callback.");
             PartyManager partyManager = GameObject.FindGameObjectWithTag("Player").GetComponent<PartyManager>();
@@ -43,7 +43,7 @@ public class OldManScript : MonoBehaviour {
         };
         dialogueInputHandler.AddDialogueChoice(feedMe, takeMe);
 
-        string orNotTag = "do not feed oldguy";
+        string orNotTag = "do not feed oldguy" + gameObject.GetHashCode().ToString();
         Action orNot = () => {
             Debug.Log("Or not callback.");
             statsManager.interactedWithCampfireNPC();

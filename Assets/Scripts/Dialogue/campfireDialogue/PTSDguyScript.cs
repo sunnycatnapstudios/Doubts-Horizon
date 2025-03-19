@@ -17,7 +17,7 @@ public class PTSDguyScript : MonoBehaviour {
         inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
         statsManager = GameStatsManager.Instance;
 
-        string Feedme = "feed soldier";
+        string Feedme = "feed soldier" + gameObject.GetHashCode().ToString();
         Action takeMe = () => {
             Debug.Log("Take me callback.");
             PartyManager partyManager = GameObject.FindGameObjectWithTag("Player").GetComponent<PartyManager>();
@@ -45,7 +45,7 @@ public class PTSDguyScript : MonoBehaviour {
         };
         dialogueInputHandler.AddDialogueChoice(Feedme, takeMe);
 
-        string orNotTag = "do not feed soldier";
+        string orNotTag = "do not feed soldier" + gameObject.GetHashCode().ToString();
         Action orNot = () => {
             Debug.Log("Or not callback.");
             statsManager.interactedWithCampfireNPC();
