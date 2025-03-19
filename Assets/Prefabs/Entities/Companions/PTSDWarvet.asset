@@ -21,7 +21,7 @@ MonoBehaviour:
   OverworldSprite: {fileID: 21300000, guid: 3639b4320d1f4484699e3a419cdb5e0a, type: 3}
   unKickable: 0
   enteringFireDialogue: 
-  Animcontroller: {fileID: 0}
+  Animcontroller: {fileID: 9100000, guid: 6a9b6e5e1e1b19b44b20423668ed320e, type: 2}
   Sprite: {fileID: 21300000, guid: 3639b4320d1f4484699e3a419cdb5e0a, type: 3}
   walkingSprite: {fileID: 0}
   GetWalkingSprite: {fileID: 0}
