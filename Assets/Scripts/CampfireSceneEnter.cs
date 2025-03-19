@@ -38,40 +38,10 @@ public class CampfireSceneEnter : MonoBehaviour
     }
 
     void AfterDialogue() {
-        //
-
         afterDialogue.pickRandomDialogue();
-        //npcDialogueHandler.currentLineIndex = 0;
-
         
         GameStatsManager.Instance._dialogueHandler.isCloseable = false;
         GameStatsManager.Instance._dialogueHandler.OpenDialogueWith(afterDialogue.gameObject);
         GameStatsManager.Instance._dialogueHandler.isCloseable = true;
-    }
-
-    private IEnumerator waitToCallNextDialogue() {
-        yield return new WaitForSeconds(1);
-        
-    }
-     void OnTriggerEnter2D(Collider2D other) {
-
-        if (other.CompareTag(tagTarget)) {
-            if (player == null) {
-                GameObject playerObject = other.gameObject;
-                player = other.gameObject.GetComponent<Player>();
-
-
-
-            }
-            Debug.Log("hitColliderCampfire");
-            gameObject.GetComponent<DialogueBoxHandler>().npcProfile = manager.player.Sprite;
-            GameStatsManager.Instance._dialogueHandler.isCloseable = false;
-            GameStatsManager.Instance._dialogueHandler.OpenDialogueWith(gameObject);
-            gameObject.GetComponent<Collider2D>().enabled = false;
-
-        }
-
-
-
     }
 }
