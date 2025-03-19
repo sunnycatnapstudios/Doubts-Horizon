@@ -8,7 +8,7 @@ public class CampfireExitDialogue : MonoBehaviour {
     private DialogueBoxHandler npcDialogueHandler;
     private Player player;
     public Vector3 location;
-    
+
     private PartyManager manager;
     [SerializeField] private Sprite highlightSprite;
     [SerializeField] private Sprite normalSprite;
@@ -47,16 +47,17 @@ public class CampfireExitDialogue : MonoBehaviour {
             //}
             player.movePoint.transform.position = location;
             player.transform.position = location;
+            AudioManager.Instance.CrossFadeMusicToZero(1f);
             kickUnfed();
             GameStatsManager.Instance._dialogueHandler.CloseDialogueBox();
 
-            
+
 
 
 
         };
         dialogueInputHandler.AddDialogueChoice(takeMeTag, takeMe);
-       
+
 
 
 
@@ -73,7 +74,7 @@ public class CampfireExitDialogue : MonoBehaviour {
     void Update() {
     }
 
-    
+
 
     void AfterDialogue() {
         Debug.Log("Completed dialogue.");
