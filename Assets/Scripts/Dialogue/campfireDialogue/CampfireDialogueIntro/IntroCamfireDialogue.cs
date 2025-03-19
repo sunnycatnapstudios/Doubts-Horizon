@@ -31,10 +31,9 @@ public class IntroCamfireDialogue : MonoBehaviour
         npcDialogueHandler.SetSfxTalkingClip(audioClips.sfxTalkingBlip);
 
         npcDialogueHandler.dialogueContents = new List<string> {
-            "Hey over there!",
-            "That looks like some food!",
-            "Im starving"
-
+            "Damn, I just checked my inventory (toggle using I) and I am out of food...",
+            "Oh wait that looks like some food, over there!",
+            "Go grab it, I'm starving",
         };
 
         npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
