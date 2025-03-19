@@ -905,6 +905,8 @@ public class _BattleUIHandler : MonoBehaviour
             AudioManager.Instance.CrossFadeMusicToZero(0.5f, 0f);
             AudioManager.Instance.PlaySound(audioClips.battlePlayerDied);
         }
+
+        GameObject.FindWithTag("Player").GetComponent<Player>().isPlayerInControl = false;
     }
 
     // Used in death button. Reset current scene, restart at title screen
