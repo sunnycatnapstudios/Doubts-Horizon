@@ -128,6 +128,8 @@ public class Bullet : MonoBehaviour {
 
     // Reset the projectile upon collision
     private void OnTriggerEnter2D(Collider2D other) {
-        ResetProjectile();
+        if (!other.CompareTag("MainCamera")) {  // Bullets can fire within camera bound
+            ResetProjectile();
+        }
     }
 }
