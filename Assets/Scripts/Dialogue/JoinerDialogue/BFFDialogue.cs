@@ -32,7 +32,7 @@ public class BFFDialogue : MonoBehaviour {
         dialogueInputHandler.AddDialogueChoice(takeMeTag, takeMe);
 
         npcDialogueHandler.dialogueContents = new List<string> {
-            "Oh good, you're okay too.",
+            "Oh good, I thought you were gone",
             "That was some crazy storm..",
             $"<link=\"{takeMeTag}\"><b><#d4af37>Let's go</color></b></link> and look for the others."
         };

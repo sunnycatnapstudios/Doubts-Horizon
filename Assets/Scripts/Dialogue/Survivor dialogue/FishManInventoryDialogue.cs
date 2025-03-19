@@ -5,15 +5,15 @@ using UnityEngine;
 public class FishManInventoryDialogue : InventoryDialogues
 {
     public override string LowHealthAndLowHunger() {
-        return "Hey... Can we wait a bit, i think i need to catch my breath";
+        return "Not feeling so good.. I might go belly up... Blub.";
     }
     public override string LowHealthDialogue() {
-        return "Owch, do we have any potions left? i think i broke something";
+        return "Blub! That last hit nearly scaled me!";
     }
     public override string LowHungerDialogue() {
-        return "I could use a burger dawg";
+        return "Blub!! Would you kindly give some snacks?";
     }
     public override string NormalDialogue() {
-        return "Woah the sun is so bright today";
+        return "Blub-blub! Smells like rain... Good day for a swim.";
     }
 }
