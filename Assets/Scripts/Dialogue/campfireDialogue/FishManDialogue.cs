@@ -28,18 +28,21 @@ public class FishManDialogue : MonoBehaviour {
                 inventory.removeItemByName("Ration");
                 statsManager.interactedWithCampfireNPC();
                 statsManager.updateBedStatus();
-                npcDialogueHandler.dialogueContents.Clear();
-                npcDialogueHandler.dialogueContents.Add($"Blub blub! You have {inventory.getCountofItem("Ration")} rations left.");
                 
+                npcDialogueHandler.dialogueContents.Add($"Blub blub! You have {inventory.getCountofItem("Ration")} rations left.");
+                npcDialogueHandler.lastLineDisplayed = false;
+                npcDialogueHandler.currentLineIndex += 1;
+
             } else {
                 statsManager.interactedWithCampfireNPC();
                 statsManager.updateBedStatus();
-                npcDialogueHandler.dialogueContents.Clear();
+                
                 npcDialogueHandler.dialogueContents.Add("Blub... You don't even have any for yourself.");
+                npcDialogueHandler.lastLineDisplayed = false;
+                npcDialogueHandler.currentLineIndex += 1;
             }
             
-            npcDialogueHandler.lastLineDisplayed = false;
-            npcDialogueHandler.currentLineIndex += 1;
+            
             npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
             GameStatsManager.Instance._dialogueHandler.UpdateDialogueBox();
         };

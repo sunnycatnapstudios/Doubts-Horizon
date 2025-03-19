@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: MC
   m_EditorClassIdentifier: 
   name: Me
-  damage: 20
+  damage: 1000
   health: 60
   isCombatant: 1
   inventoryDialogues: {fileID: -381307989238394630, guid: d861617506f94ac4287d6cf758f76951,

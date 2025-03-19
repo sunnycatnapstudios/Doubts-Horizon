@@ -28,9 +28,10 @@ public class PTSDguyScript : MonoBehaviour {
                 inventory.removeItemByName("Ration");
                 statsManager.interactedWithCampfireNPC();
                 statsManager.updateBedStatus();
+               
+                npcDialogueHandler.dialogueContents.Add($"You have {inventory.getCountofItem("Ration")} rations left");
                 npcDialogueHandler.lastLineDisplayed = false;
                 npcDialogueHandler.currentLineIndex += 1;
-                npcDialogueHandler.dialogueContents.Add($"You have {inventory.getCountofItem("Ration")} rations left");
                 npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
                 
             } else {

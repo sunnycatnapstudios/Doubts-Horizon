@@ -28,16 +28,21 @@ public class OldManScript : MonoBehaviour {
                 inventory.removeItemByName("Ration");
                 statsManager.interactedWithCampfireNPC();
                 statsManager.updateBedStatus();
-                
+               
+
                 npcDialogueHandler.dialogueContents.Add($"You have {inventory.getCountofItem("Ration")} rations left.");
+                npcDialogueHandler.lastLineDisplayed = false;
+                npcDialogueHandler.currentLineIndex += 1;
             } else {
                 statsManager.interactedWithCampfireNPC();
                 statsManager.updateBedStatus();
+               
                 npcDialogueHandler.dialogueContents.Add("Too bad we are out...");
+                npcDialogueHandler.lastLineDisplayed = false;
+                npcDialogueHandler.currentLineIndex += 1;
             }
 
-            npcDialogueHandler.lastLineDisplayed = false;
-            npcDialogueHandler.currentLineIndex += 1;
+            
             npcDialogueHandler.afterDialogue = AfterDialogue;
             GameStatsManager.Instance._dialogueHandler.UpdateDialogueBox();
         };
