@@ -20,7 +20,7 @@ public class BFFDialogue : MonoBehaviour {
         npcDialogueHandler = GetComponent<DialogueBoxHandler>();
         npcDialogueHandler.SetSfxTalkingClip(audioClips.sfxTalkingBlip);
 
-        string takeMeTag = "Take me bff";
+        string takeMeTag = "Take me bffs";
         Action takeMe = () => {
             Debug.Log("Take me callback.");
             GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
