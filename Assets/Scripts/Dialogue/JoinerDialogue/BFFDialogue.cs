@@ -33,12 +33,12 @@ public class BFFDialogue : MonoBehaviour {
             player.movePoint.transform.position = player.transform.position = transition.transform.position + new Vector3(-13, 10);
         };
         dialogueInputHandler.AddDialogueChoice(takeMeTag, takeMe);
-
-npcDialogueHandler.dialogueContents = new List<string> {
-    "Oh good, I thought you were gone",
-    "That was some crazy storm..",
-    $"<link=\"{takeMeTag}\"><b><#d4af37>Let's go</color></b></link> and look for the others."
-};
+        npcDialogueHandler.dialogueContents = new List<string> {
+            $"Quick! <link=\"{takeMeTag}\"><b><#d4af37>Grab my arm!</color></b></link>"
+//             "Oh good, you're okay",
+//             "Quick! This place is gonna blow!",
+//             "You're gonna have to pull one of us out first.."
+        };
 
         npcDialogueHandler.afterDialogue = new Action(() => {
             Debug.Log("Completed BFF dialogue.");
