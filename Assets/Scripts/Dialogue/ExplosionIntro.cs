@@ -38,7 +38,6 @@ public class ExplosionIntro : MonoBehaviour {
         GameStatsManager.Instance._dialogueHandler.CloseDialogueBox();
         GameObject transition = GameObject.Find("Intro^City1");
         player.movePoint.transform.position = player.transform.position = transition.transform.position + new Vector3(-13, 10);
-        //player.movePoint.transform.position = player.transform.position = new Vector3(-70, -100, 18);
 
         if (nextDialogue) {
             GameStatsManager.Instance._dialogueHandler.isCloseable = false;

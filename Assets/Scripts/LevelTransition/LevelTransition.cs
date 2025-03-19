@@ -41,7 +41,7 @@ public class LevelTransition : MonoBehaviour {
             sceneAnimation.SetTrigger("Leave Scene");
             AudioManager.Instance.PlaySound(audioClips.sfxEnterTransition);
 
-           // yield return new WaitForSeconds(sceneAnimation.GetCurrentAnimatorStateInfo(0).length);
+            yield return new WaitForSeconds(sceneAnimation.GetCurrentAnimatorStateInfo(0).length);
 
             // We wait for the transition to complete before moving the player and party
             player.movePoint.transform.position = exitLocation + exitDirection;
