@@ -198,10 +198,8 @@ MonoBehaviour:
   combatUI: {fileID: 0}
   audioClips:
     sfxOnHitByBullet: {fileID: 8300000, guid: af1d731a1d0c403d686b188aa4bde715, type: 3}
-    sfxMonsterSounds:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
+    sfxMonsterSounds: []
+  monsterSoundInterval: 8
 --- !u!212 &6497700935085715811
 SpriteRenderer:
   m_ObjectHideFlags: 0
