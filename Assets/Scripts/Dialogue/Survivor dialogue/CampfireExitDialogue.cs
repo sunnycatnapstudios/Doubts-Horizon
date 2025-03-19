@@ -8,6 +8,7 @@ public class CampfireExitDialogue : MonoBehaviour {
     private DialogueBoxHandler npcDialogueHandler;
     private Player player;
     public Vector3 location;
+    
     private PartyManager manager;
     [SerializeField] private Sprite highlightSprite;
     [SerializeField] private Sprite normalSprite;
@@ -31,11 +32,28 @@ public class CampfireExitDialogue : MonoBehaviour {
         Action takeMe = () => {
             Debug.Log("Take me callback.");
             Transform transform = GameObject.FindGameObjectWithTag("Player").transform;
-           
+            Inventory inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
+
+            //if (inventory.hasItemByName("Ration")) {
+            //    inventory.removeItemByName("Ration");
+            //    npcDialogueHandler.dialogueContents.Add("You sleep full and satiated");
+            //    npcDialogueHandler.lastLineDisplayed = false;
+            //    npcDialogueHandler.currentLineIndex += 1;
+
+            //} else {
+            //    npcDialogueHandler.dialogueContents.Add("you go to sleep on an empty stomach");
+            //    npcDialogueHandler.lastLineDisplayed = false;
+            //    npcDialogueHandler.currentLineIndex += 1;
+            //}
             player.movePoint.transform.position = location;
             player.transform.position = location;
             kickUnfed();
             GameStatsManager.Instance._dialogueHandler.CloseDialogueBox();
+
+            
+
+
+
         };
         dialogueInputHandler.AddDialogueChoice(takeMeTag, takeMe);
        
@@ -44,6 +62,7 @@ public class CampfireExitDialogue : MonoBehaviour {
 
         npcDialogueHandler.dialogueContents = new List<string> {
             "All people not fed will not survive to the next morning.",
+            "If you do not leave a ration for yourself it will negatively affect your health.",
             "Are you sure you're ready to leave?",
             $"<link=\"{takeMeTag}\"><b><#d4af37>Click</color></b></link> if youre ready to go back or press E to Stay"
         };
