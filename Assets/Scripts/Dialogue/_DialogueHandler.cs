@@ -190,6 +190,13 @@ public class _DialogueHandler : MonoBehaviour {
     }
 
     public void OpenDialogueBox() {
+        if (dialogueBoxHandler.beforeDialogue != null) {
+            Debug.Log("Calling beforeDialogue");
+            var toCall = dialogueBoxHandler.beforeDialogue;
+            dialogueBoxHandler.beforeDialogue = null;
+            toCall();
+        }
+
         isDialogueActive = true;
         dialogueBoxHandler.currentLineIndex = 0;
         dialogueBoxHandler.lastLineDisplayed = false;
