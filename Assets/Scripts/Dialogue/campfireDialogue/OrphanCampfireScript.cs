@@ -17,7 +17,7 @@ public class OrphanCampfireScript : MonoBehaviour {
         inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
         statsManager = GameStatsManager.Instance;
 
-        string Feedme = "feed orphan";
+        string Feedme = "feed orphan" + gameObject.GetHashCode().ToString();
         Action takeMe = () => {
             Debug.Log("Take me callback.");
             PartyManager partyManager = GameObject.FindGameObjectWithTag("Player").GetComponent<PartyManager>();
@@ -49,7 +49,7 @@ public class OrphanCampfireScript : MonoBehaviour {
         };
         dialogueInputHandler.AddDialogueChoice(Feedme, takeMe);
 
-        string orNotTag = "do not feed orphan";
+        string orNotTag = "do not feed orphan" + gameObject.GetHashCode().ToString();
         Action orNot = () => {
             Debug.Log("Or not callback.");
             statsManager.interactedWithCampfireNPC();
