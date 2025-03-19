@@ -98,6 +98,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   location: {x: 0, y: 0, z: 0}
+  HungryDialogue: {fileID: 1440509360867860723, guid: 9b4154b8fbab74143960e702ec7e8ff8,
+    type: 3}
+  FullDialogue: {fileID: 8753726837914324248, guid: da76d11c42d6f984db6dbf22bebb2d38,
+    type: 3}
   highlightSprite: {fileID: 0}
   normalSprite: {fileID: 0}
   audioClips:
