@@ -5,15 +5,15 @@ using UnityEngine;
 public class MCInventoryDialogue : InventoryDialogues
 {
     public override string LowHealthAndLowHunger() {
-        return "Hey... Can we wait a bit, i think i need to catch my breath";
+        return "I cannot die!!";
     }
     public override string LowHealthDialogue() {
-        return "Owch, do we have any potions left? i think i broke something";
+        return "Better patch myself up fast";
     }
     public override string LowHungerDialogue() {
-        return "I could use a burger dawg";
+        return "Was that sound my stomach";
     }
     public override string NormalDialogue() {
-        return "Woah the sun is so bright today";
+        return "Hopefully there is less trouble today.";
     }
 }

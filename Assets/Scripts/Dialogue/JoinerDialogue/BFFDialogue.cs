@@ -33,7 +33,6 @@ public class BFFDialogue : MonoBehaviour {
             player.movePoint.transform.position = player.transform.position = transition.transform.position + new Vector3(-13, 10);
         };
         dialogueInputHandler.AddDialogueChoice(takeMeTag, takeMe);
-
         npcDialogueHandler.dialogueContents = new List<string> {
             $"Quick! <link=\"{takeMeTag}\"><b><#d4af37>Grab my arm!</color></b></link>"
         };
