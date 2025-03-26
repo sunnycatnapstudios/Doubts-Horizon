@@ -30,7 +30,7 @@ public class OverworldUIHandler : MonoBehaviour {
     }
 
     void CheckOpenMenu() {
-        if (Input.GetKeyDown(KeyCode.Escape) && player.canControlCam) { Open_CloseMenu(isPaused); }
+        if (Input.GetKeyDown(KeyCode.Tab) && player.canControlCam) { Open_CloseMenu(isPaused); }
     }
     public void Open_CloseMenu(bool ispaused) {
         isPaused = !ispaused;
