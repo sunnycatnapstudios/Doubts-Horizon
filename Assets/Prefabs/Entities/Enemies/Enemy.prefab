@@ -196,6 +196,7 @@ MonoBehaviour:
   pathDist: {x: 2, y: 3}
   overworldUI: {fileID: 0}
   combatUI: {fileID: 0}
+  enemyObjectManager: {fileID: 11400000, guid: e71f35d3c25fc594fa201a4b6a422688, type: 2}
   audioClips:
     sfxOnHitByBullet: {fileID: 8300000, guid: af1d731a1d0c403d686b188aa4bde715, type: 3}
     sfxMonsterSounds: []
