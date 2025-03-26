@@ -320,6 +320,7 @@ public class _BattleUIHandler : MonoBehaviour
                 if (obj.CompareTag("Simple Enemy")) {
                     obj.SetActive(false);
                 } if (obj.CompareTag("Complex Enemy")) {
+                    Debug.Log("Setting complex enemy to "+ enemyStats.Name);
                     obj.SetActive(obj.name == enemyStats.Name);
                 }
             }
