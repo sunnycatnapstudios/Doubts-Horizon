@@ -30,6 +30,7 @@ public class Inventory : MonoBehaviour {
 
 
     void Start() {
+        player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         //inventoryWindow = GameObject.FindWithTag("Inventory").GetComponentInChildren<UIInventory>();
         inventory = new Dictionary<string, Slot>();
         itemsInRange = new List<GameObject>();
@@ -115,17 +116,26 @@ public class Inventory : MonoBehaviour {
 
                 curObj.GetComponent<Pickupable>().DestroyInWorld();
             }
-        } else if (Input.GetKeyDown(KeyCode.I) && timer <= 1) {
-            if (inventoryWindow.isActiveAndEnabled == false) {
-                Debug.Log("Open Inventory");
-                inventoryWindow.Show(inventory);
-            } else {
+        }
+        if (inventoryWindow.isActiveAndEnabled) {
+            if (Input.GetKeyDown(KeyCode.I) && timer <= 1) {
                 Debug.Log("Close Inventory");
                 inventoryWindow.Hide();
+                player.canControlCam = true;
+                Time.timeScale = 1;
+                timer = 5;
             }
+        } else {
+            if (player.canControlCam && Input.GetKeyDown(KeyCode.I) && timer <= 1) {
+                Debug.Log("Open Inventory");
+                inventoryWindow.Show(inventory);
+                player.canControlCam = false;
+                Time.timeScale = 0;
+                timer = 5;
+            }
+        }
 
-            timer = 5;
-        } else if (Input.GetKeyDown(KeyCode.L)) {
+        if (Input.GetKeyDown(KeyCode.L)) {
             GrabRandomItem();
         }
 
