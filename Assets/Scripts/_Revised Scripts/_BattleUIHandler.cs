@@ -35,6 +35,7 @@ public class _BattleUIHandler : MonoBehaviour
     public int currentEnemyCurrentHealth, currentEnemyMaxHealth;
     public List<CharacterStats> playerParty;
     public List<Survivor> survivors;
+    public EnemyObjectManager enemyObjectManager;
 
     [System.NonSerialized]
     public CharacterStats currentDefender = null;
@@ -285,13 +286,13 @@ public class _BattleUIHandler : MonoBehaviour
     }
     void SetupEnemy()
     {
-        enemyStats = currentEnemies[Random.Range(0, currentEnemies.Count)];
-
+        enemyStats = new CharacterStats(enemyObjectManager.Name, enemyObjectManager.Damage, enemyObjectManager.Health, enemyObjectManager.Health,true, true);
+        bool complex = enemyObjectManager.complexEnemy;
         enemyName.text = ":"+enemyStats.Name;
         currentEnemyCurrentHealth = enemyStats.currentHealth;
         currentEnemyMaxHealth = enemyStats.maxHealth;
 
-        if (enemyStats.Name == "Cuboid" || enemyStats.Name == "Handy")
+        if (!complex)
         {
             // Debug.Log("ITS A SIMPLE ENEMY");
             var allObjects = GetAllObjectsOnlyInScene();
@@ -307,9 +308,11 @@ public class _BattleUIHandler : MonoBehaviour
             // GameObject simpleUIAnimator = GameObject.FindGameObjectWithTag("Simple Enemy");
             // enemyUIAnimator = simpleUIAnimator.GetComponent<Animator>();
             enemyUIAnimator.updateMode = AnimatorUpdateMode.UnscaledTime;
+            Debug.Log(enemyStats.Name + "anim");
             enemyUIAnimator.Play($"{enemyStats.Name} Idle");
+            //enemyUIAnimator.Play(enemyObjectManager.BattleAnimeController.)
         }
-        else if (enemyStats.Name == "Gregor")
+        else if (complex)
         {
             // Debug.Log("ITS A COMPLEX ENEMY");
             var allObjects = GetAllObjectsOnlyInScene();
