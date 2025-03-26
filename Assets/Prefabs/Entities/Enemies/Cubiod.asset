@@ -10,12 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3bcbf6317579456409e3da4f03293807, type: 3}
-  m_Name: New Enemy Object Manager
+  m_Name: Cubiod
   m_EditorClassIdentifier: 
   OverworldSprite: {fileID: 0}
-  Name: 
-  damage: 0
-  health: 0
+  Name: Cuboid
+  damage: 30
+  health: 200
   Sprite: {fileID: 0}
   Animcontroller: {fileID: 0}
   BattleAnimeController: {fileID: 0}

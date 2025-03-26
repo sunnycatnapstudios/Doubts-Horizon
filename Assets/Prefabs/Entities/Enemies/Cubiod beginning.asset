@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: Cubiod beginning
   m_EditorClassIdentifier: 
   OverworldSprite: {fileID: 0}
-  Name: 
-  damage: 0
-  health: 0
+  Name: Cuboid
+  damage: 20
+  health: 60
   Sprite: {fileID: 0}
   Animcontroller: {fileID: 0}
   BattleAnimeController: {fileID: 0}
