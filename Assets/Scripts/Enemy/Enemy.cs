@@ -78,7 +78,14 @@ public class Enemy : MonoBehaviour {
 
             GameStatsManager.Instance._dialogueHandler.CloseDialogueBox();
 
-            // Enemy "killed"
+            StartCoroutine(KillEnemyAfterDelay(0.4f)); 
+        }
+    }
+    IEnumerator KillEnemyAfterDelay(float delay) {
+        yield return new WaitForSeconds(delay);
+
+        if (caught) { 
+
             stun = true;
             stunTimer = float.NegativeInfinity;
             enemyAnim.Play("Stun Down");
