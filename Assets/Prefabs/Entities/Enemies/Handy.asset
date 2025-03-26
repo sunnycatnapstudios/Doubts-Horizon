@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Handy
   m_EditorClassIdentifier: 
   OverworldSprite: {fileID: 0}
-  Name: 
+  Name: Handy
   damage: 12
   health: 180
   Sprite: {fileID: 0}
