@@ -30,12 +30,15 @@ public class OverworldUIHandler : MonoBehaviour {
     }
 
     void CheckOpenMenu() {
-        if (Input.GetKeyDown(KeyCode.Tab) && player.canControlCam) { Open_CloseMenu(isPaused); }
+        if (Input.GetKeyDown(KeyCode.Tab)) { Open_CloseMenu(isPaused); }
     }
     public void Open_CloseMenu(bool ispaused) {
-        isPaused = !ispaused;
-        // Time.timeScale = isPaused ? 0 : 1;
-        if (isPaused) {
+        if (!isPaused) {
+            if (!player.canControlCam) {
+                return;
+            }
+            isPaused = true;
+            player.canControlCam = false;
             overworldMenuAnimator.Play("OpenMenu");
             if (overworldUI != null && overworldUI.activeSelf) {
                 overworldDarkScreen.Play("Darken Screen");
@@ -44,6 +47,8 @@ public class OverworldUIHandler : MonoBehaviour {
                 combatDarkScreen.Play("Darken Screen");
             }
         } else {
+            isPaused = false;
+            player.canControlCam = true;
             overworldMenuAnimator.Play("CloseMenu");
             if (overworldUI != null && overworldUI.activeSelf) {
                 overworldDarkScreen.Play("Lighten Screen");
