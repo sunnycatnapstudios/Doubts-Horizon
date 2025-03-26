@@ -6,8 +6,8 @@
       "source": "registry",
       "dependencies": {
         "com.unity.2d.common": "2.1.0",
-        "com.unity.2d.sprite": "1.0.0",
         "com.unity.mathematics": "1.1.0",
+        "com.unity.2d.sprite": "1.0.0",
         "com.unity.modules.animation": "1.0.0",
         "com.unity.modules.uielements": "1.0.0"
       },
@@ -43,8 +43,8 @@
       "source": "registry",
       "dependencies": {
         "com.unity.2d.common": "2.0.2",
-        "com.unity.2d.sprite": "1.0.0",
-        "com.unity.2d.animation": "3.2.5"
+        "com.unity.2d.animation": "3.2.5",
+        "com.unity.2d.sprite": "1.0.0"
       },
       "url": "https://packages.unity.com"
     },
@@ -59,9 +59,9 @@
       "depth": 0,
       "source": "registry",
       "dependencies": {
-        "com.unity.2d.path": "2.0.6",
+        "com.unity.mathematics": "1.1.0",
         "com.unity.2d.common": "2.0.2",
-        "com.unity.mathematics": "1.1.0"
+        "com.unity.2d.path": "2.0.6"
       },
       "url": "https://packages.unity.com"
     },
