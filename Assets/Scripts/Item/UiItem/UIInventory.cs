@@ -21,7 +21,7 @@ public class UIInventory : MonoBehaviour {
     [SerializeField]
     private RectTransform partyPanel;
 
-   
+
     [SerializeField]
     private RectTransform contentPanel;
 
@@ -183,7 +183,7 @@ public class UIInventory : MonoBehaviour {
     }
     private void OnButtonClick() {
 
-        Debug.Log(state.ToString());
+        Debug.Log($"UIInventory state {state.ToString()}");
         switch (state) {
             case (ButtonState.item):
 
@@ -250,8 +250,6 @@ public class UIInventory : MonoBehaviour {
         //listOfMembers[0].SetdisplayItem(partyManager.getPlayer());
         //counter = 1;
         foreach (Survivor member in partyManager.currentPartyMembers) {
-            Debug.Log(counter);
-            Debug.Log(listOfMembers.Count);
             listOfMembers[counter].SetdisplayItem(member);
             counter++;
         }

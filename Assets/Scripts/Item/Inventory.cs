@@ -116,19 +116,17 @@ public class Inventory : MonoBehaviour {
                 curObj.GetComponent<Pickupable>().DestroyInWorld();
             }
         } else if (Input.GetKeyDown(KeyCode.I) && timer <= 1) {
-            Debug.Log("got I");
             if (inventoryWindow.isActiveAndEnabled == false) {
-                Debug.Log("a");
+                Debug.Log("Open Inventory");
                 inventoryWindow.Show(inventory);
             } else {
-                Debug.Log("b");
+                Debug.Log("Close Inventory");
                 inventoryWindow.Hide();
             }
 
-            timer = 30;
+            timer = 5;
         } else if (Input.GetKeyDown(KeyCode.L)) {
             GrabRandomItem();
-
         }
 
         if (timer > 0) {
