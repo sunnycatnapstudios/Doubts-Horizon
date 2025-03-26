@@ -38,6 +38,8 @@ public class Enemy : MonoBehaviour {
 
     public GameObject overworldUI, combatUI;
 
+    public EnemyObjectManager enemyObjectManager;
+
     [Serializable]
     private struct AudioClips {
         public AudioClip sfxOnHitByBullet;
@@ -71,6 +73,7 @@ public class Enemy : MonoBehaviour {
         if (iscaught && !caught) {
             caught = true;
             _battleUIHandler.curEnemy = gameObject;
+            _battleUIHandler.enemyObjectManager = enemyObjectManager;
             _battleUIHandler.EnterCombat();
 
             GameStatsManager.Instance._dialogueHandler.CloseDialogueBox();
