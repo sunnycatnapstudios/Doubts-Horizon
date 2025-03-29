@@ -12,6 +12,8 @@ public class CampfireExitDialogue : MonoBehaviour {
     private PartyManager manager;
     [SerializeField] private Sprite highlightSprite;
     [SerializeField] private Sprite normalSprite;
+    private LevelTransition levelTransition;
+    private AudioTransition audioTransition;
 
     [Serializable]
     private struct AudioClips {
@@ -25,6 +27,8 @@ public class CampfireExitDialogue : MonoBehaviour {
         npcDialogueHandler = GetComponent<DialogueBoxHandler>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         manager = GameObject.FindGameObjectWithTag("Player").GetComponent<PartyManager>();
+        levelTransition = GetComponent<LevelTransition>();
+        audioTransition = GetComponent<AudioTransition>();
 
         npcDialogueHandler.SetSfxTalkingClip(audioClips.sfxTalkingBlip);
 
@@ -45,16 +49,12 @@ public class CampfireExitDialogue : MonoBehaviour {
             //    npcDialogueHandler.lastLineDisplayed = false;
             //    npcDialogueHandler.currentLineIndex += 1;
             //}
-            player.movePoint.transform.position = location;
-            player.transform.position = location;
-            AudioManager.Instance.CrossFadeMusicToZero(1f);
+            //player.movePoint.transform.position = location;
+            //player.transform.position = location;
+            StartCoroutine(levelTransition.PerformLevelTransition());   // Use our level transition logic instead
+            audioTransition.TriggerAudioTransition();
             kickUnfed();
             GameStatsManager.Instance._dialogueHandler.CloseDialogueBox();
-
-
-
-
-
         };
         dialogueInputHandler.AddDialogueChoice(takeMeTag, takeMe);
 
