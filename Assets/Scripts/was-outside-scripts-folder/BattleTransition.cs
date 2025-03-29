@@ -10,6 +10,11 @@ public class BattleTransition : MonoBehaviour {
     private Transform deathTransform;
     public TextMeshProUGUI text, buttonText;
     public Image black, button;
+    private Transform teammateDeath;
+    public Image teammateDeathImage;
+    public TextMeshProUGUI teammateText;
+    private Image teammateDeathBackground;
+    
 
     public bool _start;
     public float fadeSpeed = 0.5f;
@@ -29,6 +34,14 @@ public class BattleTransition : MonoBehaviour {
 
         left.fillOrigin = (int)Image.OriginHorizontal.Left;
         right.fillOrigin = (int)Image.OriginHorizontal.Right;
+
+        teammateDeath = this.transform.Find("TeammateDeath");
+        teammateText = teammateDeath.Find("TeammateText").GetComponent <TextMeshProUGUI>();
+        teammateDeathImage = teammateDeath.Find("TeammateImage").GetComponent<Image>();
+        teammateDeathBackground = teammateDeath.Find("Background").GetComponent<Image>();
+
+
+
     }
 
     public void LeaveBattle() {
@@ -81,6 +94,38 @@ public class BattleTransition : MonoBehaviour {
         _start = false;
         StartCoroutine(HadDiedAnim());
     }
+
+
+    public void teammMateDeath(Survivor survivor) {
+        teammateDeath.gameObject.SetActive(true);
+        _start = false;
+
+        StartCoroutine(teammateDeathAnim());
+    }
+
+    public IEnumerator teammateDeathAnim() {
+        while (black.color.a < 1) {
+            float fadeAmount = black.color.a + (Time.unscaledDeltaTime * fadeSpeed);
+            Color newColor = new Color(black.color.r, black.color.g, black.color.b,
+                fadeAmount);
+            black.color = newColor;
+
+            newColor = new Color(text.color.r, text.color.g, text.color.b, fadeAmount);
+            text.color = newColor;
+            buttonText.color = newColor;
+
+            newColor = new Color(button.color.r, button.color.g, button.color.b,
+                fadeAmount);
+            button.color = newColor;
+            yield return null;
+        }
+        yield return new WaitForSeconds(3);
+        teammateDeath.gameObject.SetActive(false);
+
+        // Show Dialog after fade out
+        //textHandler.StartDialogue();
+    }
+
 
     public IEnumerator HadDiedAnim() {
         while (black.color.a < 1) {
