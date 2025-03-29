@@ -38,7 +38,6 @@ public class Player : MonoBehaviour {
     public Vector2 playerInput;
 
     private PartyManager partyManager;
-    //private _PartyManager _partyManager;
     public Bullet bullet;
 
     public bool isPlayerInControl;
@@ -47,16 +46,13 @@ public class Player : MonoBehaviour {
 
     void ViewMap(bool cancontrolcam) {
         isZooming = Input.GetKey(KeyCode.Q);
-        // float targetSize = isZooming ? camMax : camMin;
 
         if (cancontrolcam) {
             currentCamSize = Mathf.Clamp(currentCamSize, 4f, 6f);
             float targetSize = isZooming ? camMax : (currentCamSize >= 6) ? 6 : (currentCamSize <= 4) ? 4 : currentCamSize;
-            // vcam.m_Lens.OrthographicSize = Mathf.MoveTowards(vcam.m_Lens.OrthographicSize,targetSize,targetSize * Time.deltaTime * 2);
             vcam.m_Lens.OrthographicSize = Mathf.Lerp(vcam.m_Lens.OrthographicSize, targetSize, targetSize * Time.deltaTime);
 
             if (!isZooming) currentCamSize -= Input.mouseScrollDelta.y * .4f;
-            // currentCamSize = Mathf.Clamp(currentCamSize, 4f, 6f);
         }
     }
 
@@ -105,8 +101,6 @@ public class Player : MonoBehaviour {
         inventory = GetComponent<Inventory>();
         partyManager = GetComponent<PartyManager>();
 
-        //_partyManager = GameStatsManager.Instance._partyManager;
-
         movePoint.parent = null;
         moveConstant = moveSpeed;
 
@@ -116,10 +110,6 @@ public class Player : MonoBehaviour {
         if (moveSprint == 0f) {
             moveSprint = 8.5f;
         }
-
-
-        // moveHist = new List<Vector3>();
-        // for (int i = 0; i<partyManager.partyCount; i++) {moveHist.Add(movePoint.position); Debug.Log("AAAAAAAAA");}
     }
 
     void Update() {
@@ -146,15 +136,12 @@ public class Player : MonoBehaviour {
         }
 
         ViewMap(canControlCam);
-        // OpenPauseMenu(canControlCam);
 
         playerInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
         if (Vector3.Distance(transform.position, movePoint.position) <= movementInputDelay && !isZooming && !isPlayerInControl) {
 
             pointRef = movePoint.position;
-
-            // Vector3 moveDir = Vector3.zero;
 
             if (playerInput.x != 0 && lastInput.x == 0) {
                 lastInput = new Vector2(playerInput.x, 0f);
@@ -166,9 +153,6 @@ public class Player : MonoBehaviour {
 
             if (playerInput == Vector2.zero) { lastInput = Vector2.zero; }
             Vector3 moveDir = new Vector3(lastInput.x, lastInput.y, 0f);
-            // Vector3 moveDir = new Vector3(playerInput.x, playerInput.y, 0f);
-
-            // Vector3 moveDir = new Vector3(playerInput.x, playerInput.y, 0f).normalized;
 
             if (isTraversable(movePoint.position + moveDir)) {
                 movePoint.position += moveDir;
