@@ -127,6 +127,9 @@ public class Player : MonoBehaviour {
         transform.position = Vector3.MoveTowards(transform.position, movePoint.position, moveSpeed * Time.deltaTime);
         Vector3 endRef = transform.position;
         isMoving = startRef != endRef;
+        bool wasStill = lastInput == Vector2.zero;
+        bool movingHorizontal = startRef.x != endRef.x;
+        bool movingVertical = startRef.y != endRef.y;
 
         isSneaking = Input.GetMouseButton(1);
         isSprinting = Input.GetKey(KeyCode.LeftShift) && GameStatsManager.Instance.CanSprint() && !isSneaking;
@@ -171,7 +174,7 @@ public class Player : MonoBehaviour {
                 movePoint.position += moveDir;
             }
 
-            if (moveDir.x != 0) {
+            if (moveDir.x != 0 && (wasStill || movingHorizontal)) {
                 spritestate.flipX = moveDir.x < 0;
                 partiSystem.transform.eulerAngles = new Vector3(0f, moveDir.x < 0 ? 90f : -90f, 90f);
 
@@ -179,7 +182,7 @@ public class Player : MonoBehaviour {
                 faceUp = faceDown = false;
 
                 anim.Play("Walk Left");
-            } else if (moveDir.y != 0) {
+            } else if (moveDir.y != 0 && (wasStill || movingVertical)) {
                 bool movingUp = moveDir.y > 0;
                 anim.Play(movingUp ? "Walk Up" : "Walk Down");
                 partiSystem.transform.eulerAngles = new Vector3(movingUp ? 90f : -90f, 0f, 0f);
