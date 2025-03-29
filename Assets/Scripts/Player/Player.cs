@@ -7,7 +7,6 @@ using UnityEngine.InputSystem;
 using UnityEngine.UI;
 
 public class Player : MonoBehaviour {
-
     [HideInInspector] public Animator anim;
     [HideInInspector] public SpriteRenderer spritestate;
     [HideInInspector] public Inventory inventory;
@@ -52,7 +51,9 @@ public class Player : MonoBehaviour {
             float targetSize = isZooming ? camMax : (currentCamSize >= 6) ? 6 : (currentCamSize <= 4) ? 4 : currentCamSize;
             vcam.m_Lens.OrthographicSize = Mathf.Lerp(vcam.m_Lens.OrthographicSize, targetSize, targetSize * Time.deltaTime);
 
-            if (!isZooming) currentCamSize -= Input.mouseScrollDelta.y * .4f;
+            if (!isZooming) {
+                currentCamSize -= Input.mouseScrollDelta.y * .4f;
+            }
         }
     }
 
@@ -63,13 +64,17 @@ public class Player : MonoBehaviour {
             moveHist.Add(spawnPos);
         }
 
-        if (movePoint.position != pointRef) { moveHist.Add(pointRef); }
+        if (movePoint.position != pointRef) {
+            moveHist.Add(pointRef);
+        }
 
-        if (moveHist.Count > partyManager.partyCount) { moveHist.RemoveAt(0); }
+        if (moveHist.Count > partyManager.partyCount) {
+            moveHist.RemoveAt(0);
+        }
     }
+
     Vector3 GetValidSpawnPosition() {
-        Vector3[] possibleOffsets = new Vector3[]
-        {
+        Vector3[] possibleOffsets = new Vector3[] {
             new Vector3(-1, 0, 0),
             new Vector3(-1, -1, 0),
             new Vector3(0, -1, 0),
@@ -90,10 +95,6 @@ public class Player : MonoBehaviour {
         return pointRef; // Fallback
     }
 
-
-    void Awake() {
-
-    }
     void Start() {
         anim = GetComponent<Animator>();
         spritestate = GetComponent<SpriteRenderer>();
@@ -130,7 +131,12 @@ public class Player : MonoBehaviour {
         if (!isPlayerInControl) {
             moveSpeed = (isSneaking && !bullet.isReloading) ? moveSneak : ((isSprinting && isMoving) ? moveSprint : moveConstant);
         }
-        if (isSprinting && isMoving) { if (animCount <= 0) { partiSystem.Play(); animCount += 1; } } else {
+
+        if (isSprinting && isMoving) {
+            if (animCount <= 0) {
+                partiSystem.Play(); animCount += 1;
+            }
+        } else {
             animCount = 0;
             partiSystem.Stop();
         }
@@ -140,7 +146,6 @@ public class Player : MonoBehaviour {
         playerInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 
         if (Vector3.Distance(transform.position, movePoint.position) <= movementInputDelay && !isZooming && !isPlayerInControl) {
-
             pointRef = movePoint.position;
 
             if (playerInput.x != 0 && lastInput.x == 0) {
@@ -149,9 +154,13 @@ public class Player : MonoBehaviour {
                 lastInput = new Vector2(0f, playerInput.y);
             }
 
-            if (playerInput.x * lastInput.x == -1f || playerInput.y * lastInput.y == -1f) { lastInput = playerInput; }
+            if (playerInput.x * lastInput.x == -1f || playerInput.y * lastInput.y == -1f) {
+                lastInput = playerInput;
+            }
 
-            if (playerInput == Vector2.zero) { lastInput = Vector2.zero; }
+            if (playerInput == Vector2.zero) {
+                lastInput = Vector2.zero;
+            }
             Vector3 moveDir = new Vector3(lastInput.x, lastInput.y, 0f);
 
             if (isTraversable(movePoint.position + moveDir)) {
