@@ -142,7 +142,7 @@ public class TypeWriter : MonoBehaviour {
 
         while (elapsedTime < 0.1f) {
             // Duration of drop animation
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.unscaledDeltaTime;
             float offset = Mathf.Lerp(dropDistance, 0, elapsedTime / 0.1f); // Smooth drop
 
             _tmpProText.ForceMeshUpdate(); // Ensure text is updated

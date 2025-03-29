@@ -645,13 +645,13 @@ public class _BattleUIHandler : MonoBehaviour
 
                 if (player.isCombatant)  {healAmount = (1+(60 - player.attack)/60)*(Random.Range(20, 40));}
                 else {healAmount = Random.Range(20, 40);}
-                //GameObject thing = new GameObject();
-                //thing.AddComponent<DialogueBoxHandler>().dialogueContents = new List<string>{"i am here ", healTarget.Name };
-                //GameStatsManager.Instance._dialogueHandler.OpenDialogueWith(thing);
+                GameObject thing = new GameObject();
+                thing.AddComponent<DialogueBoxHandler>().dialogueContents = new List<string> { "i am here ", healTarget.Name };
+                GameStatsManager.Instance._dialogueHandler.OpenDialogueWith(thing);
                 //GameObject thing = new GameObject();
                 //thing.AddComponent<CanvasRenderer>();
                 //thing.AddComponent<Image>().color = Color.white;
-                battleTransition.teammMateDeath(partyManager.currentPartyMembers[0]);
+                //battleTransition.teammMateDeath(partyManager.currentPartyMembers[0]);
 
                 if (selectedTarget == player.Name) {
                     healAmount=(int)(healAmount*.8f);

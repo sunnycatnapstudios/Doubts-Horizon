@@ -36,6 +36,7 @@ public class BattleTransition : MonoBehaviour {
         right.fillOrigin = (int)Image.OriginHorizontal.Right;
 
         teammateDeath = this.transform.Find("TeammateDeath");
+        Debug.Log(teammateDeath+"teammatedeath name");
         teammateText = teammateDeath.Find("TeammateText").GetComponent <TextMeshProUGUI>();
         teammateDeathImage = teammateDeath.Find("TeammateImage").GetComponent<Image>();
         teammateDeathBackground = teammateDeath.Find("Background").GetComponent<Image>();
@@ -104,11 +105,13 @@ public class BattleTransition : MonoBehaviour {
     }
 
     public IEnumerator teammateDeathAnim() {
-        while (black.color.a < 1) {
-            float fadeAmount = black.color.a + (Time.unscaledDeltaTime * fadeSpeed);
-            Color newColor = new Color(black.color.r, black.color.g, black.color.b,
+        teammateDeathBackground.color = new Color(teammateDeathBackground.color.r, teammateDeathBackground.color.g, teammateDeathBackground.color.b,
+                0); ;
+        while (teammateDeathBackground.color.a < 1) {
+            float fadeAmount = teammateDeathBackground.color.a + (Time.unscaledDeltaTime * fadeSpeed);
+            Color newColor = new Color(teammateDeathBackground.color.r, teammateDeathBackground.color.g, teammateDeathBackground.color.b,
                 fadeAmount);
-            black.color = newColor;
+            teammateDeathBackground.color = newColor;
 
             newColor = new Color(text.color.r, text.color.g, text.color.b, fadeAmount);
             text.color = newColor;
@@ -117,13 +120,38 @@ public class BattleTransition : MonoBehaviour {
             newColor = new Color(button.color.r, button.color.g, button.color.b,
                 fadeAmount);
             button.color = newColor;
+            Debug.Log(teammateDeathBackground.color.a);
             yield return null;
         }
-        yield return new WaitForSeconds(3);
-        teammateDeath.gameObject.SetActive(false);
+        Debug.Log("I GET HERE IN DEATH ANIME");
+        StartCoroutine( closeTeammateDeathScreen());
 
         // Show Dialog after fade out
         //textHandler.StartDialogue();
+    }
+
+    public IEnumerator closeTeammateDeathScreen() {
+        Debug.Log("I GET HERE IN DEATH ANIME ONEEE");
+        yield return new WaitForSecondsRealtime(3);
+        while (teammateDeathBackground.color.a > 0) {
+            float fadeAmount = teammateDeathBackground.color.a - (Time.unscaledDeltaTime * fadeSpeed);
+            Color newColor = new Color(teammateDeathBackground.color.r, teammateDeathBackground.color.g, teammateDeathBackground.color.b,
+                fadeAmount);
+            teammateDeathBackground.color = newColor;
+
+            newColor = new Color(text.color.r, text.color.g, text.color.b, fadeAmount);
+            text.color = newColor;
+            buttonText.color = newColor;
+
+            newColor = new Color(button.color.r, button.color.g, button.color.b,
+                fadeAmount);
+            button.color = newColor;
+            Debug.Log(teammateDeathBackground.color.a);
+            yield return null;
+        }
+        Debug.Log("I GET HERE IN DEATH ANIME TWOO");
+        teammateDeath.gameObject.SetActive(false);
+
     }
 
 
