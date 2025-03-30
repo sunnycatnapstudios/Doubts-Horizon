@@ -37,7 +37,7 @@ public class TypeWriter : MonoBehaviour {
     IEnumerator TypeWriterTMP() {
         isTyping = true;
         _tmpProText.text = leadingCharBeforeDelay ? leadingChar : "";
-        yield return new WaitForSeconds(delayBeforeStart);
+        yield return new WaitForSecondsRealtime(delayBeforeStart);
         textChirp = 0f;
         AudioManager.Instance.PlaySound(_sfxTyping);
 
@@ -123,7 +123,7 @@ public class TypeWriter : MonoBehaviour {
                 AudioManager.Instance.PlaySound(_sfxTyping);
             }
 
-            yield return new WaitForSeconds(timeBtwChars);
+            yield return new WaitForSecondsRealtime(timeBtwChars);
         }
 
         if (leadingChar != "") {
@@ -142,7 +142,7 @@ public class TypeWriter : MonoBehaviour {
 
         while (elapsedTime < 0.1f) {
             // Duration of drop animation
-            elapsedTime += Time.deltaTime;
+            elapsedTime += Time.unscaledDeltaTime;
             float offset = Mathf.Lerp(dropDistance, 0, elapsedTime / 0.1f); // Smooth drop
 
             _tmpProText.ForceMeshUpdate(); // Ensure text is updated
