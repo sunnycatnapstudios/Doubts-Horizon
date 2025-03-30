@@ -774,6 +774,7 @@ public class _BattleUIHandler : MonoBehaviour
                     Debug.Log($"{currentDefender.Name} has been defeated!");
                     defeatedInCombat.Add(currentDefender.Name);
                     battleOrder.Remove(currentDefender);
+                    playerParty.Remove(currentDefender);
 
                     if (target.Name != "me") {
                         battleTransition.teammMateDeath(partyManager.currentPartyMembers.Find(x => x.Name == currentDefender.Name));
@@ -812,7 +813,7 @@ public class _BattleUIHandler : MonoBehaviour
                 if(target.Name != "me") {
                     battleTransition.teammMateDeath(partyManager.currentPartyMembers.Find(x => x.Name == target.Name));
                 }
-                
+                playerParty.Remove(target);
                 partyManager.removeFromPartyByName(target.Name);
                 
             }
