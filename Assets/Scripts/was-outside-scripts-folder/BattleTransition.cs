@@ -16,6 +16,7 @@ public class BattleTransition : MonoBehaviour {
     private Image teammateDeathBackground;
     private Survivor deadGuy;
     private GameObject deathDialogue;
+    private bool currentlyInTeammateDeath = false;
     
 
     public bool _start;
@@ -24,6 +25,7 @@ public class BattleTransition : MonoBehaviour {
     void Start() {
         left = this.transform.Find("Left").GetComponent<Image>();
         right = this.transform.Find("Right").GetComponent<Image>();
+        currentlyInTeammateDeath = false;
 
         // Behold, the most jank method of fading in a death animation
         deathTransform = this.transform.Find("Death");
@@ -104,10 +106,16 @@ public class BattleTransition : MonoBehaviour {
 
     public void teammMateDeath(Survivor survivor) {
         //teammateDeath = this.transform.Find("TeammateDeath");
+        if(currentlyInTeammateDeath == true) {
+            return;
+        } else {
+            currentlyInTeammateDeath = true;
+        }
         deadGuy = survivor;
         DeathDialogue dialogueholder = deathDialogue.GetComponent<DeathDialogue>();
         dialogueholder.setSurvivor(survivor);
         dialogueholder.setTransition(this);
+        dialogueholder.resetBeforeAndAfterDialogue();
         teammateDeath.gameObject.SetActive(true);
         //_start = false;
 
@@ -117,6 +125,8 @@ public class BattleTransition : MonoBehaviour {
     public IEnumerator teammateDeathAnim() {
         teammateDeathBackground.color = new Color(teammateDeathBackground.color.r, teammateDeathBackground.color.g, teammateDeathBackground.color.b,
                 0); ;
+
+
         while (teammateDeathBackground.color.a < 1) {
             float fadeAmount = teammateDeathBackground.color.a + (Time.unscaledDeltaTime * fadeSpeed);
             Color newColor = new Color(teammateDeathBackground.color.r, teammateDeathBackground.color.g, teammateDeathBackground.color.b,
@@ -171,6 +181,7 @@ public class BattleTransition : MonoBehaviour {
         }
         Debug.Log("I GET HERE IN DEATH ANIME TWOO");
         teammateDeath.gameObject.SetActive(false);
+        currentlyInTeammateDeath = false;
 
     }
 

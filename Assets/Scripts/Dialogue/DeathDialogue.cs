@@ -23,6 +23,12 @@ public class DeathDialogue : MonoBehaviour
 
 
     }
+    public void resetBeforeAndAfterDialogue() {
+        NPCDialogueHandler = GetComponent<DialogueBoxHandler>();
+
+        NPCDialogueHandler.afterDialogue = new Action(AfterDialogue);
+        NPCDialogueHandler.beforeDialogue = new Action(BeforeDialogue);
+    }
 
 
     public void setTransition(BattleTransition currbattletrans) {
@@ -51,8 +57,7 @@ public class DeathDialogue : MonoBehaviour
 
     }
     void AfterDialogue() {
-        //NPCDialogueHandler.afterDialogue = new Action(AfterDialogue);
-        //NPCDialogueHandler.beforeDialogue = new Action(BeforeDialogue);
+        
 
         GameStatsManager.Instance._dialogueHandler.CloseDialogueBox();
         StartCoroutine(transition.closeTeammateDeathScreen());
