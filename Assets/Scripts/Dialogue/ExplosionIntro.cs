@@ -9,8 +9,11 @@ public class ExplosionIntro : MonoBehaviour {
     private DialogueBoxHandler npcDialogueHandler;
     private Player player;
     public GameObject nextDialogue;
+
+    // Transition scripts with external functions to call
     private LevelTransition levelTransition;
     private AudioTransition audioTransition;
+    private fireplace fp;
 
     private PartyManager manager;
 
@@ -28,6 +31,7 @@ public class ExplosionIntro : MonoBehaviour {
         manager = GameObject.FindGameObjectWithTag("Player").GetComponent<PartyManager>();
         levelTransition = GetComponent<LevelTransition>();
         audioTransition = GetComponent<AudioTransition>();
+        fp = GetComponent<fireplace>();
 
         npcDialogueHandler.SetSfxTalkingClip(audioClips.sfxTalkingBlip);
 
@@ -47,6 +51,7 @@ public class ExplosionIntro : MonoBehaviour {
         // Just use our built in transition scripts
         StartCoroutine(levelTransition.PerformLevelTransition());
         audioTransition.TriggerAudioTransition();
+        StartCoroutine(fp.StartFireplaceEvent());
 
         if (nextDialogue) {
             GameStatsManager.Instance._dialogueHandler.isCloseable = false;
