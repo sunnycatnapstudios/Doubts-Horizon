@@ -112,6 +112,7 @@ public class BattleTransition : MonoBehaviour {
             currentlyInTeammateDeath = true;
         }
         deadGuy = survivor;
+        Debug.Log(survivor);
         DeathDialogue dialogueholder = deathDialogue.GetComponent<DeathDialogue>();
         dialogueholder.setSurvivor(survivor);
         dialogueholder.setTransition(this);

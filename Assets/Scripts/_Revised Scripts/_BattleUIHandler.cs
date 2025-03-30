@@ -646,10 +646,8 @@ public class _BattleUIHandler : MonoBehaviour
                 if (player.isCombatant)  {healAmount = (1+(60 - player.attack)/60)*(Random.Range(20, 40));}
                 else {healAmount = Random.Range(20, 40);}
                
-                //GameObject thing = new GameObject();
-                //thing.AddComponent<CanvasRenderer>();
-                //thing.AddComponent<Image>().color = Color.white;
-                battleTransition.teammMateDeath(partyManager.currentPartyMembers[0]);
+                
+               
 
                 if (selectedTarget == player.Name) {
                     healAmount=(int)(healAmount*.8f);
@@ -776,8 +774,11 @@ public class _BattleUIHandler : MonoBehaviour
                     Debug.Log($"{currentDefender.Name} has been defeated!");
                     defeatedInCombat.Add(currentDefender.Name);
                     battleOrder.Remove(currentDefender);
-                    currentDefender = null;
 
+                    if (target.Name != "me") {
+                        battleTransition.teammMateDeath(partyManager.currentPartyMembers.Find(x => x.Name == currentDefender.Name));
+                    }
+                    currentDefender = null;
 
 
                 }
@@ -808,7 +809,12 @@ public class _BattleUIHandler : MonoBehaviour
                 Debug.Log($"{target.Name} has been defeated!");
                 defeatedInCombat.Add(target.Name);
                 battleOrder.Remove(target);
+                if(target.Name != "me") {
+                    battleTransition.teammMateDeath(partyManager.currentPartyMembers.Find(x => x.Name == target.Name));
+                }
+                
                 partyManager.removeFromPartyByName(target.Name);
+                
             }
 
             // Reset defender at the end of the turn
