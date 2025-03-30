@@ -14,6 +14,8 @@ public class BattleTransition : MonoBehaviour {
     public Image teammateDeathImage;
     public TextMeshProUGUI teammateText;
     private Image teammateDeathBackground;
+    private Survivor deadGuy;
+    private GameObject deathDialogue;
     
 
     public bool _start;
@@ -37,9 +39,12 @@ public class BattleTransition : MonoBehaviour {
 
         teammateDeath = this.transform.Find("TeammateDeath");
         Debug.Log(teammateDeath+"teammatedeath name");
-        teammateText = teammateDeath.Find("TeammateText").GetComponent <TextMeshProUGUI>();
+      
         teammateDeathImage = teammateDeath.Find("TeammateImage").GetComponent<Image>();
         teammateDeathBackground = teammateDeath.Find("Background").GetComponent<Image>();
+        deathDialogue = teammateDeath.Find("DeathDialogue").gameObject;
+
+
 
 
 
@@ -98,8 +103,13 @@ public class BattleTransition : MonoBehaviour {
 
 
     public void teammMateDeath(Survivor survivor) {
+        //teammateDeath = this.transform.Find("TeammateDeath");
+        deadGuy = survivor;
+        DeathDialogue dialogueholder = deathDialogue.GetComponent<DeathDialogue>();
+        dialogueholder.setSurvivor(survivor);
+        dialogueholder.setTransition(this);
         teammateDeath.gameObject.SetActive(true);
-        _start = false;
+        //_start = false;
 
         StartCoroutine(teammateDeathAnim());
     }
@@ -124,11 +134,19 @@ public class BattleTransition : MonoBehaviour {
             yield return null;
         }
         Debug.Log("I GET HERE IN DEATH ANIME");
-        StartCoroutine( closeTeammateDeathScreen());
+        //GameObject thing = new GameObject();
+
+        //thing.AddComponent<DialogueBoxHandler>().dialogueContents = new List<string> { "i am here ",deadGuy.name };
+        
+        GameStatsManager.Instance._dialogueHandler.OpenDialogueWith(deathDialogue);
+        //StartCoroutine( closeTeammateDeathScreen());
+        //GameObject.Destroy( thing );
 
         // Show Dialog after fade out
         //textHandler.StartDialogue();
     }
+
+
 
     public IEnumerator closeTeammateDeathScreen() {
         Debug.Log("I GET HERE IN DEATH ANIME ONEEE");
