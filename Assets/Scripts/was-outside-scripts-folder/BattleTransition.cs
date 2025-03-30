@@ -147,7 +147,9 @@ public class BattleTransition : MonoBehaviour {
     }
 
 
-
+    public void closeGreyScreen() {
+        
+    }
     public IEnumerator closeTeammateDeathScreen() {
         Debug.Log("I GET HERE IN DEATH ANIME ONEEE");
         yield return new WaitForSecondsRealtime(3);

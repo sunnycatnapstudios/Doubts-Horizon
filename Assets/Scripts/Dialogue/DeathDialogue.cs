@@ -55,7 +55,8 @@ public class DeathDialogue : MonoBehaviour
         //NPCDialogueHandler.beforeDialogue = new Action(BeforeDialogue);
 
         GameStatsManager.Instance._dialogueHandler.CloseDialogueBox();
-        transition.closeTeammateDeathScreen();
+        StartCoroutine(transition.closeTeammateDeathScreen());
+        Debug.Log("call after close hope");
     }
 
     IEnumerable closeDialogue() {
