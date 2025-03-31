@@ -12,7 +12,7 @@ public class BattleTransition : MonoBehaviour {
     public Image black, button;
     private Transform teammateDeath;
     public Image teammateDeathImage;
-    public TextMeshProUGUI teammateText;
+    //public TextMeshProUGUI teammateText;
     private Image teammateDeathBackground;
     private Survivor deadGuy;
     private GameObject deathDialogue;
