@@ -15,6 +15,9 @@ MonoBehaviour:
   name: Old Man Dean
   damage: 10
   health: 32
+  deathDialogue:
+  - Finally,
+  - My time has come
   isCombatant: 1
   inventoryDialogues: {fileID: 6894140492303392861, guid: 7c50e87acb1109048966bedb87e4d2e7,
     type: 3}

@@ -50,7 +50,7 @@ public class DeathDialogue : MonoBehaviour
         dialogueLines = new List<string>();
         dialogueLines = _survivor.deathDialogue;
         NPCDialogueHandler.dialogueContents = dialogueLines;
-        GameStatsManager.Instance._dialogueHandler.dialogueName.text =_survivor.name;
+        GameStatsManager.Instance._dialogueHandler.dialogueName.text =_survivor.Name;
         GameStatsManager.Instance._dialogueHandler.dialogueProfile.sprite = _survivor.Sprite;
 
 

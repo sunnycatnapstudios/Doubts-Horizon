@@ -15,6 +15,10 @@ MonoBehaviour:
   name: Harvey
   damage: 20
   health: 50
+  deathDialogue:
+  - THE WAR
+  - NO REST FOR THE WEARY
+  - DAMN THOSE RATS I NEVER THOUGHT THEY WOULD GET ME
   isCombatant: 1
   inventoryDialogues: {fileID: -1496039249989309894, guid: 3059dc3cb6cf75e44a8ff00d1bb7dd44,
     type: 3}
