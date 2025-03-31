@@ -28,6 +28,8 @@ public class VeteranDialogue : MonoBehaviour {
             PartyManager partyManager = player.GetComponent<PartyManager>();
             partyManager.AddToParty(survivor);
             Destroy(gameObject);
+            GameStatsManager.Instance._dialogueHandler.CloseDialogueBox();
+
         };
         dialogueInputHandler.AddDialogueChoice(takeMeTag, takeMe);
         string orNotTag = "Or not vet";
