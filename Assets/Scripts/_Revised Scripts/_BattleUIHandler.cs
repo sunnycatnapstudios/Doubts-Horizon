@@ -772,15 +772,22 @@ public class _BattleUIHandler : MonoBehaviour
                 if (currentDefender.currentHealth <= 0)
                 {
                     Debug.Log($"{currentDefender.Name} has been defeated!");
+                    // Clear the turn indicator
                     int indicatorIndex = battleOrder.IndexOf(currentDefender);
                     turnIndicator.ClearCharAtIndexIndicator(indicatorIndex);
 
+                    // Remove from other lists
                     defeatedInCombat.Add(currentDefender.Name);
                     battleOrder.Remove(currentDefender);
                     playerParty.Remove(currentDefender);
+
                     if (currentDefender.Name != "Me") {
                         battleTransition.teammMateDeath(partyManager.currentPartyMembers.Find(x => x.Name == currentDefender.Name));
                     }
+                    // Remove from party manager after transition
+                    partyManager.removeFromPartyByName(currentDefender.Name);
+                    partySlotHandler.UpdateSlots();
+
                     currentDefender = null;
                 }
             }
@@ -808,17 +815,21 @@ public class _BattleUIHandler : MonoBehaviour
             if (target.currentHealth <= 0)
             {
                 Debug.Log($"{target.Name} has been defeated!");
+                // Remove from turn indicator
                 int indicatorIndex = battleOrder.IndexOf(target);
                 turnIndicator.ClearCharAtIndexIndicator(indicatorIndex);
 
+                // Remove from other lists
                 defeatedInCombat.Add(target.Name);
                 battleOrder.Remove(target);
+                playerParty.Remove(target);
+
                 if(target.Name != "Me") {
                     battleTransition.teammMateDeath(partyManager.currentPartyMembers.Find(x => x.Name == target.Name));
                 }
-                playerParty.Remove(target);
+                // Remove from party manager after transition
                 partyManager.removeFromPartyByName(target.Name);
-
+                partySlotHandler.UpdateSlots();
             }
 
             // Reset defender at the end of the turn
