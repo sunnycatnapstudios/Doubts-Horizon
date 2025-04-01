@@ -21,6 +21,7 @@ public class Survivor : ScriptableObject {
     public int Health {
         get { return health; }
     }
+    public List<string> deathDialogue;
 
     [SerializeField] private bool isCombatant;
 
