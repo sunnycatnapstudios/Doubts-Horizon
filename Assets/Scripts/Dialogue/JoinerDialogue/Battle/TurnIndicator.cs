@@ -49,19 +49,19 @@ public class TurnIndicator : MonoBehaviour {
             GameObject newImageObj = Instantiate(turnImagePrefab, transform);
             newImageObj.name = "Turn Image" + (i + 1); newImageObj.SetActive(true);
             Image newImage = newImageObj.transform.Find("Profile").GetComponent<Image>();
-
+            Debug.LogWarning(newImageObj.transform.Find("Profile"));
             //Sprite characterSprite = _partyManager.characterProfiles.Find(sprite => sprite.name == _battleUIHandler.battleOrder[i].Name);
             if (!_battleUIHandler.battleOrder[i].isEnemy) {
 
 
             }
             Debug.Log(_battleUIHandler.battleOrder[i].Name);
-           
+
 
             newImageObj.transform.localPosition = targetPositions[i]; // Set position
             turnOrderImages.Add(newImage.gameObject.transform.parent.GetComponent<Image>());
 
-           
+
             if (_battleUIHandler.battleOrder[i].isEnemy) {
                 foreach (var profilePic in _partyManager.characterProfiles) {
                     if (profilePic.name == "Enemy") { turnOrderImages[i].transform.Find("Profile").GetComponent<Image>().sprite = profilePic; }
@@ -104,6 +104,15 @@ public class TurnIndicator : MonoBehaviour {
             yield return null; // Wait for the next frame
         }
     }
+
+    // Delete a specific character turn icon
+    // i - the index of the character to delete, offset from the current turn (Eg enemy is i=0)
+    public void ClearCharAtIndexIndicator(int i) {
+        Destroy(turnOrderImages[i].gameObject);
+        turnOrderImages.RemoveAt(i);
+        targetPositions.RemoveAt(targetPositions.Count - 1); // Last target
+    }
+
     public void ClearTurnIndicators() {
         foreach (Image turnImage in turnOrderImages) {
             Destroy(turnImage.gameObject); // Destroy the GameObject of each turn indicator image

@@ -772,16 +772,16 @@ public class _BattleUIHandler : MonoBehaviour
                 if (currentDefender.currentHealth <= 0)
                 {
                     Debug.Log($"{currentDefender.Name} has been defeated!");
+                    int indicatorIndex = battleOrder.IndexOf(currentDefender);
+                    turnIndicator.ClearCharAtIndexIndicator(indicatorIndex);
+
                     defeatedInCombat.Add(currentDefender.Name);
                     battleOrder.Remove(currentDefender);
                     playerParty.Remove(currentDefender);
-
                     if (currentDefender.Name != "Me") {
                         battleTransition.teammMateDeath(partyManager.currentPartyMembers.Find(x => x.Name == currentDefender.Name));
                     }
                     currentDefender = null;
-
-
                 }
             }
             else // No defender, target takes full damage
@@ -808,6 +808,9 @@ public class _BattleUIHandler : MonoBehaviour
             if (target.currentHealth <= 0)
             {
                 Debug.Log($"{target.Name} has been defeated!");
+                int indicatorIndex = battleOrder.IndexOf(target);
+                turnIndicator.ClearCharAtIndexIndicator(indicatorIndex);
+
                 defeatedInCombat.Add(target.Name);
                 battleOrder.Remove(target);
                 if(target.Name != "Me") {
