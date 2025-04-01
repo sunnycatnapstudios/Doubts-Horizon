@@ -201,15 +201,14 @@ void Update() {
     refX = transform.position.x;
     refY = transform.position.y;
 
-    // Handle detection cooldown
     if (detectionDisabled) {
         detectionCooldownTimer += Time.deltaTime;
-        if (detectionCooldownTimer >= 2f) { // After 2 seconds, re-enable detection
+        if (detectionCooldownTimer >= 2f) { // after 2 secs, re-enable detection
             detectionDisabled = false;
             detectionCooldownTimer = 0f;
             Debug.Log("Detection re-enabled.");
         }
-        return; // Skip movement & detection while on cooldown
+        return; 
     }
 
     // Stuck detection for general movement
@@ -228,7 +227,6 @@ void Update() {
         }
     }
 
-    // Stuck-in-radius detection during chase
     if (attack && !isMovingBack) {
         if (Vector3.Distance(transform.position, lastChasePosition) < minMovementThreshold) {
             stuckInRadiusTimer += Time.deltaTime;
@@ -248,14 +246,12 @@ void Update() {
         stuckInRadiusTimer = 0f;
     }
 
-    // Play a random monster sound at intervals
     monsterSoundIntervalCounter += Time.deltaTime;
     if (monsterSoundIntervalCounter > monsterSoundInterval) {
         PlayMonsterSound();
         monsterSoundIntervalCounter = 0f;
     }
 
-    // Handle stun logic
     if (hitByBullet || stun) {
         hitByBullet = false;
         searchTimer = 0f;
@@ -277,13 +273,13 @@ void Update() {
     if ((playerDist <= detectRange || attack) && !demotestFreeze) {
         if (isMovingBack) {
             Debug.Log("Player detected while returning! Resuming chase.");
-            isMovingBack = false; // Stop returning
-            StopAllCoroutines(); // Completely stop MoveBackToStart()
+            isMovingBack = false; 
+            StopAllCoroutines(); 
         }
 
         transform.position = Vector3.MoveTowards(transform.position, target.position, attackSpeed * Time.deltaTime);
         attack = true;
-        chaseTimer += Time.deltaTime; // Increase chase timer
+        chaseTimer += Time.deltaTime; // increase chase timer
 
         EnterCombat(Physics2D.OverlapCircle(transform.position, caughtRange, player));
         searchTimer = 0f;
@@ -291,13 +287,12 @@ void Update() {
         intervalCheck = 0.4f;
         searching = false;
 
-        // Stop chasing after 5 seconds and enter cooldown
         if (chaseTimer >= 5f) {  
             Debug.Log("Chase lasted 5 seconds. Entering detection cooldown.");
             attack = false;
             isMovingBack = true;
             chaseTimer = 0f; // Reset chase timer
-            detectionDisabled = true; // Start cooldown
+            detectionDisabled = true; 
             StartCoroutine(MoveBackToStart());
         }
     }
@@ -334,7 +329,6 @@ void Update() {
         }
     }
 
-    // Update animation state based on movement direction
     if (!stun && !searching && !isMovingBack) {
         if (Mathf.Abs(transform.position.x - refX) > Mathf.Abs(transform.position.y - refY)) {
             spriteState.flipX = transform.position.x - refX > 0;
