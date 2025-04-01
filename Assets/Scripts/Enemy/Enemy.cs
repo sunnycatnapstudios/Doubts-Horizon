@@ -63,9 +63,12 @@ public class Enemy : MonoBehaviour {
     private float chaseTimer = 0f;
     private float maxChaseTime = 5f;
     private Vector3 startPosition;
-
-private float chaseCheckTimer = 0f; 
-private float chaseCheckInterval = 2f; 
+    private float patrolCheckTimer = 0f;
+    private float detectionCooldownTimer = 0f;
+    private bool detectionDisabled = false; 
+    private float chaseCheckTimer = 0f; 
+    private float chaseCheckInterval = 2f; 
+    
     void Start() {
         startPosition = transform.position; 
         lastStuckPosition = transform.position;
@@ -191,9 +194,7 @@ private float chaseCheckInterval = 2f;
         }
     }
 
-private float patrolCheckTimer = 0f;
-private float detectionCooldownTimer = 0f;
-private bool detectionDisabled = false; 
+
 void Update() {
     if (caught) return;
 
