@@ -15,6 +15,9 @@ MonoBehaviour:
   name: Orphan
   damage: 35
   health: 35
+  deathDialogue:
+  - Oh mother,
+  - I can feel the soil falling over my head
   isCombatant: 1
   inventoryDialogues: {fileID: -381307989238394630, guid: d861617506f94ac4287d6cf758f76951,
     type: 3}

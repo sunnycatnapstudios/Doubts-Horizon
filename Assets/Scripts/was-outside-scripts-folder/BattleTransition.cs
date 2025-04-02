@@ -8,11 +8,11 @@ public class BattleTransition : MonoBehaviour {
     public Image left, right;
 
     private Transform deathTransform;
-    public TextMeshProUGUI text, buttonText;
+    public TextMeshProUGUI text, buttonText, RIPText;
     public Image black, button;
     private Transform teammateDeath;
     public Image teammateDeathImage;
-    public TextMeshProUGUI teammateText;
+    //public TextMeshProUGUI teammateText;
     private Image teammateDeathBackground;
     private Survivor deadGuy;
     private GameObject deathDialogue;
@@ -41,7 +41,7 @@ public class BattleTransition : MonoBehaviour {
 
         teammateDeath = this.transform.Find("TeammateDeath");
         Debug.Log(teammateDeath+"teammatedeath name");
-      
+        RIPText = teammateDeath.Find("TeammateName").GetComponent<TextMeshProUGUI>();
         teammateDeathImage = teammateDeath.Find("TeammateImage").GetComponent<Image>();
         teammateDeathBackground = teammateDeath.Find("Background").GetComponent<Image>();
         deathDialogue = teammateDeath.Find("DeathDialogue").gameObject;
@@ -112,6 +112,7 @@ public class BattleTransition : MonoBehaviour {
             currentlyInTeammateDeath = true;
         }
         deadGuy = survivor;
+        Debug.Log(survivor);
         DeathDialogue dialogueholder = deathDialogue.GetComponent<DeathDialogue>();
         dialogueholder.setSurvivor(survivor);
         dialogueholder.setTransition(this);
@@ -125,7 +126,9 @@ public class BattleTransition : MonoBehaviour {
     public IEnumerator teammateDeathAnim() {
         teammateDeathBackground.color = new Color(teammateDeathBackground.color.r, teammateDeathBackground.color.g, teammateDeathBackground.color.b,
                 0); ;
-
+        RIPText.color = new Color(RIPText.color.r, RIPText.color.g, RIPText.color.b, 0);
+        teammateDeathImage.color = new Color(teammateDeathImage.color.r, teammateDeathImage.color.g, teammateDeathImage.color.b,
+                0);
 
         while (teammateDeathBackground.color.a < 1) {
             float fadeAmount = teammateDeathBackground.color.a + (Time.unscaledDeltaTime * fadeSpeed);
@@ -133,13 +136,13 @@ public class BattleTransition : MonoBehaviour {
                 fadeAmount);
             teammateDeathBackground.color = newColor;
 
-            newColor = new Color(text.color.r, text.color.g, text.color.b, fadeAmount);
-            text.color = newColor;
-            buttonText.color = newColor;
+            newColor = new Color(RIPText.color.r, RIPText.color.g, RIPText.color.b, fadeAmount);
+            RIPText.color = newColor;
+            //buttonText.color = newColor;
 
-            newColor = new Color(button.color.r, button.color.g, button.color.b,
+            newColor = new Color(teammateDeathImage.color.r, teammateDeathImage.color.g, teammateDeathImage.color.b,
                 fadeAmount);
-            button.color = newColor;
+            teammateDeathImage.color = newColor;
             Debug.Log(teammateDeathBackground.color.a);
             yield return null;
         }
@@ -169,13 +172,13 @@ public class BattleTransition : MonoBehaviour {
                 fadeAmount);
             teammateDeathBackground.color = newColor;
 
-            newColor = new Color(text.color.r, text.color.g, text.color.b, fadeAmount);
-            text.color = newColor;
-            buttonText.color = newColor;
+            newColor = new Color(RIPText.color.r, RIPText.color.g, RIPText.color.b, fadeAmount);
+            RIPText.color = newColor;
+            //buttonText.color = newColor;
 
-            newColor = new Color(button.color.r, button.color.g, button.color.b,
+            newColor = new Color(teammateDeathImage.color.r, teammateDeathImage.color.g, teammateDeathImage.color.b,
                 fadeAmount);
-            button.color = newColor;
+            teammateDeathImage.color = newColor;
             Debug.Log(teammateDeathBackground.color.a);
             yield return null;
         }

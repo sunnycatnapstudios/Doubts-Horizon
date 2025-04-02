@@ -645,11 +645,9 @@ public class _BattleUIHandler : MonoBehaviour
 
                 if (player.isCombatant)  {healAmount = (1+(60 - player.attack)/60)*(Random.Range(20, 40));}
                 else {healAmount = Random.Range(20, 40);}
-               
-                //GameObject thing = new GameObject();
-                //thing.AddComponent<CanvasRenderer>();
-                //thing.AddComponent<Image>().color = Color.white;
-                battleTransition.teammMateDeath(partyManager.currentPartyMembers[0]);
+
+
+
 
                 if (selectedTarget == player.Name) {
                     healAmount=(int)(healAmount*.8f);
@@ -776,8 +774,12 @@ public class _BattleUIHandler : MonoBehaviour
                     Debug.Log($"{currentDefender.Name} has been defeated!");
                     defeatedInCombat.Add(currentDefender.Name);
                     battleOrder.Remove(currentDefender);
-                    currentDefender = null;
+                    playerParty.Remove(currentDefender);
 
+                    if (currentDefender.Name != "Me") {
+                        battleTransition.teammMateDeath(partyManager.currentPartyMembers.Find(x => x.Name == currentDefender.Name));
+                    }
+                    currentDefender = null;
 
 
                 }
@@ -808,7 +810,12 @@ public class _BattleUIHandler : MonoBehaviour
                 Debug.Log($"{target.Name} has been defeated!");
                 defeatedInCombat.Add(target.Name);
                 battleOrder.Remove(target);
+                if(target.Name != "Me") {
+                    battleTransition.teammMateDeath(partyManager.currentPartyMembers.Find(x => x.Name == target.Name));
+                }
+                playerParty.Remove(target);
                 partyManager.removeFromPartyByName(target.Name);
+
             }
 
             // Reset defender at the end of the turn
@@ -818,7 +825,7 @@ public class _BattleUIHandler : MonoBehaviour
         }
         yield return new WaitForSecondsRealtime(.6f);
 
-        
+
     }
 
     public void ReceiveTargetSelection(string targetName)
@@ -913,7 +920,7 @@ public class _BattleUIHandler : MonoBehaviour
             Time.timeScale = 1;
         }
         if (reason == "Win") {
-            
+
             String item  = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().GrabRandomItem();
             Debug.Log(item);
             battleExplanation.text = "You did it! You gain one "+item;

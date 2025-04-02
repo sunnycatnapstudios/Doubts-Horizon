@@ -15,6 +15,11 @@ MonoBehaviour:
   name: Best Friend
   damage: 12
   health: 32
+  deathDialogue:
+  - AGHH
+  - I never thought it would end like this
+  - Fight on for me
+  - ok?
   isCombatant: 1
   inventoryDialogues: {fileID: 8850573105260575154, guid: 97ee79cdb3d35bc44bfcd125382fc182,
     type: 3}
