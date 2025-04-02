@@ -150,20 +150,25 @@ public class _DialogueHandler : MonoBehaviour {
 
         continueArrow.SetActive(!typeWriter.isTyping || typeWriter.waitingForPause);
 
-        // If there's no prompt, instantiate one
-        if (currentInteractPrompt == null) {
-            if (overworldUI.activeSelf) {
-                currentInteractPrompt = Instantiate(
-                    interactPromptPrefab,
-                    Camera.main.WorldToScreenPoint(currentNPC.transform.position + Vector3.up * 1.5f),
-                    Quaternion.identity,
-                    overworldUI.transform
-                );
-                currentInteractPrompt.transform.SetSiblingIndex(0);
+        if (!isDialogueActive) {
+            // If there's no prompt, instantiate one
+            if (currentInteractPrompt == null) {
+                if (overworldUI.activeSelf) {
+                    currentInteractPrompt = Instantiate(
+                        interactPromptPrefab,
+                        Camera.main.WorldToScreenPoint(currentNPC.transform.position + Vector3.up * 1.5f),
+                        Quaternion.identity,
+                        overworldUI.transform
+                    );
+                    currentInteractPrompt.transform.SetSiblingIndex(0);
+                }
+            } else {
+                currentInteractPrompt.transform.position =
+                    Camera.main.WorldToScreenPoint(currentNPC.transform.position + Vector3.up * 1.5f);
             }
-        } else {
-            currentInteractPrompt.transform.position =
-                Camera.main.WorldToScreenPoint(currentNPC.transform.position + Vector3.up * 1.5f);
+            currentInteractPrompt.SetActive(true);
+        } else if (currentInteractPrompt != null) {
+            currentInteractPrompt.SetActive(false);
         }
 
         // Handle interaction
