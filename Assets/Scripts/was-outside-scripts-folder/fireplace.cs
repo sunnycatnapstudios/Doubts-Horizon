@@ -46,6 +46,14 @@ public class fireplace : MonoBehaviour {
         gameObject.SetActive(false);
     }
 
+    // TODO need a function to re-enable the transition objects once fireplace event is ended
+    // Call in CampfireExitDialogue? Exit campfire transition?
+    public IEnumerator EndFireplaceEvent() {
+        // TODO
+        yield return new WaitForSeconds(2);
+        gameObject.SetActive(true);
+    }
+
     private void SpawnMembers() {
         foreach (GameObject npc in objects) {
             Identity identity = npc.GetComponent<Identity>();
