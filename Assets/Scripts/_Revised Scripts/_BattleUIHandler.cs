@@ -153,6 +153,7 @@ public class _BattleUIHandler : MonoBehaviour
         AudioManager.Instance.PlayUiSound(audioClips.sfxBell);
         AudioManager.Instance.CrossFadeAmbienceToZero(1f);
         AudioManager.Instance.CrossFadeMusicSound(audioClips.battleMusic, 2f, 1f, 1f);
+        battleExplanation.text = "";
         StartCoroutine(CaptureScreen());
         Time.timeScale = 0;
     }
