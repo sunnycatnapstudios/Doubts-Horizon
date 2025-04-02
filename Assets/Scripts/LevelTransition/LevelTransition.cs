@@ -35,34 +35,43 @@ public class LevelTransition : MonoBehaviour {
                 player = other.gameObject.GetComponent<Player>();
             }
 
-            player.movePoint.transform.position += entranceDirection;   // TODO move forward. Should be found within player script instead
-            player.isPlayerInControl = true;
-
-            sceneAnimation.SetTrigger("Leave Scene");
-            AudioManager.Instance.PlaySound(audioClips.sfxEnterTransition);
-
-            yield return new WaitForSeconds(sceneAnimation.GetCurrentAnimatorStateInfo(0).length);
-
-            // We wait for the transition to complete before moving the player and party
-            player.movePoint.transform.position = exitLocation + exitDirection;
-            playerObject.transform.position = exitLocation;
-
-            int i = 0;
-            var partyMembers = playerObject.GetComponent<PartyManager>().spawnedPartyMembers;
-            foreach (GameObject partyMember in partyMembers) {
-                partyMember.transform.position = exitLocation + exitDirection;
-                player.moveHist[i] = exitLocation + exitDirection;
-                i++;
-            }
-
-            // Wait a second before playing the exit transition
-            yield return new WaitForSeconds(1);
-
-            sceneAnimation.SetTrigger("Enter Scene");
-            AudioManager.Instance.PlaySound(audioClips.sfxExitTransition);
-
-            player.isPlayerInControl = false;
+            yield return PerformLevelTransition();
         }
+    }
+
+    public IEnumerator PerformLevelTransition()
+    {
+        if (playerObject == null) {
+            playerObject = GameObject.FindGameObjectWithTag("Player");
+            player = playerObject.GetComponent<Player>();
+        }
+        player.movePoint.transform.position += entranceDirection;   // TODO move forward. Should be found within player script instead
+        player.isPlayerInControl = true;
+
+        sceneAnimation.SetTrigger("Leave Scene");
+        AudioManager.Instance.PlaySound(audioClips.sfxEnterTransition);
+
+        yield return new WaitForSeconds(sceneAnimation.GetCurrentAnimatorStateInfo(0).length);
+
+        // We wait for the transition to complete before moving the player and party
+        player.movePoint.transform.position = exitLocation + exitDirection;
+        playerObject.transform.position = exitLocation;
+
+        int i = 0;
+        var partyMembers = playerObject.GetComponent<PartyManager>().spawnedPartyMembers;
+        foreach (GameObject partyMember in partyMembers) {
+            partyMember.transform.position = exitLocation + exitDirection;
+            player.moveHist[i] = exitLocation + exitDirection;
+            i++;
+        }
+
+        // Wait a second before playing the exit transition
+        yield return new WaitForSeconds(1);
+
+        sceneAnimation.SetTrigger("Enter Scene");
+        AudioManager.Instance.PlaySound(audioClips.sfxExitTransition);
+
+        player.isPlayerInControl = false;
     }
 
     void Start() {

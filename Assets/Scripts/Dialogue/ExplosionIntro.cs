@@ -10,8 +10,13 @@ public class ExplosionIntro : MonoBehaviour {
     private Player player;
     public GameObject nextDialogue;
 
+    // Transition scripts with external functions to call
+    private LevelTransition levelTransition;
+    private AudioTransition audioTransition;
+    private fireplace fp;
+
     private PartyManager manager;
-   
+
     [Serializable]
     private struct AudioClips {
         public AudioClip sfxTalkingBlip;
@@ -24,6 +29,9 @@ public class ExplosionIntro : MonoBehaviour {
         npcDialogueHandler = GetComponent<DialogueBoxHandler>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         manager = GameObject.FindGameObjectWithTag("Player").GetComponent<PartyManager>();
+        levelTransition = GetComponent<LevelTransition>();
+        audioTransition = GetComponent<AudioTransition>();
+        fp = GetComponent<fireplace>();
 
         npcDialogueHandler.SetSfxTalkingClip(audioClips.sfxTalkingBlip);
 
@@ -36,9 +44,14 @@ public class ExplosionIntro : MonoBehaviour {
 
     void AfterDialogue() {
         GameStatsManager.Instance._dialogueHandler.CloseDialogueBox();
-        GameObject transition = GameObject.Find("Intro^City1");
-        player.movePoint.transform.position = player.transform.position = transition.transform.position + new Vector3(-13, 9);
+        //GameObject transition = GameObject.Find("Intro^City1");
+        //player.movePoint.transform.position = player.transform.position = transition.transform.position + new Vector3(-13, 9);
         //player.movePoint.transform.position = player.transform.position = new Vector3(-70, -100, 18);
+
+        // Just use our built in transition scripts
+        StartCoroutine(levelTransition.PerformLevelTransition());
+        audioTransition.TriggerAudioTransition();
+        StartCoroutine(fp.StartFireplaceEvent());
 
         if (nextDialogue) {
             GameStatsManager.Instance._dialogueHandler.isCloseable = false;
