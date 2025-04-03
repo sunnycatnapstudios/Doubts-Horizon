@@ -28,6 +28,7 @@ public class GameStatsManager : MonoBehaviour
     public PartyManager partyManager;
     public _BattleUIHandler _battleUIHandler;
     public _DialogueHandler _dialogueHandler;
+    public GameObject nightFilter;
 
     // Combat-Related Stats
     //public Dictionary<string, CharacterStats> playerStats = new Dictionary<string, CharacterStats>
@@ -178,6 +179,8 @@ public class GameStatsManager : MonoBehaviour
     }
     public void Start()
     {
+        nightFilter = GameObject.FindGameObjectWithTag("NightFilter");
+        nightFilter.SetActive(false);
 
     }
     public void Update()

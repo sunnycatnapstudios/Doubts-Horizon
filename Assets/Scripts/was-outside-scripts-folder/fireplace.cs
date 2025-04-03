@@ -9,11 +9,13 @@ public class fireplace : MonoBehaviour {
     private GameObject player;
     private PartyManager partyManager;
     GameObject[] followers;
+    private GameObject nightFilter;
 
     public Dictionary<string, GameObject> possibleNpcs;
 
     // Start is called before the first frame update
     void Start() {
+        
         player = GameObject.FindGameObjectWithTag("Player");
         partyManager = player.GetComponent<PartyManager>();
     }
@@ -33,7 +35,8 @@ public class fireplace : MonoBehaviour {
         GameStatsManager.Instance.resetNpcCounter();
         GameStatsManager.Instance.updateBedStatus();
 
-
+        
+        
         SpawnMembers();
         followers = GameObject.FindGameObjectsWithTag("Followers");
         foreach (GameObject follower in followers) {
@@ -42,7 +45,9 @@ public class fireplace : MonoBehaviour {
         }
 
 
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(1);
+        GameStatsManager.Instance.nightFilter.SetActive(true);
+        Debug.Log(GameStatsManager.Instance.nightFilter);
         gameObject.GetComponent<fireplace>().enabled = false;
         //gameObject.SetActive(false);
     }

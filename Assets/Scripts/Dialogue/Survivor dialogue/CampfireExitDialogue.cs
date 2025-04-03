@@ -85,6 +85,7 @@ public class CampfireExitDialogue : MonoBehaviour {
         Debug.Log("Completed dialogue.");
     }
     private void endFireplaceScene() {
+        GameStatsManager.Instance.nightFilter.SetActive(false);
         foreach(GameObject teleporter in transitions) {
             teleporter.SetActive(true);
         }

@@ -53,6 +53,7 @@ TagManager:
   - InteractPrompt
   - Bullet
   - SmallDialogueBox
+  - NightFilter
   layers:
   - Default
   - TransparentFX
