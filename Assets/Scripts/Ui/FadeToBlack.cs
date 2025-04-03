@@ -21,7 +21,7 @@ public class FadeToBlack : MonoBehaviour
     {
         
     }
-   public  IEnumerator fadetoblack(List<Survivor> deadSurvivors) {
+   public  IEnumerator fadetoblack() {
         image.enabled = true;
         while (image.color.a < 1) {
             float fadeAmount = image.color.a + (Time.unscaledDeltaTime * fadeSpeed);
@@ -31,7 +31,7 @@ public class FadeToBlack : MonoBehaviour
             yield return null;
         }
 
-        StartCoroutine(fadeout());
+        //StartCoroutine(fadeout());
     }
 
    public  IEnumerator fadeout() {

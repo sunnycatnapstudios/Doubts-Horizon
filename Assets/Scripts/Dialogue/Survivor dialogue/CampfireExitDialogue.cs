@@ -61,10 +61,10 @@ public class CampfireExitDialogue : MonoBehaviour {
             //StartCoroutine(levelTransition.PerformLevelTransition());   // Use our level transition logic instead
             audioTransition.TriggerAudioTransition();
             hasFinished = true;
-            kickUnfed();
+            //kickUnfed();
             GameStatsManager.Instance._dialogueHandler.CloseDialogueBox();
             npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
-            endFireplaceScene();
+            StartCoroutine(endFireplaceScene());
         };
         dialogueInputHandler.AddDialogueChoice(takeMeTag, takeMe);
 
@@ -100,7 +100,10 @@ public class CampfireExitDialogue : MonoBehaviour {
             npcDialogueHandler.dialogueContents = new List<string> { "Just a comfy bed" };
         }
     }
-    private void endFireplaceScene() {
+    private IEnumerator endFireplaceScene() {
+
+        StartCoroutine(GameObject.FindGameObjectWithTag("BlackFadeIn").gameObject.GetComponent<FadeToBlack>().fadetoblack());
+        yield return new WaitForSecondsRealtime(1f);
         GameStatsManager.Instance.nightFilter.SetActive(false);
         foreach(GameObject teleporter in transitions) {
             teleporter.SetActive(true);
@@ -109,9 +112,13 @@ public class CampfireExitDialogue : MonoBehaviour {
             people.SetActive(false);
 
         }
+        kickUnfed();
+        yield return new WaitForSecondsRealtime(1.5f);
+
+        StartCoroutine(GameObject.FindGameObjectWithTag("BlackFadeIn").gameObject.GetComponent<FadeToBlack>().fadeout());
 
         //FireplaceTransition.GetComponent<fireplace>().enabled= false;
-        StartCoroutine(GameObject.FindGameObjectWithTag("BlackFadeIn").gameObject.GetComponent<FadeToBlack>().fadetoblack(kicked));
+
         gameObject.GetComponent<CampfireExitDialogue>().enabled= false;
 
 
