@@ -18,6 +18,7 @@ public class CampfireExitDialogue : MonoBehaviour {
     //public GameObject FireplaceTransition;
     public List<GameObject> objects;
     bool hasFinished = false;
+    List<Survivor> kicked;
 
     [Serializable]
     private struct AudioClips {
@@ -108,8 +109,9 @@ public class CampfireExitDialogue : MonoBehaviour {
             people.SetActive(false);
 
         }
-        
+
         //FireplaceTransition.GetComponent<fireplace>().enabled= false;
+        StartCoroutine(GameObject.FindGameObjectWithTag("BlackFadeIn").gameObject.GetComponent<FadeToBlack>().fadetoblack(kicked));
         gameObject.GetComponent<CampfireExitDialogue>().enabled= false;
 
 
@@ -123,6 +125,7 @@ public class CampfireExitDialogue : MonoBehaviour {
 
         }
         List<Survivor> iterator = new List<Survivor>(manager.currentPartyMembers);
+        kicked = new List<Survivor>();
         foreach (Survivor survivor in iterator) {
             if (survivor.UnKickable) {
                 continue;
@@ -132,8 +135,10 @@ public class CampfireExitDialogue : MonoBehaviour {
                 survivor.Fed = false;
 
             } else {
+                kicked.Add(survivor);
                 manager.RemoveFromParty(survivor);
                 Debug.Log($"Kicked {survivor.GetName()} from party");
+
 
             }
         }

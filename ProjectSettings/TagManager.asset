@@ -54,6 +54,8 @@ TagManager:
   - Bullet
   - SmallDialogueBox
   - NightFilter
+  - BlackFadeIn
+  - DeathDialogue
   layers:
   - Default
   - TransparentFX
