@@ -267,9 +267,11 @@ public class _BattleUIHandler : MonoBehaviour
         partySlotHandler.UpdateSlots();
         SetEscapePercentage();
 
-        battleOrder = ShuffleList(battleOrder);
-
-
+        int attempts = 0;
+        do {
+            battleOrder = ShuffleList(battleOrder);
+            attempts++;
+        } while (battleOrder[0].isEnemy && attempts < 100);
 
         foreach (var Char in battleOrder)
         {
