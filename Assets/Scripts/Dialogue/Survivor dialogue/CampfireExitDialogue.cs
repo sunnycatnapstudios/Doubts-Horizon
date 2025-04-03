@@ -14,6 +14,9 @@ public class CampfireExitDialogue : MonoBehaviour {
     [SerializeField] private Sprite normalSprite;
     private LevelTransition levelTransition;
     private AudioTransition audioTransition;
+    public List<GameObject> transitions;
+    //public GameObject FireplaceTransition;
+    public List<GameObject> objects;
 
     [Serializable]
     private struct AudioClips {
@@ -23,6 +26,7 @@ public class CampfireExitDialogue : MonoBehaviour {
     [SerializeField] private AudioClips audioClips;
 
     void Start() {
+        //objects = FireplaceTransition.GetComponent<fireplace>().objects;
         dialogueInputHandler = GameObject.FindGameObjectWithTag("Dialogue Text").GetComponent<DialogueInputHandler>();
         npcDialogueHandler = GetComponent<DialogueBoxHandler>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
@@ -51,10 +55,11 @@ public class CampfireExitDialogue : MonoBehaviour {
             //}
             //player.movePoint.transform.position = location;
             //player.transform.position = location;
-            StartCoroutine(levelTransition.PerformLevelTransition());   // Use our level transition logic instead
+            //StartCoroutine(levelTransition.PerformLevelTransition());   // Use our level transition logic instead
             audioTransition.TriggerAudioTransition();
             kickUnfed();
             GameStatsManager.Instance._dialogueHandler.CloseDialogueBox();
+            endFireplaceScene();
         };
         dialogueInputHandler.AddDialogueChoice(takeMeTag, takeMe);
 
@@ -78,6 +83,20 @@ public class CampfireExitDialogue : MonoBehaviour {
 
     void AfterDialogue() {
         Debug.Log("Completed dialogue.");
+    }
+    private void endFireplaceScene() {
+        foreach(GameObject teleporter in transitions) {
+            teleporter.SetActive(true);
+        }
+        foreach (GameObject people in objects) {
+            people.SetActive(false);
+
+        }
+        
+        //FireplaceTransition.GetComponent<fireplace>().enabled= false;
+        gameObject.GetComponent<CampfireExitDialogue>().enabled= false;
+
+
     }
     private void kickUnfed() {
         GameObject[] followers = GameObject.FindGameObjectsWithTag("Followers");

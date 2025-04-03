@@ -43,7 +43,8 @@ public class fireplace : MonoBehaviour {
 
 
         yield return new WaitForSeconds(2);
-        gameObject.SetActive(false);
+        gameObject.GetComponent<fireplace>().enabled = false;
+        //gameObject.SetActive(false);
     }
 
     // TODO need a function to re-enable the transition objects once fireplace event is ended
@@ -51,7 +52,7 @@ public class fireplace : MonoBehaviour {
     public IEnumerator EndFireplaceEvent() {
         // TODO
         yield return new WaitForSeconds(2);
-        gameObject.SetActive(true);
+        //gameObject.SetActive(true);
     }
 
     private void SpawnMembers() {
