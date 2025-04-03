@@ -17,6 +17,7 @@ public class CampfireExitDialogue : MonoBehaviour {
     public List<GameObject> transitions;
     //public GameObject FireplaceTransition;
     public List<GameObject> objects;
+    bool hasFinished = false;
 
     [Serializable]
     private struct AudioClips {
@@ -33,6 +34,7 @@ public class CampfireExitDialogue : MonoBehaviour {
         manager = GameObject.FindGameObjectWithTag("Player").GetComponent<PartyManager>();
         levelTransition = GetComponent<LevelTransition>();
         audioTransition = GetComponent<AudioTransition>();
+        
 
         npcDialogueHandler.SetSfxTalkingClip(audioClips.sfxTalkingBlip);
 
@@ -57,8 +59,10 @@ public class CampfireExitDialogue : MonoBehaviour {
             //player.transform.position = location;
             //StartCoroutine(levelTransition.PerformLevelTransition());   // Use our level transition logic instead
             audioTransition.TriggerAudioTransition();
+            hasFinished = true;
             kickUnfed();
             GameStatsManager.Instance._dialogueHandler.CloseDialogueBox();
+            npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
             endFireplaceScene();
         };
         dialogueInputHandler.AddDialogueChoice(takeMeTag, takeMe);
@@ -73,16 +77,27 @@ public class CampfireExitDialogue : MonoBehaviour {
             $"<link=\"{takeMeTag}\"><b><#d4af37>Click</color></b></link> if youre ready to go back or press E to Stay"
         };
 
-        npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
+        //npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
     }
 
     void Update() {
     }
 
+    void BeforeDialogue() {
+        if (hasFinished) {
+            npcDialogueHandler.dialogueContents = new List<string> { "Just a comfy bed" };
+            npcDialogueHandler.afterDialogue = null;
 
+        }
+
+
+    }
 
     void AfterDialogue() {
         Debug.Log("Completed dialogue.");
+        if (hasFinished) {
+            npcDialogueHandler.dialogueContents = new List<string> { "Just a comfy bed" };
+        }
     }
     private void endFireplaceScene() {
         GameStatsManager.Instance.nightFilter.SetActive(false);

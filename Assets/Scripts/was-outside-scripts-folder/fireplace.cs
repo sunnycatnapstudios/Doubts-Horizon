@@ -10,6 +10,8 @@ public class fireplace : MonoBehaviour {
     private PartyManager partyManager;
     GameObject[] followers;
     private GameObject nightFilter;
+    bool hasEntered = false;
+    private Animator animator;
 
     public Dictionary<string, GameObject> possibleNpcs;
 
@@ -27,7 +29,10 @@ public class fireplace : MonoBehaviour {
     // Update is called once per frame
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.GetComponentInParent<Player>() != null) {
-            StartCoroutine(StartFireplaceEvent());
+            if (!hasEntered) {
+                hasEntered = true;
+                StartCoroutine(StartFireplaceEvent());
+            }
         }
     }
 
@@ -48,7 +53,7 @@ public class fireplace : MonoBehaviour {
         yield return new WaitForSeconds(1);
         GameStatsManager.Instance.nightFilter.SetActive(true);
         Debug.Log(GameStatsManager.Instance.nightFilter);
-        gameObject.GetComponent<fireplace>().enabled = false;
+      GetComponent<fireplace>().enabled = false;
         //gameObject.SetActive(false);
     }
 
