@@ -556,6 +556,9 @@ public class _BattleUIHandler : MonoBehaviour
         defendIndicator.GetComponent<Image>().color = Color.white;
         defendIndicator.GetComponent<DefendIndicator>().inAnimation = false;
         defendIndicator.GetComponent<DefendIndicator>().isAssigned = false;
+
+        // Update party slot
+        partySlotHandler.UpdateSlots();
     }
 
     private IEnumerator PlayerTurn(CharacterStats player) {
@@ -718,11 +721,14 @@ public class _BattleUIHandler : MonoBehaviour
 
         if (playerParty.Count > 0)
         {
+            bool defenderWasAttacked = false;
+
             CharacterStats target = playerParty[Random.Range(0, playerParty.Count)];
             int enemyDamage = (int)Random.Range(enemy.attack * 0.6f, enemy.attack * 1.2f);
 
-            if (currentDefender != null && currentDefender != target) // If there's an active defender
+            if (currentDefender != null) // If there's an active defender
             {
+                defenderWasAttacked = true;
                 // Calculate negation percentage
                 float healthRatio = currentDefender.currentHealth / (float)currentDefender.maxHealth;
                 float negationPercentage = 0.4f * healthRatio * (currentDefender.attack / 100f); // Adjust 100f for balance
@@ -772,10 +778,14 @@ public class _BattleUIHandler : MonoBehaviour
                 // Check if defender is defeated
                 if (currentDefender.currentHealth <= 0)
                 {
-                    Debug.Log($"{currentDefender.Name} has been defeated!");
+                    Debug.Log($"Defender {currentDefender.Name} has been defeated!");
+
                     // Clear the turn indicator
                     int indicatorIndex = battleOrder.IndexOf(currentDefender);
                     turnIndicator.ClearCharAtIndexIndicator(indicatorIndex);
+
+                    // Move the defend indicator out of the turn slot before being deleted
+                    //StartCoroutine(DestroyDefend());
 
                     // Remove from other lists
                     defeatedInCombat.Add(currentDefender.Name);
@@ -785,9 +795,9 @@ public class _BattleUIHandler : MonoBehaviour
                     if (currentDefender.Name != "Me") {
                         battleTransition.teammMateDeath(partyManager.currentPartyMembers.Find(x => x.Name == currentDefender.Name));
                     }
-                    // Remove from party manager after transition
+
                     partyManager.removeFromPartyByName(currentDefender.Name);
-                    partySlotHandler.UpdateSlots();
+                    StartCoroutine(DestroyDefend());
 
                     currentDefender = null;
                 }
@@ -813,9 +823,9 @@ public class _BattleUIHandler : MonoBehaviour
                 }
 
             // Check if target is defeated
-            if (target.currentHealth <= 0)
+            if (target.currentHealth <= 0 && !defenderWasAttacked)
             {
-                Debug.Log($"{target.Name} has been defeated!");
+                Debug.Log($"Target {target.Name} has been defeated!");
                 // Remove from turn indicator
                 int indicatorIndex = battleOrder.IndexOf(target);
                 turnIndicator.ClearCharAtIndexIndicator(indicatorIndex);
