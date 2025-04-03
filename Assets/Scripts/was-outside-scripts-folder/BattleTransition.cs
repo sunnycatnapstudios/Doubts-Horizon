@@ -8,8 +8,16 @@ public class BattleTransition : MonoBehaviour {
     public Image left, right;
 
     private Transform deathTransform;
-    public TextMeshProUGUI text, buttonText;
+    public TextMeshProUGUI text, buttonText, RIPText;
     public Image black, button;
+    private Transform teammateDeath;
+    public Image teammateDeathImage;
+    //public TextMeshProUGUI teammateText;
+    private Image teammateDeathBackground;
+    private Survivor deadGuy;
+    private GameObject deathDialogue;
+    private bool currentlyInTeammateDeath = false;
+    
 
     public bool _start;
     public float fadeSpeed = 0.5f;
@@ -17,6 +25,7 @@ public class BattleTransition : MonoBehaviour {
     void Start() {
         left = this.transform.Find("Left").GetComponent<Image>();
         right = this.transform.Find("Right").GetComponent<Image>();
+        currentlyInTeammateDeath = false;
 
         // Behold, the most jank method of fading in a death animation
         deathTransform = this.transform.Find("Death");
@@ -29,6 +38,18 @@ public class BattleTransition : MonoBehaviour {
 
         left.fillOrigin = (int)Image.OriginHorizontal.Left;
         right.fillOrigin = (int)Image.OriginHorizontal.Right;
+
+        teammateDeath = this.transform.Find("TeammateDeath");
+        Debug.Log(teammateDeath+"teammatedeath name");
+        RIPText = teammateDeath.Find("TeammateName").GetComponent<TextMeshProUGUI>();
+        teammateDeathImage = teammateDeath.Find("TeammateImage").GetComponent<Image>();
+        teammateDeathBackground = teammateDeath.Find("Background").GetComponent<Image>();
+        deathDialogue = teammateDeath.Find("DeathDialogue").gameObject;
+
+
+
+
+
     }
 
     public void LeaveBattle() {
@@ -81,6 +102,92 @@ public class BattleTransition : MonoBehaviour {
         _start = false;
         StartCoroutine(HadDiedAnim());
     }
+
+
+    public void teammMateDeath(Survivor survivor) {
+        //teammateDeath = this.transform.Find("TeammateDeath");
+        if(currentlyInTeammateDeath == true) {
+            return;
+        } else {
+            currentlyInTeammateDeath = true;
+        }
+        deadGuy = survivor;
+        Debug.Log(survivor);
+        DeathDialogue dialogueholder = deathDialogue.GetComponent<DeathDialogue>();
+        dialogueholder.setSurvivor(survivor);
+        dialogueholder.setTransition(this);
+        dialogueholder.resetBeforeAndAfterDialogue();
+        teammateDeath.gameObject.SetActive(true);
+        //_start = false;
+
+        StartCoroutine(teammateDeathAnim());
+    }
+
+    public IEnumerator teammateDeathAnim() {
+        teammateDeathBackground.color = new Color(teammateDeathBackground.color.r, teammateDeathBackground.color.g, teammateDeathBackground.color.b,
+                0); ;
+        RIPText.color = new Color(RIPText.color.r, RIPText.color.g, RIPText.color.b, 0);
+        teammateDeathImage.color = new Color(teammateDeathImage.color.r, teammateDeathImage.color.g, teammateDeathImage.color.b,
+                0);
+
+        while (teammateDeathBackground.color.a < 1) {
+            float fadeAmount = teammateDeathBackground.color.a + (Time.unscaledDeltaTime * fadeSpeed);
+            Color newColor = new Color(teammateDeathBackground.color.r, teammateDeathBackground.color.g, teammateDeathBackground.color.b,
+                fadeAmount);
+            teammateDeathBackground.color = newColor;
+
+            newColor = new Color(RIPText.color.r, RIPText.color.g, RIPText.color.b, fadeAmount);
+            RIPText.color = newColor;
+            //buttonText.color = newColor;
+
+            newColor = new Color(teammateDeathImage.color.r, teammateDeathImage.color.g, teammateDeathImage.color.b,
+                fadeAmount);
+            teammateDeathImage.color = newColor;
+            Debug.Log(teammateDeathBackground.color.a);
+            yield return null;
+        }
+        Debug.Log("I GET HERE IN DEATH ANIME");
+        //GameObject thing = new GameObject();
+
+        //thing.AddComponent<DialogueBoxHandler>().dialogueContents = new List<string> { "i am here ",deadGuy.name };
+        
+        GameStatsManager.Instance._dialogueHandler.OpenDialogueWith(deathDialogue);
+        //StartCoroutine( closeTeammateDeathScreen());
+        //GameObject.Destroy( thing );
+
+        // Show Dialog after fade out
+        //textHandler.StartDialogue();
+    }
+
+
+    public void closeGreyScreen() {
+        
+    }
+    public IEnumerator closeTeammateDeathScreen() {
+        Debug.Log("I GET HERE IN DEATH ANIME ONEEE");
+        yield return new WaitForSecondsRealtime(3);
+        while (teammateDeathBackground.color.a > 0) {
+            float fadeAmount = teammateDeathBackground.color.a - (Time.unscaledDeltaTime * fadeSpeed);
+            Color newColor = new Color(teammateDeathBackground.color.r, teammateDeathBackground.color.g, teammateDeathBackground.color.b,
+                fadeAmount);
+            teammateDeathBackground.color = newColor;
+
+            newColor = new Color(RIPText.color.r, RIPText.color.g, RIPText.color.b, fadeAmount);
+            RIPText.color = newColor;
+            //buttonText.color = newColor;
+
+            newColor = new Color(teammateDeathImage.color.r, teammateDeathImage.color.g, teammateDeathImage.color.b,
+                fadeAmount);
+            teammateDeathImage.color = newColor;
+            Debug.Log(teammateDeathBackground.color.a);
+            yield return null;
+        }
+        Debug.Log("I GET HERE IN DEATH ANIME TWOO");
+        teammateDeath.gameObject.SetActive(false);
+        currentlyInTeammateDeath = false;
+
+    }
+
 
     public IEnumerator HadDiedAnim() {
         while (black.color.a < 1) {

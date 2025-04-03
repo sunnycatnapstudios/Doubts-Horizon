@@ -9,6 +9,7 @@ using UnityEngine.UI;
 public class _DialogueHandler : MonoBehaviour {
     private float detectionRadius = 1.2f;
     public GameObject currentNPC, newNPC;
+    private GameObject overworldUI;
 
     private GameObject player,
         dialogueBox,
@@ -73,6 +74,8 @@ public class _DialogueHandler : MonoBehaviour {
 
         interactPromptPrefab = GameObject.FindWithTag("InteractPrompt");
         smallDialogueBox = GameObject.FindWithTag("SmallDialogueBox");
+
+        overworldUI = GameObject.FindGameObjectWithTag("Overworld UI");
     }
 
     void Start() {
@@ -130,7 +133,9 @@ public class _DialogueHandler : MonoBehaviour {
     }
 
     void Update() {
-        SetCurrentNpc(GetNearbyNpc());
+        if (!isDialogueActive) {
+            SetCurrentNpc(GetNearbyNpc());
+        }
 
         if (Input.GetKeyDown(KeyCode.E)) {
             if (isDialogueActive) {
@@ -145,29 +150,36 @@ public class _DialogueHandler : MonoBehaviour {
 
         continueArrow.SetActive(!typeWriter.isTyping || typeWriter.waitingForPause);
 
-        // If there's no prompt, instantiate one
-        if (currentInteractPrompt == null) {
-            currentInteractPrompt = Instantiate(
-                interactPromptPrefab,
-                Camera.main.WorldToScreenPoint(currentNPC.transform.position + Vector3.up * 1.5f),
-                Quaternion.identity,
-                GameObject.FindGameObjectWithTag("Overworld UI").transform
-            );
-            currentInteractPrompt.transform.SetSiblingIndex(0);
-        } else {
-            currentInteractPrompt.transform.position =
-                Camera.main.WorldToScreenPoint(currentNPC.transform.position + Vector3.up * 1.5f);
+        if (!isDialogueActive) {
+            // If there's no prompt, instantiate one
+            if (currentInteractPrompt == null) {
+                if (overworldUI.activeSelf) {
+                    currentInteractPrompt = Instantiate(
+                        interactPromptPrefab,
+                        Camera.main.WorldToScreenPoint(currentNPC.transform.position + Vector3.up * 1.5f),
+                        Quaternion.identity,
+                        overworldUI.transform
+                    );
+                    currentInteractPrompt.transform.SetSiblingIndex(0);
+                }
+            } else {
+                currentInteractPrompt.transform.position =
+                    Camera.main.WorldToScreenPoint(currentNPC.transform.position + Vector3.up * 1.5f);
+            }
+            currentInteractPrompt.SetActive(true);
+        } else if (currentInteractPrompt != null) {
+            currentInteractPrompt.SetActive(false);
         }
 
         // Handle interaction
-        if (Input.GetKeyDown(KeyCode.E)) {
+        if (Input.GetKeyDown(KeyCode.E) && overworldUI.activeSelf) {
             if (currentNPC.CompareTag("Interactable")) {
                 if (currentSmallDialogueBox == null) {
                     currentSmallDialogueBox = Instantiate(
                         smallDialogueBox,
                         Camera.main.WorldToScreenPoint(currentNPC.transform.position + Vector3.up * 1.7f),
                         Quaternion.identity,
-                        GameObject.FindGameObjectWithTag("Overworld UI").transform);
+                        overworldUI.transform);
 
                     currentSmallDialogueBox.transform.SetParent(currentInteractPrompt.transform);
 
