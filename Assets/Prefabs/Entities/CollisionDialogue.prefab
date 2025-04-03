@@ -13,8 +13,10 @@ GameObject:
   - component: {fileID: 3124501801454225164}
   - component: {fileID: 3124501801454225166}
   - component: {fileID: 3124501801454225161}
+  - component: {fileID: 7409701376345506924}
+  - component: {fileID: 2562411267699584173}
   m_Layer: 0
-  m_Name: GameObject
+  m_Name: CollisionDialogue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -105,6 +107,48 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eeadf322c95391026b33c3d21213985f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &7409701376345506924
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3124501801454225170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc4363cca338e644ab928a0e8a0c9a9d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transitionAnimator: {fileID: 0}
+  targetTransform: {fileID: 0}
+  entranceDirection: {x: 0, y: 0, z: 0}
+  exitDirection: {x: 0, y: 0, z: 0}
+  exitLocation: {x: 0, y: 0, z: 0}
+  endPosition: {x: 0, y: 0, z: 0}
+  audioClips:
+    sfxEnterTransition: {fileID: 0}
+    sfxExitTransition: {fileID: 0}
+--- !u!114 &2562411267699584173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3124501801454225170}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7066732721e7a5ab69ffdc014464a31d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delayBeforeStart: 0
+  crossfadeDuration: 0
+  crossVolume: 1
+  crossMuteMusic: 0
+  crossMuteAmbience: 0
+  audioClips:
+    nextMusicClip: {fileID: 0}
+    nextAmbientClip: {fileID: 0}
+  enableColliderTransition: 1
 --- !u!1 &3124501802468348264
 GameObject:
   m_ObjectHideFlags: 0
