@@ -9,11 +9,15 @@ public class fireplace : MonoBehaviour {
     private GameObject player;
     private PartyManager partyManager;
     GameObject[] followers;
+    private GameObject nightFilter;
+    bool hasEntered = false;
+    private Animator animator;
 
     public Dictionary<string, GameObject> possibleNpcs;
 
     // Start is called before the first frame update
     void Start() {
+        
         player = GameObject.FindGameObjectWithTag("Player");
         partyManager = player.GetComponent<PartyManager>();
     }
@@ -25,7 +29,10 @@ public class fireplace : MonoBehaviour {
     // Update is called once per frame
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.GetComponentInParent<Player>() != null) {
-            StartCoroutine(StartFireplaceEvent());
+            if (!hasEntered) {
+                hasEntered = true;
+                StartCoroutine(StartFireplaceEvent());
+            }
         }
     }
 
@@ -33,7 +40,8 @@ public class fireplace : MonoBehaviour {
         GameStatsManager.Instance.resetNpcCounter();
         GameStatsManager.Instance.updateBedStatus();
 
-
+        
+        
         SpawnMembers();
         followers = GameObject.FindGameObjectsWithTag("Followers");
         foreach (GameObject follower in followers) {
@@ -42,8 +50,11 @@ public class fireplace : MonoBehaviour {
         }
 
 
-        yield return new WaitForSeconds(2);
-        gameObject.SetActive(false);
+        yield return new WaitForSeconds(1);
+        GameStatsManager.Instance.nightFilter.SetActive(true);
+        Debug.Log(GameStatsManager.Instance.nightFilter);
+      GetComponent<fireplace>().enabled = false;
+        //gameObject.SetActive(false);
     }
 
     // TODO need a function to re-enable the transition objects once fireplace event is ended
@@ -51,7 +62,7 @@ public class fireplace : MonoBehaviour {
     public IEnumerator EndFireplaceEvent() {
         // TODO
         yield return new WaitForSeconds(2);
-        gameObject.SetActive(true);
+        //gameObject.SetActive(true);
     }
 
     private void SpawnMembers() {

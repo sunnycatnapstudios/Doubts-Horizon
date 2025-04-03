@@ -14,6 +14,11 @@ public class CampfireExitDialogue : MonoBehaviour {
     [SerializeField] private Sprite normalSprite;
     private LevelTransition levelTransition;
     private AudioTransition audioTransition;
+    public List<GameObject> transitions;
+    //public GameObject FireplaceTransition;
+    public List<GameObject> objects;
+    bool hasFinished = false;
+    List<Survivor> kicked;
 
     [Serializable]
     private struct AudioClips {
@@ -23,12 +28,14 @@ public class CampfireExitDialogue : MonoBehaviour {
     [SerializeField] private AudioClips audioClips;
 
     void Start() {
+        //objects = FireplaceTransition.GetComponent<fireplace>().objects;
         dialogueInputHandler = GameObject.FindGameObjectWithTag("Dialogue Text").GetComponent<DialogueInputHandler>();
         npcDialogueHandler = GetComponent<DialogueBoxHandler>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         manager = GameObject.FindGameObjectWithTag("Player").GetComponent<PartyManager>();
         levelTransition = GetComponent<LevelTransition>();
         audioTransition = GetComponent<AudioTransition>();
+        
 
         npcDialogueHandler.SetSfxTalkingClip(audioClips.sfxTalkingBlip);
 
@@ -51,10 +58,13 @@ public class CampfireExitDialogue : MonoBehaviour {
             //}
             //player.movePoint.transform.position = location;
             //player.transform.position = location;
-            StartCoroutine(levelTransition.PerformLevelTransition());   // Use our level transition logic instead
+            //StartCoroutine(levelTransition.PerformLevelTransition());   // Use our level transition logic instead
             audioTransition.TriggerAudioTransition();
-            kickUnfed();
+            hasFinished = true;
+            //kickUnfed();
             GameStatsManager.Instance._dialogueHandler.CloseDialogueBox();
+            npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
+            StartCoroutine(endFireplaceScene());
         };
         dialogueInputHandler.AddDialogueChoice(takeMeTag, takeMe);
 
@@ -68,16 +78,50 @@ public class CampfireExitDialogue : MonoBehaviour {
             $"<link=\"{takeMeTag}\"><b><#d4af37>Click</color></b></link> if youre ready to go back or press E to Stay"
         };
 
-        npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
+        //npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
     }
 
     void Update() {
     }
 
+    void BeforeDialogue() {
+        if (hasFinished) {
+            npcDialogueHandler.dialogueContents = new List<string> { "Just a comfy bed" };
+            npcDialogueHandler.afterDialogue = null;
 
+        }
+
+
+    }
 
     void AfterDialogue() {
         Debug.Log("Completed dialogue.");
+        if (hasFinished) {
+            npcDialogueHandler.dialogueContents = new List<string> { "Just a comfy bed" };
+        }
+    }
+    private IEnumerator endFireplaceScene() {
+
+        StartCoroutine(GameObject.FindGameObjectWithTag("BlackFadeIn").gameObject.GetComponent<FadeToBlack>().fadetoblack());
+        yield return new WaitForSecondsRealtime(1f);
+        GameStatsManager.Instance.nightFilter.SetActive(false);
+        foreach(GameObject teleporter in transitions) {
+            teleporter.SetActive(true);
+        }
+        foreach (GameObject people in objects) {
+            people.SetActive(false);
+
+        }
+        kickUnfed();
+        yield return new WaitForSecondsRealtime(1.5f);
+
+        StartCoroutine(GameObject.FindGameObjectWithTag("BlackFadeIn").gameObject.GetComponent<FadeToBlack>().fadeout());
+
+        //FireplaceTransition.GetComponent<fireplace>().enabled= false;
+
+        gameObject.GetComponent<CampfireExitDialogue>().enabled= false;
+
+
     }
     private void kickUnfed() {
         GameObject[] followers = GameObject.FindGameObjectsWithTag("Followers");
@@ -88,6 +132,7 @@ public class CampfireExitDialogue : MonoBehaviour {
 
         }
         List<Survivor> iterator = new List<Survivor>(manager.currentPartyMembers);
+        kicked = new List<Survivor>();
         foreach (Survivor survivor in iterator) {
             if (survivor.UnKickable) {
                 continue;
@@ -97,8 +142,10 @@ public class CampfireExitDialogue : MonoBehaviour {
                 survivor.Fed = false;
 
             } else {
+                kicked.Add(survivor);
                 manager.RemoveFromParty(survivor);
                 Debug.Log($"Kicked {survivor.GetName()} from party");
+
 
             }
         }
