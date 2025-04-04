@@ -85,6 +85,7 @@ public class Survivor : ScriptableObject {
 
     public void AddHealth(int health) {
         charstats.currentHealth += health;
+        if (charstats.currentHealth > maxHealth) charstats.currentHealth = maxHealth;
     }
 
     public void DecHealth(int health) {
@@ -107,12 +108,12 @@ public class Survivor : ScriptableObject {
         return $"{name}: hp:{charstats.currentHealth}/{health} dmg:{damage}";
     }
 
-    
+
 
 
     public string GetInventoryDialogue() {
 
-       
+
         if (currentHealth < maxHealth * 0.5 && Hungry) {
             return inventoryDialogues.LowHealthAndLowHunger();
         } else if (currentHealth < maxHealth * 0.5) {

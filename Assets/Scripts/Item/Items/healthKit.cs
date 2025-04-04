@@ -33,10 +33,8 @@ public class healthKit : Item,UsableInInventory
     }
     public override bool UsableInInventory() => true;
     public void UseOnMember(Survivor survivor) {
-        survivor.AddHealth(100);
-        Debug.Log(survivor.CurHealth);
-
-
+        int healAmount = survivor.maxHealth / 2;
+        survivor.AddHealth(healAmount);
     }
 
     public override AudioClip GetPickupSound() {

@@ -18,6 +18,7 @@ public class _BattleUIHandler : MonoBehaviour
     private _PartyManager _partyManager;
     private _DialogueHandler _dialogueHandler;
     private PartyManager partyManager;
+    private Inventory _inventory;
 
     public Animator partyUIAnimator, enemyUIAnimator, enemyStatsAnimator;
     public bool actOption = false, itemOption = false, canSelect = false;
@@ -29,7 +30,7 @@ public class _BattleUIHandler : MonoBehaviour
     private bool battleInProgress = false, escapeSuccessful = false;
     public List<CharacterStats> currentEnemies = new List<CharacterStats>();
     public TurnIndicator turnIndicator;
-    public TextMeshProUGUI enemyName, damageButtonText;
+    public TextMeshProUGUI enemyName, damageButtonText, healButtonText;
     public string selectedAction = "", selectedTarget = null;
     public CharacterStats enemyStats;
     public int currentEnemyCurrentHealth, currentEnemyMaxHealth;
@@ -114,6 +115,7 @@ public class _BattleUIHandler : MonoBehaviour
                 damageButtonText = actOptionBList.GetComponentInChildren<TextMeshProUGUI>();
             } if (obj.CompareTag("Item Options")) {
                 itemOptionBList = obj;
+                healButtonText = itemOptionBList.GetComponentInChildren<TextMeshProUGUI>(); // TODO
             } if (obj.CompareTag("PartyCombatUI")) {
                 partyUIAnimator = obj.GetComponent<Animator>();
                 partyUIAnimator.updateMode = AnimatorUpdateMode.UnscaledTime;
@@ -123,6 +125,8 @@ public class _BattleUIHandler : MonoBehaviour
                 floatingTextPrefab = obj;
             } if (obj.GetComponent<BattleTransition>() != null) {
                 battleTransition = obj.GetComponent<BattleTransition>();
+            } if (obj.GetComponent<Inventory>() != null) {
+                _inventory = obj.GetComponent<Inventory>();
             }
 
             // if (combatUI != null && overworldUI != null && enemySlot != null) {break;}
@@ -391,6 +395,9 @@ public class _BattleUIHandler : MonoBehaviour
             else if (!currentCombatant.isEnemy)// Player turn
             {
                 damageButtonText.text = $"Attack:{currentCombatant.attack}";
+
+                int numKits = _inventory.getInventory()["Health Kit"].getCount();
+                healButtonText.text = $"Health Kit:{numKits}";
                 yield return PlayerTurn(currentCombatant);
             }
 
@@ -583,9 +590,17 @@ public class _BattleUIHandler : MonoBehaviour
             selectedTarget = null;
 
             if (selectedAction == "Heal") {
-                partySlotHandler.ViewPortCanvasGroup.blocksRaycasts = false;
-                canSelect = true;
-                battleExplanation.text = "Select a survivor to heal.";
+                // Check if we have health kit in inventory
+                int numKits = _inventory.getInventory()["Health Kit"].getCount();
+                if (numKits > 0) {
+                    partySlotHandler.ViewPortCanvasGroup.blocksRaycasts = false;
+                    canSelect = true;
+                    battleExplanation.text = "Select a survivor to heal.";
+                } else {
+                    // Reject prompt
+                    battleExplanation.text = "You are out of Health Kits";
+                    selectedAction = null;  // Reset selection back to default state
+                }
             }
 
             while (selectedTarget == null)
@@ -650,9 +665,9 @@ public class _BattleUIHandler : MonoBehaviour
                 partySlotHandler.ViewPortCanvasGroup.blocksRaycasts = false;
 
                 if (player.isCombatant)  {healAmount = (1+(60 - player.attack)/60)*(Random.Range(20, 40));}
-                else {healAmount = Random.Range(20, 40);}
+                else {healAmount = player.maxHealth / 2;}
 
-
+                _inventory.getInventory()["Health Kit"].decCount();     // Use a health kit
 
 
                 if (selectedTarget == player.Name) {
