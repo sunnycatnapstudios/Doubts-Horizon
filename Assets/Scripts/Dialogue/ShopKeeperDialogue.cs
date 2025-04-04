@@ -14,6 +14,9 @@ public class ShopKeeperDialogue : MonoBehaviour
     public Item Potion;
     public Item Knife;
     public Item Ration;
+    string orNotTag;
+    string Feedme;
+    string sacrificeHP;
 
     void Start() {
         dialogueInputHandler = GameObject.FindGameObjectWithTag("Dialogue Text").GetComponent<DialogueInputHandler>();
@@ -21,7 +24,7 @@ public class ShopKeeperDialogue : MonoBehaviour
         inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
         statsManager = GameStatsManager.Instance;
 
-        string Feedme = "buy Potion" + gameObject.GetHashCode().ToString();
+         Feedme = "buy Potion" + gameObject.GetHashCode().ToString();
         Action takeMe = () => {
             Debug.Log("Take me callback.");
             PartyManager partyManager = GameObject.FindGameObjectWithTag("Player").GetComponent<PartyManager>();
@@ -51,7 +54,7 @@ public class ShopKeeperDialogue : MonoBehaviour
         };
         dialogueInputHandler.AddDialogueChoice(Feedme, takeMe);
 
-        string orNotTag = "buy Knife" + gameObject.GetHashCode().ToString();
+         orNotTag = "buy Knife" + gameObject.GetHashCode().ToString();
         Action orNot = () => {
             if (inventory.hasItemByName("Ration")) {
 
@@ -77,7 +80,7 @@ public class ShopKeeperDialogue : MonoBehaviour
         };
         dialogueInputHandler.AddDialogueChoice(orNotTag, orNot);
 
-        string sacrificeHP = "Sell Life" + gameObject.GetHashCode().ToString();
+         sacrificeHP = "Sell Life" + gameObject.GetHashCode().ToString();
         Action sellLife = () => {
             Debug.Log("Or not callback.");
            
