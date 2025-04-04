@@ -50,7 +50,7 @@ public class Inventory : MonoBehaviour {
         return inventory;
     }
 
-    private void addItem(Item item) {
+    public void addItem(Item item) {
         if (!inventory.ContainsKey(item.GetName())) //adding if no prev item
         {
             Slot slot = new Slot(item);
