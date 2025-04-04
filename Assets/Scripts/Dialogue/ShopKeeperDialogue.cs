@@ -162,7 +162,7 @@ public class ShopKeeperDialogue : MonoBehaviour
         npcDialogueHandler.dialogueContents = new List<string> {
             "Welcome to my shop,",
             "Does anything catch your eye?",
-             $"<link=\"{Feedme}\"><b><color=#d4af37>Bandages</color></b></link>         <link=\"{orNotTag}\"><b><color=#a40000>knife</color></b></link>         <link=\"{sacrificeHP}\"><b><color=#a40000>Sacrifice...</color></b></link>"
+             $"<link=\"{Feedme}\"><b><color=#d4af37>Bandages</color></b></link>     <link=\"{orNotTag}\"><b><color=#a40000>knife</color></b></link>     (1 Ration)\n        <link=\"{sacrificeHP}\"><b><color=#a40000>Sacrifice...</color></b></link>(Your Lifeforce)"
         };
 
     }
