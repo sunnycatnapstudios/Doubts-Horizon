@@ -1,25 +1,27 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
+
 [CreateAssetMenu]
 
-public class healingPotion : Item,UsableInInventory
+public class healthKit : Item,UsableInInventory
 {
-    public Pickupable _healingPotion;
+    public Pickupable _healthKit;
     public Sprite Sprite;
     public AudioClip sfxPickup;
 
 
     public override string GetDesc() {
-        return "heals a teamate";
+        return "heal a member";
 
     }
     public override string GetFlavour() {
-        return "not sure what this is";
+        return "a kit full of old medical supplies...";
     }
 
     public override string GetName() {
-        return "Potion of healing";
+        return "Health Kit";
     }
 
     public override Sprite GetSprite() {
@@ -33,7 +35,7 @@ public class healingPotion : Item,UsableInInventory
     public void UseOnMember(Survivor survivor) {
         survivor.AddHealth(100);
         Debug.Log(survivor.CurHealth);
-        
+
 
     }
 
