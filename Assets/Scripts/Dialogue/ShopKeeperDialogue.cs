@@ -1,18 +1,114 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ShopKeeperDialogue : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
+    private DialogueInputHandler dialogueInputHandler;
+    private DialogueBoxHandler npcDialogueHandler;
+    public Survivor survivor;
+    private bool fedOrNot;
+    private Inventory inventory;
+    private GameStatsManager statsManager;
+    public Item Potion;
+    public Item Knife;
+    public Item Ration;
+
+    void Start() {
+        dialogueInputHandler = GameObject.FindGameObjectWithTag("Dialogue Text").GetComponent<DialogueInputHandler>();
+        npcDialogueHandler = GetComponent<DialogueBoxHandler>();
+        inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
+        statsManager = GameStatsManager.Instance;
+
+        string Feedme = "buy Potion" + gameObject.GetHashCode().ToString();
+        Action takeMe = () => {
+            Debug.Log("Take me callback.");
+            PartyManager partyManager = GameObject.FindGameObjectWithTag("Player").GetComponent<PartyManager>();
+
+            if (inventory.hasItemByName("Ration")) {
+               
+                inventory.removeItemByName("Ration");
+               
+
+                npcDialogueHandler.lastLineDisplayed = false;
+                npcDialogueHandler.currentLineIndex += 1;
+                npcDialogueHandler.afterDialogue = AfterDialogue;
+                npcDialogueHandler.dialogueContents.Add("Thank you for your endorsement");
+                npcDialogueHandler.dialogueContents.Add($"You have {inventory.getCountofItem("Ration")} rations left.");
+
+            } else {
+               
+
+                npcDialogueHandler.lastLineDisplayed = false;
+                npcDialogueHandler.currentLineIndex += 1;
+                npcDialogueHandler.afterDialogue = AfterDialogue;
+
+                npcDialogueHandler.dialogueContents.Add("You have no rations. What are you trying to pull?");
+            }
+
+            GameStatsManager.Instance._dialogueHandler.UpdateDialogueBox();
+        };
+        dialogueInputHandler.AddDialogueChoice(Feedme, takeMe);
+
+        string orNotTag = "buy Knife" + gameObject.GetHashCode().ToString();
+        Action orNot = () => {
+            if (inventory.hasItemByName("Ration")) {
+
+                inventory.removeItemByName("Ration");
+
+
+                npcDialogueHandler.lastLineDisplayed = false;
+                npcDialogueHandler.currentLineIndex += 1;
+                npcDialogueHandler.afterDialogue = AfterDialogue;
+                npcDialogueHandler.dialogueContents.Add($"You have {inventory.getCountofItem("Ration")} rations left.");
+
+            } else {
+
+
+                npcDialogueHandler.lastLineDisplayed = false;
+                npcDialogueHandler.currentLineIndex += 1;
+                npcDialogueHandler.afterDialogue = AfterDialogue;
+
+                npcDialogueHandler.dialogueContents.Add("You have no rations. What are you trying to pull?");
+            }
+
+            GameStatsManager.Instance._dialogueHandler.UpdateDialogueBox();
+        };
+        dialogueInputHandler.AddDialogueChoice(orNotTag, orNot);
+
+        string sacrificeHP = "Sell Life" + gameObject.GetHashCode().ToString();
+        Action sellLife = () => {
+            Debug.Log("Or not callback.");
+           
+
+            npcDialogueHandler.lastLineDisplayed = false;
+            npcDialogueHandler.currentLineIndex += 1;
+            npcDialogueHandler.afterDialogue = AfterDialogue;
+            npcDialogueHandler.dialogueContents.Add("Let me have a look");
+
+            GameStatsManager.Instance._dialogueHandler.CloseDialogueBox();
+        };
+        dialogueInputHandler.AddDialogueChoice(sacrificeHP, sellLife);
+
+        npcDialogueHandler.dialogueContents = new List<string> {
+            "Welcome to my shop,",
+            "Does anything catch your eye?",
+             $"<link=\"{Feedme}\"><b><color=#d4af37>Bandages</color></b></link>              <link=\"{orNotTag}\"><b><color=#a40000>knife</color></b></link>            <link=\"{sacrificeHP}\"><b><color=#a40000>Sacrifice...</color></b></link>"
+        };
         
+
+        //npcDialogueHandler.afterDialogue = AfterDialogue;
+    }
+    void BeforeDialogue() {
+        npcDialogueHandler.dialogueContents = new List<string> {
+            "Welcome to my shop,",
+            "Does anything catch your eye?",
+             $"<link=\"{Feedme}\"><b><color=#d4af37>Bandages</color></b></link>              <link=\"{orNotTag}\"><b><color=#a40000>knife</color></b></link>            <link=\"{sacrificeHP}\"><b><color=#a40000>Sacrifice...</color></b></link>"
+        };
     }
 
-    // Update is called once per frame
-    void Update()
-    {
+    void AfterDialogue() {
         
     }
 }
