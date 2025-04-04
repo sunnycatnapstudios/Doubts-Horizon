@@ -10,6 +10,8 @@ tent icon: https://opengameart.org/content/tent-3
 city sprites, CC-BY-SA 3.0, https://opengameart.org/content/post-apocalyptic-16x16-tileset-update1
 fire/explosion, CC0, https://opengameart.org/content/explosion-3
 mushroom cloud, CC0, https://opengameart.org/content/nuclear-mushroom-cloud
+Blood Splatter: https://opengameart.org/content/blood-splatter
+LPC Chicken (Rework): https://opengameart.org/content/lpc-chicken-rework
 
 # Audio
 ## Sample Packs (various online soureces):
