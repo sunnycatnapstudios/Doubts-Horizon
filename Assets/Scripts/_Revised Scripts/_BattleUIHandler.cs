@@ -44,7 +44,7 @@ public class _BattleUIHandler : MonoBehaviour
     public GameObject curEnemy = null;
     private TMP_Text battleExplanation = null;
 
-    private int healAmount;
+    private int healAmount, numKits;
     public List<string> defeatedInCombat = new List<string>();
     public string endCause;
     public bool endTurn;
@@ -158,6 +158,10 @@ public class _BattleUIHandler : MonoBehaviour
         AudioManager.Instance.CrossFadeAmbienceToZero(1f);
         AudioManager.Instance.CrossFadeMusicSound(audioClips.battleMusic, 2f, 1f, 1f);
         battleExplanation.text = "";
+        Slot healthKit = _inventory.GetSlotItem("Health Kit");
+        if (healthKit != null) {
+            numKits = healthKit.getCount();
+        }
         StartCoroutine(CaptureScreen());
         Time.timeScale = 0;
     }
@@ -395,8 +399,6 @@ public class _BattleUIHandler : MonoBehaviour
             else if (!currentCombatant.isEnemy)// Player turn
             {
                 damageButtonText.text = $"Attack:{currentCombatant.attack}";
-
-                int numKits = _inventory.getInventory()["Health Kit"].getCount();
                 healButtonText.text = $"Health Kit:{numKits}";
                 yield return PlayerTurn(currentCombatant);
             }
@@ -591,7 +593,6 @@ public class _BattleUIHandler : MonoBehaviour
 
             if (selectedAction == "Heal") {
                 // Check if we have health kit in inventory
-                int numKits = _inventory.getInventory()["Health Kit"].getCount();
                 if (numKits > 0) {
                     partySlotHandler.ViewPortCanvasGroup.blocksRaycasts = false;
                     canSelect = true;
@@ -599,7 +600,6 @@ public class _BattleUIHandler : MonoBehaviour
                 } else {
                     // Reject prompt
                     battleExplanation.text = "You are out of Health Kits";
-                    selectedAction = null;  // Reset selection back to default state
                 }
             }
 
@@ -608,12 +608,12 @@ public class _BattleUIHandler : MonoBehaviour
                 yield return null;
 
                 // If the action is changed mid-selection, restart decision phase
-                if (selectedAction == "Attack" || selectedAction == "Defend")
+                if (selectedAction == "Attack" || selectedAction == "Defend" || selectedAction == "Escape")
                 {
 
                     partySlotHandler.ViewPortCanvasGroup.blocksRaycasts = true;
                     Debug.Log("Action switched");
-                    if (selectedAction == "Attack") break;  // Go back to the start of the loop
+                    if (selectedAction == "Attack" || selectedAction == "Escape") break;  // Go back to the start of the loop
 
                     Debug.Log($"Current Action: {selectedAction}");
                     if (selectedAction == "Defend" && currentDefender == null)
@@ -630,7 +630,7 @@ public class _BattleUIHandler : MonoBehaviour
             }
 
             // If we broke out of the loop due to switching to Another Option, restart the process
-            if (selectedAction == "Attack") continue;
+            if (selectedAction == "Attack" || selectedAction == "Escape") continue;
 
             Debug.Log($"Target chosen: {selectedTarget}");
 
@@ -668,7 +668,7 @@ public class _BattleUIHandler : MonoBehaviour
                 else {healAmount = player.maxHealth / 2;}
 
                 _inventory.getInventory()["Health Kit"].decCount();     // Use a health kit
-
+                numKits--;
 
                 if (selectedTarget == player.Name) {
                     healAmount=(int)(healAmount*.8f);

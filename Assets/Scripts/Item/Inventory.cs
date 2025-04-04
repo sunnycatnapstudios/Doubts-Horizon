@@ -154,10 +154,17 @@ public class Inventory : MonoBehaviour {
         }
     }
 
+    public Slot GetSlotItem(string name) {
+        if (inventory.ContainsKey(name)) {
+            return inventory[name];
+        } else {
+            return null;
+        }
+    }
 
     public string GrabRandomItem() {
         int rand = UnityEngine.Random.Range(0, items.Count);
-        if(items.Count == 0) 
+        if(items.Count == 0)
             { return "non"; }
         addItem(items[rand]);
         Debug.Log(items[rand]);
