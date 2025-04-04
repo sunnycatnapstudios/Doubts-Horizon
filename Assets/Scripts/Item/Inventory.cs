@@ -76,6 +76,7 @@ public class Inventory : MonoBehaviour {
         if (inventory.ContainsKey(name)) {
             return inventory[name].getCount();
         }
+
         Debug.Log(inventory.ToString());
         return 0;
     }
@@ -117,6 +118,7 @@ public class Inventory : MonoBehaviour {
                 curObj.GetComponent<Pickupable>().DestroyInWorld();
             }
         }
+
         if (inventoryWindow.isActiveAndEnabled) {
             if (Input.GetKeyDown(KeyCode.I) && timer <= 1) {
                 Debug.Log("Close Inventory");
@@ -164,8 +166,10 @@ public class Inventory : MonoBehaviour {
 
     public string GrabRandomItem() {
         int rand = UnityEngine.Random.Range(0, items.Count);
-        if(items.Count == 0)
-            { return "non"; }
+        if (items.Count == 0) {
+            return "non";
+        }
+
         addItem(items[rand]);
         Debug.Log(items[rand]);
 

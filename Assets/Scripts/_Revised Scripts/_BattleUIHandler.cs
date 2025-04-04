@@ -667,7 +667,7 @@ public class _BattleUIHandler : MonoBehaviour
                 if (player.isCombatant)  {healAmount = (1+(60 - player.attack)/60)*(Random.Range(20, 40));}
                 else {healAmount = player.maxHealth / 2;}
 
-                _inventory.getInventory()["Health Kit"].decCount();     // Use a health kit
+                _inventory.GetSlotItem("Health Kit").decCount();     // Use a health kit
                 numKits--;
 
                 if (selectedTarget == player.Name) {
