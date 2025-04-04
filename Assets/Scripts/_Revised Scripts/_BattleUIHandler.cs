@@ -132,7 +132,7 @@ public class _BattleUIHandler : MonoBehaviour
             // if (combatUI != null && overworldUI != null && enemySlot != null) {break;}
         }
 
-        Debug.Log("MAKE SURE TO IMPLEMENT A METHOD FOR ENEMIES TO ASSIGN SPECIFIC LOCATIONS TO SPECIFIC ENEMY LISTS");
+        // MAKE SURE TO IMPLEMENT A METHOD FOR ENEMIES TO ASSIGN SPECIFIC LOCATIONS TO SPECIFIC ENEMY LISTS
     }
 
     public List<GameObject> GetAllObjectsOnlyInScene()
@@ -319,7 +319,6 @@ public class _BattleUIHandler : MonoBehaviour
             // GameObject simpleUIAnimator = GameObject.FindGameObjectWithTag("Simple Enemy");
             // enemyUIAnimator = simpleUIAnimator.GetComponent<Animator>();
             enemyUIAnimator.updateMode = AnimatorUpdateMode.UnscaledTime;
-            Debug.Log(enemyStats.Name + "anim");
             enemyUIAnimator.Play($"{enemyStats.Name} Idle");
             //enemyUIAnimator.Play(enemyObjectManager.BattleAnimeController.)
         }
@@ -339,7 +338,6 @@ public class _BattleUIHandler : MonoBehaviour
     }
     void EnemyIsAttacking(string enemyName)
     {
-        Debug.Log($"{enemyStats.Name} Attacks");
         switch (enemyName)
         {
             case "Gregor":
@@ -352,7 +350,6 @@ public class _BattleUIHandler : MonoBehaviour
     }
     void EnemyGotAttacked(string enemyName)
     {
-        Debug.Log($"{enemyStats.Name} got Attacked");
         switch (enemyName)
         {
             case "Gregor":
@@ -573,7 +570,6 @@ public class _BattleUIHandler : MonoBehaviour
     }
 
     private IEnumerator PlayerTurn(CharacterStats player) {
-        Debug.Log($"{player.Name}'s turn. Choose an action!");
         battleExplanation.text = "Choose an action!";
         partySlotHandler.MoveToActivePlayer(player, false);
         partySlotHandler.ViewPortCanvasGroup.blocksRaycasts = true;
@@ -612,10 +608,10 @@ public class _BattleUIHandler : MonoBehaviour
                 {
 
                     partySlotHandler.ViewPortCanvasGroup.blocksRaycasts = true;
-                    Debug.Log("Action switched");
+                    //Debug.Log("Action switched");
                     if (selectedAction == "Attack" || selectedAction == "Escape") break;  // Go back to the start of the loop
 
-                    Debug.Log($"Current Action: {selectedAction}");
+                    //Debug.Log($"Current Action: {selectedAction}");
                     if (selectedAction == "Defend" && currentDefender == null)
                     {
                         break;
@@ -631,9 +627,7 @@ public class _BattleUIHandler : MonoBehaviour
 
             // If we broke out of the loop due to switching to Another Option, restart the process
             if (selectedAction == "Attack" || selectedAction == "Escape") continue;
-
-            Debug.Log($"Target chosen: {selectedTarget}");
-
+            
             if (selectedAction == "Defend")
             {
                 if (currentDefender == null)
@@ -642,7 +636,7 @@ public class _BattleUIHandler : MonoBehaviour
                     SpawnDefendIndicator(player);
                     partySlotHandler.MoveToActivePlayer(player, false);
 
-                    Debug.Log($"{player.Name} chose to defend the Party!!!");
+                    // Debug.Log($"{player.Name} chose to defend the Party!!!");
                     canSelect = false;
                     selectedTarget = player.Name;
                     break;
@@ -650,7 +644,7 @@ public class _BattleUIHandler : MonoBehaviour
                 else
                 {
                     // StartCoroutine(ShakeDefendIndicator());
-                    Debug.Log("There's already someone defending :(");
+                    // Debug.Log("There's already someone defending :(");
                     // partySlotHandler.MoveToActivePlayer(currentDefender, false);
 
                     selectedAction = null;
@@ -692,7 +686,7 @@ public class _BattleUIHandler : MonoBehaviour
                     }
                 }
 
-                Debug.Log($"{selectedTarget} was healed by {player.Name} for {healAmount} HP!");
+                // Debug.Log($"{selectedTarget} was healed by {player.Name} for {healAmount} HP!");
                 // canSelect = false;
                 break; // Move forward in the turn after completing Heal/Defend
             }
@@ -722,12 +716,11 @@ public class _BattleUIHandler : MonoBehaviour
         partySlotHandler.ViewPortCanvasGroup.blocksRaycasts = true;
         canSelect = false;
 
-        Debug.Log($"Player chose {selectedAction}");
+        //Debug.Log($"Player chose {selectedAction}");
         yield return new WaitForSecondsRealtime(.6f);
     }
 
     private IEnumerator EnemyTurn(CharacterStats enemy) {
-        Debug.Log($"Enemy's Turn: {enemy.Name}");
         battleExplanation.text = "Enemy turn.";
 
         partyUIAnimator.SetTrigger("Close");
@@ -929,8 +922,6 @@ public class _BattleUIHandler : MonoBehaviour
 
     // Called when the battle should end. Use to transition back to overworld
     private void EndEncounter(string reason) {
-        Debug.Log($"EndEncounter({reason})");
-
         // Clean up
         if (partyUIAnimator != null) {
             partyUIAnimator.ResetTrigger("Open");
@@ -964,7 +955,6 @@ public class _BattleUIHandler : MonoBehaviour
         if (reason == "Win") {
 
             String item  = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().GrabRandomItem();
-            Debug.Log(item);
             battleExplanation.text = "You did it! You gain one "+item;
         } if (reason == "Escape") {
             Destroy(curEnemy);
@@ -996,7 +986,6 @@ public class _BattleUIHandler : MonoBehaviour
         }
 
         selectedAction = action;
-        Debug.Log("Current Action: " + selectedAction);
         partyUIAnimator.SetTrigger("Close");
         actOption = false;
         itemOption = false;
@@ -1070,7 +1059,6 @@ public class _BattleUIHandler : MonoBehaviour
         {
             escapePressedOnce = true;
             escapeTimer = Time.time; // Start the timer
-            Debug.Log("Press Escape again to confirm fleeing.");
             return; // Wait for second press
         }
 
@@ -1079,7 +1067,6 @@ public class _BattleUIHandler : MonoBehaviour
         {
             escapePressedOnce = true;
             escapeTimer = Time.time;
-            Debug.Log("Press Escape again to confirm fleeing.");
             return;
         }
 

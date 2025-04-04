@@ -52,7 +52,6 @@ public class PartySlotHandler : MonoBehaviour {
 
     public void UpdateSlots() {
         survivors = _battleUIHandler.survivors;
-        Debug.Log($"{playerParty.Count}");
 
         // Destroy old slots
         foreach (Transform child in horizRectTransform.transform) {
@@ -69,7 +68,6 @@ public class PartySlotHandler : MonoBehaviour {
             newSlot.name = "PartySlot" + (partySlots.Count + 1);
             PartySlot slotComponent = newSlot.GetComponent<PartySlot>();
             slotCount++;
-            Debug.Log("anderler" + member.ToString());
 
             if (slotComponent != null) {
                 slotComponent.Initialize(member);

@@ -55,7 +55,7 @@ public class Door : MonoBehaviour {
                 Unlock();
                 player.inventory.removeItemByName("Key");
             } else {
-                Debug.Log(GetHashCode().ToString() + ": locked");
+                // Debug.Log(GetHashCode().ToString() + ": locked");
                 AudioManager.Instance.PlaySound(audioClips.sfxLocked);
             }
         } else {
@@ -68,7 +68,7 @@ public class Door : MonoBehaviour {
     }
 
     void Close() {
-        Debug.Log(GetHashCode().ToString() + ": close");
+        // Debug.Log(GetHashCode().ToString() + ": close");
         spriteRenderer.sprite = closed;
         isOpen = false;
         this.gameObject.layer = LayerMask.NameToLayer("Can't Traverse");
@@ -78,7 +78,7 @@ public class Door : MonoBehaviour {
     }
 
     void Open() {
-        Debug.Log(GetHashCode().ToString() + ": open");
+        // Debug.Log(GetHashCode().ToString() + ": open");
         spriteRenderer.sprite = open;
         isOpen = true;
         this.gameObject.layer = LayerMask.NameToLayer("Default");
@@ -86,12 +86,12 @@ public class Door : MonoBehaviour {
     }
 
     void Lock() {
-        Debug.Log(GetHashCode().ToString() + ": lock");
+        // Debug.Log(GetHashCode().ToString() + ": lock");
         isLocked = true;
     }
 
     void Unlock() {
-        Debug.Log(GetHashCode().ToString() + ": unlock");
+        // Debug.Log(GetHashCode().ToString() + ": unlock");
         isLocked = false;
         AudioManager.Instance.PlaySound(audioClips.sfxUnlock);
     }

@@ -17,7 +17,7 @@ public class BattleTransition : MonoBehaviour {
     private Survivor deadGuy;
     private GameObject deathDialogue;
     private bool currentlyInTeammateDeath = false;
-    
+
 
     public bool _start;
     public float fadeSpeed = 0.5f;
@@ -40,7 +40,6 @@ public class BattleTransition : MonoBehaviour {
         right.fillOrigin = (int)Image.OriginHorizontal.Right;
 
         teammateDeath = this.transform.Find("TeammateDeath");
-        Debug.Log(teammateDeath+"teammatedeath name");
         RIPText = teammateDeath.Find("TeammateName").GetComponent<TextMeshProUGUI>();
         teammateDeathImage = teammateDeath.Find("TeammateImage").GetComponent<Image>();
         teammateDeathBackground = teammateDeath.Find("Background").GetComponent<Image>();
@@ -112,7 +111,6 @@ public class BattleTransition : MonoBehaviour {
             currentlyInTeammateDeath = true;
         }
         deadGuy = survivor;
-        Debug.Log(survivor);
         DeathDialogue dialogueholder = deathDialogue.GetComponent<DeathDialogue>();
         dialogueholder.setSurvivor(survivor);
         dialogueholder.setTransition(this);
@@ -143,14 +141,12 @@ public class BattleTransition : MonoBehaviour {
             newColor = new Color(teammateDeathImage.color.r, teammateDeathImage.color.g, teammateDeathImage.color.b,
                 fadeAmount);
             teammateDeathImage.color = newColor;
-            Debug.Log(teammateDeathBackground.color.a);
             yield return null;
         }
-        Debug.Log("I GET HERE IN DEATH ANIME");
         //GameObject thing = new GameObject();
 
         //thing.AddComponent<DialogueBoxHandler>().dialogueContents = new List<string> { "i am here ",deadGuy.name };
-        
+
         GameStatsManager.Instance._dialogueHandler.OpenDialogueWith(deathDialogue);
         //StartCoroutine( closeTeammateDeathScreen());
         //GameObject.Destroy( thing );
@@ -161,10 +157,9 @@ public class BattleTransition : MonoBehaviour {
 
 
     public void closeGreyScreen() {
-        
+
     }
     public IEnumerator closeTeammateDeathScreen() {
-        Debug.Log("I GET HERE IN DEATH ANIME ONEEE");
         yield return new WaitForSecondsRealtime(3);
         while (teammateDeathBackground.color.a > 0) {
             float fadeAmount = teammateDeathBackground.color.a - (Time.unscaledDeltaTime * fadeSpeed);
@@ -179,10 +174,8 @@ public class BattleTransition : MonoBehaviour {
             newColor = new Color(teammateDeathImage.color.r, teammateDeathImage.color.g, teammateDeathImage.color.b,
                 fadeAmount);
             teammateDeathImage.color = newColor;
-            Debug.Log(teammateDeathBackground.color.a);
             yield return null;
         }
-        Debug.Log("I GET HERE IN DEATH ANIME TWOO");
         teammateDeath.gameObject.SetActive(false);
         currentlyInTeammateDeath = false;
 

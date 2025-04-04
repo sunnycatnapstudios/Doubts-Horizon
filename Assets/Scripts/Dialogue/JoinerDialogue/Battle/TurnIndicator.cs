@@ -49,14 +49,8 @@ public class TurnIndicator : MonoBehaviour {
             GameObject newImageObj = Instantiate(turnImagePrefab, transform);
             newImageObj.name = "Turn Image" + (i + 1); newImageObj.SetActive(true);
             Image newImage = newImageObj.transform.Find("Profile").GetComponent<Image>();
-            Debug.LogWarning(newImageObj.transform.Find("Profile"));
+            //Debug.LogWarning(newImageObj.transform.Find("Profile"));
             //Sprite characterSprite = _partyManager.characterProfiles.Find(sprite => sprite.name == _battleUIHandler.battleOrder[i].Name);
-            if (!_battleUIHandler.battleOrder[i].isEnemy) {
-
-
-            }
-            Debug.Log(_battleUIHandler.battleOrder[i].Name);
-
 
             newImageObj.transform.localPosition = targetPositions[i]; // Set position
             turnOrderImages.Add(newImage.gameObject.transform.parent.GetComponent<Image>());
