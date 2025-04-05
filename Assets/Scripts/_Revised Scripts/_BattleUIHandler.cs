@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,6 +18,7 @@ public class _BattleUIHandler : MonoBehaviour
     private _PartyManager _partyManager;
     private _DialogueHandler _dialogueHandler;
     private PartyManager partyManager;
+    private Inventory _inventory;
 
     public Animator partyUIAnimator, enemyUIAnimator, enemyStatsAnimator;
     public bool actOption = false, itemOption = false, canSelect = false;
@@ -29,7 +30,7 @@ public class _BattleUIHandler : MonoBehaviour
     private bool battleInProgress = false, escapeSuccessful = false;
     public List<CharacterStats> currentEnemies = new List<CharacterStats>();
     public TurnIndicator turnIndicator;
-    public TextMeshProUGUI enemyName, damageButtonText;
+    public TextMeshProUGUI enemyName, damageButtonText, healButtonText;
     public string selectedAction = "", selectedTarget = null;
     public CharacterStats enemyStats;
     public int currentEnemyCurrentHealth, currentEnemyMaxHealth;
@@ -43,7 +44,7 @@ public class _BattleUIHandler : MonoBehaviour
     public GameObject curEnemy = null;
     private TMP_Text battleExplanation = null;
 
-    private int healAmount;
+    private int healAmount, numKits;
     public List<string> defeatedInCombat = new List<string>();
     public string endCause;
     public bool endTurn;
@@ -114,6 +115,7 @@ public class _BattleUIHandler : MonoBehaviour
                 damageButtonText = actOptionBList.GetComponentInChildren<TextMeshProUGUI>();
             } if (obj.CompareTag("Item Options")) {
                 itemOptionBList = obj;
+                healButtonText = itemOptionBList.GetComponentInChildren<TextMeshProUGUI>(); // TODO
             } if (obj.CompareTag("PartyCombatUI")) {
                 partyUIAnimator = obj.GetComponent<Animator>();
                 partyUIAnimator.updateMode = AnimatorUpdateMode.UnscaledTime;
@@ -123,12 +125,14 @@ public class _BattleUIHandler : MonoBehaviour
                 floatingTextPrefab = obj;
             } if (obj.GetComponent<BattleTransition>() != null) {
                 battleTransition = obj.GetComponent<BattleTransition>();
+            } if (obj.GetComponent<Inventory>() != null) {
+                _inventory = obj.GetComponent<Inventory>();
             }
 
             // if (combatUI != null && overworldUI != null && enemySlot != null) {break;}
         }
 
-        Debug.Log("MAKE SURE TO IMPLEMENT A METHOD FOR ENEMIES TO ASSIGN SPECIFIC LOCATIONS TO SPECIFIC ENEMY LISTS");
+        // MAKE SURE TO IMPLEMENT A METHOD FOR ENEMIES TO ASSIGN SPECIFIC LOCATIONS TO SPECIFIC ENEMY LISTS
     }
 
     public List<GameObject> GetAllObjectsOnlyInScene()
@@ -154,6 +158,10 @@ public class _BattleUIHandler : MonoBehaviour
         AudioManager.Instance.CrossFadeAmbienceToZero(1f);
         AudioManager.Instance.CrossFadeMusicSound(audioClips.battleMusic, 2f, 1f, 1f);
         battleExplanation.text = "";
+        Slot healthKit = _inventory.GetSlotItem("Health Kit");
+        if (healthKit != null) {
+            numKits = healthKit.getCount();
+        }
         StartCoroutine(CaptureScreen());
         Time.timeScale = 0;
     }
@@ -267,9 +275,11 @@ public class _BattleUIHandler : MonoBehaviour
         partySlotHandler.UpdateSlots();
         SetEscapePercentage();
 
-        battleOrder = ShuffleList(battleOrder);
-
-
+        int attempts = 0;
+        do {
+            battleOrder = ShuffleList(battleOrder);
+            attempts++;
+        } while (battleOrder[currentTurnIndex].isEnemy && attempts < 100);
 
         foreach (var Char in battleOrder)
         {
@@ -309,7 +319,6 @@ public class _BattleUIHandler : MonoBehaviour
             // GameObject simpleUIAnimator = GameObject.FindGameObjectWithTag("Simple Enemy");
             // enemyUIAnimator = simpleUIAnimator.GetComponent<Animator>();
             enemyUIAnimator.updateMode = AnimatorUpdateMode.UnscaledTime;
-            Debug.Log(enemyStats.Name + "anim");
             enemyUIAnimator.Play($"{enemyStats.Name} Idle");
             //enemyUIAnimator.Play(enemyObjectManager.BattleAnimeController.)
         }
@@ -329,7 +338,6 @@ public class _BattleUIHandler : MonoBehaviour
     }
     void EnemyIsAttacking(string enemyName)
     {
-        Debug.Log($"{enemyStats.Name} Attacks");
         switch (enemyName)
         {
             case "Gregor":
@@ -342,7 +350,6 @@ public class _BattleUIHandler : MonoBehaviour
     }
     void EnemyGotAttacked(string enemyName)
     {
-        Debug.Log($"{enemyStats.Name} got Attacked");
         switch (enemyName)
         {
             case "Gregor":
@@ -389,6 +396,7 @@ public class _BattleUIHandler : MonoBehaviour
             else if (!currentCombatant.isEnemy)// Player turn
             {
                 damageButtonText.text = $"Attack:{currentCombatant.attack}";
+                healButtonText.text = $"Health Kit:{numKits}";
                 yield return PlayerTurn(currentCombatant);
             }
 
@@ -556,10 +564,12 @@ public class _BattleUIHandler : MonoBehaviour
         defendIndicator.GetComponent<Image>().color = Color.white;
         defendIndicator.GetComponent<DefendIndicator>().inAnimation = false;
         defendIndicator.GetComponent<DefendIndicator>().isAssigned = false;
+
+        // Update party slot
+        partySlotHandler.UpdateSlots();
     }
 
     private IEnumerator PlayerTurn(CharacterStats player) {
-        Debug.Log($"{player.Name}'s turn. Choose an action!");
         battleExplanation.text = "Choose an action!";
         partySlotHandler.MoveToActivePlayer(player, false);
         partySlotHandler.ViewPortCanvasGroup.blocksRaycasts = true;
@@ -578,9 +588,15 @@ public class _BattleUIHandler : MonoBehaviour
             selectedTarget = null;
 
             if (selectedAction == "Heal") {
-                partySlotHandler.ViewPortCanvasGroup.blocksRaycasts = false;
-                canSelect = true;
-                battleExplanation.text = "Select a survivor to heal.";
+                // Check if we have health kit in inventory
+                if (numKits > 0) {
+                    partySlotHandler.ViewPortCanvasGroup.blocksRaycasts = false;
+                    canSelect = true;
+                    battleExplanation.text = "Select a survivor to heal.";
+                } else {
+                    // Reject prompt
+                    battleExplanation.text = "You are out of Health Kits";
+                }
             }
 
             while (selectedTarget == null)
@@ -588,14 +604,14 @@ public class _BattleUIHandler : MonoBehaviour
                 yield return null;
 
                 // If the action is changed mid-selection, restart decision phase
-                if (selectedAction == "Attack" || selectedAction == "Defend")
+                if (selectedAction == "Attack" || selectedAction == "Defend" || selectedAction == "Escape")
                 {
 
                     partySlotHandler.ViewPortCanvasGroup.blocksRaycasts = true;
-                    Debug.Log("Action switched");
-                    if (selectedAction == "Attack") break;  // Go back to the start of the loop
+                    //Debug.Log("Action switched");
+                    if (selectedAction == "Attack" || selectedAction == "Escape") break;  // Go back to the start of the loop
 
-                    Debug.Log($"Current Action: {selectedAction}");
+                    //Debug.Log($"Current Action: {selectedAction}");
                     if (selectedAction == "Defend" && currentDefender == null)
                     {
                         break;
@@ -610,9 +626,7 @@ public class _BattleUIHandler : MonoBehaviour
             }
 
             // If we broke out of the loop due to switching to Another Option, restart the process
-            if (selectedAction == "Attack") continue;
-
-            Debug.Log($"Target chosen: {selectedTarget}");
+            if (selectedAction == "Attack" || selectedAction == "Escape") continue;
 
             if (selectedAction == "Defend")
             {
@@ -622,7 +636,7 @@ public class _BattleUIHandler : MonoBehaviour
                     SpawnDefendIndicator(player);
                     partySlotHandler.MoveToActivePlayer(player, false);
 
-                    Debug.Log($"{player.Name} chose to defend the Party!!!");
+                    // Debug.Log($"{player.Name} chose to defend the Party!!!");
                     canSelect = false;
                     selectedTarget = player.Name;
                     break;
@@ -630,7 +644,7 @@ public class _BattleUIHandler : MonoBehaviour
                 else
                 {
                     // StartCoroutine(ShakeDefendIndicator());
-                    Debug.Log("There's already someone defending :(");
+                    // Debug.Log("There's already someone defending :(");
                     // partySlotHandler.MoveToActivePlayer(currentDefender, false);
 
                     selectedAction = null;
@@ -645,10 +659,10 @@ public class _BattleUIHandler : MonoBehaviour
                 partySlotHandler.ViewPortCanvasGroup.blocksRaycasts = false;
 
                 if (player.isCombatant)  {healAmount = (1+(60 - player.attack)/60)*(Random.Range(20, 40));}
-                else {healAmount = Random.Range(20, 40);}
+                else {healAmount = player.maxHealth / 2;}
 
-
-
+                _inventory.GetSlotItem("Health Kit").decCount();     // Use a health kit
+                numKits--;
 
                 if (selectedTarget == player.Name) {
                     healAmount=(int)(healAmount*.8f);
@@ -672,7 +686,7 @@ public class _BattleUIHandler : MonoBehaviour
                     }
                 }
 
-                Debug.Log($"{selectedTarget} was healed by {player.Name} for {healAmount} HP!");
+                // Debug.Log($"{selectedTarget} was healed by {player.Name} for {healAmount} HP!");
                 // canSelect = false;
                 break; // Move forward in the turn after completing Heal/Defend
             }
@@ -702,12 +716,11 @@ public class _BattleUIHandler : MonoBehaviour
         partySlotHandler.ViewPortCanvasGroup.blocksRaycasts = true;
         canSelect = false;
 
-        Debug.Log($"Player chose {selectedAction}");
+        //Debug.Log($"Player chose {selectedAction}");
         yield return new WaitForSecondsRealtime(.6f);
     }
 
     private IEnumerator EnemyTurn(CharacterStats enemy) {
-        Debug.Log($"Enemy's Turn: {enemy.Name}");
         battleExplanation.text = "Enemy turn.";
 
         partyUIAnimator.SetTrigger("Close");
@@ -718,11 +731,14 @@ public class _BattleUIHandler : MonoBehaviour
 
         if (playerParty.Count > 0)
         {
+            bool defenderWasAttacked = false;
+
             CharacterStats target = playerParty[Random.Range(0, playerParty.Count)];
             int enemyDamage = (int)Random.Range(enemy.attack * 0.6f, enemy.attack * 1.2f);
 
-            if (currentDefender != null && currentDefender != target) // If there's an active defender
+            if (currentDefender != null) // If there's an active defender
             {
+                defenderWasAttacked = true;
                 // Calculate negation percentage
                 float healthRatio = currentDefender.currentHealth / (float)currentDefender.maxHealth;
                 float negationPercentage = 0.4f * healthRatio * (currentDefender.attack / 100f); // Adjust 100f for balance
@@ -772,7 +788,16 @@ public class _BattleUIHandler : MonoBehaviour
                 // Check if defender is defeated
                 if (currentDefender.currentHealth <= 0)
                 {
-                    Debug.Log($"{currentDefender.Name} has been defeated!");
+                    Debug.Log($"Defender {currentDefender.Name} has been defeated!");
+
+                    // Clear the turn indicator
+                    int indicatorIndex = battleOrder.IndexOf(currentDefender);
+                    turnIndicator.ClearCharAtIndexIndicator(indicatorIndex);
+
+                    // Move the defend indicator out of the turn slot before being deleted
+                    //StartCoroutine(DestroyDefend());
+
+                    // Remove from other lists
                     defeatedInCombat.Add(currentDefender.Name);
                     battleOrder.Remove(currentDefender);
                     playerParty.Remove(currentDefender);
@@ -780,9 +805,11 @@ public class _BattleUIHandler : MonoBehaviour
                     if (currentDefender.Name != "Me") {
                         battleTransition.teammMateDeath(partyManager.currentPartyMembers.Find(x => x.Name == currentDefender.Name));
                     }
+
+                    partyManager.removeFromPartyByName(currentDefender.Name);
+                    StartCoroutine(DestroyDefend());
+
                     currentDefender = null;
-
-
                 }
             }
             else // No defender, target takes full damage
@@ -806,17 +833,24 @@ public class _BattleUIHandler : MonoBehaviour
                 }
 
             // Check if target is defeated
-            if (target.currentHealth <= 0)
+            if (target.currentHealth <= 0 && !defenderWasAttacked)
             {
-                Debug.Log($"{target.Name} has been defeated!");
+                Debug.Log($"Target {target.Name} has been defeated!");
+                // Remove from turn indicator
+                int indicatorIndex = battleOrder.IndexOf(target);
+                turnIndicator.ClearCharAtIndexIndicator(indicatorIndex);
+
+                // Remove from other lists
                 defeatedInCombat.Add(target.Name);
                 battleOrder.Remove(target);
+                playerParty.Remove(target);
+
                 if(target.Name != "Me") {
                     battleTransition.teammMateDeath(partyManager.currentPartyMembers.Find(x => x.Name == target.Name));
                 }
-                playerParty.Remove(target);
+                // Remove from party manager after transition
                 partyManager.removeFromPartyByName(target.Name);
-
+                partySlotHandler.UpdateSlots();
             }
 
             // Reset defender at the end of the turn
@@ -888,8 +922,6 @@ public class _BattleUIHandler : MonoBehaviour
 
     // Called when the battle should end. Use to transition back to overworld
     private void EndEncounter(string reason) {
-        Debug.Log($"EndEncounter({reason})");
-
         // Clean up
         if (partyUIAnimator != null) {
             partyUIAnimator.ResetTrigger("Open");
@@ -923,7 +955,6 @@ public class _BattleUIHandler : MonoBehaviour
         if (reason == "Win") {
 
             String item  = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>().GrabRandomItem();
-            Debug.Log(item);
             battleExplanation.text = "You did it! You gain one "+item;
         } if (reason == "Escape") {
             Destroy(curEnemy);
@@ -955,7 +986,6 @@ public class _BattleUIHandler : MonoBehaviour
         }
 
         selectedAction = action;
-        Debug.Log("Current Action: " + selectedAction);
         partyUIAnimator.SetTrigger("Close");
         actOption = false;
         itemOption = false;
@@ -1029,7 +1059,6 @@ public class _BattleUIHandler : MonoBehaviour
         {
             escapePressedOnce = true;
             escapeTimer = Time.time; // Start the timer
-            Debug.Log("Press Escape again to confirm fleeing.");
             return; // Wait for second press
         }
 
@@ -1038,7 +1067,6 @@ public class _BattleUIHandler : MonoBehaviour
         {
             escapePressedOnce = true;
             escapeTimer = Time.time;
-            Debug.Log("Press Escape again to confirm fleeing.");
             return;
         }
 
