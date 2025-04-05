@@ -20,6 +20,10 @@ MonoBehaviour:
   - I never thought it would end like this
   - Fight on for me
   - ok?
+  starvedDialogue:
+  - Sorry to leave you like this
+  - But if you ain't gonna help me now then I'm going on my own
+  - Goodbye. Maybe we'll meet again one day
   isCombatant: 1
   inventoryDialogues: {fileID: 8850573105260575154, guid: 97ee79cdb3d35bc44bfcd125382fc182,
     type: 3}
