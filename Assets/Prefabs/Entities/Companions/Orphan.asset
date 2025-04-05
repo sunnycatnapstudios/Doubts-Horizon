@@ -16,8 +16,8 @@ MonoBehaviour:
   damage: 35
   health: 35
   deathDialogue:
-  - I'm sorry... but I can't go on
-  - The hunger... it's too much
+  - Oh mother,
+  - I can feel the soil falling over my head
   starvedDialogue:
   - I'm sorry... but I can't go on
   - The hunger... it's too much
