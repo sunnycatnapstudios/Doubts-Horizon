@@ -12,6 +12,7 @@ fire/explosion, CC0, https://opengameart.org/content/explosion-3
 mushroom cloud, CC0, https://opengameart.org/content/nuclear-mushroom-cloud
 Blood Splatter: https://opengameart.org/content/blood-splatter
 LPC Chicken (Rework): https://opengameart.org/content/lpc-chicken-rework
+16x16 Indoor RPG Tileset (The Baseline): https://opengameart.org/content/16x16-indoor-rpg-tileset-the-baseline
 
 # Audio
 ## Sample Packs (various online soureces):
