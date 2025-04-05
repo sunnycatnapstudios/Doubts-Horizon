@@ -17,6 +17,7 @@ public class CampfireExitDialogue : MonoBehaviour {
     public List<GameObject> transitions;
     //public GameObject FireplaceTransition;
     public List<GameObject> objects;
+    private BattleTransition _battleTransition;
     bool hasFinished = false;
     List<Survivor> kicked;
 
@@ -33,9 +34,9 @@ public class CampfireExitDialogue : MonoBehaviour {
         npcDialogueHandler = GetComponent<DialogueBoxHandler>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         manager = GameObject.FindGameObjectWithTag("Player").GetComponent<PartyManager>();
+        _battleTransition = GameObject.FindGameObjectWithTag("Out Transition").GetComponent<BattleTransition>();
         levelTransition = GetComponent<LevelTransition>();
         audioTransition = GetComponent<AudioTransition>();
-        
 
         npcDialogueHandler.SetSfxTalkingClip(audioClips.sfxTalkingBlip);
 
@@ -99,6 +100,7 @@ public class CampfireExitDialogue : MonoBehaviour {
         if (hasFinished) {
             npcDialogueHandler.dialogueContents = new List<string> { "Just a comfy bed" };
         }
+        GameStatsManager.Instance._dialogueHandler.CloseDialogueBox();  // Just in case
     }
     private IEnumerator endFireplaceScene() {
 
@@ -146,8 +148,14 @@ public class CampfireExitDialogue : MonoBehaviour {
                 manager.RemoveFromParty(survivor);
                 Debug.Log($"Kicked {survivor.GetName()} from party");
 
-
+                if (survivor.starvedDialogue.Count > 0) {
+                    survivor.deathDialogue = survivor.starvedDialogue;  // Since we're reusing the death animation
+                }
             }
+        }
+
+        if (kicked.Count > 0) {
+            _battleTransition.teammMateDeath(kicked);   // death scene with each kicked survivor
         }
     }
 
