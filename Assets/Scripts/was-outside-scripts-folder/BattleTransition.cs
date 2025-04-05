@@ -12,7 +12,9 @@ public class BattleTransition : MonoBehaviour {
     public TextMeshProUGUI text, buttonText, RIPText;
     public Image black, button;
     private Transform teammateDeath;
+
     public Image teammateDeathImage;
+
     //public TextMeshProUGUI teammateText;
     private Image teammateDeathBackground;
     private Survivor deadGuy;
@@ -103,16 +105,19 @@ public class BattleTransition : MonoBehaviour {
         foreach (Survivor s in survivors) {
             survivorsToKill.Push(s);
         }
+
         isStacking = true;
-        teammMateDeath(survivorsToKill.Pop());  // Start with the first survivor
+        teammMateDeath(survivorsToKill.Pop()); // Start with the first survivor
     }
+
     public void teammMateDeath(Survivor survivor) {
         //teammateDeath = this.transform.Find("TeammateDeath");
-        if(currentlyInTeammateDeath == true) {
+        if (currentlyInTeammateDeath == true) {
             return;
         } else {
             currentlyInTeammateDeath = true;
         }
+
         deadGuy = survivor;
         DeathDialogue dialogueholder = deathDialogue.GetComponent<DeathDialogue>();
         dialogueholder.setSurvivor(survivor);
@@ -126,19 +131,25 @@ public class BattleTransition : MonoBehaviour {
 
     public IEnumerator teammateDeathAnim() {
         float a = 1;
-        if (isStacking) {   // Subsequence calls will start with alpha = 1
+        if (isStacking) {
+            // Subsequence calls will start with alpha = 1
             a = 0;
             isStacking = false;
         }
-        teammateDeathBackground.color = new Color(teammateDeathBackground.color.r, teammateDeathBackground.color.g, teammateDeathBackground.color.b,
-            a); ;
+
+        teammateDeathBackground.color = new Color(teammateDeathBackground.color.r, teammateDeathBackground.color.g,
+            teammateDeathBackground.color.b,
+            a);
+        ;
         RIPText.color = new Color(RIPText.color.r, RIPText.color.g, RIPText.color.b, a);
-        teammateDeathImage.color = new Color(teammateDeathImage.color.r, teammateDeathImage.color.g, teammateDeathImage.color.b,
-                a);
+        teammateDeathImage.color = new Color(teammateDeathImage.color.r, teammateDeathImage.color.g,
+            teammateDeathImage.color.b,
+            a);
 
         while (teammateDeathBackground.color.a < 1) {
             float fadeAmount = teammateDeathBackground.color.a + (Time.unscaledDeltaTime * fadeSpeed);
-            Color newColor = new Color(teammateDeathBackground.color.r, teammateDeathBackground.color.g, teammateDeathBackground.color.b,
+            Color newColor = new Color(teammateDeathBackground.color.r, teammateDeathBackground.color.g,
+                teammateDeathBackground.color.b,
                 fadeAmount);
             teammateDeathBackground.color = newColor;
 
@@ -165,8 +176,8 @@ public class BattleTransition : MonoBehaviour {
 
 
     public void closeGreyScreen() {
-
     }
+
     public IEnumerator closeTeammateDeathScreen() {
         yield return new WaitForSecondsRealtime(2);
 
@@ -180,7 +191,8 @@ public class BattleTransition : MonoBehaviour {
 
         while (teammateDeathBackground.color.a > 0) {
             float fadeAmount = teammateDeathBackground.color.a - (Time.unscaledDeltaTime * fadeSpeed);
-            Color newColor = new Color(teammateDeathBackground.color.r, teammateDeathBackground.color.g, teammateDeathBackground.color.b,
+            Color newColor = new Color(teammateDeathBackground.color.r, teammateDeathBackground.color.g,
+                teammateDeathBackground.color.b,
                 fadeAmount);
             teammateDeathBackground.color = newColor;
 
@@ -193,6 +205,7 @@ public class BattleTransition : MonoBehaviour {
             teammateDeathImage.color = newColor;
             yield return null;
         }
+
         teammateDeath.gameObject.SetActive(false);
         currentlyInTeammateDeath = false;
     }
