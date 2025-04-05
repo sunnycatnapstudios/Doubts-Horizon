@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -16,8 +17,9 @@ public class BattleTransition : MonoBehaviour {
     private Image teammateDeathBackground;
     private Survivor deadGuy;
     private GameObject deathDialogue;
+    private Stack<Survivor> survivorsToKill = new Stack<Survivor>();
     private bool currentlyInTeammateDeath = false;
-    
+
 
     public bool _start;
     public float fadeSpeed = 0.5f;
@@ -103,7 +105,12 @@ public class BattleTransition : MonoBehaviour {
         StartCoroutine(HadDiedAnim());
     }
 
-
+    public void teammMateDeath(List<Survivor> survivors) {
+        foreach (Survivor s in survivors) {
+            survivorsToKill.Push(s);
+        }
+        teammMateDeath(survivorsToKill.Pop());  // Start with the first survivor
+    }
     public void teammMateDeath(Survivor survivor) {
         //teammateDeath = this.transform.Find("TeammateDeath");
         if(currentlyInTeammateDeath == true) {
@@ -150,7 +157,7 @@ public class BattleTransition : MonoBehaviour {
         //GameObject thing = new GameObject();
 
         //thing.AddComponent<DialogueBoxHandler>().dialogueContents = new List<string> { "i am here ",deadGuy.name };
-        
+
         GameStatsManager.Instance._dialogueHandler.OpenDialogueWith(deathDialogue);
         //StartCoroutine( closeTeammateDeathScreen());
         //GameObject.Destroy( thing );
@@ -161,7 +168,7 @@ public class BattleTransition : MonoBehaviour {
 
 
     public void closeGreyScreen() {
-        
+
     }
     public IEnumerator closeTeammateDeathScreen() {
         Debug.Log("I GET HERE IN DEATH ANIME ONEEE");
@@ -186,6 +193,10 @@ public class BattleTransition : MonoBehaviour {
         teammateDeath.gameObject.SetActive(false);
         currentlyInTeammateDeath = false;
 
+        // If we're calling with a list of survivors, trigger the next animation in stack
+        if (survivorsToKill.Count > 0) {
+            teammMateDeath(survivorsToKill.Pop());
+        }
     }
 
 

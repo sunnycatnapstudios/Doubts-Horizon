@@ -146,10 +146,11 @@ public class CampfireExitDialogue : MonoBehaviour {
                 kicked.Add(survivor);
                 manager.RemoveFromParty(survivor);
                 Debug.Log($"Kicked {survivor.GetName()} from party");
-
-                // TODO
-                _battleTransition.teammMateDeath(survivor);
             }
+        }
+
+        if (kicked.Count > 0) {
+            _battleTransition.teammMateDeath(kicked);   // death scene with each kicked survivor
         }
     }
 
