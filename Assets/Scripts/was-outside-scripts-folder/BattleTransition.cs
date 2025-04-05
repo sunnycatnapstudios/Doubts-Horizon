@@ -18,7 +18,7 @@ public class BattleTransition : MonoBehaviour {
     private Survivor deadGuy;
     private GameObject deathDialogue;
     private Stack<Survivor> survivorsToKill = new Stack<Survivor>();
-    private bool currentlyInTeammateDeath = false;
+    private bool currentlyInTeammateDeath = false, isStacking = false;
 
 
     public bool _start;
@@ -47,11 +47,6 @@ public class BattleTransition : MonoBehaviour {
         teammateDeathImage = teammateDeath.Find("TeammateImage").GetComponent<Image>();
         teammateDeathBackground = teammateDeath.Find("Background").GetComponent<Image>();
         deathDialogue = teammateDeath.Find("DeathDialogue").gameObject;
-
-
-
-
-
     }
 
     public void LeaveBattle() {
@@ -109,6 +104,7 @@ public class BattleTransition : MonoBehaviour {
         foreach (Survivor s in survivors) {
             survivorsToKill.Push(s);
         }
+        isStacking = true;
         teammMateDeath(survivorsToKill.Pop());  // Start with the first survivor
     }
     public void teammMateDeath(Survivor survivor) {
@@ -131,11 +127,16 @@ public class BattleTransition : MonoBehaviour {
     }
 
     public IEnumerator teammateDeathAnim() {
+        float a = 1;
+        if (isStacking) {   // Subsequence calls will start with alpha = 1
+            a = 0;
+            isStacking = false;
+        }
         teammateDeathBackground.color = new Color(teammateDeathBackground.color.r, teammateDeathBackground.color.g, teammateDeathBackground.color.b,
-                0); ;
-        RIPText.color = new Color(RIPText.color.r, RIPText.color.g, RIPText.color.b, 0);
+            a); ;
+        RIPText.color = new Color(RIPText.color.r, RIPText.color.g, RIPText.color.b, a);
         teammateDeathImage.color = new Color(teammateDeathImage.color.r, teammateDeathImage.color.g, teammateDeathImage.color.b,
-                0);
+                a);
 
         while (teammateDeathBackground.color.a < 1) {
             float fadeAmount = teammateDeathBackground.color.a + (Time.unscaledDeltaTime * fadeSpeed);
@@ -172,7 +173,16 @@ public class BattleTransition : MonoBehaviour {
     }
     public IEnumerator closeTeammateDeathScreen() {
         Debug.Log("I GET HERE IN DEATH ANIME ONEEE");
-        yield return new WaitForSecondsRealtime(3);
+        yield return new WaitForSecondsRealtime(2);
+
+        // If we're calling with a list of survivors, trigger the next animation in stack
+        if (survivorsToKill.Count > 0) {
+            currentlyInTeammateDeath = false;
+            teammMateDeath(survivorsToKill.Pop());
+            yield break;
+        }
+
+
         while (teammateDeathBackground.color.a > 0) {
             float fadeAmount = teammateDeathBackground.color.a - (Time.unscaledDeltaTime * fadeSpeed);
             Color newColor = new Color(teammateDeathBackground.color.r, teammateDeathBackground.color.g, teammateDeathBackground.color.b,
@@ -192,11 +202,6 @@ public class BattleTransition : MonoBehaviour {
         Debug.Log("I GET HERE IN DEATH ANIME TWOO");
         teammateDeath.gameObject.SetActive(false);
         currentlyInTeammateDeath = false;
-
-        // If we're calling with a list of survivors, trigger the next animation in stack
-        if (survivorsToKill.Count > 0) {
-            teammMateDeath(survivorsToKill.Pop());
-        }
     }
 
 

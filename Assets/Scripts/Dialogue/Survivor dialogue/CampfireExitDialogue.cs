@@ -100,6 +100,7 @@ public class CampfireExitDialogue : MonoBehaviour {
         if (hasFinished) {
             npcDialogueHandler.dialogueContents = new List<string> { "Just a comfy bed" };
         }
+        GameStatsManager.Instance._dialogueHandler.CloseDialogueBox();  // Just in case
     }
     private IEnumerator endFireplaceScene() {
 
