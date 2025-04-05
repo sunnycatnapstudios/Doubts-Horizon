@@ -23,6 +23,8 @@ public class Survivor : ScriptableObject {
     }
     public List<string> deathDialogue;
 
+    public List<string> starvedDialogue;
+
     [SerializeField] private bool isCombatant;
 
     [SerializeField] public InventoryDialogues inventoryDialogues;

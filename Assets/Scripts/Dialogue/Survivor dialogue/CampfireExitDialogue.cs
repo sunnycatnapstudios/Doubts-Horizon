@@ -147,6 +147,10 @@ public class CampfireExitDialogue : MonoBehaviour {
                 kicked.Add(survivor);
                 manager.RemoveFromParty(survivor);
                 Debug.Log($"Kicked {survivor.GetName()} from party");
+
+                if (survivor.starvedDialogue.Count > 0) {
+                    survivor.deathDialogue = survivor.starvedDialogue;  // Since we're reusing the death animation
+                }
             }
         }
 

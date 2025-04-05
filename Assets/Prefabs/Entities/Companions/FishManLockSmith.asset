@@ -18,6 +18,7 @@ MonoBehaviour:
   deathDialogue:
   - A fish out of water,
   - glub glub glub
+  starvedDialogue: []
   isCombatant: 1
   inventoryDialogues: {fileID: 8505032188855102423, guid: da5c6aaa70a459040b5135841c579049,
     type: 3}
