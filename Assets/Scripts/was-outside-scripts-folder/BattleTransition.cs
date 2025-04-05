@@ -42,7 +42,6 @@ public class BattleTransition : MonoBehaviour {
         right.fillOrigin = (int)Image.OriginHorizontal.Right;
 
         teammateDeath = this.transform.Find("TeammateDeath");
-        Debug.Log(teammateDeath+"teammatedeath name");
         RIPText = teammateDeath.Find("TeammateName").GetComponent<TextMeshProUGUI>();
         teammateDeathImage = teammateDeath.Find("TeammateImage").GetComponent<Image>();
         teammateDeathBackground = teammateDeath.Find("Background").GetComponent<Image>();
@@ -115,7 +114,6 @@ public class BattleTransition : MonoBehaviour {
             currentlyInTeammateDeath = true;
         }
         deadGuy = survivor;
-        Debug.Log(survivor);
         DeathDialogue dialogueholder = deathDialogue.GetComponent<DeathDialogue>();
         dialogueholder.setSurvivor(survivor);
         dialogueholder.setTransition(this);
@@ -151,10 +149,8 @@ public class BattleTransition : MonoBehaviour {
             newColor = new Color(teammateDeathImage.color.r, teammateDeathImage.color.g, teammateDeathImage.color.b,
                 fadeAmount);
             teammateDeathImage.color = newColor;
-            Debug.Log(teammateDeathBackground.color.a);
             yield return null;
         }
-        Debug.Log("I GET HERE IN DEATH ANIME");
         //GameObject thing = new GameObject();
 
         //thing.AddComponent<DialogueBoxHandler>().dialogueContents = new List<string> { "i am here ",deadGuy.name };
@@ -172,7 +168,6 @@ public class BattleTransition : MonoBehaviour {
 
     }
     public IEnumerator closeTeammateDeathScreen() {
-        Debug.Log("I GET HERE IN DEATH ANIME ONEEE");
         yield return new WaitForSecondsRealtime(2);
 
         // If we're calling with a list of survivors, trigger the next animation in stack
@@ -196,10 +191,8 @@ public class BattleTransition : MonoBehaviour {
             newColor = new Color(teammateDeathImage.color.r, teammateDeathImage.color.g, teammateDeathImage.color.b,
                 fadeAmount);
             teammateDeathImage.color = newColor;
-            Debug.Log(teammateDeathBackground.color.a);
             yield return null;
         }
-        Debug.Log("I GET HERE IN DEATH ANIME TWOO");
         teammateDeath.gameObject.SetActive(false);
         currentlyInTeammateDeath = false;
     }

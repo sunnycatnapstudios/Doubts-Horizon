@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4c397d6a8eb0b2049a83b41d1f7258c4, type: 3}
-  m_Name: New Healing Potion
+  m_Name: New Health Kit
   m_EditorClassIdentifier: 
-  _healingPotion: {fileID: 308638609959419940, guid: 6731cb7877789e44fbe1c9a4e0b546da,
+  _healthKit: {fileID: 308638609959419940, guid: 6731cb7877789e44fbe1c9a4e0b546da,
     type: 3}
-  Sprite: {fileID: 21300000, guid: ea8d1d18a7cb1d04c9a99fba20d21aa0, type: 3}
+  Sprite: {fileID: 21300000, guid: 82e49f250b438cfff8197ba343b625a1, type: 3}
   sfxPickup: {fileID: 8300000, guid: c6f38b1cf169e1d79972fd231dbba484, type: 3}
