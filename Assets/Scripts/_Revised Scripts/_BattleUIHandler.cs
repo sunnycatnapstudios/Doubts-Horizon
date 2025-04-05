@@ -279,7 +279,7 @@ public class _BattleUIHandler : MonoBehaviour
         do {
             battleOrder = ShuffleList(battleOrder);
             attempts++;
-        } while (battleOrder[0].isEnemy && attempts < 100);
+        } while (battleOrder[currentTurnIndex].isEnemy && attempts < 100);
 
         foreach (var Char in battleOrder)
         {
@@ -627,7 +627,7 @@ public class _BattleUIHandler : MonoBehaviour
 
             // If we broke out of the loop due to switching to Another Option, restart the process
             if (selectedAction == "Attack" || selectedAction == "Escape") continue;
-            
+
             if (selectedAction == "Defend")
             {
                 if (currentDefender == null)
