@@ -100,6 +100,7 @@ public class ShopKeeperDialogue : MonoBehaviour
                     takeHealthThreshhold();
                     inventory.addItem(Ration);
                     npcDialogueHandler.dialogueContents.Add("Thank you for the vitality");
+                    timesSacrificed++;
                 }
 
                 npcDialogueHandler.dialogueContents.Add($"You have {inventory.getCountofItem("Ration")} rations left.");
