@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 28230a9f975108a47baf1f62d64238bc
+guid: d22b07ef5a971304dadad64eb965f829
 TextureImporter:
   internalIDToNameTable:
   - first:
@@ -23,6 +23,12 @@ TextureImporter:
   - first:
       213: -289909062963813447
     second: tilesetformattedupdate1_6
+  - first:
+      213: 2171340759970597649
+    second: tilesetformattedupdate1_7
+  - first:
+      213: 1316331263880017371
+    second: tilesetformattedupdate1_8
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -128,7 +134,7 @@ TextureImporter:
         width: 15
         height: 15
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -144,10 +150,10 @@ TextureImporter:
       name: tilesetformattedupdate1_1
       rect:
         serializedVersion: 2
-        x: 69
-        y: 125
-        width: 23
-        height: 23
+        x: 98
+        y: 1
+        width: 11
+        height: 30
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -165,10 +171,10 @@ TextureImporter:
       name: tilesetformattedupdate1_2
       rect:
         serializedVersion: 2
-        x: 17
-        y: 127
+        x: 1
+        y: 65
         width: 13
-        height: 22
+        height: 10
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -186,10 +192,10 @@ TextureImporter:
       name: tilesetformattedupdate1_3
       rect:
         serializedVersion: 2
-        x: 49
-        y: 126
-        width: 12
-        height: 23
+        x: 16
+        y: 66
+        width: 18
+        height: 7
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -207,10 +213,10 @@ TextureImporter:
       name: tilesetformattedupdate1_4
       rect:
         serializedVersion: 2
-        x: 1
-        y: 64
-        width: 13
-        height: 11
+        x: 17
+        y: 127
+        width: 12
+        height: 23
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -228,13 +234,13 @@ TextureImporter:
       name: tilesetformattedupdate1_5
       rect:
         serializedVersion: 2
-        x: 96
-        y: 0
-        width: 14
-        height: 31
+        x: 69
+        y: 127
+        width: 21
+        height: 22
       alignment: 0
       pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
+      border: {x: 1, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
@@ -249,10 +255,10 @@ TextureImporter:
       name: tilesetformattedupdate1_6
       rect:
         serializedVersion: 2
-        x: 5
-        y: 1
-        width: 69
-        height: 53
+        x: 54
+        y: 64
+        width: 20
+        height: 28
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -262,6 +268,48 @@ TextureImporter:
       bones: []
       spriteID: 9b320e44e390afbf0800000000000000
       internalID: -289909062963813447
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tilesetformattedupdate1_7
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 95
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11bcf5cbae6222e10800000000000000
+      internalID: 2171340759970597649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: tilesetformattedupdate1_8
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 159
+        width: 47
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bd53f4e6f4c844210800000000000000
+      internalID: 1316331263880017371
       vertices: []
       indices: 
       edges: []
