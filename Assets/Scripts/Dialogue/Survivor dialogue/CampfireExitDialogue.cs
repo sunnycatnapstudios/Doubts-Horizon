@@ -62,6 +62,7 @@ public class CampfireExitDialogue : MonoBehaviour {
             //StartCoroutine(levelTransition.PerformLevelTransition());   // Use our level transition logic instead
             audioTransition.TriggerAudioTransition();
             hasFinished = true;
+            npcDialogueHandler.dialogueContents = new List<string> { "Just a comfy bed" };
             //kickUnfed();
             GameStatsManager.Instance._dialogueHandler.CloseDialogueBox();
             npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
