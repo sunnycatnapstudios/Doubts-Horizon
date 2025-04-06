@@ -18,6 +18,7 @@ public class ShopKeeperDialogue : MonoBehaviour
     string Feedme;
     string sacrificeHP;
     int timesSacrificed=0;
+    List<string> defaultDialogue;
 
     void Start() {
         dialogueInputHandler = GameObject.FindGameObjectWithTag("Dialogue Text").GetComponent<DialogueInputHandler>();
@@ -53,6 +54,7 @@ public class ShopKeeperDialogue : MonoBehaviour
 
             GameStatsManager.Instance._dialogueHandler.UpdateDialogueBox();
         };
+        
         dialogueInputHandler.AddDialogueChoice(Feedme, takeMe);
 
          orNotTag = "buy Knife" + gameObject.GetHashCode().ToString();
@@ -116,11 +118,14 @@ public class ShopKeeperDialogue : MonoBehaviour
         };
         dialogueInputHandler.AddDialogueChoice(sacrificeHP, sellLife);
 
-        npcDialogueHandler.dialogueContents = new List<string> {
+        defaultDialogue = new List<string> {
             "Welcome to my shop,",
             "Does anything catch your eye?",
-             $"<link=\"{Feedme}\"><b><color=#d4af37>Bandages</color></b></link>           <link=\"{orNotTag}\"><b><color=#a40000>knife</color></b></link>         <link=\"{sacrificeHP}\"><b><color=#a40000>Sacrifice...</color></b></link>"
+             $"<link=\"{Feedme}\"><b><color=#d4af37>Bandages</color></b></link>(1 Ration)   <link=\"{orNotTag}\"><b><color=#a40000>knife</color></b></link>(1 Ration)\n        <link=\"{sacrificeHP}\"><b><color=#a40000>Sacrifice...</color></b></link>(Your Lifeforce for a Ration)"
         };
+
+        npcDialogueHandler.dialogueContents = new List<string>(defaultDialogue);
+       
         npcDialogueHandler.beforeDialogue = BeforeDialogue;
         
 
@@ -128,11 +133,7 @@ public class ShopKeeperDialogue : MonoBehaviour
     }
     void BeforeDialogue() {
         Debug.Log("am i even bing called");
-        npcDialogueHandler.dialogueContents = new List<string> {
-            "Welcome to my shop,",
-            "Does anything catch your eye?",
-             $"<link=\"{Feedme}\"><b><color=#d4af37>Bandages</color></b></link>(1 Ration)   <link=\"{orNotTag}\"><b><color=#a40000>knife</color></b></link>(1 Ration)\n        <link=\"{sacrificeHP}\"><b><color=#a40000>Sacrifice...</color></b></link>(Your Lifeforce for a Ration)"
-        };
+        npcDialogueHandler.dialogueContents = new List<string>(defaultDialogue);
     }
     public bool checkHP() {
         float threshhold = 0.3f;
@@ -160,11 +161,7 @@ public class ShopKeeperDialogue : MonoBehaviour
     }
 
     void AfterDialogue() {
-        npcDialogueHandler.dialogueContents = new List<string> {
-            "Welcome to my shop,",
-            "Does anything catch your eye?",
-             $"<link=\"{Feedme}\"><b><color=#d4af37>Bandages</color></b></link>     <link=\"{orNotTag}\"><b><color=#a40000>knife</color></b></link>     (1 Ration)\n        <link=\"{sacrificeHP}\"><b><color=#a40000>Sacrifice...</color></b></link>(Your Lifeforce)"
-        };
+        npcDialogueHandler.dialogueContents = new List<string>(defaultDialogue);
 
     }
 }
