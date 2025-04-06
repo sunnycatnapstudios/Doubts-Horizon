@@ -23,6 +23,8 @@ public class UIPartyMember : MonoBehaviour
     private TMP_Text nameText;
     [SerializeField]
     private TMP_Text description;
+    [SerializeField]
+    private TMP_Text health;
 
     public List<Sprite> profileImages;
     public event Action<UIPartyMember> OnItemClicked;
@@ -77,6 +79,7 @@ public class UIPartyMember : MonoBehaviour
         this.image.sprite = member.GetSprite();
         nameText.text = member.GetName();
         description.text = "ATK:"+member.Damage.ToString();
+        health.text = $"HP:{member.currentHealth}/{member.maxHealth}";
         
        
         this.member = member;
