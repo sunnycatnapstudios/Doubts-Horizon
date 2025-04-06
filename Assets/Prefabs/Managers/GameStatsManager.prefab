@@ -1,5 +1,48 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &389144273978306539
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7574075695771794805}
+  - component: {fileID: 6739205793358311576}
+  m_Layer: 0
+  m_Name: Intro Handler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7574075695771794805
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 389144273978306539}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4560704930532117087}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6739205793358311576
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 389144273978306539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e9c0a837e4bec92188963ad1d378e42, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4560704928614595110
 GameObject:
   m_ObjectHideFlags: 0
@@ -29,7 +72,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4560704930532117087}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4560704928614595104
 MonoBehaviour:
@@ -64,12 +107,15 @@ MonoBehaviour:
   turnIndicator: {fileID: 0}
   enemyName: {fileID: 0}
   damageButtonText: {fileID: 0}
+  healButtonText: {fileID: 0}
   selectedAction: 
   selectedTarget: 
   currentEnemyCurrentHealth: 0
   currentEnemyMaxHealth: 0
   survivors: []
+  enemyObjectManager: {fileID: 0}
   floatingText: {fileID: 0}
+  curEnemy: {fileID: 0}
   defeatedInCombat: []
   endCause: 
   endTurn: 0
@@ -116,7 +162,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4560704930532117087}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4560704928814271651
 MonoBehaviour:
@@ -137,6 +183,8 @@ MonoBehaviour:
   NPCLayer:
     serializedVersion: 2
     m_Bits: 4096
+  dialogueProfile: {fileID: 0}
+  isCloseable: 1
 --- !u!1 &4560704929212909663
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,7 +214,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4560704930532117087}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &4560704929212909657
 MonoBehaviour:
@@ -207,7 +255,7 @@ GameObject:
   - component: {fileID: 4560704929782034073}
   - component: {fileID: 4560704929782034072}
   m_Layer: 0
-  m_Name: Intro Handler
+  m_Name: (OLD) Intro Handler
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -270,6 +318,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4560704929782034073}
+  - {fileID: 7574075695771794805}
   - {fileID: 4560704929212909662}
   - {fileID: 4560704928614595105}
   - {fileID: 4560704928814271648}
@@ -293,7 +342,10 @@ MonoBehaviour:
   partyManager: {fileID: 0}
   _battleUIHandler: {fileID: 4560704928614595104}
   _dialogueHandler: {fileID: 0}
+  nightFilter: {fileID: 0}
   player: {fileID: 0}
+  CampfireNPCInteractedWith: 0
+  allBeds: []
   spawnedPartyMembers: []
   infSprint: 0
   staminaRecharging: 0
@@ -331,7 +383,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4560704930532117087}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2570329757195463051
 MonoBehaviour:
