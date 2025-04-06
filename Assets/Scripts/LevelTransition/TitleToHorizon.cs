@@ -46,7 +46,17 @@ public class TitleToHorizon : MonoBehaviour {
         StartCoroutine(FadeOutToBlack());
     }
 
-    private IEnumerator FadeOutToBlack() {
+    // Make a copy of black fader and move it above everything for a full fade
+    public void DuplicateBlackFader() {
+        blackFader = Instantiate(blackFader.gameObject, blackFader.transform.parent);
+        blackFaderImage = blackFader.GetComponent<RawImage>();
+        blackFader.transform.SetAsLastSibling();
+        float redFilter = 0.2f;
+        blackFaderImage.color = new Color(blackFaderImage.color.r + redFilter, blackFaderImage.color.g, blackFaderImage.color.b,
+            0);
+    }
+
+    public IEnumerator FadeOutToBlack() {
         blackFader.gameObject.SetActive(true);
 
         while (blackFaderImage.color.a < 1) {
