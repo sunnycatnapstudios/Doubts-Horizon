@@ -11,6 +11,8 @@ public class IntroSequenceHandler : MonoBehaviour {
     private Image radicalImage;
     private Image solidImage;
 
+    private bool wasTriggered = false;
+
     public AudioClip musicIntro;
 
     void Start() {
@@ -32,16 +34,19 @@ public class IntroSequenceHandler : MonoBehaviour {
     // Called in GameStatsManager upon startup
     // Should only trigger when coming from Title scene. Aka not during editing cause it might be annoying
     public void StartIntroSequence() {
+        wasTriggered = true;
         StartCoroutine(FadeOutFromSolid(solidOverlay, solidImage, 0.4f));
         radicalOverlay.SetActive(true);
-        AudioManager.Instance.CrossFadeMusicSound(musicIntro, 4f);
+        AudioManager.Instance.CrossFadeMusicSound(musicIntro, 3f);
     }
 
     // Call to disable overlays and other logic
     public void EndIntroSequence() {
-        StartCoroutine(FadeOutFromSolid(radicalOverlay, radicalImage, 0.8f));
-        solidOverlay.SetActive(false);
-        // Crossfadetozero handled in explosion Audio Transition
+        if (wasTriggered) {
+            StartCoroutine(FadeOutFromSolid(radicalOverlay, radicalImage, 0.8f));
+            solidOverlay.SetActive(false);
+            // Crossfadetozero handled in explosion Audio Transition
+        }
     }
 
     // Yes I'm reusing the titleToHorizon code cause I'm a lazy bastard

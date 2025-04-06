@@ -185,9 +185,11 @@ public class GameStatsManager : MonoBehaviour
         nightFilter.SetActive(false);
 
         string prevScene = PlayerPrefs.GetString("SceneNumber");
-        if (prevScene == "Title") {     // TODO debugging
+        Debug.LogWarning(prevScene);
+        if (prevScene == "Title") {
             // Trigger the intro sequence if we're loading in from Title scene
             // Saves us the headache of skipping it every time when developing
+            PlayerPrefs.DeleteKey("SceneNumber");   // To reset it on future launches
             _introSequenceHandler.StartIntroSequence();
         }
     }
