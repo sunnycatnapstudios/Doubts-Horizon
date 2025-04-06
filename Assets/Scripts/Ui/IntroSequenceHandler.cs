@@ -11,6 +11,8 @@ public class IntroSequenceHandler : MonoBehaviour {
     private Image radicalImage;
     private Image solidImage;
 
+    public AudioClip musicIntro;
+
     void Start() {
         // Fetch the two overlays and disable by default
         if (radicalOverlay == null) {
@@ -27,30 +29,33 @@ public class IntroSequenceHandler : MonoBehaviour {
         solidImage = solidOverlay.GetComponent<Image>();
     }
 
-
+    // Called in GameStatsManager upon startup
+    // Should only trigger when coming from Title scene. Aka not during editing cause it might be annoying
     public void StartIntroSequence() {
-        StartCoroutine(FadeOutFromSolid());
+        StartCoroutine(FadeOutFromSolid(solidOverlay, solidImage, 0.4f));
         radicalOverlay.SetActive(true);
+        AudioManager.Instance.CrossFadeMusicSound(musicIntro, 4f);
     }
 
     // Call to disable overlays and other logic
     public void EndIntroSequence() {
-        radicalOverlay.SetActive(false);
+        StartCoroutine(FadeOutFromSolid(radicalOverlay, radicalImage, 0.8f));
         solidOverlay.SetActive(false);
+        // Crossfadetozero handled in explosion Audio Transition
     }
 
     // Yes I'm reusing the titleToHorizon code cause I'm a lazy bastard
-    private IEnumerator FadeOutFromSolid() {
-        solidOverlay.gameObject.SetActive(true);
-        while (solidImage.color.a > 0) {
-            float fadeAmount = solidImage.color.a - (Time.deltaTime * 0.4f);
-            Color newColor = new Color(solidImage.color.r, solidImage.color.g, solidImage.color.b,
+    private IEnumerator FadeOutFromSolid(GameObject obj, Image image, float fadeSpeed) {
+        obj.gameObject.SetActive(true);
+        while (image.color.a > 0) {
+            float fadeAmount = image.color.a - (Time.deltaTime * fadeSpeed);
+            Color newColor = new Color(image.color.r, image.color.g, image.color.b,
                 fadeAmount);
-            solidImage.color = newColor;
+            image.color = newColor;
             yield return null;
         }
 
         // Disable the fader
-        solidOverlay.gameObject.SetActive(false);
+        obj.gameObject.SetActive(false);
     }
 }
