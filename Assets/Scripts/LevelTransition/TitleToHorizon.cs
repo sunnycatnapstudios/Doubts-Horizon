@@ -52,7 +52,7 @@ public class TitleToHorizon : MonoBehaviour {
         blackFader = Instantiate(blackFader.gameObject, blackFader.transform.parent);
         blackFaderImage = blackFader.GetComponent<RawImage>();
         blackFader.transform.SetAsLastSibling();
-        float redFilter = 0.2f;
+        float redFilter = 0.4f;
         blackFaderImage.color = new Color(blackFaderImage.color.r + redFilter, blackFaderImage.color.g, blackFaderImage.color.b,
             0);
     }

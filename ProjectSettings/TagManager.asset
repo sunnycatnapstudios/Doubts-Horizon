@@ -57,6 +57,8 @@ TagManager:
   - BlackFadeIn
   - DeathDialogue
   - Out Transition
+  - Intro Radical Overlay
+  - Intro Solid Overlay
   layers:
   - Default
   - TransparentFX

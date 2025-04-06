@@ -49,6 +49,7 @@ public class ExplosionIntro : MonoBehaviour {
         //player.movePoint.transform.position = player.transform.position = new Vector3(-70, -100, 18);
 
         // Just use our built in transition scripts
+        GameStatsManager.Instance.EndIntroSequence();
         StartCoroutine(levelTransition.PerformLevelTransition());
         audioTransition.TriggerAudioTransition();
         StartCoroutine(fp.StartFireplaceEvent());
