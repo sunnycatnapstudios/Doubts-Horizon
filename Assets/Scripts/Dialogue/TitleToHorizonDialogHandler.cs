@@ -12,9 +12,11 @@ public class TitleToHorizonDialogHandler : MonoBehaviour {
     private bool isDialogueActive = false;
 
     private TypeWriter typeWriter;
+    private TitleToHorizon titleToHorizon;
 
     [SerializeField] public AudioClip sfxTypingClip;
     [SerializeField] public AudioClip ambienceIntroWind;
+    [SerializeField] public AudioClip sfxExplosionIntro;
 
     private List<string> dialogueContents = new List<string> {
         "....",
@@ -22,7 +24,6 @@ public class TitleToHorizonDialogHandler : MonoBehaviour {
         "I hear something...",
         ".. .. ..",
         "Where am I?",
-        "BOOM"
     };
 
     private int currentLineIndex = 0;
@@ -31,6 +32,7 @@ public class TitleToHorizonDialogHandler : MonoBehaviour {
         continueArrow = GameObject.FindWithTag("Continue Arrow");
 
         typeWriter = GameObject.FindWithTag("Dialogue Text").GetComponent<TypeWriter>();
+        titleToHorizon = GetComponent<TitleToHorizon>();
     }
 
     public void StartDialogue() {
@@ -69,23 +71,34 @@ public class TitleToHorizonDialogHandler : MonoBehaviour {
                 typeWriter.skipTyping = true;
                 return;
             }
-        } else if (currentLineIndex == dialogueContents.Count) {
-            CloseDialogueBox();
-            return;
+        }
+
+        if (currentLineIndex == dialogueContents.Count - 1) {
+            // Explosion and fade out at last line (The blank)
+            StartCoroutine(CloseDialogueBox());
+            //return;
         }
 
         UpdateTypewriter();
     }
 
-    public void CloseDialogueBox() {
+    private IEnumerator CloseDialogueBox() {
         if (!isDialogueActive) {
-            return;
+            yield break;
         }
-
         isDialogueActive = false;
 
-        // End the intro, Transition to Horizon Scene
-        AudioManager.Instance.CrossFadeAmbienceToZero(1);
+        // Delay before explosion and fade
+        yield return new WaitForSeconds(1f);
+        AudioManager.Instance.PlaySound(sfxExplosionIntro);
+
+        // Fade text out to black
+        titleToHorizon.DuplicateBlackFader();
+        StartCoroutine(titleToHorizon.FadeOutToBlack());
+        AudioManager.Instance.CrossFadeAmbienceToZero(2f);
+        yield return new WaitForSeconds(2f);
+
+        // End the intro by loading Horizon Scene
         SceneManager.LoadScene("Horizon", LoadSceneMode.Single);
     }
 

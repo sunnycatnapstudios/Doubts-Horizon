@@ -28,6 +28,7 @@ public class GameStatsManager : MonoBehaviour
     public PartyManager partyManager;
     public _BattleUIHandler _battleUIHandler;
     public _DialogueHandler _dialogueHandler;
+    public IntroSequenceHandler _introSequenceHandler;
     public GameObject nightFilter;
 
     // Combat-Related Stats
@@ -172,6 +173,7 @@ public class GameStatsManager : MonoBehaviour
         _partyManager = GetComponentInChildren<_PartyManager>();
         _battleUIHandler = GetComponentInChildren<_BattleUIHandler>();
         _dialogueHandler = GetComponentInChildren<_DialogueHandler>();
+        _introSequenceHandler = GetComponentInChildren<IntroSequenceHandler>();
 
         staminaBar = GameObject.FindGameObjectWithTag("Stamina Bar").GetComponent<Image>();
 
@@ -182,6 +184,14 @@ public class GameStatsManager : MonoBehaviour
         nightFilter = GameObject.FindGameObjectWithTag("NightFilter");
         nightFilter.SetActive(false);
 
+        string prevScene = PlayerPrefs.GetString("SceneNumber");
+        Debug.LogWarning(prevScene);
+        if (prevScene == "Title") {
+            // Trigger the intro sequence if we're loading in from Title scene
+            // Saves us the headache of skipping it every time when developing
+            PlayerPrefs.DeleteKey("SceneNumber");   // To reset it on future launches
+            _introSequenceHandler.StartIntroSequence();
+        }
     }
     public void Update()
     {
@@ -234,5 +244,10 @@ public class GameStatsManager : MonoBehaviour
 
             }
         }
+    }
+
+    // So we can use the GamestatManager instance to end the sequence
+    public void EndIntroSequence() {
+        _introSequenceHandler.EndIntroSequence();
     }
 }

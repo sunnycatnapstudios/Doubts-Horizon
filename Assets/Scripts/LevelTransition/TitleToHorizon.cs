@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.Design.Serialization;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class TitleToHorizon : MonoBehaviour {
@@ -46,7 +47,17 @@ public class TitleToHorizon : MonoBehaviour {
         StartCoroutine(FadeOutToBlack());
     }
 
-    private IEnumerator FadeOutToBlack() {
+    // Make a copy of black fader and move it above everything for a full fade
+    public void DuplicateBlackFader() {
+        blackFader = Instantiate(blackFader.gameObject, blackFader.transform.parent);
+        blackFaderImage = blackFader.GetComponent<RawImage>();
+        blackFader.transform.SetAsLastSibling();
+        float redFilter = 0.4f;
+        blackFaderImage.color = new Color(blackFaderImage.color.r + redFilter, blackFaderImage.color.g, blackFaderImage.color.b,
+            0);
+    }
+
+    public IEnumerator FadeOutToBlack() {
         blackFader.gameObject.SetActive(true);
 
         while (blackFaderImage.color.a < 1) {
@@ -84,6 +95,7 @@ public class TitleToHorizon : MonoBehaviour {
     public void Start() {
         AudioManager.Instance.CrossFadeAmbienceSound(musicIntro, 3, 1, 1f);
         fadeCoroutine = StartCoroutine(FadeInFromBlack());
+        PlayerPrefs.SetString("SceneNumber", SceneManager.GetActiveScene().name);   // To check if we're loading in from title
     }
 
     public void Update() {
