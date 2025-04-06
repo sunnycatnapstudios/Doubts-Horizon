@@ -26,6 +26,7 @@ LPC Chicken (Rework): https://opengameart.org/content/lpc-chicken-rework
 "Foot walking step sounds on stone, water, snow, wood and dirt" by Jute -- https://opengameart.org/content/foot-walking-step-sounds-on-stone-water-snow-wood-and-dirt -- licensed under GPL 3.0
 "Different steps on wood, stone, leaves, gravel and mud" by TinyWorlds -- https://opengameart.org/content/different-steps-on-wood-stone-leaves-gravel-and-mud -- licensed under CC0
 "35 Wooden Cracks/Hits/Destructions" by Independent.nu -- https://opengameart.org/content/35-wooden-crackshitsdestructions -- licensed under CC0
+"GOLDFISH-8-BIT(ISH) SPRITE" by Blake Speers --https://opengameart.org/content/goldfish-8-bit-ish-sprite --licensed under CC0
 
 ## Freesound.org:
 temple bell 001.wav by tec_studio -- https://freesound.org/s/668646/ -- License: Creative Commons 0
