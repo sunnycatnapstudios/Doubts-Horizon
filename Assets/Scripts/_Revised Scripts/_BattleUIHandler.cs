@@ -310,6 +310,11 @@ public class _BattleUIHandler : MonoBehaviour
             foreach (GameObject obj in allObjects) {
                 if (obj.CompareTag("Simple Enemy")) {
                     obj.SetActive(true);
+                    if(enemyStats.Name == "Hector") {
+                        obj.transform.localScale = new Vector3(2.5f,2.5f,1);
+                    } else{
+                        obj.transform.localScale = Vector3.one;
+                    }
                     enemyUIAnimator = obj.GetComponent<Animator>();
                 } if (obj.CompareTag("Complex Enemy")) {
                     obj.SetActive(false);
