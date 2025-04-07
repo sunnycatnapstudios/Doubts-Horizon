@@ -131,7 +131,7 @@ public class BattleTransition : MonoBehaviour {
 
     public IEnumerator teammateDeathAnim() {
         float a = 1;
-        if (isStacking) {
+        if (isStacking || currentlyInTeammateDeath) {
             // Subsequence calls will start with alpha = 1
             a = 0;
             isStacking = false;
