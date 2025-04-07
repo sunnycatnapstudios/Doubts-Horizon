@@ -36,13 +36,14 @@ public class Boss : MonoBehaviour
         GameStatsManager.Instance._dialogueHandler.CloseDialogueBox();
         _battleUIHandler.curEnemy = gameObject;
         _battleUIHandler.enemyObjectManager = enemyObjectManager;
-        _battleUIHandler.EnterCombat();
         StartCoroutine(destroySelf());
+        _battleUIHandler.EnterCombat();
+        
 
     }
     IEnumerator destroySelf() {
         yield return new WaitForSecondsRealtime(2);
-       // Destroy(this);
+        Destroy(gameObject);
     }
 
 

@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   OverworldSprite: {fileID: 0}
   Name: Hector
-  damage: 20
-  health: 400
+  damage: 25
+  health: 450
   Sprite: {fileID: 8184862106366864440, guid: 3f0f085de39b3ee4a844e64adb75565d, type: 3}
   Animcontroller: {fileID: 9100000, guid: 69c8ca3638c75394eb1fbf5eaf8bde46, type: 2}
   BattleAnimeController: {fileID: 0}
