@@ -172,7 +172,7 @@ public class _DialogueHandler : MonoBehaviour {
         }
 
         // Handle interaction
-        if (Input.GetKeyDown(KeyCode.E) && overworldUI.activeSelf) {
+        if (Input.GetKeyDown(KeyCode.E) && overworldUI.activeSelf && !player.GetComponent<Player>().isPlayerInControl && player.GetComponent<Player>().canControlCam) {
             if (currentNPC.CompareTag("Interactable")) {
                 if (currentSmallDialogueBox == null) {
                     currentSmallDialogueBox = Instantiate(
