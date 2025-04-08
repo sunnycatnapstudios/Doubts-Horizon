@@ -86,7 +86,7 @@ public class SignDialogPrior : MonoBehaviour
             GameStatsManager.Instance._dialogueHandler.OpenDialogueWith(nextDialog);
         } else {
             GameStatsManager.Instance._dialogueHandler.isCloseable = true;
-
         }
+        NPCDialogueHandler.afterDialogue = AfterDialogue;
     }
 }

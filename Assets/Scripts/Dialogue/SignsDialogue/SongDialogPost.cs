@@ -82,17 +82,11 @@ public int signDialogID;    // To pick which one to play
 
 
         NPCDialogueHandler.dialogueContents = _dialogueLines;
-        NPCDialogueHandler.afterDialogue = new Action(AfterDialogue);
+        NPCDialogueHandler.afterDialogue = AfterDialogue;
     }
 
     void AfterDialogue() {
-        // if (nextDialogue) {
-        //     GameStatsManager.Instance._dialogueHandler.isCloseable = false;
-        //     GameStatsManager.Instance._dialogueHandler.OpenDialogueWith(nextDialogue);
-        // } else {
-        //     GameStatsManager.Instance._dialogueHandler.isCloseable = true;
-        // }
         GameStatsManager.Instance._dialogueHandler.isCloseable = true;
-        NPCDialogueHandler.ResetDialogue();
+        NPCDialogueHandler.afterDialogue = AfterDialogue;
     }
 }
