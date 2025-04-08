@@ -197,7 +197,9 @@ public class _DialogueHandler : MonoBehaviour {
     void UpdateTypewriter() {
         // Set talking sfx to current clip set in dialogBoxHandler, which is determined by attached NPC dialog script
         typeWriter.SetSfxTypingClip(dialogueBoxHandler.SfxTalkingClip);
-        typeWriter.StartTypewriter(dialogueBoxHandler.GetCurrentDialogueLine());
+        string line = dialogueBoxHandler.GetCurrentDialogueLine();
+        Debug.Log($"UpdateTypewriter with {line}");
+        typeWriter.StartTypewriter(line);
         typeWriter.skipTyping = false;
         typeWriter.hasStartedTyping = true;
     }
@@ -236,6 +238,7 @@ public class _DialogueHandler : MonoBehaviour {
                 return;
             }
         } else if (dialogueBoxHandler.CanClose()) {
+            Debug.Log("UpdateDialogueBox and not typing and can close");
             CloseDialogueBox();
             return;
         }

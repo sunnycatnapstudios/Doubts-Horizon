@@ -21,6 +21,7 @@ public class LocksmithUnlockDialogue : MonoBehaviour {
         npcDialogueHandler.SetSfxTalkingClip(audioClips.sfxTalkingBlip);
 
         npcDialogueHandler.dialogueContents = new List<string> {
+            "", // Secret first line which is getting skipped for some reason
             "I've got this, blub!",
         };
     }
