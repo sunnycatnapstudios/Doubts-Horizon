@@ -3,9 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SongDialogPost : MonoBehaviour
-{
-public int signDialogID;    // To pick which one to play
+public class SongDialogPost : MonoBehaviour {
+    public int signDialogID; // To pick which one to play
 
     private DialogueBoxHandler NPCDialogueHandler;
     private List<string> _dialogueLines;

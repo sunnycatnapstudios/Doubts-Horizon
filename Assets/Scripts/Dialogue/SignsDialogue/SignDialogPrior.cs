@@ -3,13 +3,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SignDialogPrior : MonoBehaviour
-{
-    public int signDialogID;    // To pick which one to play
+public class SignDialogPrior : MonoBehaviour {
+    public int signDialogID; // To pick which one to play
 
     private DialogueBoxHandler NPCDialogueHandler;
     private List<string> _dialogueLines;
-    public GameObject nextDialog;     // Assign with me sprite
+    public GameObject nextDialog; // Assign with me sprite
 
     [Serializable]
     private struct AudioClips {
@@ -80,13 +79,14 @@ public class SignDialogPrior : MonoBehaviour
     }
 
     void AfterDialogue() {
-        Debug.Log(nextDialog +"Exist or not?");
+        Debug.Log(nextDialog + "Exist or not?");
         if (nextDialog) {
             GameStatsManager.Instance._dialogueHandler.isCloseable = false;
             GameStatsManager.Instance._dialogueHandler.OpenDialogueWith(nextDialog);
         } else {
             GameStatsManager.Instance._dialogueHandler.isCloseable = true;
         }
+
         NPCDialogueHandler.afterDialogue = AfterDialogue;
     }
 }

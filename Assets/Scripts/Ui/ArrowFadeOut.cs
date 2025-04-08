@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ArrowFadeOut : MonoBehaviour
-{
+public class ArrowFadeOut : MonoBehaviour {
     public Transform playerTransform;
 
     public float fadeStartDistance = 5.0f;
@@ -16,25 +15,21 @@ public class ArrowFadeOut : MonoBehaviour
     private float targetAlpha = 1.0f;
     private float currentAlpha = 1.0f;
 
-    void Start()
-    {
+    void Start() {
         // Try to get the appropriate renderer component
         spriteRenderer = GetComponent<SpriteRenderer>();
 
-        if (playerTransform == null)
-        {
+        if (playerTransform == null) {
             // Attempt to find the player in the scene
             playerTransform = GameObject.FindGameObjectWithTag("Player")?.transform;
 
-            if (playerTransform == null)
-            {
+            if (playerTransform == null) {
                 Debug.LogError("ArrowFadeOut: No player transform assigned and no GameObject with 'Player' tag found");
             }
         }
     }
 
-    void Update()
-    {
+    void Update() {
         if (playerTransform == null)
             return;
 
@@ -42,16 +37,11 @@ public class ArrowFadeOut : MonoBehaviour
         float distanceToPlayer = Vector3.Distance(transform.position, playerTransform.position);
 
         // Calculate target alpha based on distance
-        if (distanceToPlayer <= fadeEndDistance)
-        {
+        if (distanceToPlayer <= fadeEndDistance) {
             targetAlpha = 0f;
-        }
-        else if (distanceToPlayer >= fadeStartDistance)
-        {
+        } else if (distanceToPlayer >= fadeStartDistance) {
             targetAlpha = 1f;
-        }
-        else
-        {
+        } else {
             // Smoothly interpolate alpha between start and end distances
             float t = (distanceToPlayer - fadeEndDistance) / (fadeStartDistance - fadeEndDistance);
             targetAlpha = Mathf.Clamp01(t);
@@ -61,8 +51,7 @@ public class ArrowFadeOut : MonoBehaviour
         currentAlpha = Mathf.Lerp(currentAlpha, targetAlpha, Time.deltaTime * fadeSpeed);
 
         // Apply alpha to the appropriate component
-        if (spriteRenderer != null)
-        {
+        if (spriteRenderer != null) {
             Color color = spriteRenderer.color;
             color.a = currentAlpha;
             spriteRenderer.color = color;
@@ -73,4 +62,3 @@ public class ArrowFadeOut : MonoBehaviour
         transform.rotation = Quaternion.Euler(0, 0, rotation);
     }
 }
-
