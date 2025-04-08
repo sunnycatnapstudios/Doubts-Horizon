@@ -104,6 +104,7 @@ public class CampfireExitDialogue : MonoBehaviour {
         GameStatsManager.Instance._dialogueHandler.CloseDialogueBox();  // Just in case
     }
     private IEnumerator endFireplaceScene() {
+        player.isPlayerInControl = true;
 
         StartCoroutine(GameObject.FindGameObjectWithTag("BlackFadeIn").gameObject.GetComponent<FadeToBlack>().fadetoblack());
         yield return new WaitForSecondsRealtime(1f);
@@ -119,6 +120,7 @@ public class CampfireExitDialogue : MonoBehaviour {
         yield return new WaitForSecondsRealtime(1.5f);
 
         StartCoroutine(GameObject.FindGameObjectWithTag("BlackFadeIn").gameObject.GetComponent<FadeToBlack>().fadeout());
+        player.isPlayerInControl = false;
 
         //FireplaceTransition.GetComponent<fireplace>().enabled= false;
 

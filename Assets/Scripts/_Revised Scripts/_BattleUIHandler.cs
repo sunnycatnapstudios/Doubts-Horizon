@@ -809,6 +809,7 @@ public class _BattleUIHandler : MonoBehaviour
                     playerParty.Remove(currentDefender);
 
                     if (currentDefender.Name != "Me") {
+                        AudioManager.Instance.PlaySound(audioClips.sfxBell);
                         battleTransition.teammMateDeath(partyManager.currentPartyMembers.Find(x => x.Name == currentDefender.Name));
                     }
 
@@ -878,6 +879,7 @@ public class _BattleUIHandler : MonoBehaviour
 
                         if (person.Name != "Me") {
                             battleTransition.teammMateDeath(partyManager.currentPartyMembers.Find(x => x.Name == person.Name));
+                            AudioManager.Instance.PlaySound(audioClips.sfxBell);
                         }
                         // Remove from party manager after transition
                         partyManager.removeFromPartyByName(person.Name);

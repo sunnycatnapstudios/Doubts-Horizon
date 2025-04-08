@@ -13,6 +13,7 @@ public class Door : MonoBehaviour {
         public AudioClip sfxOpen;
         public AudioClip sfxClose;
     }
+    public Survivor locksmith;
 
     [SerializeField] private AudioClips audioClips;
     bool interactable = false;
@@ -51,7 +52,14 @@ public class Door : MonoBehaviour {
 
     void Interact() {
         if (isLocked) {
-            if (player.inventory.hasItemByName("Key")) {
+
+            // Locksmith
+            if (GameStatsManager.Instance.partyManager.currentPartyMembers.Contains(locksmith)) {
+                GameObject locksmithUnlock = gameObject.transform.GetChild(0).gameObject;
+                Debug.Log(locksmithUnlock.name);
+                GameStatsManager.Instance._dialogueHandler.OpenDialogueWith(locksmithUnlock);
+                Unlock();
+            } else if (player.inventory.hasItemByName("Key")) {
                 Unlock();
                 player.inventory.removeItemByName("Key");
             } else {
