@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// Originally used for just everything, but I wanted to chain dialog to switch sprites instead
 public class SignDialog : MonoBehaviour {
     public int signDialogID;    // To pick which one to play
 
