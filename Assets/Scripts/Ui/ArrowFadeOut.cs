@@ -68,5 +68,9 @@ public class ArrowFadeOut : MonoBehaviour
             spriteRenderer.color = color;
         }
     }
+
+    public void RotateArrow(float rotation) {
+        transform.rotation = Quaternion.Euler(0, 0, rotation);
+    }
 }
 
