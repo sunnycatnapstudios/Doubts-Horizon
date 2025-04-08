@@ -27,6 +27,8 @@ public class FishManJoinDialogue : MonoBehaviour {
             partyManager.AddToParty(survivor);
             Destroy(gameObject);
             GameStatsManager.Instance._dialogueHandler.CloseDialogueBox();
+            Inventory inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
+            inventory.removeItemByName("Fishbowl");
         };
         dialogueInputHandler.AddDialogueChoice(takeMeTag, takeMe);
 
@@ -42,8 +44,13 @@ public class FishManJoinDialogue : MonoBehaviour {
     }
 
     void BeforeDialogue() {
+        Debug.Log("fish beforedialogue");
         Inventory inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
+                foreach (string slot in inventory.inventory.Keys) {
+                    Debug.Log(slot);
+                }
         if (inventory.hasItemByName("Fishbowl")) {
+            Debug.Log("detected bowl");
             npcDialogueHandler.dialogueContents = new List<string> {
                 "Blub! That bowl",
                 "It is exactly what I need blub!",
@@ -53,15 +60,15 @@ public class FishManJoinDialogue : MonoBehaviour {
         } else {
             npcDialogueHandler.dialogueContents = new List<string> {
                 "Blub... I used to be a locksmith y'know, blub...",
-                "Now I can't even blubbing leave the riverside or else I will drown-",
-                "you know what I mean blub.",
+                "Now I can't even blubbing leave the riverside or else I will drown-{pause} you know what I mean blub.",
                 "What can you do though.. I'm a survivor, blub!",
             };
         }
-        Debug.Log("fish beforedialogue1");
+        npcDialogueHandler.beforeDialogue = BeforeDialogue;
     }
 
     void AfterDialogue() {
         Debug.Log("Blub... Completed dialogue.");
+        npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
     }
 }
