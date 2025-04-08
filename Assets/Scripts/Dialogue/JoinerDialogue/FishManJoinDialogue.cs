@@ -46,9 +46,6 @@ public class FishManJoinDialogue : MonoBehaviour {
     void BeforeDialogue() {
         Debug.Log("fish beforedialogue");
         Inventory inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
-                foreach (string slot in inventory.inventory.Keys) {
-                    Debug.Log(slot);
-                }
         if (inventory.hasItemByName("Fishbowl")) {
             Debug.Log("detected bowl");
             npcDialogueHandler.dialogueContents = new List<string> {
