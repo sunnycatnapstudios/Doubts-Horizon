@@ -25,6 +25,7 @@ MonoBehaviour:
   inventoryDialogues: {fileID: 6894140492303392861, guid: 7c50e87acb1109048966bedb87e4d2e7,
     type: 3}
   OverworldSprite: {fileID: 21300000, guid: dda27ad77a20fc44e98c26a311d50163, type: 3}
+  talkingSfx: {fileID: 8300000, guid: 6a45d166cfd29cf4c99410d1625a4cd4, type: 3}
   unKickable: 0
   enteringFireDialogue: 
   Animcontroller: {fileID: 9100000, guid: 30c540004e812f141b5067d399011421, type: 2}

@@ -18,10 +18,12 @@ MonoBehaviour:
   deathDialogue:
   - Technically the player should
   - never see these lines
+  starvedDialogue: []
   isCombatant: 1
   inventoryDialogues: {fileID: -381307989238394630, guid: d861617506f94ac4287d6cf758f76951,
     type: 3}
   OverworldSprite: {fileID: 21300000, guid: 69fdd4830be235a429e1652197a4aeb0, type: 3}
+  talkingSfx: {fileID: 8300000, guid: 28c78a651100df1cea783ae402a74437, type: 3}
   unKickable: 1
   enteringFireDialogue: The wilderness is grueling....
   Animcontroller: {fileID: 9100000, guid: 9b454cd6a9bc678428b46c5d51ed0f67, type: 2}

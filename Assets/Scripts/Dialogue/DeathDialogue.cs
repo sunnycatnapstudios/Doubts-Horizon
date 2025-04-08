@@ -37,6 +37,9 @@ public class DeathDialogue : MonoBehaviour
     }
     void Start() {
         NPCDialogueHandler = GetComponent<DialogueBoxHandler>();
+        if (audioClips.sfxTalkingBlip == null) {
+            audioClips.sfxTalkingBlip = _survivor.GetTalkingSfx();
+        }
         NPCDialogueHandler.SetSfxTalkingClip(audioClips.sfxTalkingBlip);
 
         NPCDialogueHandler.dialogueContents = dialogueLines;
@@ -57,7 +60,7 @@ public class DeathDialogue : MonoBehaviour
 
     }
     void AfterDialogue() {
-        
+
 
         GameStatsManager.Instance._dialogueHandler.CloseDialogueBox();
         StartCoroutine(transition.closeTeammateDeathScreen());

@@ -31,6 +31,8 @@ public class Survivor : ScriptableObject {
 
     [SerializeField] public Sprite OverworldSprite;
 
+    [SerializeField] public AudioClip talkingSfx;
+
     [SerializeField] private bool unKickable;
     private bool Hungry = false;
 
@@ -104,6 +106,10 @@ public class Survivor : ScriptableObject {
 
     public Sprite GetSprite() {
         return Sprite;
+    }
+
+    public AudioClip GetTalkingSfx() {
+        return talkingSfx;
     }
 
     public override string ToString() {
