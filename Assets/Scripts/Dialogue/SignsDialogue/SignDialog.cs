@@ -36,7 +36,9 @@ public class SignDialog : MonoBehaviour {
                 break;
             case 3:
                 _dialogueLines = new List<string> {
-                    ">2km - lea_ing d___b_ _or__on\n>1.8k_ - hi_hw__ ___....."
+                    ">2km - lea_ing d___b_ _or__on\n>1.8k_ - hi_hw__ ___",
+                    "*Something* must of torn off the end of this sign. " +
+                    "I have a hunch to who the culprit may be...\n>looks behind you ..."
                 };
                 break;
             case 4:
