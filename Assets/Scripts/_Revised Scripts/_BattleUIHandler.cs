@@ -242,6 +242,7 @@ public class _BattleUIHandler : MonoBehaviour
         defendIndicator.anchoredPosition = new Vector2(-2000, 48);
         currentDefender = null;
         battleOrder.Clear();
+        currentTurnIndex = 0; //how did we forget this sadge
 
         //CharacterStats player = gameStatsManager.playerStats;
 
@@ -819,9 +820,30 @@ public class _BattleUIHandler : MonoBehaviour
             }
             else // No defender, target takes full damage
             {
-                target.currentHealth -= enemyDamage;
-                partySlotHandler.MoveToActivePlayer(target, true);
-                Debug.Log($"{enemy.Name} attacks {target.Name} for {enemyDamage} damage!");
+                if (enemyStats.Name == "Hector") {
+                    int rngAttack = Random.Range(0, playerParty.Count);
+                    if (rngAttack > 1) {
+                        foreach(CharacterStats member in playerParty) {
+                            member.currentHealth -= enemyDamage / 2;
+                            partySlotHandler.MoveToActivePlayer(member, true);
+
+                            Debug.Log($"{enemy.Name} attacks all for {enemyDamage/2} damage!");
+                            battleExplanation.text = "Hector hits all party members!";
+                        }
+
+                    } else {
+                        target.currentHealth -= enemyDamage;
+                        partySlotHandler.MoveToActivePlayer(target, true);
+                        Debug.Log($"{enemy.Name} attacks {target.Name} for {enemyDamage} damage!");
+
+                    }
+                } else {
+                    target.currentHealth -= enemyDamage;
+                    partySlotHandler.MoveToActivePlayer(target, true);
+                    Debug.Log($"{enemy.Name} attacks {target.Name} for {enemyDamage} damage!");
+
+                }
+               
 
                 yield return new WaitForSecondsRealtime(.2f);
 
@@ -835,32 +857,39 @@ public class _BattleUIHandler : MonoBehaviour
                         }
                     }
                     }
+
                 }
+
 
             // Check if target is defeated
-            if (target.currentHealth <= 0 && !defenderWasAttacked)
-            {
-                Debug.Log($"Target {target.Name} has been defeated!");
-                // Remove from turn indicator
-                int indicatorIndex = battleOrder.IndexOf(target);
-                turnIndicator.ClearCharAtIndexIndicator(indicatorIndex);
+            if (!defenderWasAttacked) {
+                foreach (CharacterStats person in new List<CharacterStats>(playerParty)) {
 
-                // Remove from other lists
-                defeatedInCombat.Add(target.Name);
-                battleOrder.Remove(target);
-                playerParty.Remove(target);
+                    if (person.currentHealth <= 0) {
+                        Debug.Log($"Target {person.Name} has been defeated!");
+                        // Remove from turn indicator
+                        int indicatorIndex = battleOrder.IndexOf(target);
+                        turnIndicator.ClearCharAtIndexIndicator(indicatorIndex);
 
-                if(target.Name != "Me") {
-                    battleTransition.teammMateDeath(partyManager.currentPartyMembers.Find(x => x.Name == target.Name));
+                        // Remove from other lists
+                        defeatedInCombat.Add(person.Name);
+                        battleOrder.Remove(person);
+                        playerParty.Remove(person);
+
+                        if (person.Name != "Me") {
+                            battleTransition.teammMateDeath(partyManager.currentPartyMembers.Find(x => x.Name == person.Name));
+                        }
+                        // Remove from party manager after transition
+                        partyManager.removeFromPartyByName(person.Name);
+                        partySlotHandler.UpdateSlots();
+                    }
                 }
-                // Remove from party manager after transition
-                partyManager.removeFromPartyByName(target.Name);
-                partySlotHandler.UpdateSlots();
             }
 
-            // Reset defender at the end of the turn
-            if (currentDefender != null) StartCoroutine(DestroyDefend());
+                // Reset defender at the end of the turn
+                if (currentDefender != null) StartCoroutine(DestroyDefend());
             currentDefender = null;
+            currentTurnIndex = currentTurnIndex%battleOrder.Count;
             EnemyIsAttacking(enemyStats.Name);
         }
         yield return new WaitForSecondsRealtime(.6f);
