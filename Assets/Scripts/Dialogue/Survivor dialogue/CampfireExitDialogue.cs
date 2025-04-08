@@ -16,8 +16,6 @@ public class CampfireExitDialogue : MonoBehaviour {
     public List<GameObject> transitions;
     //public GameObject FireplaceTransition;
     public List<GameObject> objects;
-    [SerializeField] public Transform pointerTarget;
-    public float pointerRotation;
     private BattleTransition _battleTransition;
     bool hasFinished = false;
     List<Survivor> kicked;
@@ -119,11 +117,6 @@ public class CampfireExitDialogue : MonoBehaviour {
 
         }
         kickUnfed();
-
-        // TODO move the pointer to the exit
-        floatingPointer.SetActive(true);
-        floatingPointer.GetComponent<ArrowFadeOut>().RotateArrow(pointerRotation);
-        floatingPointer.transform.position = pointerTarget.position;
 
         yield return new WaitForSecondsRealtime(1.5f);
 
