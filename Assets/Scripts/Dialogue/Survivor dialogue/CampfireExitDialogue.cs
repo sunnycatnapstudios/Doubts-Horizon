@@ -7,7 +7,6 @@ public class CampfireExitDialogue : MonoBehaviour {
     private DialogueInputHandler dialogueInputHandler;
     private DialogueBoxHandler npcDialogueHandler;
     private Player player;
-    public Vector3 location;
 
     private PartyManager manager;
     [SerializeField] private Sprite highlightSprite;
@@ -17,10 +16,12 @@ public class CampfireExitDialogue : MonoBehaviour {
     public List<GameObject> transitions;
     //public GameObject FireplaceTransition;
     public List<GameObject> objects;
+    [SerializeField] public Transform pointerTarget;
     private BattleTransition _battleTransition;
     bool hasFinished = false;
     List<Survivor> kicked;
 
+    private GameObject floatingPointer;
     [Serializable]
     private struct AudioClips {
         public AudioClip sfxTalkingBlip;
@@ -37,6 +38,7 @@ public class CampfireExitDialogue : MonoBehaviour {
         _battleTransition = GameObject.FindGameObjectWithTag("Out Transition").GetComponent<BattleTransition>();
         levelTransition = GetComponent<LevelTransition>();
         audioTransition = GetComponent<AudioTransition>();
+        floatingPointer = GameObject.FindGameObjectWithTag("Pointer");
 
         npcDialogueHandler.SetSfxTalkingClip(audioClips.sfxTalkingBlip);
 
@@ -116,6 +118,12 @@ public class CampfireExitDialogue : MonoBehaviour {
 
         }
         kickUnfed();
+
+        // TODO move the pointer to the exit
+        floatingPointer.SetActive(true);
+        floatingPointer.transform.rotation = Quaternion.Euler(0, 0, 180);
+        floatingPointer.transform.position = pointerTarget.position;
+
         yield return new WaitForSecondsRealtime(1.5f);
 
         StartCoroutine(GameObject.FindGameObjectWithTag("BlackFadeIn").gameObject.GetComponent<FadeToBlack>().fadeout());
