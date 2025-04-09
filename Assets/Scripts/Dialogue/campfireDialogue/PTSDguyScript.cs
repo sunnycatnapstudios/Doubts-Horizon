@@ -10,12 +10,17 @@ public class PTSDguyScript : MonoBehaviour {
     private bool fedOrNot;
     private Inventory inventory;
     private GameStatsManager statsManager;
+    public AudioClip sfxTalkingClip;
 
     void Start() {
         dialogueInputHandler = GameObject.FindGameObjectWithTag("Dialogue Text").GetComponent<DialogueInputHandler>();
         npcDialogueHandler = GetComponent<DialogueBoxHandler>();
         inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
         statsManager = GameStatsManager.Instance;
+        if (sfxTalkingClip == null) {
+            sfxTalkingClip = survivor.GetTalkingSfx();
+        }
+        npcDialogueHandler.SetSfxTalkingClip(sfxTalkingClip);
 
         string Feedme = "feed soldier" + gameObject.GetHashCode().ToString();
         Action takeMe = () => {
@@ -28,12 +33,12 @@ public class PTSDguyScript : MonoBehaviour {
                 inventory.removeItemByName("Ration");
                 statsManager.interactedWithCampfireNPC();
                 statsManager.updateBedStatus();
-               
+
                 npcDialogueHandler.dialogueContents.Add($"You have {inventory.getCountofItem("Ration")} rations left");
                 npcDialogueHandler.lastLineDisplayed = false;
                 npcDialogueHandler.currentLineIndex += 1;
                 npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
-                
+
             } else {
                 statsManager.interactedWithCampfireNPC();
                 statsManager.updateBedStatus();
@@ -70,13 +75,13 @@ public class PTSDguyScript : MonoBehaviour {
     void AfterDialogue() {
         Debug.Log("Completed dialogue.");
         if (fedOrNot) {
-            npcDialogueHandler.dialogueContents = new List<string> { 
-                "T-thank you... For a moment, I forgot... I was back there again..." 
+            npcDialogueHandler.dialogueContents = new List<string> {
+                "T-thank you... For a moment, I forgot... I was back there again..."
             };
         } else {
-            npcDialogueHandler.dialogueContents = new List<string> { 
-                "It's fine I didn't deserve it anyway", 
-                "Time to get going..." 
+            npcDialogueHandler.dialogueContents = new List<string> {
+                "It's fine I didn't deserve it anyway",
+                "Time to get going..."
             };
         }
     }

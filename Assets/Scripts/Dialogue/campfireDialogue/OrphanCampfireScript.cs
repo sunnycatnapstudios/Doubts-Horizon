@@ -10,12 +10,17 @@ public class OrphanCampfireScript : MonoBehaviour {
     private bool fedOrNot;
     private Inventory inventory;
     private GameStatsManager statsManager;
+    public AudioClip sfxTalkingClip;
 
     void Start() {
         dialogueInputHandler = GameObject.FindGameObjectWithTag("Dialogue Text").GetComponent<DialogueInputHandler>();
         npcDialogueHandler = GetComponent<DialogueBoxHandler>();
         inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
         statsManager = GameStatsManager.Instance;
+        if (sfxTalkingClip == null) {
+            sfxTalkingClip = survivor.GetTalkingSfx();
+        }
+        npcDialogueHandler.SetSfxTalkingClip(sfxTalkingClip);
 
         string Feedme = "feed orphan" + gameObject.GetHashCode().ToString();
         Action takeMe = () => {
@@ -31,16 +36,16 @@ public class OrphanCampfireScript : MonoBehaviour {
 
                 npcDialogueHandler.lastLineDisplayed = false;
                 npcDialogueHandler.currentLineIndex += 1;
-                npcDialogueHandler.afterDialogue = AfterDialogue;  
+                npcDialogueHandler.afterDialogue = AfterDialogue;
                 npcDialogueHandler.dialogueContents.Add($"You have {inventory.getCountofItem("Ration")} rations left.");
-                
+
             } else {
                 statsManager.interactedWithCampfireNPC();
                 statsManager.updateBedStatus();
 
                 npcDialogueHandler.lastLineDisplayed = false;
                 npcDialogueHandler.currentLineIndex += 1;
-                npcDialogueHandler.afterDialogue = AfterDialogue;  
+                npcDialogueHandler.afterDialogue = AfterDialogue;
 
                 npcDialogueHandler.dialogueContents.Add("Oh no, we are out!!");
             }
@@ -58,8 +63,8 @@ public class OrphanCampfireScript : MonoBehaviour {
 
             npcDialogueHandler.lastLineDisplayed = false;
             npcDialogueHandler.currentLineIndex += 1;
-            npcDialogueHandler.afterDialogue = AfterDialogue; 
-            
+            npcDialogueHandler.afterDialogue = AfterDialogue;
+
             GameStatsManager.Instance._dialogueHandler.CloseDialogueBox();
         };
         dialogueInputHandler.AddDialogueChoice(orNotTag, orNot);
