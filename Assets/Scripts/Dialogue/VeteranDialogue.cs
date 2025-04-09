@@ -18,7 +18,7 @@ public class VeteranDialogue : MonoBehaviour {
     void Start() {
         dialogueInputHandler = GameObject.FindGameObjectWithTag("Dialogue Text").GetComponent<DialogueInputHandler>();
         npcDialogueHandler = GetComponent<DialogueBoxHandler>();
-        if (audioClips.sfxTalkingBlip == null) {
+        if (audioClips.sfxTalkingBlip == null && survivor != null) {
             audioClips.sfxTalkingBlip = survivor.GetTalkingSfx();
         }
         npcDialogueHandler.SetSfxTalkingClip(audioClips.sfxTalkingBlip);

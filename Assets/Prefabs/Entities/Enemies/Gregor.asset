@@ -15,7 +15,7 @@ MonoBehaviour:
   OverworldSprite: {fileID: 0}
   Name: Gregor
   damage: 12
-  health: 300
+  health: 150
   Sprite: {fileID: 0}
   Animcontroller: {fileID: 9100000, guid: 297785522440ed54e8ef5b4ef595641d, type: 2}
   BattleAnimeController: {fileID: 9100000, guid: cca09b40de9370243a1cbf959a8a2562,

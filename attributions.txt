@@ -1,3 +1,4 @@
+# Pixel Art
 Castle Tiles for RPGs: https://opengameart.org/content/castle-tiles-for-rpgs
 Post-Apocalyptic 16x16 Tileset: https://opengameart.org/content/post-apocalyptic-16x16-tileset-update1 (CC-BY-SA 3.0)
 City Icons: https://opengameart.org/content/city-icons
@@ -16,6 +17,9 @@ LPC Chicken (Rework): https://opengameart.org/content/lpc-chicken-rework
 16x16 Indoor RPG Tileset (The Baseline): https://opengameart.org/content/16x16-indoor-rpg-tileset-the-baseline
 Signs 1: https://opengameart.org/content/lpc-signposts-graves-line-cloths-and-scare-crow
 Signs 2: https://opengameart.org/content/cc0-sign-icons
+Boulder: https://opengameart.org/content/boulder
+Meter's running for taxi easter egg: https://mrstrqfe.itch.io/meters-running
+Unquenchable team for ember easter egg: https://genericconfluent.itch.io/unquenchable
 
 # Audio
 ## Sample Packs (various online soureces):
