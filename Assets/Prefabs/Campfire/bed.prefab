@@ -99,13 +99,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d833dced7cd8cc4d9279e290f3477cf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  location: {x: 0, y: 0, z: 0}
   highlightSprite: {fileID: 21300000, guid: af7dbcfc8f2fb6d409ad89a556d18506, type: 3}
   normalSprite: {fileID: 21300000, guid: d0a1dba88e926d74f8fa846bbcec4ee8, type: 3}
   transitions: []
   objects: []
   audioClips:
-    sfxTalkingBlip: {fileID: 8300000, guid: 28c78a651100df1cea783ae402a74437, type: 3}
+    sfxTalkingBlip: {fileID: 8300000, guid: 423016f5bd75bf37aab19ad5e37cc75c, type: 3}
 --- !u!114 &3975173022313475548
 MonoBehaviour:
   m_ObjectHideFlags: 0
