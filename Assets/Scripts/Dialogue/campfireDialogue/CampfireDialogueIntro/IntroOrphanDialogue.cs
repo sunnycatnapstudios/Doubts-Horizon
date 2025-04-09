@@ -25,7 +25,7 @@ public class IntroOrphanDialogue : MonoBehaviour
         npcDialogueHandler = GetComponent<DialogueBoxHandler>();
         inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
         statsManager = GameStatsManager.Instance;
-        if (audioClips.sfxTalkingBlip == null) {
+        if (audioClips.sfxTalkingBlip == null && survivor != null) {
             audioClips.sfxTalkingBlip = survivor.GetTalkingSfx();
         }
         npcDialogueHandler.SetSfxTalkingClip(audioClips.sfxTalkingBlip);
