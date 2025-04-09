@@ -212,6 +212,8 @@ public class _DialogueHandler : MonoBehaviour {
             var toCall = dialogueBoxHandler.beforeDialogue;
             dialogueBoxHandler.beforeDialogue = null;
             toCall();
+        } else {
+            Debug.Log("Before Dialogue is null");
         }
 
         isDialogueActive = true;

@@ -39,10 +39,28 @@ public class endingDialogue : MonoBehaviour {
         npcDialogueHandler.SetSfxTalkingClip(audioClips.sfxTalkingBlip);
 
         npcDialogueHandler.dialogueContents = new List<string> {
-            "lets see where youre gonna go"
+            "The sanctuary has been overrun..",
         };
 
         npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
+        npcDialogueHandler.beforeDialogue = BeforeDialogue;
+    }
+
+    void BeforeDialogue() {
+        Debug.Log("EndingDialogue BeforeDialogue");
+        if (GameStatsManager.Instance.partyManager.currentPartyMembers.Count > 2) {
+            npcDialogueHandler.dialogueContents = new List<string> {
+                "The sanctuary has been overrun..",
+                "It will be a long road..",
+                "But we can rebuild!",
+            };
+        } else {
+            npcDialogueHandler.dialogueContents = new List<string> {
+                "The sanctuary has been overrun..",
+                "There is noone to rebuild..",
+                "I am alone.",
+            };
+        }
     }
 
     void AfterDialogue() {
