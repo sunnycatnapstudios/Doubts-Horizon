@@ -821,6 +821,7 @@ public class _BattleUIHandler : MonoBehaviour
             }
             else // No defender, target takes full damage
             {
+                bool splashhit = false;
                 if (enemyStats.Name == "Hector") {
                     int rngAttack = Random.Range(0, playerParty.Count);
                     if (rngAttack > 1) {
@@ -831,6 +832,7 @@ public class _BattleUIHandler : MonoBehaviour
                             Debug.Log($"{enemy.Name} attacks all for {enemyDamage/2} damage!");
                             battleExplanation.text = "Hector hits all party members!";
                         }
+                        splashhit = true;
 
                     } else {
                         target.currentHealth -= enemyDamage;
@@ -848,18 +850,33 @@ public class _BattleUIHandler : MonoBehaviour
 
                 yield return new WaitForSecondsRealtime(.2f);
 
-                foreach (PartySlot mem in partySlotHandler.partySlots)
-                {
-                    if (mem.isCharacter) {
-                        if (mem.playerStats.Name == target.Name) {
-                            mem.ShowHealthChange();
-                            ShowFloatingText(enemyDamage, Color.red, mem.transform.position, false);
-                            StartCoroutine(mem.JutterHealthBar(0.2f, 10f));
+
+                if (splashhit) {
+                    foreach (PartySlot mem in partySlotHandler.partySlots) {
+                        if (mem.isCharacter) {
+                            
+                                mem.ShowHealthChange();
+                                ShowFloatingText(enemyDamage, Color.red, mem.transform.position, false);
+                                StartCoroutine(mem.JutterHealthBar(0.2f, 10f));
+                            
                         }
                     }
-                    }
 
+
+                } else {
+               
+                    foreach (PartySlot mem in partySlotHandler.partySlots) {
+                        if (mem.isCharacter) {
+                            if (mem.playerStats.Name == target.Name) {
+                                mem.ShowHealthChange();
+                                ShowFloatingText(enemyDamage, Color.red, mem.transform.position, false);
+                                StartCoroutine(mem.JutterHealthBar(0.2f, 10f));
+                            }
+                        }
+                    }
                 }
+
+            }
 
 
             // Check if target is defeated
@@ -869,7 +886,7 @@ public class _BattleUIHandler : MonoBehaviour
                     if (person.currentHealth <= 0) {
                         Debug.Log($"Target {person.Name} has been defeated!");
                         // Remove from turn indicator
-                        int indicatorIndex = battleOrder.IndexOf(target);
+                        int indicatorIndex = battleOrder.IndexOf(person);
                         turnIndicator.ClearCharAtIndexIndicator(indicatorIndex);
 
                         // Remove from other lists
@@ -1089,6 +1106,12 @@ public class _BattleUIHandler : MonoBehaviour
             AudioManager.Instance.PlayUiSound(audioClips.uiDrawer);
             return;
         }
+        Debug.Log("Hey i get here");
+        if (enemyStats.Name == "Hector") {
+            Debug.Log("Hey i get here");
+            battleExplanation.text = "You cannot run";
+            return;
+        }
 
         escapePrompt.OpenPrompt();
         if (!escapePressedOnce)
@@ -1126,6 +1149,7 @@ public class _BattleUIHandler : MonoBehaviour
     }
     public void TryEscape() {
         roll = Random.Range(0, 100);
+
 
         Debug.Log($"Chance of escape: {escapeChance}%");
 
@@ -1167,6 +1191,9 @@ public class _BattleUIHandler : MonoBehaviour
             }
         }
         escapeChance = (int)(35 + (((totalMaxHealth-totalCurrentHealth)/totalMaxHealth)*65));
+        if (enemyStats.Name == "Hector") {
+            escapeChance = -99999;
+        }
     }
 
     private IEnumerator WaitForCloseThenToggle(GameObject targetContent, bool state)
