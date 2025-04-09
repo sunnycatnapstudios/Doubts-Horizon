@@ -16,6 +16,14 @@ public class Boss : MonoBehaviour
     private Player player;
     private PartyManager manager;
 
+    [Serializable]
+    private struct AudioClips {
+        public AudioClip sfxTalkingBlip;
+        public AudioClip musicBossBattle;
+    }
+
+    [SerializeField] private AudioClips audioClips;
+
     void Start() {
         gameStatsManager = GameStatsManager.Instance;
         _battleUIHandler = GameStatsManager.Instance._battleUIHandler;
@@ -28,8 +36,9 @@ public class Boss : MonoBehaviour
             "TERMINATE ALL LIFEFORMS!!!"
 
         };
+        dialogueHandler.SetSfxTalkingClip(audioClips.sfxTalkingBlip);
         dialogueHandler.afterDialogue =new Action(AfterDialogue);
-        
+
     }
 
     void AfterDialogue() {
@@ -37,8 +46,9 @@ public class Boss : MonoBehaviour
         _battleUIHandler.curEnemy = gameObject;
         _battleUIHandler.enemyObjectManager = enemyObjectManager;
         StartCoroutine(destroySelf());
+        _battleUIHandler.SetBossBattleMusic(audioClips.musicBossBattle);
         _battleUIHandler.EnterCombat();
-        
+
 
     }
     IEnumerator destroySelf() {
