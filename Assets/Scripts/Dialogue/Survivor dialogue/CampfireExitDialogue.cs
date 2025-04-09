@@ -75,10 +75,8 @@ public class CampfireExitDialogue : MonoBehaviour {
 
 
         npcDialogueHandler.dialogueContents = new List<string> {
-            "All people not fed will not survive to the next morning.",
-            "If you do not leave a ration for yourself it will negatively affect your health.",
-            "Are you sure you're ready to leave?",
-            $"<link=\"{takeMeTag}\"><b><#d4af37>Click</color></b></link> if youre ready to go back or press E to Stay"
+            "Have you fed everyone that you want to?\nSurvivors might not stick around on an empty stomach.",
+            $"<link=\"{takeMeTag}\"><b><#d4af37>Click here</color></b></link> if you're ready to go to sleep or press E if not."
         };
 
         //npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
