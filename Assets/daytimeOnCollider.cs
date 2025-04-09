@@ -23,13 +23,15 @@ public class daytimeOnCollider : MonoBehaviour
 
 
    void OnTriggerEnter2D(Collider2D other) {
+        Debug.Log("HEERRREEE");
         if (other.CompareTag(tagTarget)) {
             if (player == null) {
 
                 GameObject playerObject = other.gameObject;
                 player = other.gameObject.GetComponent<Player>();
             }
-            GameStatsManager.Instance.nightFilter.SetActive(true);
+            GameStatsManager.Instance.nightFilter.SetActive(false);
+            Debug.Log("HEERRREEE");
         }
 
 
