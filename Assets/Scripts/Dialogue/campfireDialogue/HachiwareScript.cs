@@ -10,13 +10,17 @@ public class HachiwareScript : MonoBehaviour {
     private bool fedOrNot;
     private Inventory inventory;
     private GameStatsManager statsManager;
-
+    public AudioClip sfxTalkingClip;
 
     void Start() {
         dialogueInputHandler = GameObject.FindGameObjectWithTag("Dialogue Text").GetComponent<DialogueInputHandler>();
         npcDialogueHandler = GetComponent<DialogueBoxHandler>();
         inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
         statsManager = GameStatsManager.Instance;
+        if (sfxTalkingClip == null) {
+            sfxTalkingClip = survivor.GetTalkingSfx();
+        }
+        npcDialogueHandler.SetSfxTalkingClip(sfxTalkingClip);
 
         string Feedme = "feed hachi" + gameObject.GetHashCode().ToString();
         Action takeMe = () => {
@@ -33,12 +37,12 @@ public class HachiwareScript : MonoBehaviour {
                 npcDialogueHandler.lastLineDisplayed = false;
                 npcDialogueHandler.currentLineIndex += 1;
                 npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
-                
+
             } else {
-                
+
                 statsManager.interactedWithCampfireNPC();
                 statsManager.updateBedStatus();
-               
+
                 npcDialogueHandler.dialogueContents.Add($"You dont even have any for yourself");
                 npcDialogueHandler.lastLineDisplayed = false;
                 npcDialogueHandler.currentLineIndex += 1;
