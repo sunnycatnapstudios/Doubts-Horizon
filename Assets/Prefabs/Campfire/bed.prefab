@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 3975173022313475546}
   - component: {fileID: 3975173022313475548}
   - component: {fileID: 713338384753670803}
-  - component: {fileID: 9145081574601465165}
   - component: {fileID: 3975173022313475550}
   - component: {fileID: 952554367783652991}
   m_Layer: 12
@@ -144,27 +143,6 @@ MonoBehaviour:
     sfxEnterTransition: {fileID: 8300000, guid: a2084134c7f44bf9990df0e0e69e8bf3,
       type: 3}
     sfxExitTransition: {fileID: 8300000, guid: 30a48f6110694570b8b46e0f4da417fa, type: 3}
---- !u!114 &9145081574601465165
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3975173022313475544}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7066732721e7a5ab69ffdc014464a31d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  delayBeforeStart: 0
-  crossfadeDuration: 0
-  crossVolume: 1
-  crossMuteMusic: 0
-  crossMuteAmbience: 0
-  audioClips:
-    nextMusicClip: {fileID: 0}
-    nextAmbientClip: {fileID: 0}
-  enableColliderTransition: 1
 --- !u!61 &3975173022313475550
 BoxCollider2D:
   m_ObjectHideFlags: 0
