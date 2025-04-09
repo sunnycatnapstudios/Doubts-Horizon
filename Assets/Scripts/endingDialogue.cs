@@ -5,9 +5,7 @@ using System.Numerics;
 using UnityEngine;
 using static AlertAnim;
 
-public class endingDialogue : MonoBehaviour
-{
-
+public class endingDialogue : MonoBehaviour {
     private readonly string tagTarget = "Player";
     private DialogueInputHandler dialogueInputHandler;
     private DialogueBoxHandler npcDialogueHandler;
@@ -25,16 +23,18 @@ public class endingDialogue : MonoBehaviour
     private struct AudioClips {
         public AudioClip sfxTalkingBlip;
     }
+
     [SerializeField] private AudioClips audioClips;
+
     // Start is called before the first frame update
     void Start() {
         dialogueInputHandler = GameObject.FindGameObjectWithTag("Dialogue Text").GetComponent<DialogueInputHandler>();
         npcDialogueHandler = GetComponent<DialogueBoxHandler>();
         player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-       
+
         //levelTransition = GetComponent<LevelTransition>();
         audioTransition = GetComponent<AudioTransition>();
-       
+
 
         npcDialogueHandler.SetSfxTalkingClip(audioClips.sfxTalkingBlip);
 
@@ -53,7 +53,7 @@ public class endingDialogue : MonoBehaviour
 
         // Just use our built in transition scripts
         GameStatsManager.Instance.EndIntroSequence();
-        
+
         audioTransition.TriggerAudioTransition();
 
         if (GameStatsManager.Instance.partyManager.currentPartyMembers.Count > 2) {
@@ -63,6 +63,7 @@ public class endingDialogue : MonoBehaviour
             StartCoroutine(Badfp.StartFireplaceEvent());
             StartCoroutine(badTransition.PerformLevelTransition());
         }
+
         if (nextDialogue) {
             GameStatsManager.Instance._dialogueHandler.isCloseable = false;
             GameStatsManager.Instance._dialogueHandler.OpenDialogueWith(nextDialogue);
