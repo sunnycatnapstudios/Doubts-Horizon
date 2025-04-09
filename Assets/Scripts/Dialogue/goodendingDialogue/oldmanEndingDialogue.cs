@@ -24,8 +24,8 @@ public class oldmanEndingDialogue : MonoBehaviour {
         statsManager.updateBedStatus();
 
         npcDialogueHandler.dialogueContents = new List<string> {
-            "oldmanEndingDialogue I'm feeling better now... Thank you again for saving me.",
-            "I’ll never forget your kindness."
+            "This was the most scared and the most I have been in my old life.",
+            "Good job in leading us to safety."
         };
 
         npcDialogueHandler.afterDialogue = AfterDialogue;

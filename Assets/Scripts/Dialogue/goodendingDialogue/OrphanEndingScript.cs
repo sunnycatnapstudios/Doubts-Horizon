@@ -24,8 +24,8 @@ public class OrphanEndingScript : MonoBehaviour {
         statsManager.updateBedStatus();
 
         npcDialogueHandler.dialogueContents = new List<string> {
-            "I'm feeling better now... Thank you again for saving me.",
-            "I’ll never forget your kindness."
+            "This place looks really nice!",
+            ":D"
         };
 
         npcDialogueHandler.afterDialogue = AfterDialogue;

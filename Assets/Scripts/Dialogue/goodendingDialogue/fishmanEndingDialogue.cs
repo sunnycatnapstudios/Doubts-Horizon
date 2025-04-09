@@ -24,8 +24,8 @@ public class fishmanEndingDialogue : MonoBehaviour {
         statsManager.updateBedStatus();
 
         npcDialogueHandler.dialogueContents = new List<string> {
-            "fishmanEndingDialogue I'm feeling better now... Thank you again for saving me.",
-            "I’ll never forget your kindness."
+            "BLUB.. I knew you were a leader once I met you!",
+            "Cannot wait to develop - BLUB! - this place."
         };
 
         npcDialogueHandler.afterDialogue = AfterDialogue;

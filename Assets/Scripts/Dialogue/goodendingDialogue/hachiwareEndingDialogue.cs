@@ -24,8 +24,8 @@ public class hachiwareEndingDialogue : MonoBehaviour {
         statsManager.updateBedStatus();
 
         npcDialogueHandler.dialogueContents = new List<string> {
-            "hachiwareEndingDialogue I'm feeling better now... Thank you again for saving me.",
-            "I’ll never forget your kindness."
+            "This was a close call, bud.",
+            "Thank you for this adventure."
         };
 
         npcDialogueHandler.afterDialogue = AfterDialogue;
