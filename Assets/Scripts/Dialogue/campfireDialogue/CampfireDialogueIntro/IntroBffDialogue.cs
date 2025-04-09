@@ -13,13 +13,22 @@ public class IntroBffDialogue : MonoBehaviour
     private GameStatsManager statsManager;
     public GameObject loreDialogueCollider; // INSPECTOR
 
+    [Serializable]
+    private struct AudioClips {
+        public AudioClip sfxTalkingBlip;
+    }
+
+    [SerializeField] private AudioClips audioClips;
 
     void Start() {
         dialogueInputHandler = GameObject.FindGameObjectWithTag("Dialogue Text").GetComponent<DialogueInputHandler>();
         npcDialogueHandler = GetComponent<DialogueBoxHandler>();
         inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
         statsManager = GameStatsManager.Instance;
-
+        if (audioClips.sfxTalkingBlip == null) {
+            audioClips.sfxTalkingBlip = survivor.GetTalkingSfx();
+        }
+        npcDialogueHandler.SetSfxTalkingClip(audioClips.sfxTalkingBlip);
         string Feedme = "IntroFeedHachi";
         Action takeMe = () => {
             Debug.Log("Take me callback.");

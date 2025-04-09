@@ -179,6 +179,7 @@ MonoBehaviour:
   walkAudiCount: 0
   partiSystem: {fileID: 4434343550034611817}
   vcam: {fileID: 0}
+  cameraCollider: {fileID: 0}
   camMax: 10
   camMin: 6
   currentCamSize: 0
@@ -195,7 +196,6 @@ MonoBehaviour:
   isPlayerInControl: 0
   isSneaking: 0
   isSprinting: 0
-  pauseMenu: {fileID: 0}
 --- !u!50 &8129783758635369271
 Rigidbody2D:
   serializedVersion: 4
@@ -392,11 +392,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   inventoryWindow: {fileID: 0}
+  items: []
   test1: {fileID: 0}
   test2: {fileID: 0}
   inventorySize: 10
   audioClips:
-    sfxCloseInventory: {fileID: 0}
+    sfxOpenInventory: {fileID: 8300000, guid: b4039f555a91f4e238eac4e0df62d358, type: 3}
+    sfxCloseInventory: {fileID: 8300000, guid: 4b7bcd91fb6187bbeb1682364c35469a, type: 3}
 --- !u!1001 &1545461077899872922
 PrefabInstance:
   m_ObjectHideFlags: 0
