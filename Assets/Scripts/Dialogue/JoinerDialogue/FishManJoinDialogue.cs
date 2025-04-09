@@ -58,7 +58,7 @@ public class FishManJoinDialogue : MonoBehaviour {
             npcDialogueHandler.dialogueContents = new List<string> {
                 "Blub... I used to be a locksmith y'know, blub...",
                 "Now I can't even blubbing leave the riverside or else I will drown-{pause} you know what I mean blub.",
-                "What can you do though.. I'm a survivor, blub!",
+                "What can you do though.. It's not like there's an object built to let fish survive on land.. blub.",
             };
         }
         npcDialogueHandler.beforeDialogue = BeforeDialogue;

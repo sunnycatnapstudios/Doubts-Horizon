@@ -37,7 +37,7 @@ public class DeathDialogue : MonoBehaviour
     }
     void Start() {
         NPCDialogueHandler = GetComponent<DialogueBoxHandler>();
-        if (audioClips.sfxTalkingBlip == null) {
+        if (audioClips.sfxTalkingBlip == null && _survivor != null) {
             audioClips.sfxTalkingBlip = _survivor.GetTalkingSfx();
         }
         NPCDialogueHandler.SetSfxTalkingClip(audioClips.sfxTalkingBlip);
