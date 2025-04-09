@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 7460660327679847681}
   - component: {fileID: 7460660327679847742}
   - component: {fileID: 5351222907632597802}
+  - component: {fileID: 2160597865604329001}
   m_Layer: 12
   m_Name: Joiner
   m_TagString: NPC
@@ -101,18 +102,13 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 2048
-  player: {fileID: 0}
-  popUpPrefab: {fileID: 5665048404440187164, guid: 7eeee5a54ca28c54e825d2b0f42c421b,
-    type: 3}
   interactBoxPrefab: {fileID: 1967722894350683128, guid: 7f4db9ccac2dc2c4f9f5989036a87960,
     type: 3}
   interactBoxTextReplacement: 
-  dialogueBox: {fileID: 2310329873098196876, guid: 6ef267433f1eb973ead7e9a84284718b,
-    type: 3}
   characterProfile: {fileID: 21300000, guid: 233e090b78912f445af3f602a407830f, type: 3}
   isDialogueOpen: 0
   dialogueFinished: 0
-  npcDialogueHandler: {fileID: 7460660327679847685}
+  npcDialogueHandler: {fileID: 0}
   audioClips:
     sfxOnInteract: {fileID: 0}
     sfxTypewriter: {fileID: 0}
@@ -189,4 +185,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfe630102f35a011b96ac6fe502b3e45, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  survivor: {fileID: 11400000, guid: 7ea66f04ca169e844a9a9805f2c6e4b0, type: 2}
+  survivor: {fileID: 0}
+  audioClips:
+    sfxTalkingBlip: {fileID: 0}
+--- !u!114 &2160597865604329001
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7460660327679847743}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 432508fb7384d964bb879e74b3d189d1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogueContents: []
+  currentLineIndex: 0
+  npcProfile: {fileID: 0}
+  lastLineDisplayed: 0
+  hasChoice: 0

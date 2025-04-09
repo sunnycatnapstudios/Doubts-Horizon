@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Old Man Dean
   damage: 10
-  health: 32
+  health: 53
   deathDialogue:
   - Finally,
   - My time has come
