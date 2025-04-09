@@ -1,6 +1,12 @@
 fileFormatVersion: 2
+<<<<<<<< HEAD:Assets/Media/Final Assets/Animations/Pointer.meta
+guid: a488377d3e3116f579cc0f97c4012d7e
+folderAsset: yes
+DefaultImporter:
+========
 guid: ac8f1f490439c710484be00f7f80be04
 PrefabImporter:
+>>>>>>>> main:Assets/Prefabs/Entities/NPC/car - meters running.prefab.meta
   externalObjects: {}
   userData: 
   assetBundleName: 

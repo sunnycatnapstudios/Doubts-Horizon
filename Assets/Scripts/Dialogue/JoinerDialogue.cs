@@ -16,11 +16,14 @@ public class JoinerDialogue : MonoBehaviour {
     void Start() {
         dialogueInputHandler = GameObject.FindGameObjectWithTag("Dialogue Text").GetComponent<DialogueInputHandler>();
         npcDialogueHandler = GetComponent<DialogueBoxHandler>();
+        if (audioClips.sfxTalkingBlip == null) {
+            audioClips.sfxTalkingBlip = survivor.GetTalkingSfx();
+        }
         npcDialogueHandler.SetSfxTalkingClip(audioClips.sfxTalkingBlip);
 
         if (dialogueInputHandler == null) return;
 
-        string takeMeTag = "Take me";
+        string takeMeTag = "Take me"+gameObject.GetHashCode();
         Action takeMe = () => {
             Debug.Log("Take me callback.");
             PartyManager partyManager = GameObject.FindGameObjectWithTag("Player").GetComponent<PartyManager>();
@@ -30,7 +33,7 @@ public class JoinerDialogue : MonoBehaviour {
         };
         dialogueInputHandler.AddDialogueChoice(takeMeTag, takeMe);
 
-        string orNotTag = "Or not";
+        string orNotTag = "Or not"+gameObject.GetHashCode();
         Action orNot = () => {
             Debug.Log("Or not callback.");
             Destroy(gameObject);

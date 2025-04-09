@@ -59,6 +59,7 @@ TagManager:
   - Out Transition
   - Intro Radical Overlay
   - Intro Solid Overlay
+  - Pointer
   layers:
   - Default
   - TransparentFX

@@ -164,4 +164,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   survivor: {fileID: 11400000, guid: 3912433602bf16044bae152819f39b95, type: 2}
   audioClips:
-    sfxTalkingBlip: {fileID: 0}
+    sfxTalkingBlip: {fileID: 8300000, guid: ca1454ce3b868bdc985b6ac255ea7c2f, type: 3}

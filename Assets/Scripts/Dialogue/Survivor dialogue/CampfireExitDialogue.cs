@@ -7,13 +7,12 @@ public class CampfireExitDialogue : MonoBehaviour {
     private DialogueInputHandler dialogueInputHandler;
     private DialogueBoxHandler npcDialogueHandler;
     private Player player;
-    public Vector3 location;
 
     private PartyManager manager;
     [SerializeField] private Sprite highlightSprite;
     [SerializeField] private Sprite normalSprite;
     private LevelTransition levelTransition;
-    private AudioTransition audioTransition;
+    //private AudioTransition audioTransition;
     public List<GameObject> transitions;
     //public GameObject FireplaceTransition;
     public List<GameObject> objects;
@@ -21,6 +20,7 @@ public class CampfireExitDialogue : MonoBehaviour {
     bool hasFinished = false;
     List<Survivor> kicked;
 
+    private GameObject floatingPointer;
     [Serializable]
     private struct AudioClips {
         public AudioClip sfxTalkingBlip;
@@ -36,7 +36,8 @@ public class CampfireExitDialogue : MonoBehaviour {
         manager = GameObject.FindGameObjectWithTag("Player").GetComponent<PartyManager>();
         _battleTransition = GameObject.FindGameObjectWithTag("Out Transition").GetComponent<BattleTransition>();
         levelTransition = GetComponent<LevelTransition>();
-        audioTransition = GetComponent<AudioTransition>();
+        //audioTransition = GetComponent<AudioTransition>();
+        floatingPointer = GameObject.FindGameObjectWithTag("Pointer");
 
         npcDialogueHandler.SetSfxTalkingClip(audioClips.sfxTalkingBlip);
 
@@ -60,7 +61,7 @@ public class CampfireExitDialogue : MonoBehaviour {
             //player.movePoint.transform.position = location;
             //player.transform.position = location;
             //StartCoroutine(levelTransition.PerformLevelTransition());   // Use our level transition logic instead
-            audioTransition.TriggerAudioTransition();
+            //audioTransition.TriggerAudioTransition();
             hasFinished = true;
             npcDialogueHandler.dialogueContents = new List<string> { "Just a comfy bed" };
             //kickUnfed();
@@ -117,6 +118,7 @@ public class CampfireExitDialogue : MonoBehaviour {
 
         }
         kickUnfed();
+
         yield return new WaitForSecondsRealtime(1.5f);
 
         StartCoroutine(GameObject.FindGameObjectWithTag("BlackFadeIn").gameObject.GetComponent<FadeToBlack>().fadeout());
