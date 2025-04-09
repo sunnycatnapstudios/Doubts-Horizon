@@ -590,10 +590,12 @@ public class _BattleUIHandler : MonoBehaviour
             yield return null;
         }
 
-        if (endTurn) {yield break;}
 
-        while (selectedAction == "Heal" || selectedAction == "Defend")
+        while ((selectedAction == "Heal" || selectedAction == "Defend" || selectedAction == "Escape")
+               && (!escapeSuccessful || !endTurn))  // Check if we've escaped or need to end our turn
         {
+            if (endTurn) {yield break;}     // Leave immediately if we're ending our turn
+
             canSelect = true;
             selectedTarget = null;
 
@@ -614,7 +616,7 @@ public class _BattleUIHandler : MonoBehaviour
                 yield return null;
 
                 // If the action is changed mid-selection, restart decision phase
-                if (selectedAction == "Attack" || selectedAction == "Defend" || selectedAction == "Escape")
+                if (selectedAction == "Attack" || selectedAction == "Defend")
                 {
 
                     partySlotHandler.ViewPortCanvasGroup.blocksRaycasts = true;
