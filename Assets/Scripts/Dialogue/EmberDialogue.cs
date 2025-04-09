@@ -8,7 +8,6 @@ public class EmberDialogue : MonoBehaviour {
     private DialogueInputHandler dialogueInputHandler;
     private DialogueBoxHandler npcDialogueHandler;
     public Survivor survivor;
-    List<string> dialogueOptions;
 
     [Serializable]
     private struct AudioClips {
@@ -25,23 +24,17 @@ public class EmberDialogue : MonoBehaviour {
         }
         npcDialogueHandler.SetSfxTalkingClip(audioClips.sfxTalkingBlip);
 
-        dialogueOptions = new List<string> {
-            "Just because I'm a fire doesn't mean I can't live in the woods y'know.",
-            "I'm actually a pretty chill dude B)",
-            "Only I can prevent forest fires!",
-        };
-        npcDialogueHandler.dialogueContents = new List<string> {
-            "Just because I'm a fire doesn't mean I can't live in the woods y'know.",
-            "I'm actually a pretty chill dude B)",
-            "Only I can prevent forest fires!",
-        };
-
         npcDialogueHandler.beforeDialogue = BeforeDialogue;
     }
+
     void BeforeDialogue() {
         Debug.Log("Ember BeforeDialogue");
-        npcDialogueHandler.dialogueContents = new List<string> {
+        var dialogueOptions = new List<string> {
             "Just because I'm a fire doesn't mean I can't live in the woods y'know.",
+            "I'm actually a pretty chill dude B)",
+            "Only I can prevent forest fires!",
+        };
+        npcDialogueHandler.dialogueContents = new List<string> {
             dialogueOptions[Random.Range(0, dialogueOptions.Count)],
         };
         npcDialogueHandler.beforeDialogue = BeforeDialogue;
