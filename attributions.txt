@@ -14,6 +14,8 @@ mushroom cloud, CC0, https://opengameart.org/content/nuclear-mushroom-cloud
 Blood Splatter: https://opengameart.org/content/blood-splatter
 LPC Chicken (Rework): https://opengameart.org/content/lpc-chicken-rework
 16x16 Indoor RPG Tileset (The Baseline): https://opengameart.org/content/16x16-indoor-rpg-tileset-the-baseline
+Signs 1: https://opengameart.org/content/lpc-signposts-graves-line-cloths-and-scare-crow
+Signs 2: https://opengameart.org/content/cc0-sign-icons
 
 # Audio
 ## Sample Packs (various online soureces):

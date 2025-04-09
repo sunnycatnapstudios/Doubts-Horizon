@@ -10,8 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 4888902503916961998}
   - component: {fileID: 3786379145754013643}
-  - component: {fileID: 1889239609521202578}
   - component: {fileID: 2748878265244596751}
+  - component: {fileID: 1889239609521202578}
   - component: {fileID: 8596177133253856640}
   m_Layer: 0
   m_Name: Knife
@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1923646054537113392}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 304.8125, y: 190.13585, z: -202.74727}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -84,22 +84,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &1889239609521202578
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1923646054537113392}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.08
 --- !u!114 &2748878265244596751
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -113,6 +97,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   item: {fileID: 11400000, guid: 1f5c1dce6c2c6f144b166b10eed020eb, type: 2}
+--- !u!58 &1889239609521202578
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1923646054537113392}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.6
 --- !u!114 &8596177133253856640
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -128,9 +128,10 @@ MonoBehaviour:
   interactRange: 0.6
   playerLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 2048
   promptText: E
-  popUpPrefab: {fileID: 0}
+  popUpPrefab: {fileID: 5665048404440187164, guid: 7eeee5a54ca28c54e825d2b0f42c421b,
+    type: 3}
   onInteract:
     m_PersistentCalls:
       m_Calls: []
