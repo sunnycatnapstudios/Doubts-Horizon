@@ -18,6 +18,7 @@ MonoBehaviour:
   deathDialogue:
   - Technically the player should
   - never see these lines
+  starvedDialogue: []
   isCombatant: 1
   inventoryDialogues: {fileID: -381307989238394630, guid: d861617506f94ac4287d6cf758f76951,
     type: 3}

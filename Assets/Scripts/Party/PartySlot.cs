@@ -80,16 +80,17 @@ public class PartySlot : MonoBehaviour {
 
     public IEnumerator JutterHealthBar(float duration, float strength) {
         float elapsedTime = 0f;
+        if (healthbarCasing.transform.localPosition != null&&initialBarPosition!=null) {
+            while (elapsedTime < duration) {
+                float jutterAmount = Mathf.Sin(elapsedTime * 30f) * strength;  // Small oscillations
+                healthbarCasing.transform.localPosition = initialBarPosition + new Vector3(jutterAmount, 0f, 0f); // Jutter left/right
 
-        while (elapsedTime < duration) {
-            float jutterAmount = Mathf.Sin(elapsedTime * 30f) * strength;  // Small oscillations
-            healthbarCasing.transform.localPosition = initialBarPosition + new Vector3(jutterAmount, 0f, 0f); // Jutter left/right
+                elapsedTime += Time.unscaledDeltaTime;
+                yield return null; // Wait for next frame
+            }
 
-            elapsedTime += Time.unscaledDeltaTime;
-            yield return null; // Wait for next frame
+            healthbarCasing.transform.localPosition = initialBarPosition; // Return to original position after jutter
         }
-
-        healthbarCasing.transform.localPosition = initialBarPosition; // Return to original position after jutter
     }
 
     private IEnumerator FadeOutHealthText() {
