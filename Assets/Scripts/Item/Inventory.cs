@@ -23,6 +23,7 @@ public class Inventory : MonoBehaviour {
     [Serializable]
     private struct AudioClips {
         // TODO add other sounds when needed
+        public AudioClip sfxOpenInventory;
         public AudioClip sfxCloseInventory;
     }
 
@@ -87,7 +88,6 @@ public class Inventory : MonoBehaviour {
         slot.decCount();
         Debug.Log("new count is " + slot.getCount().ToString());
         if (slot.getCount() == 0) {
-            Debug.Log("inside if");
             inventory.Remove(name);
         }
     }
@@ -109,11 +109,10 @@ public class Inventory : MonoBehaviour {
                 Item item = curObj.GetComponent<Pickupable>().GetItem();
                 addItem(item);
                 AudioManager.Instance.PlaySound(item.GetPickupSound());
-                Debug.Log("did");
 
-                foreach (string slot in inventory.Keys) {
-                    Debug.Log(slot + inventory[slot].getCount().ToString());
-                }
+                // foreach (string slot in inventory.Keys) {
+                //     Debug.Log(slot + inventory[slot].getCount().ToString());
+                // }
 
                 curObj.GetComponent<Pickupable>().DestroyInWorld();
             }
@@ -121,7 +120,8 @@ public class Inventory : MonoBehaviour {
 
         if (inventoryWindow.isActiveAndEnabled) {
             if (Input.GetKeyDown(KeyCode.I) && timer <= 1) {
-                Debug.Log("Close Inventory");
+                // Debug.Log("Close Inventory");
+                AudioManager.Instance.PlaySound(audioClips.sfxCloseInventory);
                 inventoryWindow.Hide();
                 player.canControlCam = true;
                 Time.timeScale = 1;
@@ -129,7 +129,8 @@ public class Inventory : MonoBehaviour {
             }
         } else {
             if (player.canControlCam && Input.GetKeyDown(KeyCode.I) && timer <= 1) {
-                Debug.Log("Open Inventory");
+                // Debug.Log("Open Inventory");
+                AudioManager.Instance.PlaySound(audioClips.sfxOpenInventory);
                 inventoryWindow.Show(inventory);
                 player.canControlCam = false;
                 Time.timeScale = 0;
