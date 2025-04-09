@@ -20,21 +20,28 @@ public class ShopKeeperDialogue : MonoBehaviour
     int timesSacrificed=0;
     List<string> defaultDialogue;
 
+    [Serializable]
+    private struct AudioClips {
+        public AudioClip sfxTalkingBlip;
+    }
+
+    [SerializeField] private AudioClips audioClips;
     void Start() {
         dialogueInputHandler = GameObject.FindGameObjectWithTag("Dialogue Text").GetComponent<DialogueInputHandler>();
         npcDialogueHandler = GetComponent<DialogueBoxHandler>();
         inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
         statsManager = GameStatsManager.Instance;
+        npcDialogueHandler.SetSfxTalkingClip(audioClips.sfxTalkingBlip);
 
-         Feedme = "buy Potion" + gameObject.GetHashCode().ToString();
+        Feedme = "buy Potion" + gameObject.GetHashCode().ToString();
         Action takeMe = () => {
             Debug.Log("Take me callback.");
             PartyManager partyManager = GameObject.FindGameObjectWithTag("Player").GetComponent<PartyManager>();
 
             if (inventory.hasItemByName("Ration")) {
-               
+
                 inventory.removeItemByName("Ration");
-               
+
                 inventory.addItem(Potion);
                 npcDialogueHandler.lastLineDisplayed = false;
                 npcDialogueHandler.currentLineIndex += 1;
@@ -43,7 +50,7 @@ public class ShopKeeperDialogue : MonoBehaviour
                 npcDialogueHandler.dialogueContents.Add($"You have {inventory.getCountofItem("Ration")} rations left.");
 
             } else {
-               
+
 
                 npcDialogueHandler.lastLineDisplayed = false;
                 npcDialogueHandler.currentLineIndex += 1;
@@ -54,7 +61,7 @@ public class ShopKeeperDialogue : MonoBehaviour
 
             GameStatsManager.Instance._dialogueHandler.UpdateDialogueBox();
         };
-        
+
         dialogueInputHandler.AddDialogueChoice(Feedme, takeMe);
 
          orNotTag = "buy Knife" + gameObject.GetHashCode().ToString();
@@ -89,7 +96,7 @@ public class ShopKeeperDialogue : MonoBehaviour
          sacrificeHP = "Sell Life" + gameObject.GetHashCode().ToString();
         Action sellLife = () => {
             Debug.Log("Or not callback.");
-           
+
 
             npcDialogueHandler.lastLineDisplayed = false;
             npcDialogueHandler.currentLineIndex += 1;
@@ -110,7 +117,7 @@ public class ShopKeeperDialogue : MonoBehaviour
                 npcDialogueHandler.dialogueContents.Add("You cannot give what you don't have.");
 
             }
-            
+
 
 
 
@@ -125,9 +132,9 @@ public class ShopKeeperDialogue : MonoBehaviour
         };
 
         npcDialogueHandler.dialogueContents = new List<string>(defaultDialogue);
-       
+
         npcDialogueHandler.beforeDialogue = BeforeDialogue;
-        
+
 
         //npcDialogueHandler.afterDialogue = AfterDialogue;
     }
@@ -148,14 +155,14 @@ public class ShopKeeperDialogue : MonoBehaviour
         float threshhold = 0.3f;
         Debug.Log("HIAIIII");
         foreach (Survivor member in GameStatsManager.Instance.partyManager.currentPartyMembers) {
-           
+
                 member.currentHealth -=(int)( member.maxHealth * threshhold);
                 Debug.Log(member.currentHealth.ToString()+member.name);
             if (member.currentHealth < 1) {
                 member.currentHealth = 1;
             }
-               
-            
+
+
 
         }
     }

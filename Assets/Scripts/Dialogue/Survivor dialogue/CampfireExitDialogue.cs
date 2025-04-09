@@ -12,7 +12,7 @@ public class CampfireExitDialogue : MonoBehaviour {
     [SerializeField] private Sprite highlightSprite;
     [SerializeField] private Sprite normalSprite;
     private LevelTransition levelTransition;
-    private AudioTransition audioTransition;
+    //private AudioTransition audioTransition;
     public List<GameObject> transitions;
     //public GameObject FireplaceTransition;
     public List<GameObject> objects;
@@ -36,7 +36,7 @@ public class CampfireExitDialogue : MonoBehaviour {
         manager = GameObject.FindGameObjectWithTag("Player").GetComponent<PartyManager>();
         _battleTransition = GameObject.FindGameObjectWithTag("Out Transition").GetComponent<BattleTransition>();
         levelTransition = GetComponent<LevelTransition>();
-        audioTransition = GetComponent<AudioTransition>();
+        //audioTransition = GetComponent<AudioTransition>();
         floatingPointer = GameObject.FindGameObjectWithTag("Pointer");
 
         npcDialogueHandler.SetSfxTalkingClip(audioClips.sfxTalkingBlip);
@@ -61,7 +61,7 @@ public class CampfireExitDialogue : MonoBehaviour {
             //player.movePoint.transform.position = location;
             //player.transform.position = location;
             //StartCoroutine(levelTransition.PerformLevelTransition());   // Use our level transition logic instead
-            audioTransition.TriggerAudioTransition();
+            //audioTransition.TriggerAudioTransition();
             hasFinished = true;
             npcDialogueHandler.dialogueContents = new List<string> { "Just a comfy bed" };
             //kickUnfed();

@@ -10,12 +10,17 @@ public class FishManDialogue : MonoBehaviour {
     private bool fedOrNot;
     private Inventory inventory;
     private GameStatsManager statsManager;
+    public AudioClip sfxTalkingClip;
 
     void Start() {
         dialogueInputHandler = GameObject.FindGameObjectWithTag("Dialogue Text").GetComponent<DialogueInputHandler>();
         npcDialogueHandler = GetComponent<DialogueBoxHandler>();
         inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
         statsManager = GameStatsManager.Instance;
+        if (sfxTalkingClip == null) {
+            sfxTalkingClip = survivor.GetTalkingSfx();
+        }
+        npcDialogueHandler.SetSfxTalkingClip(sfxTalkingClip);
 
         string Feedme = "feed fishman" + gameObject.GetHashCode().ToString();
         Action takeMe = () => {
@@ -28,7 +33,7 @@ public class FishManDialogue : MonoBehaviour {
                 inventory.removeItemByName("Ration");
                 statsManager.interactedWithCampfireNPC();
                 statsManager.updateBedStatus();
-                
+
                 npcDialogueHandler.dialogueContents.Add($"Blub blub! You have {inventory.getCountofItem("Ration")} rations left.");
                 npcDialogueHandler.lastLineDisplayed = false;
                 npcDialogueHandler.currentLineIndex += 1;
@@ -36,13 +41,13 @@ public class FishManDialogue : MonoBehaviour {
             } else {
                 statsManager.interactedWithCampfireNPC();
                 statsManager.updateBedStatus();
-                
+
                 npcDialogueHandler.dialogueContents.Add("Blub... You don't even have any for yourself.");
                 npcDialogueHandler.lastLineDisplayed = false;
                 npcDialogueHandler.currentLineIndex += 1;
             }
-            
-            
+
+
             npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
             GameStatsManager.Instance._dialogueHandler.UpdateDialogueBox();
         };
@@ -72,7 +77,7 @@ public class FishManDialogue : MonoBehaviour {
     void AfterDialogue() {
         Debug.Log("Completed dialogue.");
         npcDialogueHandler.dialogueContents.Clear();
-        
+
         if (fedOrNot) {
             npcDialogueHandler.dialogueContents.Add("Blub! That was tasty. You ever need a lock picked, I'm your fish.");
         } else {

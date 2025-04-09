@@ -151,6 +151,10 @@ public class _BattleUIHandler : MonoBehaviour
         return objectsInScene;
     }
 
+    public void SetBossBattleMusic(AudioClip audioClip) {
+        audioClips.battleMusic = audioClip;
+    }
+
     public void EnterCombat()
     {
         _dialogueHandler.CloseDialogueBox();
@@ -667,7 +671,7 @@ public class _BattleUIHandler : MonoBehaviour
                 if (player.isCombatant)  {healAmount = (1+(60 - player.attack)/60)*(Random.Range(20, 40));}
                 else {healAmount = player.maxHealth / 2;}
 
-                _inventory.GetSlotItem("Health Kit").decCount();     // Use a health kit
+                _inventory.removeItemByName("Health Kit"); // Use a health kit
                 numKits--;
 
                 if (selectedTarget == player.Name) {
@@ -846,7 +850,7 @@ public class _BattleUIHandler : MonoBehaviour
                     Debug.Log($"{enemy.Name} attacks {target.Name} for {enemyDamage} damage!");
 
                 }
-               
+
 
                 yield return new WaitForSecondsRealtime(.2f);
 
@@ -854,17 +858,17 @@ public class _BattleUIHandler : MonoBehaviour
                 if (splashhit) {
                     foreach (PartySlot mem in partySlotHandler.partySlots) {
                         if (mem.isCharacter) {
-                            
+
                                 mem.ShowHealthChange();
                                 ShowFloatingText(enemyDamage, Color.red, mem.transform.position, false);
                                 StartCoroutine(mem.JutterHealthBar(0.2f, 10f));
-                            
+
                         }
                     }
 
 
                 } else {
-               
+
                     foreach (PartySlot mem in partySlotHandler.partySlots) {
                         if (mem.isCharacter) {
                             if (mem.playerStats.Name == target.Name) {

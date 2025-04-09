@@ -1081,7 +1081,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ef89fe14edec2bf895a4375581ce31e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sfxTypingClip: {fileID: 8300000, guid: 28c78a651100df1cea783ae402a74437, type: 3}
+  sfxTypingClip: {fileID: 8300000, guid: 2f6f99adaf93975e0bebf835bf24a5a4, type: 3}
   ambienceIntroWind: {fileID: 8300000, guid: b20c91fa5c6ce453c9bf0b4540fe2bc0, type: 3}
   sfxExplosionIntro: {fileID: 8300000, guid: 439eb45189dbfed4296f6b30da31b9a5, type: 3}
 --- !u!1 &1807557738

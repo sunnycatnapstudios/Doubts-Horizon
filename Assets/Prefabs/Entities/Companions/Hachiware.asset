@@ -28,6 +28,7 @@ MonoBehaviour:
   inventoryDialogues: {fileID: 8850573105260575154, guid: 97ee79cdb3d35bc44bfcd125382fc182,
     type: 3}
   OverworldSprite: {fileID: 21300000, guid: 23b12652556d59c489d63abb394c772d, type: 3}
+  talkingSfx: {fileID: 8300000, guid: ca1454ce3b868bdc985b6ac255ea7c2f, type: 3}
   unKickable: 0
   enteringFireDialogue: Foul Tarnished, Emboldened by the flame of ambition
   Animcontroller: {fileID: 9100000, guid: faac9bb8734f004439bc1bc96b385420, type: 2}

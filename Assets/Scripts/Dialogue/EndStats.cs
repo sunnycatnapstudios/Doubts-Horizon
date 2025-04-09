@@ -12,7 +12,7 @@ public class EndStats : MonoBehaviour {
     public GameObject nextDialogue;
 
     private PartyManager manager;
-   
+
     [Serializable]
     private struct AudioClips {
         public AudioClip sfxTalkingBlip;
@@ -40,6 +40,7 @@ public class EndStats : MonoBehaviour {
         });
 
         npcDialogueHandler.afterDialogue = new Action(() => {
+            AudioManager.Instance.RestartToDefault();
             SceneManager.LoadScene("Title", LoadSceneMode.Single);
         });
     }

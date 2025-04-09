@@ -18,6 +18,9 @@ public class OldManDialogue : MonoBehaviour {
     void Start() {
         dialogueInputHandler = GameObject.FindGameObjectWithTag("Dialogue Text").GetComponent<DialogueInputHandler>();
         npcDialogueHandler = GetComponent<DialogueBoxHandler>();
+        if (audioClips.sfxTalkingBlip == null) {
+            audioClips.sfxTalkingBlip = survivor.GetTalkingSfx();
+        }
         npcDialogueHandler.SetSfxTalkingClip(audioClips.sfxTalkingBlip);
 
         string takeMeTag = "Take me bff";

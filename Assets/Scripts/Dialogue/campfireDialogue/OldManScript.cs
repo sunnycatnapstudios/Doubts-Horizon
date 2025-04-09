@@ -10,12 +10,17 @@ public class OldManScript : MonoBehaviour {
     private bool fedOrNot;
     private Inventory inventory;
     private GameStatsManager statsManager;
+    public AudioClip sfxTalkingClip;
 
     void Start() {
         dialogueInputHandler = GameObject.FindGameObjectWithTag("Dialogue Text").GetComponent<DialogueInputHandler>();
         npcDialogueHandler = GetComponent<DialogueBoxHandler>();
         inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
         statsManager = GameStatsManager.Instance;
+        if (sfxTalkingClip == null) {
+            sfxTalkingClip = survivor.GetTalkingSfx();
+        }
+        npcDialogueHandler.SetSfxTalkingClip(sfxTalkingClip);
 
         string feedMe = "feed oldguy" + gameObject.GetHashCode().ToString();
         Action takeMe = () => {
@@ -28,7 +33,7 @@ public class OldManScript : MonoBehaviour {
                 inventory.removeItemByName("Ration");
                 statsManager.interactedWithCampfireNPC();
                 statsManager.updateBedStatus();
-               
+
 
                 npcDialogueHandler.dialogueContents.Add($"You have {inventory.getCountofItem("Ration")} rations left.");
                 npcDialogueHandler.lastLineDisplayed = false;
@@ -36,13 +41,13 @@ public class OldManScript : MonoBehaviour {
             } else {
                 statsManager.interactedWithCampfireNPC();
                 statsManager.updateBedStatus();
-               
+
                 npcDialogueHandler.dialogueContents.Add("Too bad we are out...");
                 npcDialogueHandler.lastLineDisplayed = false;
                 npcDialogueHandler.currentLineIndex += 1;
             }
 
-            
+
             npcDialogueHandler.afterDialogue = AfterDialogue;
             GameStatsManager.Instance._dialogueHandler.UpdateDialogueBox();
         };

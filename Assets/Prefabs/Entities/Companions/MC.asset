@@ -23,6 +23,7 @@ MonoBehaviour:
   inventoryDialogues: {fileID: 1981801264492324836, guid: a3f4b27e879ac234498d547317f7d7fd,
     type: 3}
   OverworldSprite: {fileID: 21300000, guid: 69fdd4830be235a429e1652197a4aeb0, type: 3}
+  talkingSfx: {fileID: 8300000, guid: 28c78a651100df1cea783ae402a74437, type: 3}
   unKickable: 1
   enteringFireDialogue: The wilderness is grueling....
   Animcontroller: {fileID: 9100000, guid: 9b454cd6a9bc678428b46c5d51ed0f67, type: 2}
