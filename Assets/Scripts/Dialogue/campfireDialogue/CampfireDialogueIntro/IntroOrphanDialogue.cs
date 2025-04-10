@@ -12,6 +12,7 @@ public class IntroOrphanDialogue : MonoBehaviour
     private Inventory inventory;
     private GameStatsManager statsManager;
     public GameObject loreDialogueCollider; // INSPECTOR
+    string Feedme = "IntroFeedOrphan";
 
     [Serializable]
     private struct AudioClips {
@@ -29,7 +30,6 @@ public class IntroOrphanDialogue : MonoBehaviour
             audioClips.sfxTalkingBlip = survivor.GetTalkingSfx();
         }
         npcDialogueHandler.SetSfxTalkingClip(audioClips.sfxTalkingBlip);
-        string Feedme = "IntroFeedOrphan";
         Action takeMe = () => {
             Debug.Log("Take me callback.");
             PartyManager partyManager = GameObject.FindGameObjectWithTag("Player").GetComponent<PartyManager>();
@@ -59,35 +59,35 @@ public class IntroOrphanDialogue : MonoBehaviour
         };
         dialogueInputHandler.AddDialogueChoice(Feedme, takeMe);
 
-        string orNotTag = "IntroAbandonOrphan";
-        Action orNot = () => {
-            Debug.Log("Or not callback.");
-            fedOrNot = false;
-            npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
-            statsManager.interactedWithCampfireNPC();
-            statsManager.updateBedStatus();
-            npcDialogueHandler.dialogueContents.Add("But why not?");
-            npcDialogueHandler.dialogueContents.Add("Please...?");
-            npcDialogueHandler.lastLineDisplayed = false;
-            npcDialogueHandler.currentLineIndex += 1;
-            GameStatsManager.Instance._dialogueHandler.UpdateDialogueBox();
-        };
-        dialogueInputHandler.AddDialogueChoice(orNotTag, orNot);
-
         npcDialogueHandler.dialogueContents = new List<string> {
             "I... I haven't eaten in so long... Please, do you have anything?",
-            $"<link=\"{Feedme}\"><b><#d4af37>Feed</color></b></link>.\n...\n<link=\"{orNotTag}\"><b><#a40000>Or not...</color></b></link>."
+            $"<link=\"{Feedme}\"><b><#d4af37>Feed</color></b></link>"
         };
+
+        npcDialogueHandler.beforeDialogue = BeforeDialogue;
+    }
+
+    void BeforeDialogue() {
+        if (inventory.hasItemByName("Ration")) {
+            npcDialogueHandler.dialogueContents = new List<string> {
+                "I... I haven't eaten in so long... Please, do you have anything?",
+                $"<link=\"{Feedme}\"><b><#d4af37>Feed</color></b></link>"
+            };
+        } else if (!fedOrNot) {
+            npcDialogueHandler.dialogueContents = new List<string> {
+                "Big juicy chicken leg right over there!",
+            };
+        }
+
+        npcDialogueHandler.beforeDialogue = BeforeDialogue;
     }
 
     void AfterDialogue() {
         Debug.Log("Completed dialogue.");
-        if (fedOrNot) {
-            npcDialogueHandler.dialogueContents = new List<string>
-                { "Thank you so much I dont think I would have made it!", "Times are so rough out here though,","What is there to do next?" };
-        } else {
-            npcDialogueHandler.dialogueContents = new List<string> { "Fine", "I didnt need any anyway","You should have left me in that fire" };
-        }
+        npcDialogueHandler.dialogueContents = new List<string> {
+            "Thanks!", "I knew I could trust you!",
+            "What is there to do next?",
+        };
         loreDialogueCollider.SetActive(true);
     }
 }
