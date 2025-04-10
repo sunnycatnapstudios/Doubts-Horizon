@@ -35,7 +35,7 @@ public class EndStats : MonoBehaviour {
         npcDialogueHandler.beforeDialogue = new Action(() => {
             GameStatsManager.Instance._dialogueHandler.dialogueName.text = "Me";
             npcDialogueHandler.dialogueContents = new List<string> {
-                $"Wow! I saved {manager.currentPartyMembers.Count} people in {Time.realtimeSinceStartup} seconds.",
+                $"Good job speedrunner you took {Time.realtimeSinceStartup} seconds.",
             };
         });
 
