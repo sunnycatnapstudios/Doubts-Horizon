@@ -7,7 +7,7 @@ public class Knife : Item, UsableInInventory {
     public Pickupable _healingPotion;
     public Sprite Sprite;
     public AudioClip sfxPickup;
-    public override string GetDesc() => "member gain permanent 10 damage";
+    public override string GetDesc() => "member gain permanent 10 attack";
     public override string GetFlavour() => "I think it has been used";
     public override string GetName() => "Knife";
     public override AudioClip GetPickupSound() => sfxPickup;
