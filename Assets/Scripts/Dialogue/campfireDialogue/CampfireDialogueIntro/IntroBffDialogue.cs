@@ -12,6 +12,7 @@ public class IntroBffDialogue : MonoBehaviour
     private Inventory inventory;
     private GameStatsManager statsManager;
     public GameObject loreDialogueCollider; // INSPECTOR
+    string Feedme = "IntroFeedHachi";
 
     [Serializable]
     private struct AudioClips {
@@ -29,7 +30,6 @@ public class IntroBffDialogue : MonoBehaviour
             audioClips.sfxTalkingBlip = survivor.GetTalkingSfx();
         }
         npcDialogueHandler.SetSfxTalkingClip(audioClips.sfxTalkingBlip);
-        string Feedme = "IntroFeedHachi";
         Action takeMe = () => {
             Debug.Log("Take me callback.");
             PartyManager partyManager = GameObject.FindGameObjectWithTag("Player").GetComponent<PartyManager>();
@@ -59,35 +59,35 @@ public class IntroBffDialogue : MonoBehaviour
         };
         dialogueInputHandler.AddDialogueChoice(Feedme, takeMe);
 
-        string orNotTag = "introAbandonHachi";
-        Action orNot = () => {
-            Debug.Log("Or not callback.");
-            fedOrNot = false;
-            npcDialogueHandler.afterDialogue = new Action(AfterDialogue);
-            statsManager.interactedWithCampfireNPC();
-            statsManager.updateBedStatus();
-            npcDialogueHandler.dialogueContents.Add("do you want to get rid of me that bad?");
-            npcDialogueHandler.dialogueContents.Add("i guess i see how it is....");
-            npcDialogueHandler.lastLineDisplayed = false;
-            npcDialogueHandler.currentLineIndex += 1;
-            GameStatsManager.Instance._dialogueHandler.UpdateDialogueBox();
-        };
-        dialogueInputHandler.AddDialogueChoice(orNotTag, orNot);
-
         npcDialogueHandler.dialogueContents = new List<string> {
             "hey, If you dont mind splitting that ration,","Im really weak right now",
-            $"<link=\"{Feedme}\"><b><#d4af37>Feed</color></b></link>.\n...\n<link=\"{orNotTag}\"><b><#a40000>Or not...</color></b></link>."
+            $"<link=\"{Feedme}\"><b><#d4af37>Feed</color></b></link>"
         };
+
+        npcDialogueHandler.beforeDialogue = BeforeDialogue;
+    }
+
+    void BeforeDialogue() {
+        if (inventory.hasItemByName("Ration")) {
+            npcDialogueHandler.dialogueContents = new List<string> {
+                "hey, If you dont mind splitting that ration,","Im really weak right now",
+                $"<link=\"{Feedme}\"><b><#d4af37>Feed</color></b></link>"
+            };
+        } else if (!fedOrNot) {
+            npcDialogueHandler.dialogueContents = new List<string> {
+                "Big juicy chicken leg right over there!",
+            };
+        }
+
+        npcDialogueHandler.beforeDialogue = BeforeDialogue;
     }
 
     void AfterDialogue() {
         Debug.Log("Completed dialogue.");
-        if (fedOrNot) {
-            npcDialogueHandler.dialogueContents = new List<string>
-                { "Thanks!", "I knew I could trust you!" };
-        } else {
-            npcDialogueHandler.dialogueContents = new List<string> { "well", "im sure i can manage" };
-        }
+        npcDialogueHandler.dialogueContents = new List<string> {
+            "Thank you so much! I don't think I would have made it!", "Times are so tough..",
+            "What is there to do next?",
+        };
         loreDialogueCollider.SetActive(true);
     }
 }
