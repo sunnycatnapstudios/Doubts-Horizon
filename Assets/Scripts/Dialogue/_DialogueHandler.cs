@@ -239,11 +239,9 @@ public class _DialogueHandler : MonoBehaviour {
                 typeWriter.skipTyping = true;
                 return;
             }
-        } else {
-            if (dialogueBoxHandler != null && dialogueBoxHandler.CanClose()) {
+        } else if (dialogueBoxHandler != null && dialogueBoxHandler.CanClose()) {
                 Debug.Log("UpdateDialogueBox and not typing and can close");
                 CloseDialogueBox();
-            }
             return;
         }
 

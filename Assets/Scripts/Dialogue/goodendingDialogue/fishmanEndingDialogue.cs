@@ -29,8 +29,6 @@ public class fishmanEndingDialogue : MonoBehaviour {
         };
 
         npcDialogueHandler.afterDialogue = AfterDialogue;
-
-        GameStatsManager.Instance._dialogueHandler.UpdateDialogueBox();
     }
 
     void AfterDialogue() {

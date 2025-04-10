@@ -30,7 +30,6 @@ public class ptsdEndingDialogue : MonoBehaviour {
 
         npcDialogueHandler.afterDialogue = AfterDialogue;
 
-        GameStatsManager.Instance._dialogueHandler.UpdateDialogueBox();
     }
 
     void AfterDialogue() {

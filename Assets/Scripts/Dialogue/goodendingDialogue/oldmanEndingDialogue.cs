@@ -30,7 +30,6 @@ public class oldmanEndingDialogue : MonoBehaviour {
 
         npcDialogueHandler.afterDialogue = AfterDialogue;
 
-        GameStatsManager.Instance._dialogueHandler.UpdateDialogueBox();
     }
 
     void AfterDialogue() {
