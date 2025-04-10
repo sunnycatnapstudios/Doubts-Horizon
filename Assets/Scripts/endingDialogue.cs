@@ -16,10 +16,14 @@ public class endingDialogue : MonoBehaviour {
     public LevelTransition goodTransition;
     public LevelTransition badTransition;
 
+    public AudioTransition goodAudioTransition;
+    public AudioTransition badAudioTransition;
+
     private AudioTransition audioTransition;
     public fireplace Goodfp;
     public fireplace Badfp;
 
+    [Serializable]
     private struct AudioClips {
         public AudioClip sfxTalkingBlip;
     }
@@ -72,14 +76,14 @@ public class endingDialogue : MonoBehaviour {
         // Just use our built in transition scripts
         GameStatsManager.Instance.EndIntroSequence();
 
-        audioTransition.TriggerAudioTransition();
-
         if (GameStatsManager.Instance.partyManager.currentPartyMembers.Count > 2) {
             StartCoroutine(Goodfp.StartFireplaceEvent());
             StartCoroutine(goodTransition.PerformLevelTransition());
+            goodAudioTransition.TriggerAudioTransition();
         } else {
             StartCoroutine(Badfp.StartFireplaceEvent());
             StartCoroutine(badTransition.PerformLevelTransition());
+            badAudioTransition.TriggerAudioTransition();
         }
 
         if (nextDialogue) {
