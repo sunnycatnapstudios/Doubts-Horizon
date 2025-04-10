@@ -15,7 +15,7 @@ public class oldmanEndingDialogue : MonoBehaviour {
         npcDialogueHandler = GetComponent<DialogueBoxHandler>();
         statsManager = GameStatsManager.Instance;
 
-        if (sfxTalkingClip == null) {
+        if (sfxTalkingClip == null && survivor != null) {
             sfxTalkingClip = survivor.GetTalkingSfx();
         }
         npcDialogueHandler.SetSfxTalkingClip(sfxTalkingClip);
