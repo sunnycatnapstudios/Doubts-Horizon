@@ -17,7 +17,7 @@ public class FishManDialogue : MonoBehaviour {
         npcDialogueHandler = GetComponent<DialogueBoxHandler>();
         inventory = GameObject.FindGameObjectWithTag("Player").GetComponent<Inventory>();
         statsManager = GameStatsManager.Instance;
-        if (sfxTalkingClip == null) {
+        if (sfxTalkingClip == null && survivor != null) {
             sfxTalkingClip = survivor.GetTalkingSfx();
         }
         npcDialogueHandler.SetSfxTalkingClip(sfxTalkingClip);
